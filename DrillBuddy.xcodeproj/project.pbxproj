@@ -12,6 +12,10 @@
 		75D1135A2ABE2E7500BF8874 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D113592ABE2E7500BF8874 /* Item.swift */; };
 		75D1135C2ABE2E7B00BF8874 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75D1135B2ABE2E7B00BF8874 /* Assets.xcassets */; };
 		75D113602ABE2E7B00BF8874 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75D1135F2ABE2E7B00BF8874 /* Preview Assets.xcassets */; };
+		75D1136C2ABE2F4900BF8874 /* LaunchScreenStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75D1136B2ABE2F4900BF8874 /* LaunchScreenStoryboard.storyboard */; };
+		75D1136E2ABE308C00BF8874 /* SessionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D1136D2ABE308C00BF8874 /* SessionsListView.swift */; };
+		75D113712ABE331600BF8874 /* DrillsSessionsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D113702ABE331600BF8874 /* DrillsSessionsContainer.swift */; };
+		75D113732ABE3A7A00BF8874 /* DrillContainerPreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D113722ABE3A7A00BF8874 /* DrillContainerPreviewData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +27,10 @@
 		75D1135D2ABE2E7B00BF8874 /* DrillBuddy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DrillBuddy.entitlements; sourceTree = "<group>"; };
 		75D1135F2ABE2E7B00BF8874 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		75D113612ABE2E7B00BF8874 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		75D1136B2ABE2F4900BF8874 /* LaunchScreenStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreenStoryboard.storyboard; sourceTree = "<group>"; };
+		75D1136D2ABE308C00BF8874 /* SessionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsListView.swift; sourceTree = "<group>"; };
+		75D113702ABE331600BF8874 /* DrillsSessionsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillsSessionsContainer.swift; sourceTree = "<group>"; };
+		75D113722ABE3A7A00BF8874 /* DrillContainerPreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillContainerPreviewData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,12 +63,9 @@
 		75D113542ABE2E7500BF8874 /* DrillBuddy */ = {
 			isa = PBXGroup;
 			children = (
-				75D113552ABE2E7500BF8874 /* DrillBuddyApp.swift */,
-				75D113572ABE2E7500BF8874 /* ContentView.swift */,
-				75D113592ABE2E7500BF8874 /* Item.swift */,
-				75D1135B2ABE2E7B00BF8874 /* Assets.xcassets */,
-				75D1135D2ABE2E7B00BF8874 /* DrillBuddy.entitlements */,
-				75D113612ABE2E7B00BF8874 /* Info.plist */,
+				75D113672ABE2EE100BF8874 /* App */,
+				75D113682ABE2EE600BF8874 /* Views */,
+				75D113692ABE2EF000BF8874 /* Resources */,
 				75D1135E2ABE2E7B00BF8874 /* Preview Content */,
 			);
 			path = DrillBuddy;
@@ -70,8 +75,55 @@
 			isa = PBXGroup;
 			children = (
 				75D1135F2ABE2E7B00BF8874 /* Preview Assets.xcassets */,
+				75D113722ABE3A7A00BF8874 /* DrillContainerPreviewData.swift */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		75D113672ABE2EE100BF8874 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				75D113552ABE2E7500BF8874 /* DrillBuddyApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		75D113682ABE2EE600BF8874 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				75D1136A2ABE2F3700BF8874 /* Launch Screen */,
+				75D113572ABE2E7500BF8874 /* ContentView.swift */,
+				75D1136D2ABE308C00BF8874 /* SessionsListView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		75D113692ABE2EF000BF8874 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				75D1135B2ABE2E7B00BF8874 /* Assets.xcassets */,
+				75D1135D2ABE2E7B00BF8874 /* DrillBuddy.entitlements */,
+				75D113612ABE2E7B00BF8874 /* Info.plist */,
+				75D1136F2ABE32F100BF8874 /* Models */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		75D1136A2ABE2F3700BF8874 /* Launch Screen */ = {
+			isa = PBXGroup;
+			children = (
+				75D1136B2ABE2F4900BF8874 /* LaunchScreenStoryboard.storyboard */,
+			);
+			path = "Launch Screen";
+			sourceTree = "<group>";
+		};
+		75D1136F2ABE32F100BF8874 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				75D113592ABE2E7500BF8874 /* Item.swift */,
+				75D113702ABE331600BF8874 /* DrillsSessionsContainer.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -132,6 +184,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75D1136C2ABE2F4900BF8874 /* LaunchScreenStoryboard.storyboard in Resources */,
 				75D113602ABE2E7B00BF8874 /* Preview Assets.xcassets in Resources */,
 				75D1135C2ABE2E7B00BF8874 /* Assets.xcassets in Resources */,
 			);
@@ -146,7 +199,10 @@
 			files = (
 				75D113582ABE2E7500BF8874 /* ContentView.swift in Sources */,
 				75D1135A2ABE2E7500BF8874 /* Item.swift in Sources */,
+				75D113732ABE3A7A00BF8874 /* DrillContainerPreviewData.swift in Sources */,
+				75D113712ABE331600BF8874 /* DrillsSessionsContainer.swift in Sources */,
 				75D113562ABE2E7500BF8874 /* DrillBuddyApp.swift in Sources */,
+				75D1136E2ABE308C00BF8874 /* SessionsListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +343,7 @@
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreenStoryboard.storyboard;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -326,6 +383,7 @@
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreenStoryboard.storyboard;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
