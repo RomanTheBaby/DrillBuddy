@@ -16,6 +16,7 @@
 		75D1136E2ABE308C00BF8874 /* SessionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D1136D2ABE308C00BF8874 /* SessionsListView.swift */; };
 		75D113712ABE331600BF8874 /* DrillsSessionsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D113702ABE331600BF8874 /* DrillsSessionsContainer.swift */; };
 		75D113732ABE3A7A00BF8874 /* DrillContainerPreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D113722ABE3A7A00BF8874 /* DrillContainerPreviewData.swift */; };
+		75D113762ABE4EE200BF8874 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D113752ABE4EE200BF8874 /* View+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		75D1136D2ABE308C00BF8874 /* SessionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsListView.swift; sourceTree = "<group>"; };
 		75D113702ABE331600BF8874 /* DrillsSessionsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillsSessionsContainer.swift; sourceTree = "<group>"; };
 		75D113722ABE3A7A00BF8874 /* DrillContainerPreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillContainerPreviewData.swift; sourceTree = "<group>"; };
+		75D113752ABE4EE200BF8874 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				75D1135B2ABE2E7B00BF8874 /* Assets.xcassets */,
 				75D1135D2ABE2E7B00BF8874 /* DrillBuddy.entitlements */,
 				75D113612ABE2E7B00BF8874 /* Info.plist */,
+				75D113742ABE4ED200BF8874 /* Extension */,
 				75D1136F2ABE32F100BF8874 /* Models */,
 			);
 			path = Resources;
@@ -124,6 +127,14 @@
 				75D113702ABE331600BF8874 /* DrillsSessionsContainer.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		75D113742ABE4ED200BF8874 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				75D113752ABE4EE200BF8874 /* View+Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,6 +213,7 @@
 				75D113732ABE3A7A00BF8874 /* DrillContainerPreviewData.swift in Sources */,
 				75D113712ABE331600BF8874 /* DrillsSessionsContainer.swift in Sources */,
 				75D113562ABE2E7500BF8874 /* DrillBuddyApp.swift in Sources */,
+				75D113762ABE4EE200BF8874 /* View+Extension.swift in Sources */,
 				75D1136E2ABE308C00BF8874 /* SessionsListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -337,6 +349,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DrillBuddy/Info.plist;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Microphone access is required to record when shots happens";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -377,6 +390,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DrillBuddy/Info.plist;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Microphone access is required to record when shots happens";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
