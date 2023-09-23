@@ -22,7 +22,10 @@ struct SessionsListView: View {
     
     // MARK: - Properties
     
+    @State private var error: Error?
+    @State private var hasMicrophoneAccess = true
     @State private var isPresentingDeleteDataAlert: Bool = false
+    @State private var redirectToNewDrillConfigurationView = false
     @Environment(\.modelContext) private var modelContext
     
     @Query(sort: \DrillsSessionsContainer.date, order: .reverse, animation: .smooth)
@@ -32,40 +35,46 @@ struct SessionsListView: View {
     
     var body: some View {
         NavigationStack {
-            if drillContainers.isEmpty {
-                VStack {
-                    Text("You do not have any drill yet...")
-                        .font(.system(.title2, weight: .bold))
-                        .multilineTextAlignment(.center)
-                    
-                    NavigationLink(destination: EmptyView()) {
-                        Label("Add New", systemImage: "plus")
-                            .fontWeight(.medium)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical)
-                    }
-                    .buttonStyle(.borderedProminent)
-                    .tint(Color.blue)
-                    .padding(.horizontal)
+            Group {
+                if drillContainers.isEmpty {
+                    emptyView
+                } else {
+                    listView
+                        .navigationTitle("My Sessions")
+                        .navigationBarTitleDisplayMode(.large)
                 }
-            } else {
-                listView
-                    .confirmationDialog(
-                        "Confirm Action",
-                        isPresented: $isPresentingDeleteDataAlert
-                    ) {
-                        Button("Delete All", role: .destructive, action: clearData)
-                    } message: {
-                        Text("Are you sure you want to delete all records?\nThis action cannot be undone")
-                    }
-                    .navigationTitle("My Sessions")
-                    .navigationBarTitleDisplayMode(.large)
+            }
+            .navigationDestination(isPresented: $redirectToNewDrillConfigurationView) {
+                Text("Yolo")
+            }
+            .confirmationDialog(
+                "Confirm Action",
+                isPresented: $isPresentingDeleteDataAlert
+            ) {
+                Button("Delete All", role: .destructive, action: clearData)
+            } message: {
+                Text("Are you sure you want to delete all records?\nThis action cannot be undone")
             }
         }
-        .onAppear {
-            if isInPreview == false {
-                ensureMicrophoneAccess()
+        .errorAlert(error: $error)
+    }
+    
+    private var emptyView: some View {
+        VStack {
+            Text("You do not have any drill yet...")
+                .font(.system(.title2, weight: .bold))
+                .multilineTextAlignment(.center)
+            Button(action: {
+                redirectToNewDrillConfigurationIfNeeded()
+            }) {
+                Label("Add New", systemImage: "plus")
+                    .fontWeight(.medium)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical)
             }
+            .buttonStyle(.borderedProminent)
+            .tint(Color.blue)
+            .padding(.horizontal)
         }
     }
     
@@ -106,9 +115,9 @@ struct SessionsListView: View {
             }
         }
         .toolbar {
-            //                ToolbarItem(placement: .navigationBarTrailing) {
-            //                    EditButton()
-            //                }
+//                            ToolbarItem(placement: .navigationBarTrailing) {
+//                                EditButton()
+//                            }
             ToolbarItem {
                 Button {
                     isPresentingDeleteDataAlert = true
@@ -118,43 +127,31 @@ struct SessionsListView: View {
             }
         }
         .safeAreaInset(edge: .bottom) {
-            buttonView
+            Button(action: {
+                redirectToNewDrillConfigurationIfNeeded()
+            }) {
+                Text("Add New")
+                    .fontWeight(.medium)
+                    .frame(
+                        width: Constants.newSessionButton.width,
+                        height: Constants.newSessionButton.height
+                    )
+            }
+            .buttonStyle(.borderedProminent)
+            .clipShape(Circle())
+            .background(
+                Circle()
+                    .shadow(radius: 8, y: 2)
+            )
         }
     }
     
     private var macView: some View {
-        List {
-            
-        }
-        .toolbar {
-            ToolbarItem {
-                Button(action: clearData) {
-                    Label("Delete all", systemImage: "trash.fill")
-                }
-            }
-        }
+        phoneView
     }
     
     private var watchView: some View {
         EmptyView()
-    }
-    
-    private var buttonView: some View {
-//        NavigationLink(destination: DrillConfigurationView()) {
-        NavigationLink(destination: EmptyView()) {
-            Text("Add New")
-                .fontWeight(.medium)
-                .frame(
-                    width: Constants.newSessionButton.width,
-                    height: Constants.newSessionButton.height
-                )
-        }
-        .buttonStyle(.borderedProminent)
-        .clipShape(Circle())
-        .background(
-            Circle()
-                .shadow(radius: 8, y: 2)
-        )
     }
     
     // MARK: - Private Methods
@@ -165,7 +162,25 @@ struct SessionsListView: View {
         }
     }
     
-    private func ensureMicrophoneAccess() {
+    private func redirectToNewDrillConfigurationIfNeeded(failInPreview: Bool = false) {
+        if isInPreview {
+            if failInPreview {
+                error = SessionsListViewError.noMicrophoneAccessPreview
+            } else {
+                redirectToNewDrillConfigurationView = true
+            }
+        } else {
+            do {
+                try ensureMicrophoneAccess()
+                redirectToNewDrillConfigurationView = true
+            } catch let microphoneError {
+                error = microphoneError
+                redirectToNewDrillConfigurationView = false
+            }
+        }
+    }
+    
+    private func ensureMicrophoneAccess() throws {
         var hasMicrophoneAccess = false
         
         #if os(watchOS)
@@ -196,7 +211,42 @@ struct SessionsListView: View {
         #endif
 
         if !hasMicrophoneAccess {
-//            throw SystemAudioClassificationError.noMicrophoneAccess
+            throw SessionsListViewError.noMicrophoneAccess
+        }
+    }
+}
+
+
+// MARK: - SessionsListViewError
+
+private extension SessionsListView {
+    enum SessionsListViewError: LocalizedError {
+        case noMicrophoneAccess
+        case noMicrophoneAccessPreview
+        
+        var errorDescription: String? {
+            switch self {
+            case .noMicrophoneAccess:
+                return "Microphone Access Required title"
+            case .noMicrophoneAccessPreview:
+                return "Cannot request microphone access from preview"
+            }
+        }
+        
+        var failureReason: String? {
+            switch self {
+            case .noMicrophoneAccess, .noMicrophoneAccessPreview:
+                return "Cannot start new drill without microphone access"
+            }
+        }
+        
+        var recoverySuggestion: String? {
+            switch self {
+            case .noMicrophoneAccess:
+                return "Please provide microphone access in phone settings"
+            case .noMicrophoneAccessPreview:
+                return "Please run app on simulator or device"
+            }
         }
     }
 }
@@ -206,6 +256,7 @@ struct SessionsListView: View {
 #Preview("With Data") {
     MainActor.assumeIsolated {
         SessionsListView()
+            .previewDevice(PreviewDevice(rawValue: "iPhone 15 Pro"))
             .modelContainer(DrillSessionsContainerSampleData.container)
     }
 }

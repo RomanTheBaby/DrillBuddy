@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		75D113562ABE2E7500BF8874 /* DrillBuddyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D113552ABE2E7500BF8874 /* DrillBuddyApp.swift */; };
 		75D113582ABE2E7500BF8874 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D113572ABE2E7500BF8874 /* ContentView.swift */; };
-		75D1135A2ABE2E7500BF8874 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D113592ABE2E7500BF8874 /* Item.swift */; };
 		75D1135C2ABE2E7B00BF8874 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75D1135B2ABE2E7B00BF8874 /* Assets.xcassets */; };
 		75D113602ABE2E7B00BF8874 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75D1135F2ABE2E7B00BF8874 /* Preview Assets.xcassets */; };
 		75D1136C2ABE2F4900BF8874 /* LaunchScreenStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75D1136B2ABE2F4900BF8874 /* LaunchScreenStoryboard.storyboard */; };
@@ -23,7 +22,6 @@
 		75D113522ABE2E7500BF8874 /* DrillBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrillBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75D113552ABE2E7500BF8874 /* DrillBuddyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillBuddyApp.swift; sourceTree = "<group>"; };
 		75D113572ABE2E7500BF8874 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		75D113592ABE2E7500BF8874 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		75D1135B2ABE2E7B00BF8874 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		75D1135D2ABE2E7B00BF8874 /* DrillBuddy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DrillBuddy.entitlements; sourceTree = "<group>"; };
 		75D1135F2ABE2E7B00BF8874 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -123,7 +121,6 @@
 		75D1136F2ABE32F100BF8874 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				75D113592ABE2E7500BF8874 /* Item.swift */,
 				75D113702ABE331600BF8874 /* DrillsSessionsContainer.swift */,
 			);
 			path = Models;
@@ -209,7 +206,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				75D113582ABE2E7500BF8874 /* ContentView.swift in Sources */,
-				75D1135A2ABE2E7500BF8874 /* Item.swift in Sources */,
 				75D113732ABE3A7A00BF8874 /* DrillContainerPreviewData.swift in Sources */,
 				75D113712ABE331600BF8874 /* DrillsSessionsContainer.swift in Sources */,
 				75D113562ABE2E7500BF8874 /* DrillBuddyApp.swift in Sources */,

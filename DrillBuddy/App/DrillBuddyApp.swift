@@ -21,7 +21,7 @@ import SwiftData
 struct DrillBuddyApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SessionsListView()
         }
         .modelContainer(ModelContainer.shared)
     }
