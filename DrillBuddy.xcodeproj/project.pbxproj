@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		751CBCB82ABE7AB000141805 /* DrillBuddy Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 751CBCAB2ABE7AAD00141805 /* DrillBuddy Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		7548387C2ABE7B1000146415 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 754838772ABE7B1000146415 /* Assets.xcassets */; };
+		7548387D2ABE7B1000146415 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 754838792ABE7B1000146415 /* Preview Assets.xcassets */; };
+		7548387E2ABE7B1000146415 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7548387A2ABE7B1000146415 /* ContentView.swift */; };
+		754838822ABE7B5300146415 /* DrillBuddyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D113552ABE2E7500BF8874 /* DrillBuddyApp.swift */; };
+		754838832ABE7B5700146415 /* DrillsSessionsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D113702ABE331600BF8874 /* DrillsSessionsContainer.swift */; };
+		754838842ABE7B6100146415 /* SessionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D1136D2ABE308C00BF8874 /* SessionsListView.swift */; };
+		754838852ABE7B8600146415 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D113752ABE4EE200BF8874 /* View+Extension.swift */; };
+		754838862ABE7B8B00146415 /* DrillContainerPreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D113722ABE3A7A00BF8874 /* DrillContainerPreviewData.swift */; };
+		7572F0142ABF1D14001E2F3C /* SessionsListTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7572F0132ABF1D14001E2F3C /* SessionsListTabView.swift */; };
+		7572F0162ABF5DE8001E2F3C /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7572F0152ABF5DE8001E2F3C /* AppError.swift */; };
+		7572F0172ABF5E10001E2F3C /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7572F0152ABF5DE8001E2F3C /* AppError.swift */; };
 		75D113562ABE2E7500BF8874 /* DrillBuddyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D113552ABE2E7500BF8874 /* DrillBuddyApp.swift */; };
 		75D113582ABE2E7500BF8874 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D113572ABE2E7500BF8874 /* ContentView.swift */; };
 		75D1135C2ABE2E7B00BF8874 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75D1135B2ABE2E7B00BF8874 /* Assets.xcassets */; };
@@ -18,7 +30,37 @@
 		75D113762ABE4EE200BF8874 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D113752ABE4EE200BF8874 /* View+Extension.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		751CBCB62ABE7AB000141805 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 75D1134A2ABE2E7500BF8874 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 751CBCAA2ABE7AAD00141805;
+			remoteInfo = "DrillBuddyWatch Watch App";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		751CBCB92ABE7AB000141805 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				751CBCB82ABE7AB000141805 /* DrillBuddy Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		751CBCAB2ABE7AAD00141805 /* DrillBuddy Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DrillBuddy Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		754838772ABE7B1000146415 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		754838792ABE7B1000146415 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		7548387A2ABE7B1000146415 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		7572F0132ABF1D14001E2F3C /* SessionsListTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsListTabView.swift; sourceTree = "<group>"; };
+		7572F0152ABF5DE8001E2F3C /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		75D113522ABE2E7500BF8874 /* DrillBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrillBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75D113552ABE2E7500BF8874 /* DrillBuddyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillBuddyApp.swift; sourceTree = "<group>"; };
 		75D113572ABE2E7500BF8874 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -34,6 +76,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		751CBCA82ABE7AAD00141805 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		75D1134F2ABE2E7500BF8874 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -44,10 +93,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		754838762ABE7B1000146415 /* DrillBuddy Watch App */ = {
+			isa = PBXGroup;
+			children = (
+				754838812ABE7B4200146415 /* Views */,
+				754838802ABE7B3800146415 /* Resources */,
+				754838782ABE7B1000146415 /* Preview Content */,
+			);
+			path = "DrillBuddy Watch App";
+			sourceTree = "<group>";
+		};
+		754838782ABE7B1000146415 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				754838792ABE7B1000146415 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		754838802ABE7B3800146415 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				754838772ABE7B1000146415 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		754838812ABE7B4200146415 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7548387A2ABE7B1000146415 /* ContentView.swift */,
+				7572F0132ABF1D14001E2F3C /* SessionsListTabView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		75D113492ABE2E7500BF8874 = {
 			isa = PBXGroup;
 			children = (
 				75D113542ABE2E7500BF8874 /* DrillBuddy */,
+				754838762ABE7B1000146415 /* DrillBuddy Watch App */,
 				75D113532ABE2E7500BF8874 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -56,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				75D113522ABE2E7500BF8874 /* DrillBuddy.app */,
+				751CBCAB2ABE7AAD00141805 /* DrillBuddy Watch App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -122,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				75D113702ABE331600BF8874 /* DrillsSessionsContainer.swift */,
+				7572F0152ABF5DE8001E2F3C /* AppError.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -137,6 +224,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		751CBCAA2ABE7AAD00141805 /* DrillBuddy Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 751CBCBC2ABE7AB000141805 /* Build configuration list for PBXNativeTarget "DrillBuddy Watch App" */;
+			buildPhases = (
+				751CBCA72ABE7AAD00141805 /* Sources */,
+				751CBCA82ABE7AAD00141805 /* Frameworks */,
+				751CBCA92ABE7AAD00141805 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "DrillBuddy Watch App";
+			productName = "DrillBuddyWatch Watch App";
+			productReference = 751CBCAB2ABE7AAD00141805 /* DrillBuddy Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
 		75D113512ABE2E7500BF8874 /* DrillBuddy */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 75D113642ABE2E7B00BF8874 /* Build configuration list for PBXNativeTarget "DrillBuddy" */;
@@ -144,10 +248,12 @@
 				75D1134E2ABE2E7500BF8874 /* Sources */,
 				75D1134F2ABE2E7500BF8874 /* Frameworks */,
 				75D113502ABE2E7500BF8874 /* Resources */,
+				751CBCB92ABE7AB000141805 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				751CBCB72ABE7AB000141805 /* PBXTargetDependency */,
 			);
 			name = DrillBuddy;
 			productName = DrillBuddy;
@@ -164,6 +270,9 @@
 				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
+					751CBCAA2ABE7AAD00141805 = {
+						CreatedOnToolsVersion = 15.0;
+					};
 					75D113512ABE2E7500BF8874 = {
 						CreatedOnToolsVersion = 15.0;
 					};
@@ -183,11 +292,21 @@
 			projectRoot = "";
 			targets = (
 				75D113512ABE2E7500BF8874 /* DrillBuddy */,
+				751CBCAA2ABE7AAD00141805 /* DrillBuddy Watch App */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		751CBCA92ABE7AAD00141805 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7548387D2ABE7B1000146415 /* Preview Assets.xcassets in Resources */,
+				7548387C2ABE7B1000146415 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		75D113502ABE2E7500BF8874 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -201,6 +320,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		751CBCA72ABE7AAD00141805 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				754838832ABE7B5700146415 /* DrillsSessionsContainer.swift in Sources */,
+				754838822ABE7B5300146415 /* DrillBuddyApp.swift in Sources */,
+				7572F0142ABF1D14001E2F3C /* SessionsListTabView.swift in Sources */,
+				754838862ABE7B8B00146415 /* DrillContainerPreviewData.swift in Sources */,
+				7572F0172ABF5E10001E2F3C /* AppError.swift in Sources */,
+				754838852ABE7B8600146415 /* View+Extension.swift in Sources */,
+				7548387E2ABE7B1000146415 /* ContentView.swift in Sources */,
+				754838842ABE7B6100146415 /* SessionsListView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		75D1134E2ABE2E7500BF8874 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -211,12 +345,82 @@
 				75D113562ABE2E7500BF8874 /* DrillBuddyApp.swift in Sources */,
 				75D113762ABE4EE200BF8874 /* View+Extension.swift in Sources */,
 				75D1136E2ABE308C00BF8874 /* SessionsListView.swift in Sources */,
+				7572F0162ABF5DE8001E2F3C /* AppError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		751CBCB72ABE7AB000141805 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 751CBCAA2ABE7AAD00141805 /* DrillBuddy Watch App */;
+			targetProxy = 751CBCB62ABE7AB000141805 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		751CBCBA2ABE7AB000141805 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"DrillBuddy Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = JL6XT94C4X;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = DrillBuddyWatch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = bakehouse.DrillBuddy;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = bakehouse.DrillBuddy.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		751CBCBB2ABE7AB000141805 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"DrillBuddy Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = JL6XT94C4X;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = DrillBuddyWatch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = bakehouse.DrillBuddy;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = bakehouse.DrillBuddy.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
 		75D113622ABE2E7B00BF8874 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -334,6 +538,7 @@
 		75D113652ABE2E7B00BF8874 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = DrillBuddy/DrillBuddy.entitlements;
@@ -375,6 +580,7 @@
 		75D113662ABE2E7B00BF8874 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = DrillBuddy/DrillBuddy.entitlements;
@@ -416,6 +622,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		751CBCBC2ABE7AB000141805 /* Build configuration list for PBXNativeTarget "DrillBuddy Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				751CBCBA2ABE7AB000141805 /* Debug */,
+				751CBCBB2ABE7AB000141805 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		75D1134D2ABE2E7500BF8874 /* Build configuration list for PBXProject "DrillBuddy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

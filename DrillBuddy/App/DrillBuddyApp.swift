@@ -24,6 +24,7 @@ struct DrillBuddyApp: App {
             SessionsListView()
         }
         .modelContainer(ModelContainer.shared)
+//        .modelContainer(DrillSessionsContainerSampleData.container)
     }
 }
 

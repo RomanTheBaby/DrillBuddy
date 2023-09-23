@@ -32,7 +32,9 @@ class DrillsSessionsContainer: Identifiable {
 }
 
 @Model
-class Drill {
+class Drill: Identifiable {
+    @Attribute(.unique)
+    var id: UUID = UUID()
     var sounds: [String]
     var recordingURL: URL?
     

@@ -36,13 +36,22 @@ struct SessionsListView: View {
     var body: some View {
         NavigationStack {
             Group {
-                if drillContainers.isEmpty {
-                    emptyView
-                } else {
-                    listView
-                        .navigationTitle("My Sessions")
-                        .navigationBarTitleDisplayMode(.large)
-                }
+                #if os(watchOS)
+                    SessionsListTabView(
+                        drillContainers: drillContainers,
+                        customNewSessionAction: {
+                            redirectToNewDrillConfigurationIfNeeded()
+                        }
+                    )
+                #else
+                    if drillContainers.isEmpty {
+                        emptyView
+                    } else {
+                        listView
+                            .navigationTitle("My Sessions")
+                            .navigationBarTitleDisplayMode(.large)
+                    }
+                #endif
             }
             .navigationDestination(isPresented: $redirectToNewDrillConfigurationView) {
                 Text("Yolo")
@@ -61,9 +70,9 @@ struct SessionsListView: View {
     
     private var emptyView: some View {
         VStack {
-            Text("You do not have any drill yet...")
-                .font(.system(.title2, weight: .bold))
+            Text("You do not have any drills yet...")
                 .multilineTextAlignment(.center)
+                .font(.system(.title2, weight: .bold))
             Button(action: {
                 redirectToNewDrillConfigurationIfNeeded()
             }) {
@@ -73,22 +82,16 @@ struct SessionsListView: View {
                     .padding(.vertical)
             }
             .buttonStyle(.borderedProminent)
-            .tint(Color.blue)
             .padding(.horizontal)
+            #if os(watchOS)
+            .tint(Color.orange)
+            #else
+            .tint(Color.blue)
+            #endif
         }
     }
     
     private var listView: some View {
-        #if os(iOS)
-            phoneView
-        #elseif os(macOS)
-            macView
-        #elseif os(watchOS)
-            watchView
-        #endif
-    }
-    
-    private var phoneView: some View {
         List {
             ForEach(drillContainers) { container in
                 Section {
@@ -146,14 +149,6 @@ struct SessionsListView: View {
         }
     }
     
-    private var macView: some View {
-        phoneView
-    }
-    
-    private var watchView: some View {
-        EmptyView()
-    }
-    
     // MARK: - Private Methods
     
     private func clearData() {
@@ -165,7 +160,7 @@ struct SessionsListView: View {
     private func redirectToNewDrillConfigurationIfNeeded(failInPreview: Bool = false) {
         if isInPreview {
             if failInPreview {
-                error = SessionsListViewError.noMicrophoneAccessPreview
+                error = AppError.Microphone.noAccessPreview
             } else {
                 redirectToNewDrillConfigurationView = true
             }
@@ -211,42 +206,7 @@ struct SessionsListView: View {
         #endif
 
         if !hasMicrophoneAccess {
-            throw SessionsListViewError.noMicrophoneAccess
-        }
-    }
-}
-
-
-// MARK: - SessionsListViewError
-
-private extension SessionsListView {
-    enum SessionsListViewError: LocalizedError {
-        case noMicrophoneAccess
-        case noMicrophoneAccessPreview
-        
-        var errorDescription: String? {
-            switch self {
-            case .noMicrophoneAccess:
-                return "Microphone Access Required title"
-            case .noMicrophoneAccessPreview:
-                return "Cannot request microphone access from preview"
-            }
-        }
-        
-        var failureReason: String? {
-            switch self {
-            case .noMicrophoneAccess, .noMicrophoneAccessPreview:
-                return "Cannot start new drill without microphone access"
-            }
-        }
-        
-        var recoverySuggestion: String? {
-            switch self {
-            case .noMicrophoneAccess:
-                return "Please provide microphone access in phone settings"
-            case .noMicrophoneAccessPreview:
-                return "Please run app on simulator or device"
-            }
+            throw AppError.Microphone.noAccess
         }
     }
 }
