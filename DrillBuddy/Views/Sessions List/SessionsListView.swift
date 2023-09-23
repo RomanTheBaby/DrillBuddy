@@ -54,7 +54,7 @@ struct SessionsListView: View {
                 #endif
             }
             .navigationDestination(isPresented: $redirectToNewDrillConfigurationView) {
-                Text("Yolo")
+                DrillConfigurationView()
             }
             .confirmationDialog(
                 "Confirm Action",

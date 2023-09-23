@@ -54,7 +54,7 @@ struct SessionsListTabView: View {
         }
         .errorAlert(error: $error)
         .navigationDestination(isPresented: $redirectToNewDrillConfigurationView) {
-            Text("Yolo")
+            DrillConfigurationView()
         }
         .onChange(of: drillContainers) { _, newValue in
             if newValue.isEmpty {
@@ -97,7 +97,7 @@ struct SessionsListTabView: View {
 ////                ToolbarItem {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-////                    redirectToNewDrillConfigurationIfNeeded()
+//                    redirectToNewDrillConfigurationIfNeeded()
                 } label: {
                     Label("Add New", systemImage: "plus")
                         .labelsHidden()
@@ -119,7 +119,6 @@ struct SessionsListTabView: View {
                 redirectToNewDrillConfigurationIfNeeded()
             }) {
                 Label("Add New", systemImage: "plus")
-//                    .fontWeight(.medium)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical)
             }

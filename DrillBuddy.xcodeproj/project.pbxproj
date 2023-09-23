@@ -19,6 +19,12 @@
 		7572F0142ABF1D14001E2F3C /* SessionsListTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7572F0132ABF1D14001E2F3C /* SessionsListTabView.swift */; };
 		7572F0162ABF5DE8001E2F3C /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7572F0152ABF5DE8001E2F3C /* AppError.swift */; };
 		7572F0172ABF5E10001E2F3C /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7572F0152ABF5DE8001E2F3C /* AppError.swift */; };
+		7572F01E2ABF61A4001E2F3C /* DrillConfigurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7572F01D2ABF61A4001E2F3C /* DrillConfigurationView.swift */; };
+		7572F01F2ABF61A4001E2F3C /* DrillConfigurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7572F01D2ABF61A4001E2F3C /* DrillConfigurationView.swift */; };
+		7572F0212ABF7CCA001E2F3C /* DrillRecordingConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7572F0202ABF7CCA001E2F3C /* DrillRecordingConfiguration.swift */; };
+		7572F0222ABF7CCA001E2F3C /* DrillRecordingConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7572F0202ABF7CCA001E2F3C /* DrillRecordingConfiguration.swift */; };
+		7572F0252ABFACB4001E2F3C /* DrillRecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7572F0242ABFACB4001E2F3C /* DrillRecordingView.swift */; };
+		7572F0262ABFACB5001E2F3C /* DrillRecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7572F0242ABFACB4001E2F3C /* DrillRecordingView.swift */; };
 		75D113562ABE2E7500BF8874 /* DrillBuddyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D113552ABE2E7500BF8874 /* DrillBuddyApp.swift */; };
 		75D113582ABE2E7500BF8874 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D113572ABE2E7500BF8874 /* ContentView.swift */; };
 		75D1135C2ABE2E7B00BF8874 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75D1135B2ABE2E7B00BF8874 /* Assets.xcassets */; };
@@ -61,6 +67,9 @@
 		7548387A2ABE7B1000146415 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7572F0132ABF1D14001E2F3C /* SessionsListTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsListTabView.swift; sourceTree = "<group>"; };
 		7572F0152ABF5DE8001E2F3C /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
+		7572F01D2ABF61A4001E2F3C /* DrillConfigurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillConfigurationView.swift; sourceTree = "<group>"; };
+		7572F0202ABF7CCA001E2F3C /* DrillRecordingConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillRecordingConfiguration.swift; sourceTree = "<group>"; };
+		7572F0242ABFACB4001E2F3C /* DrillRecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillRecordingView.swift; sourceTree = "<group>"; };
 		75D113522ABE2E7500BF8874 /* DrillBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrillBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75D113552ABE2E7500BF8874 /* DrillBuddyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillBuddyApp.swift; sourceTree = "<group>"; };
 		75D113572ABE2E7500BF8874 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -128,6 +137,30 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		7572F0182ABF6174001E2F3C /* Sessions List */ = {
+			isa = PBXGroup;
+			children = (
+				75D1136D2ABE308C00BF8874 /* SessionsListView.swift */,
+			);
+			path = "Sessions List";
+			sourceTree = "<group>";
+		};
+		7572F0192ABF6184001E2F3C /* Drill Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				7572F01D2ABF61A4001E2F3C /* DrillConfigurationView.swift */,
+			);
+			path = "Drill Configuration";
+			sourceTree = "<group>";
+		};
+		7572F0232ABFAC9F001E2F3C /* Drill Recording */ = {
+			isa = PBXGroup;
+			children = (
+				7572F0242ABFACB4001E2F3C /* DrillRecordingView.swift */,
+			);
+			path = "Drill Recording";
+			sourceTree = "<group>";
+		};
 		75D113492ABE2E7500BF8874 = {
 			isa = PBXGroup;
 			children = (
@@ -178,8 +211,10 @@
 			isa = PBXGroup;
 			children = (
 				75D1136A2ABE2F3700BF8874 /* Launch Screen */,
+				7572F0192ABF6184001E2F3C /* Drill Configuration */,
+				7572F0232ABFAC9F001E2F3C /* Drill Recording */,
+				7572F0182ABF6174001E2F3C /* Sessions List */,
 				75D113572ABE2E7500BF8874 /* ContentView.swift */,
-				75D1136D2ABE308C00BF8874 /* SessionsListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -207,8 +242,9 @@
 		75D1136F2ABE32F100BF8874 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				75D113702ABE331600BF8874 /* DrillsSessionsContainer.swift */,
 				7572F0152ABF5DE8001E2F3C /* AppError.swift */,
+				7572F0202ABF7CCA001E2F3C /* DrillRecordingConfiguration.swift */,
+				75D113702ABE331600BF8874 /* DrillsSessionsContainer.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -329,9 +365,12 @@
 				7572F0142ABF1D14001E2F3C /* SessionsListTabView.swift in Sources */,
 				754838862ABE7B8B00146415 /* DrillContainerPreviewData.swift in Sources */,
 				7572F0172ABF5E10001E2F3C /* AppError.swift in Sources */,
+				7572F0262ABFACB5001E2F3C /* DrillRecordingView.swift in Sources */,
 				754838852ABE7B8600146415 /* View+Extension.swift in Sources */,
+				7572F0222ABF7CCA001E2F3C /* DrillRecordingConfiguration.swift in Sources */,
 				7548387E2ABE7B1000146415 /* ContentView.swift in Sources */,
 				754838842ABE7B6100146415 /* SessionsListView.swift in Sources */,
+				7572F01F2ABF61A4001E2F3C /* DrillConfigurationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,7 +379,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				75D113582ABE2E7500BF8874 /* ContentView.swift in Sources */,
+				7572F01E2ABF61A4001E2F3C /* DrillConfigurationView.swift in Sources */,
+				7572F0212ABF7CCA001E2F3C /* DrillRecordingConfiguration.swift in Sources */,
 				75D113732ABE3A7A00BF8874 /* DrillContainerPreviewData.swift in Sources */,
+				7572F0252ABFACB4001E2F3C /* DrillRecordingView.swift in Sources */,
 				75D113712ABE331600BF8874 /* DrillsSessionsContainer.swift in Sources */,
 				75D113562ABE2E7500BF8874 /* DrillBuddyApp.swift in Sources */,
 				75D113762ABE4EE200BF8874 /* View+Extension.swift in Sources */,
