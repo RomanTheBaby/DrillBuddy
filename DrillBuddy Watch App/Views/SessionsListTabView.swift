@@ -35,6 +35,7 @@ struct SessionsListTabView: View {
     // MARK: - Private Properties
     
     @State private var error: Error?
+    @State private var isSynchronizing: Bool = false
     @State private var redirectToNewDrillConfigurationView = false
     
     // MARK: - View
@@ -147,14 +148,16 @@ struct SessionsListTabView: View {
                 
                 VStack {
                     Button {
-                        watchDataSynchronizer.synchronize(drillContainers)
+                        Task {
+                            await synchronizeContainers()
+                        }
                     } label: {
                         Image(systemName: "arrow.clockwise")
                     }
                     .tint(Color.yellow)
                     Text("Sync Data")
                 }
-                .disabled(drillContainers.isEmpty)
+                .disabled(isSynchronizing || drillContainers.isEmpty)
             }
             
             HStack {
@@ -209,6 +212,17 @@ struct SessionsListTabView: View {
         
         if !hasMicrophoneAccess {
             throw AppError.Microphone.noAccess
+        }
+    }
+    
+    private func synchronizeContainers() async {
+        do {
+            isSynchronizing = true
+            try await watchDataSynchronizer.synchronize(drillContainers)
+            isSynchronizing = false
+        } catch let syncError {
+            isSynchronizing = false
+            error = syncError
         }
     }
 }

@@ -9,35 +9,28 @@ import Combine
 import OSLog
 import WatchConnectivity
 
-// MARK: - SyncData
-
-struct SyncData: Codable {
-    var drillContainers: [DrillsSessionsContainer]?
-}
-
-struct SyncResponse: Codable {
-    enum SyncResult: Codable {
-        case success
-        case error(String)
-    }
-    
-    var result: SyncResult
-}
-
 // MARK: - WatchSessionDelegate
 
 class WatchSessionDelegate: NSObject, WCSessionDelegate {
-    // MARK: - Properties
     
-    let syncSubject: PassthroughSubject<SyncData, Never>
+    // MARK: - Private Properties
     
-    private let jsonEncoder = JSONEncoder()
-    private let jsonDecoder = JSONDecoder()
+    private let jsonEncoder: JSONEncoder
+    private let jsonDecoder: JSONDecoder
+    
+    private let watchDataSyncHandler: WatchDataSyncHandler
     
     // MARK: - Init
     
-    init(syncSubject: PassthroughSubject<SyncData, Never>) {
-        self.syncSubject = syncSubject
+    init(
+        watchDataSyncHandler: WatchDataSyncHandler,
+        jsonEncoder: JSONEncoder = JSONEncoder(),
+        jsonDecoder: JSONDecoder = JSONDecoder()
+    ) {
+        self.watchDataSyncHandler = watchDataSyncHandler
+        self.jsonEncoder = jsonEncoder
+        self.jsonDecoder = jsonDecoder
+        
         super.init()
     }
     
@@ -53,12 +46,13 @@ class WatchSessionDelegate: NSObject, WCSessionDelegate {
         Logger.watchSession.trace("Did receive message data")
         do {
             let syncData = try jsonDecoder.decode(SyncData.self, from: messageData)
-            syncSubject.send(syncData)
+            try watchDataSyncHandler.handleSyncData(syncData)
             send(syncResult: .success, to: replyHandler)
         } catch {
-            Logger.watchSession.error("Failed to decode SyncData with error error: \(error, privacy: .public)")
-            assertionFailure()
-            send(syncResult: .error(error.localizedDescription), to: replyHandler)
+            Logger.watchSession.error("Failed to sync data with error: \(error, privacy: .public)")
+//            assertionFailure()
+            let syncError = SyncResponse.SyncError(error: error)
+            send(syncResult: .error(syncError), to: replyHandler)
         }
     }
     
@@ -87,7 +81,7 @@ class WatchSessionDelegate: NSObject, WCSessionDelegate {
             replyHandler(encodedSencResponse)
         } catch {
             Logger.watchSession.error("Failed to encode SyncResponse with error error: \(error, privacy: .public)")
-            assertionFailure()
+//            assertionFailure()
         }
     }
 }
@@ -96,7 +90,7 @@ class WatchSessionDelegate: NSObject, WCSessionDelegate {
 
 private extension Logger {
     static let watchSession = Logger(
-        subsystem: Bundle.main.bundleIdentifier ?? "DrillBuddy.WatchConnectivity",
+        subsystem: Bundle.main.bundleIdentifier ?? "DrillBuddy.WatchSessionDelegate",
         category: String(describing: WatchSessionDelegate.self)
     )
 }

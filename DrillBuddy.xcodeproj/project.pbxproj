@@ -29,6 +29,12 @@
 		7572F0292ABFB326001E2F3C /* WatchSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7572F0272ABFB326001E2F3C /* WatchSessionDelegate.swift */; };
 		7572F02B2AC0A62A001E2F3C /* WatchDataSynchronizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7572F02A2AC0A62A001E2F3C /* WatchDataSynchronizer.swift */; };
 		7572F02C2AC0A62A001E2F3C /* WatchDataSynchronizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7572F02A2AC0A62A001E2F3C /* WatchDataSynchronizer.swift */; };
+		7572F02F2AC22FCA001E2F3C /* WatchDataSyncHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7572F02E2AC22FCA001E2F3C /* WatchDataSyncHandler.swift */; };
+		7572F0302AC22FCA001E2F3C /* WatchDataSyncHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7572F02E2AC22FCA001E2F3C /* WatchDataSyncHandler.swift */; };
+		7572F0332AC24A64001E2F3C /* SyncData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7572F0322AC24A64001E2F3C /* SyncData.swift */; };
+		7572F0342AC24A64001E2F3C /* SyncData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7572F0322AC24A64001E2F3C /* SyncData.swift */; };
+		7572F0362AC24AAE001E2F3C /* SyncResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7572F0352AC24AAE001E2F3C /* SyncResponse.swift */; };
+		7572F0372AC24AAE001E2F3C /* SyncResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7572F0352AC24AAE001E2F3C /* SyncResponse.swift */; };
 		75D113562ABE2E7500BF8874 /* DrillBuddyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D113552ABE2E7500BF8874 /* DrillBuddyApp.swift */; };
 		75D113582ABE2E7500BF8874 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D113572ABE2E7500BF8874 /* ContentView.swift */; };
 		75D1135C2ABE2E7B00BF8874 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75D1135B2ABE2E7B00BF8874 /* Assets.xcassets */; };
@@ -76,6 +82,9 @@
 		7572F0242ABFACB4001E2F3C /* DrillRecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillRecordingView.swift; sourceTree = "<group>"; };
 		7572F0272ABFB326001E2F3C /* WatchSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSessionDelegate.swift; sourceTree = "<group>"; };
 		7572F02A2AC0A62A001E2F3C /* WatchDataSynchronizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchDataSynchronizer.swift; sourceTree = "<group>"; };
+		7572F02E2AC22FCA001E2F3C /* WatchDataSyncHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchDataSyncHandler.swift; sourceTree = "<group>"; };
+		7572F0322AC24A64001E2F3C /* SyncData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncData.swift; sourceTree = "<group>"; };
+		7572F0352AC24AAE001E2F3C /* SyncResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncResponse.swift; sourceTree = "<group>"; };
 		75D113522ABE2E7500BF8874 /* DrillBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrillBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75D113552ABE2E7500BF8874 /* DrillBuddyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillBuddyApp.swift; sourceTree = "<group>"; };
 		75D113572ABE2E7500BF8874 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -129,9 +138,8 @@
 		754838802ABE7B3800146415 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7572F02D2AC22FB8001E2F3C /* Watch Connectivity */,
 				754838772ABE7B1000146415 /* Assets.xcassets */,
-				7572F0272ABFB326001E2F3C /* WatchSessionDelegate.swift */,
-				7572F02A2AC0A62A001E2F3C /* WatchDataSynchronizer.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -167,6 +175,26 @@
 				7572F0242ABFACB4001E2F3C /* DrillRecordingView.swift */,
 			);
 			path = "Drill Recording";
+			sourceTree = "<group>";
+		};
+		7572F02D2AC22FB8001E2F3C /* Watch Connectivity */ = {
+			isa = PBXGroup;
+			children = (
+				7572F0312AC24A5C001E2F3C /* Models */,
+				7572F0272ABFB326001E2F3C /* WatchSessionDelegate.swift */,
+				7572F02A2AC0A62A001E2F3C /* WatchDataSynchronizer.swift */,
+				7572F02E2AC22FCA001E2F3C /* WatchDataSyncHandler.swift */,
+			);
+			path = "Watch Connectivity";
+			sourceTree = "<group>";
+		};
+		7572F0312AC24A5C001E2F3C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7572F0322AC24A64001E2F3C /* SyncData.swift */,
+				7572F0352AC24AAE001E2F3C /* SyncResponse.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		75D113492ABE2E7500BF8874 = {
@@ -375,9 +403,12 @@
 				754838862ABE7B8B00146415 /* DrillContainerPreviewData.swift in Sources */,
 				7572F0172ABF5E10001E2F3C /* AppError.swift in Sources */,
 				7572F0262ABFACB5001E2F3C /* DrillRecordingView.swift in Sources */,
+				7572F0302AC22FCA001E2F3C /* WatchDataSyncHandler.swift in Sources */,
 				754838852ABE7B8600146415 /* View+Extension.swift in Sources */,
+				7572F0372AC24AAE001E2F3C /* SyncResponse.swift in Sources */,
 				7572F0292ABFB326001E2F3C /* WatchSessionDelegate.swift in Sources */,
 				7572F0222ABF7CCA001E2F3C /* DrillRecordingConfiguration.swift in Sources */,
+				7572F0342AC24A64001E2F3C /* SyncData.swift in Sources */,
 				7548387E2ABE7B1000146415 /* ContentView.swift in Sources */,
 				754838842ABE7B6100146415 /* SessionsListView.swift in Sources */,
 				7572F01F2ABF61A4001E2F3C /* DrillConfigurationView.swift in Sources */,
@@ -393,12 +424,15 @@
 				7572F0212ABF7CCA001E2F3C /* DrillRecordingConfiguration.swift in Sources */,
 				75D113732ABE3A7A00BF8874 /* DrillContainerPreviewData.swift in Sources */,
 				7572F0252ABFACB4001E2F3C /* DrillRecordingView.swift in Sources */,
+				7572F0362AC24AAE001E2F3C /* SyncResponse.swift in Sources */,
 				7572F0282ABFB326001E2F3C /* WatchSessionDelegate.swift in Sources */,
+				7572F02F2AC22FCA001E2F3C /* WatchDataSyncHandler.swift in Sources */,
 				75D113712ABE331600BF8874 /* DrillsSessionsContainer.swift in Sources */,
 				75D113562ABE2E7500BF8874 /* DrillBuddyApp.swift in Sources */,
 				75D113762ABE4EE200BF8874 /* View+Extension.swift in Sources */,
 				7572F02B2AC0A62A001E2F3C /* WatchDataSynchronizer.swift in Sources */,
 				75D1136E2ABE308C00BF8874 /* SessionsListView.swift in Sources */,
+				7572F0332AC24A64001E2F3C /* SyncData.swift in Sources */,
 				7572F0162ABF5DE8001E2F3C /* AppError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
