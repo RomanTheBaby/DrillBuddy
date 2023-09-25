@@ -38,29 +38,29 @@ actor DrillSessionsContainerSampleData {
                 Drill(sounds: ["0", "9", "3", "4"]),
             ]
         ),
-            DrillsSessionsContainer(
-                date: dateFormatter.date(from: "08-Aug-2023") ?? Date().addingTimeInterval(-(3600 * 24)),
-                drills: [
-                    Drill(sounds: ["5", "6", "7", "8"]),
-                    Drill(sounds: ["1", "2", "3", "4"]),
-                    Drill(sounds: ["2", "3", "3", "4"], recordingURL: URL(string: "google.com")!),
-                ]
-            ),
-            DrillsSessionsContainer(
-                date: dateFormatter.date(from: "11-Sep-2021") ?? Date().addingTimeInterval(-(3600 * 24)),
-                drills: [
-                    Drill(sounds: ["1", "2", "3", "4"]),
-                    Drill(sounds: ["1", "5", "2", "4"]),
-                ]
-            ),
-            DrillsSessionsContainer(
-                date: dateFormatter.date(from: "08-Dec-1996") ?? Date().addingTimeInterval(-(3600 * 52)),
-                drills: [
-                    Drill(sounds: ["1", "2", "3", "4"]),
-                    Drill(sounds: ["1", "2"]),
-                    Drill(sounds: ["1", "2", "8", "4"]),
-                    Drill(sounds: ["1", "2", "9", "0"], recordingURL: URL(string: "google.com")!),
-                ]
-            ),
+        DrillsSessionsContainer(
+            date: dateFormatter.date(from: "08-Aug-2023") ?? Date().addingTimeInterval(-(3600 * 24)),
+            drills: [
+                Drill(sounds: ["5", "6", "7", "8"]),
+                Drill(sounds: ["1", "2", "3", "4"]),
+                Drill(sounds: ["2", "3", "3", "4"], recordingURL: URL(string: "google.com")!),
+            ]
+        ),
+        DrillsSessionsContainer(
+            date: dateFormatter.date(from: "11-Sep-2021") ?? Date().addingTimeInterval(-(3600 * 24)),
+            drills: [
+                Drill(sounds: ["1", "2", "3", "4"]),
+                Drill(sounds: ["1", "5", "2", "4"]),
+            ]
+        ),
+        DrillsSessionsContainer(
+            date: dateFormatter.date(from: "08-Dec-1996") ?? Date().addingTimeInterval(-(3600 * 52)),
+            drills: [
+                Drill(sounds: ["1", "2", "3", "4"]),
+                Drill(sounds: ["1", "2"]),
+                Drill(sounds: ["1", "2", "8", "4"]),
+                Drill(sounds: ["1", "2", "9", "0"], recordingURL: URL(string: "google.com")!),
+            ]
+        ),
     ]
 }

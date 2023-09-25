@@ -20,13 +20,17 @@ struct SessionsListView: View {
         )
     }
     
-    // MARK: - Properties
+    // MARK: - Public Properties
+    
+    @StateObject var watchDataSynchronizer: WatchDataSynchronizer
+    
+    // MARK: - Private Properties
     
     @State private var error: Error?
     @State private var hasMicrophoneAccess = true
     @State private var isPresentingDeleteDataAlert: Bool = false
     @State private var redirectToNewDrillConfigurationView = false
-    @Environment(\.modelContext) private var modelContext
+    @Environment(\.modelContext) private var modelContext: ModelContext
     
     @Query(sort: \DrillsSessionsContainer.date, order: .reverse, animation: .smooth)
     private var drillContainers: [DrillsSessionsContainer]
@@ -38,6 +42,7 @@ struct SessionsListView: View {
             Group {
                 #if os(watchOS)
                     SessionsListTabView(
+                        watchDataSynchronizer: watchDataSynchronizer,
                         drillContainers: drillContainers,
                         customNewSessionAction: {
                             redirectToNewDrillConfigurationIfNeeded()
@@ -215,12 +220,19 @@ struct SessionsListView: View {
 
 #Preview("With Data") {
     MainActor.assumeIsolated {
-        SessionsListView()
-            .previewDevice(PreviewDevice(rawValue: "iPhone 15 Pro"))
-            .modelContainer(DrillSessionsContainerSampleData.container)
+        SessionsListView(
+            watchDataSynchronizer: WatchDataSynchronizer(
+                modelContext: DrillSessionsContainerSampleData.container.mainContext
+            )
+        )
+        .modelContainer(DrillSessionsContainerSampleData.container)
     }
 }
 
 #Preview("No container") {
-    SessionsListView()
+    SessionsListView(
+        watchDataSynchronizer: WatchDataSynchronizer(
+            modelContext: DrillSessionsContainerSampleData.container.mainContext
+        )
+    )
 }

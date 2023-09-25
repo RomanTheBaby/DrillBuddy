@@ -25,14 +25,17 @@ struct SessionsListTabView: View {
         }
     }
 
-    // MARK: - Properties
+    // MARK: - Public Properties
     
-    @State private var error: Error?
-    @State private var redirectToNewDrillConfigurationView = false
-    
+    @StateObject var watchDataSynchronizer: WatchDataSynchronizer
     @State var drillContainers: [DrillsSessionsContainer] = []
     @State var selectedTab: Tab = .controls
     var customNewSessionAction: (() -> Void)? = nil
+    
+    // MARK: - Private Properties
+    
+    @State private var error: Error?
+    @State private var redirectToNewDrillConfigurationView = false
     
     // MARK: - View
     
@@ -109,7 +112,7 @@ struct SessionsListTabView: View {
     
     private var emptyView: some View {
         VStack {
-            Text("You do not have any drills yet...")
+            Text("All data is synced with phone...")
                 .multilineTextAlignment(.center)
                 .font(.system(.title3, weight: .medium))
             
@@ -133,7 +136,7 @@ struct SessionsListTabView: View {
             HStack {
                 VStack {
                     Button {
-                        
+                        print("Delete all is not implemented yet.Need:\n1. Confirmation popup?\n2.Delete functionality")
                     } label: {
                         Image(systemName: "trash")
                     }
@@ -144,7 +147,7 @@ struct SessionsListTabView: View {
                 
                 VStack {
                     Button {
-                        
+                        watchDataSynchronizer.synchronize(drillContainers)
                     } label: {
                         Image(systemName: "arrow.clockwise")
                     }
@@ -216,6 +219,9 @@ struct SessionsListTabView: View {
     MainActor.assumeIsolated {
         NavigationStack {
             SessionsListTabView(
+                watchDataSynchronizer: WatchDataSynchronizer(
+                    modelContext: DrillSessionsContainerSampleData.container.mainContext
+                ),
                 drillContainers: DrillSessionsContainerSampleData.previewModels,
                 selectedTab: .recordslist
             )
@@ -225,6 +231,11 @@ struct SessionsListTabView: View {
 
 #Preview("No Data") {
     NavigationStack {
-        SessionsListTabView(drillContainers: [])
+        SessionsListTabView(
+            watchDataSynchronizer: WatchDataSynchronizer(
+                modelContext: DrillSessionsContainerSampleData.container.mainContext
+            ),
+            drillContainers: []
+        )
     }
 }
