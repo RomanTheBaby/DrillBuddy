@@ -146,13 +146,21 @@ struct SessionsListTabView: View {
                 }
                 .disabled(drillContainers.isEmpty)
                 
+                // shot progress view when synchronizing???? ProgressView()
                 VStack {
                     Button {
                         Task {
                             await synchronizeContainers()
                         }
                     } label: {
-                        Image(systemName: "arrow.clockwise")
+                        if isSynchronizing {
+                            ProgressView()
+                                .progressViewStyle(.circular)
+//                                .controlSize(.mini)
+                                .fixedSize(horizontal: true, vertical: true)
+                        } else {
+                            Image(systemName: "arrow.clockwise")
+                        }
                     }
                     .tint(Color.yellow)
                     Text("Sync Data")

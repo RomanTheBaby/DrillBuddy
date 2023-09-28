@@ -43,16 +43,18 @@ class WatchSessionDelegate: NSObject, WCSessionDelegate {
     }
     
     func session(_ session: WCSession, didReceiveMessageData messageData: Data, replyHandler: @escaping (Data) -> Void) {
-        Logger.watchSession.trace("Did receive message data")
-        do {
-            let syncData = try jsonDecoder.decode(SyncData.self, from: messageData)
-            try watchDataSyncHandler.handleSyncData(syncData)
-            send(syncResult: .success, to: replyHandler)
-        } catch {
-            Logger.watchSession.error("Failed to sync data with error: \(error, privacy: .public)")
-//            assertionFailure()
-            let syncError = SyncResponse.SyncError(error: error)
-            send(syncResult: .error(syncError), to: replyHandler)
+        DispatchQueue.main.async { [self] in
+            Logger.watchSession.trace("Did receive message data")
+            do {
+                let syncData = try jsonDecoder.decode(SyncData.self, from: messageData)
+                try watchDataSyncHandler.handleSyncData(syncData)
+                send(syncResult: .success, to: replyHandler)
+            } catch {
+                Logger.watchSession.error("Failed to sync data with error: \(error, privacy: .public)")
+                assertionFailure()
+                let syncError = SyncResponse.SyncError(error: error)
+                send(syncResult: .error(syncError), to: replyHandler)
+            }
         }
     }
     
@@ -65,6 +67,7 @@ class WatchSessionDelegate: NSObject, WCSessionDelegate {
     
     func sessionDidDeactivate(_ session: WCSession) {
         // Activate the new session after having switched to a new watch.
+        Logger.watchSession.trace("Session did deactivate. Activating new one")
         session.activate()
     }
     
@@ -81,7 +84,7 @@ class WatchSessionDelegate: NSObject, WCSessionDelegate {
             replyHandler(encodedSencResponse)
         } catch {
             Logger.watchSession.error("Failed to encode SyncResponse with error error: \(error, privacy: .public)")
-//            assertionFailure()
+            assertionFailure()
         }
     }
 }

@@ -25,18 +25,19 @@ class WatchDataSyncHandler {
     // MARK: - Public Methods
     
     func handleSyncData(_ syncData: SyncData) throws {
-        guard let drillContainers = syncData.drillContainers else {
+        guard let drillContainersData = syncData.drillContainers else {
             Logger.watchSyncHandler.trace("No drill containers to sync")
             return
         }
         
-        Logger.watchSyncHandler.trace("Did Receive \(drillContainers.count) drill containers to sync")
+        Logger.watchSyncHandler.trace("Did Receive \(drillContainersData.count) drill containers to sync")
         
         do {
-            let syncedContainersDates = Set<Date>(drillContainers.map(\.date))
+            let syncedContainersDates = Set<Date>(drillContainersData.map(\.date))
             let predicate = #Predicate<DrillsSessionsContainer> { container in
                 syncedContainersDates.contains(container.date)
             }
+            
             let existing = try modelContext.fetch(FetchDescriptor<DrillsSessionsContainer>(predicate: predicate))
             let existingContainersDict = existing.reduce([Date: DrillsSessionsContainer]()) { partialResult, container in
                 var result = partialResult
@@ -44,16 +45,19 @@ class WatchDataSyncHandler {
                 return result
             }
             
-            drillContainers.forEach { newContainer in
-                if let localContainer = existingContainersDict[newContainer.id] {
-                    print(">>>Already existing container found for: ", localContainer.title)
+            drillContainersData.forEach { drillContainerData in
+                if let localContainer = existingContainersDict[drillContainerData.date] {
+                    let insertedDrillsCount = localContainer.addDrills(drillContainerData.drills.map(Drill.init(sendableRepresentation:)))
+                    Logger.watchSyncHandler.trace("Container already exists for \(drillContainerData.date), inserted missing containers: \(insertedDrillsCount)")
                 } else {
+                    Logger.watchSyncHandler.trace("No container found for \(drillContainerData.date), inserting all data")
+                    let newContainer = DrillsSessionsContainer(sendableRepresentation: drillContainerData)
                     modelContext.insert(newContainer)
                 }
             }
         } catch {
             Logger.watchSyncHandler.error("Failed to fetch existing drills with error: \(error)")
-//            assertionFailure()
+            assertionFailure()
             throw error
         }
     }

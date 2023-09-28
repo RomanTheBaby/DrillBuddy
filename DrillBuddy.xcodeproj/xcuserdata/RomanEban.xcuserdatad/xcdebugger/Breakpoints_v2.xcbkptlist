@@ -3,4 +3,195 @@
    uuid = "77DB4015-1DC1-4675-AAE9-8F0531CA974F"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EF03385C-890C-4F78-AF9C-1240CF9A6437"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DrillBuddy/Resources/Models/DrillsSessionsContainer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
+            landmarkName = "addDrills(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "EF03385C-890C-4F78-AF9C-1240CF9A6437 - 7a10b47c3b3190b7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "DrillBuddy.DrillsSessionsContainer.addDrills(Swift.Array&lt;DrillBuddy.Drill&gt;) -&gt; ()"
+                  moduleName = "DrillBuddy"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/RomanEban/Developer/DrillBuddy/DrillBuddy/Resources/Models/DrillsSessionsContainer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "70"
+                  endingLineNumber = "70"
+                  offsetFromSymbolStart = "804">
+               </Location>
+               <Location
+                  uuid = "EF03385C-890C-4F78-AF9C-1240CF9A6437 - 1ba2066256875104"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "DrillBuddy_Watch_App.DrillsSessionsContainer.addDrills(Swift.Array&lt;DrillBuddy_Watch_App.Drill&gt;) -&gt; ()"
+                  moduleName = "DrillBuddy Watch App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/RomanEban/Developer/DrillBuddy/DrillBuddy/Resources/Models/DrillsSessionsContainer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "70"
+                  endingLineNumber = "70"
+                  offsetFromSymbolStart = "804">
+               </Location>
+               <Location
+                  uuid = "EF03385C-890C-4F78-AF9C-1240CF9A6437 - 7a10b47c3b3197ed"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "DrillBuddy.DrillsSessionsContainer.addDrills(Swift.Array&lt;DrillBuddy.Drill&gt;) -&gt; ()"
+                  moduleName = "DrillBuddy"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/RomanEban/Developer/DrillBuddy/DrillBuddy/Resources/Models/DrillsSessionsContainer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "92"
+                  endingLineNumber = "92"
+                  offsetFromSymbolStart = "804">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1ACF8A8C-64F5-442A-A8D8-A2902F169AE2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DrillBuddy/Resources/Models/DrillsSessionsContainer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
+            landmarkName = "addDrills(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "1ACF8A8C-64F5-442A-A8D8-A2902F169AE2 - 7a10b47c3b319118"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "DrillBuddy.DrillsSessionsContainer.addDrills(Swift.Array&lt;DrillBuddy.Drill&gt;) -&gt; ()"
+                  moduleName = "DrillBuddy"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/RomanEban/Developer/DrillBuddy/DrillBuddy/Resources/Models/DrillsSessionsContainer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "73"
+                  endingLineNumber = "73"
+                  offsetFromSymbolStart = "685">
+               </Location>
+               <Location
+                  uuid = "1ACF8A8C-64F5-442A-A8D8-A2902F169AE2 - 1ba20662568750ab"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "DrillBuddy_Watch_App.DrillsSessionsContainer.addDrills(Swift.Array&lt;DrillBuddy_Watch_App.Drill&gt;) -&gt; ()"
+                  moduleName = "DrillBuddy Watch App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/RomanEban/Developer/DrillBuddy/DrillBuddy/Resources/Models/DrillsSessionsContainer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "73"
+                  endingLineNumber = "73"
+                  offsetFromSymbolStart = "685">
+               </Location>
+               <Location
+                  uuid = "1ACF8A8C-64F5-442A-A8D8-A2902F169AE2 - 7a10b47c3b31944e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "DrillBuddy.DrillsSessionsContainer.addDrills(Swift.Array&lt;DrillBuddy.Drill&gt;) -&gt; ()"
+                  moduleName = "DrillBuddy"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/RomanEban/Developer/DrillBuddy/DrillBuddy/Resources/Models/DrillsSessionsContainer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "95"
+                  endingLineNumber = "95"
+                  offsetFromSymbolStart = "685">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "10B18464-5100-437B-9431-AAD268F38AE3"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DrillBuddy/Resources/Models/DrillsSessionsContainer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "addDrills(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "10B18464-5100-437B-9431-AAD268F38AE3 - 1ba206625687521d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "DrillBuddy_Watch_App.DrillsSessionsContainer.addDrills(Swift.Array&lt;DrillBuddy_Watch_App.Drill&gt;) -&gt; ()"
+                  moduleName = "DrillBuddy Watch App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/RomanEban/Developer/DrillBuddy/DrillBuddy/Resources/Models/DrillsSessionsContainer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "63"
+                  endingLineNumber = "63"
+                  offsetFromSymbolStart = "74">
+               </Location>
+               <Location
+                  uuid = "10B18464-5100-437B-9431-AAD268F38AE3 - 7a10b47c3b3193ae"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "DrillBuddy.DrillsSessionsContainer.addDrills(Swift.Array&lt;DrillBuddy.Drill&gt;) -&gt; ()"
+                  moduleName = "DrillBuddy"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/RomanEban/Developer/DrillBuddy/DrillBuddy/Resources/Models/DrillsSessionsContainer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "63"
+                  endingLineNumber = "63"
+                  offsetFromSymbolStart = "74">
+               </Location>
+               <Location
+                  uuid = "10B18464-5100-437B-9431-AAD268F38AE3 - 7a10b47c3b319684"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "DrillBuddy.DrillsSessionsContainer.addDrills(Swift.Array&lt;DrillBuddy.Drill&gt;) -&gt; ()"
+                  moduleName = "DrillBuddy"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/RomanEban/Developer/DrillBuddy/DrillBuddy/Resources/Models/DrillsSessionsContainer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "85"
+                  endingLineNumber = "85"
+                  offsetFromSymbolStart = "74">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

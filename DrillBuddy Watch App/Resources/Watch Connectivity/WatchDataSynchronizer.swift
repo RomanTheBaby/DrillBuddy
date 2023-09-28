@@ -37,7 +37,7 @@ final class WatchDataSynchronizer: ObservableObject {
     func synchronize(_ containers: [DrillsSessionsContainer]) async throws {
         try await withCheckedThrowingContinuation { continuation in
             do {
-                let encodedSyncData = try jsonEncoder.encode(SyncData(drillContainers: containers))
+                let encodedSyncData = try jsonEncoder.encode(SyncData(drillContainers: containers.map(\.sendableRepresentation)))
                 
                 session.sendMessageData(encodedSyncData) { [unowned self] replyData in
                     do {

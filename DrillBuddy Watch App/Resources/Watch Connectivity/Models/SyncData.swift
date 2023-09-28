@@ -8,5 +8,5 @@
 import Foundation
 
 struct SyncData: Codable {
-    var drillContainers: [DrillsSessionsContainer]?
+    var drillContainers: [DrillsSessionsContainer.SendableRepresentation]?
 }
