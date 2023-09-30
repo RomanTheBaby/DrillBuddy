@@ -41,7 +41,7 @@ class WatchDataSyncHandler {
             let existing = try modelContext.fetch(FetchDescriptor<DrillsSessionsContainer>(predicate: predicate))
             let existingContainersDict = existing.reduce([Date: DrillsSessionsContainer]()) { partialResult, container in
                 var result = partialResult
-                result[container.id] = container
+                result[container.date] = container
                 return result
             }
             
@@ -51,8 +51,7 @@ class WatchDataSyncHandler {
                     Logger.watchSyncHandler.trace("Container already exists for \(drillContainerData.date), inserted missing containers: \(insertedDrillsCount)")
                 } else {
                     Logger.watchSyncHandler.trace("No container found for \(drillContainerData.date), inserting all data")
-                    let newContainer = DrillsSessionsContainer(sendableRepresentation: drillContainerData)
-                    modelContext.insert(newContainer)
+                    DrillsSessionsContainer(context: modelContext, sendableRepresentation: drillContainerData)
                 }
             }
         } catch {

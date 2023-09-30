@@ -13,7 +13,7 @@ class Drill: Identifiable, Hashable, Equatable {
     
     // MARK: - SendableRepresentation
     
-    struct SendableRepresentation: Codable {
+    struct SendableRepresentation: Codable, Hashable {
         var id: UUID = UUID()
         var date: Date
         var sounds: [String]
@@ -29,6 +29,8 @@ class Drill: Identifiable, Hashable, Equatable {
     private(set) var date: Date
     private(set) var sounds: [String]
     private(set) var recordingURL: URL?
+    
+    @Relationship(inverse: \DrillsSessionsContainer.drills) var container: DrillsSessionsContainer?
     
     @Transient
     var sendableRepresentation: SendableRepresentation {

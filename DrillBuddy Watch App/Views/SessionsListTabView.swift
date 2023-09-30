@@ -7,6 +7,7 @@
 
 import AVFoundation
 import SwiftUI
+import SwiftData
 
 struct SessionsListTabView: View {
     // MARK: - Tab
@@ -28,15 +29,20 @@ struct SessionsListTabView: View {
     // MARK: - Public Properties
     
     @StateObject var watchDataSynchronizer: WatchDataSynchronizer
-    @State var drillContainers: [DrillsSessionsContainer] = []
+//    @State var drillContainers: [DrillsSessionsContainer] = []
     @State var selectedTab: Tab = .controls
     var customNewSessionAction: (() -> Void)? = nil
     
     // MARK: - Private Properties
     
+    @Query(sort: \DrillsSessionsContainer.date, order: .reverse)
+    private var drillContainers: [DrillsSessionsContainer]
+    
     @State private var error: Error?
     @State private var isSynchronizing: Bool = false
     @State private var redirectToNewDrillConfigurationView = false
+    @State private var isConfirmingDeletion = false
+    @Environment(\.modelContext) private var modelContext: ModelContext
     
     // MARK: - View
     
@@ -65,11 +71,25 @@ struct SessionsListTabView: View {
                 selectedTab = .controls
             }
         }
+        .confirmationDialog(
+            "Are you sure you want to delete ALL records?",
+            isPresented: $isConfirmingDeletion) {
+                
+                Button("Delete", role: .destructive) {
+                    deleteAllRecords()
+                }
+                
+                Button("Cancel", role: .cancel) {
+                    isConfirmingDeletion = false
+                }
+            } message: {
+                Text("This action cannot be undone")
+            }
     }
     
     private var sessionsListView: some View {
         List {
-            ForEach(drillContainers) { container in
+            ForEach(drillContainers, id: \.date) { container in
                 Section {
                     ForEach(Array(container.drills.enumerated()), id: \.offset) { index, drill in
                         HStack {
@@ -101,7 +121,7 @@ struct SessionsListTabView: View {
 ////                ToolbarItem {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-//                    redirectToNewDrillConfigurationIfNeeded()
+                    redirectToNewDrillConfigurationIfNeeded()
                 } label: {
                     Label("Add New", systemImage: "plus")
                         .labelsHidden()
@@ -138,6 +158,7 @@ struct SessionsListTabView: View {
                 VStack {
                     Button {
                         print("Delete all is not implemented yet.Need:\n1. Confirmation popup?\n2.Delete functionality")
+                        isConfirmingDeletion = true
                     } label: {
                         Image(systemName: "trash")
                     }
@@ -146,7 +167,6 @@ struct SessionsListTabView: View {
                 }
                 .disabled(drillContainers.isEmpty)
                 
-                // shot progress view when synchronizing???? ProgressView()
                 VStack {
                     Button {
                         Task {
@@ -156,7 +176,6 @@ struct SessionsListTabView: View {
                         if isSynchronizing {
                             ProgressView()
                                 .progressViewStyle(.circular)
-//                                .controlSize(.mini)
                                 .fixedSize(horizontal: true, vertical: true)
                         } else {
                             Image(systemName: "arrow.clockwise")
@@ -233,6 +252,10 @@ struct SessionsListTabView: View {
             error = syncError
         }
     }
+    
+    private func deleteAllRecords() {
+        modelContext.container.deleteAllData()
+    }
 }
 
 // MARK: - Previews
@@ -244,7 +267,7 @@ struct SessionsListTabView: View {
                 watchDataSynchronizer: WatchDataSynchronizer(
                     modelContext: DrillSessionsContainerSampleData.container.mainContext
                 ),
-                drillContainers: DrillSessionsContainerSampleData.previewModels,
+//                drillContainers: DrillSessionsContainerSampleData.previewModels,
                 selectedTab: .recordslist
             )
         }
@@ -256,8 +279,8 @@ struct SessionsListTabView: View {
         SessionsListTabView(
             watchDataSynchronizer: WatchDataSynchronizer(
                 modelContext: DrillSessionsContainerSampleData.container.mainContext
-            ),
-            drillContainers: []
+            )
+//            drillContainers: []
         )
     }
 }

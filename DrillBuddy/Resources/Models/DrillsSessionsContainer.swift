@@ -13,7 +13,7 @@ class DrillsSessionsContainer: Identifiable, Hashable {
     
     // MARK: - SendableRepresentation
     
-    struct SendableRepresentation: Codable {
+    struct SendableRepresentation: Codable, Hashable {
         var date: Date
         var drills: [Drill.SendableRepresentation]
         
@@ -22,18 +22,13 @@ class DrillsSessionsContainer: Identifiable, Hashable {
     
     // MARK: - Properties
     
-    @Transient
-    var id: Date {
-        date
-    }
-    
-    @Transient
-    var title: String = ""
+    var title: String
     
     /// This date is at format of
     @Attribute(.unique) 
     private(set) var date: Date
     
+    @Relationship(deleteRule: .cascade)
     private(set) var drills: [Drill]
     
     @Transient
@@ -43,14 +38,35 @@ class DrillsSessionsContainer: Identifiable, Hashable {
     
     // MARK: - Init
     
-    init(date: Date = Date(), drills: [Drill]) {
-        self.title = DateFormatter.drillSessionsContainer.string(from: date)
+    init(title: String? = nil, date: Date = Date()) {
+        self.title = title ?? DateFormatter.drillSessionsContainer.string(from: date)
         self.date = date.containerFormatted
-        self.drills = drills
+        self.drills = []
     }
     
-    convenience init(sendableRepresentation: SendableRepresentation) {
-        self.init(date: sendableRepresentation.date, drills: sendableRepresentation.drills.map(Drill.init(sendableRepresentation:)))
+    @discardableResult
+    convenience init(
+        context: ModelContext,
+        title: String? = nil,
+        date: Date = Date(),
+        drills: [Drill] = []
+    ) {
+        self.init(
+            title: title,
+            date: date
+        )
+        
+        context.insert(self)
+        addDrills(drills)
+    }
+    
+    @discardableResult
+    convenience init(context: ModelContext, sendableRepresentation: SendableRepresentation) {
+        self.init(
+            context: context,
+            date: sendableRepresentation.date,
+            drills: sendableRepresentation.drills.map(Drill.init(sendableRepresentation:))
+        )
     }
     
     // MARK: - Hashable
@@ -73,6 +89,10 @@ class DrillsSessionsContainer: Identifiable, Hashable {
         
         guard missingDrills.isEmpty == false else {
             return 0
+        }
+        
+        missingDrills.forEach {
+            $0.container = self
         }
         
         drills.append(contentsOf: missingDrills)

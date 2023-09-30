@@ -10,7 +10,6 @@
 		751CBCB82ABE7AB000141805 /* DrillBuddy Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 751CBCAB2ABE7AAD00141805 /* DrillBuddy Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7548387C2ABE7B1000146415 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 754838772ABE7B1000146415 /* Assets.xcassets */; };
 		7548387D2ABE7B1000146415 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 754838792ABE7B1000146415 /* Preview Assets.xcassets */; };
-		7548387E2ABE7B1000146415 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7548387A2ABE7B1000146415 /* ContentView.swift */; };
 		754838822ABE7B5300146415 /* DrillBuddyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D113552ABE2E7500BF8874 /* DrillBuddyApp.swift */; };
 		754838832ABE7B5700146415 /* DrillsSessionsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D113702ABE331600BF8874 /* DrillsSessionsContainer.swift */; };
 		754838842ABE7B6100146415 /* SessionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D1136D2ABE308C00BF8874 /* SessionsListView.swift */; };
@@ -76,7 +75,6 @@
 		751CBCAB2ABE7AAD00141805 /* DrillBuddy Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DrillBuddy Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		754838772ABE7B1000146415 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		754838792ABE7B1000146415 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		7548387A2ABE7B1000146415 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7572F0132ABF1D14001E2F3C /* SessionsListTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsListTabView.swift; sourceTree = "<group>"; };
 		7572F0152ABF5DE8001E2F3C /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		7572F01D2ABF61A4001E2F3C /* DrillConfigurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillConfigurationView.swift; sourceTree = "<group>"; };
@@ -150,7 +148,6 @@
 		754838812ABE7B4200146415 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				7548387A2ABE7B1000146415 /* ContentView.swift */,
 				7572F0132ABF1D14001E2F3C /* SessionsListTabView.swift */,
 			);
 			path = Views;
@@ -414,7 +411,6 @@
 				7572F03A2AC25356001E2F3C /* Drill.swift in Sources */,
 				7572F0222ABF7CCA001E2F3C /* DrillRecordingConfiguration.swift in Sources */,
 				7572F0342AC24A64001E2F3C /* SyncData.swift in Sources */,
-				7548387E2ABE7B1000146415 /* ContentView.swift in Sources */,
 				754838842ABE7B6100146415 /* SessionsListView.swift in Sources */,
 				7572F01F2ABF61A4001E2F3C /* DrillConfigurationView.swift in Sources */,
 			);

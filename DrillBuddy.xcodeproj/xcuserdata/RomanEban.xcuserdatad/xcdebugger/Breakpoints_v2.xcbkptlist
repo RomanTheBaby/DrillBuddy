@@ -7,188 +7,93 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "EF03385C-890C-4F78-AF9C-1240CF9A6437"
-            shouldBeEnabled = "Yes"
+            uuid = "884E8FD6-B216-4E87-A70A-2C5E1309C684"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DrillBuddy/Resources/Models/DrillsSessionsContainer.swift"
+            filePath = "DrillBuddy Watch App/Resources/Watch Connectivity/WatchDataSynchronizer.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
-            landmarkName = "addDrills(_:)"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
+            landmarkName = "handlerSyncReplyData(_:for:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "EF03385C-890C-4F78-AF9C-1240CF9A6437 - 7a10b47c3b3190b7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "DrillBuddy.DrillsSessionsContainer.addDrills(Swift.Array&lt;DrillBuddy.Drill&gt;) -&gt; ()"
-                  moduleName = "DrillBuddy"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/RomanEban/Developer/DrillBuddy/DrillBuddy/Resources/Models/DrillsSessionsContainer.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "70"
-                  endingLineNumber = "70"
-                  offsetFromSymbolStart = "804">
-               </Location>
-               <Location
-                  uuid = "EF03385C-890C-4F78-AF9C-1240CF9A6437 - 1ba2066256875104"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "DrillBuddy_Watch_App.DrillsSessionsContainer.addDrills(Swift.Array&lt;DrillBuddy_Watch_App.Drill&gt;) -&gt; ()"
-                  moduleName = "DrillBuddy Watch App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/RomanEban/Developer/DrillBuddy/DrillBuddy/Resources/Models/DrillsSessionsContainer.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "70"
-                  endingLineNumber = "70"
-                  offsetFromSymbolStart = "804">
-               </Location>
-               <Location
-                  uuid = "EF03385C-890C-4F78-AF9C-1240CF9A6437 - 7a10b47c3b3197ed"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "DrillBuddy.DrillsSessionsContainer.addDrills(Swift.Array&lt;DrillBuddy.Drill&gt;) -&gt; ()"
-                  moduleName = "DrillBuddy"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/RomanEban/Developer/DrillBuddy/DrillBuddy/Resources/Models/DrillsSessionsContainer.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "92"
-                  endingLineNumber = "92"
-                  offsetFromSymbolStart = "804">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1ACF8A8C-64F5-442A-A8D8-A2902F169AE2"
+            uuid = "61AF1ABB-3F6C-4114-A495-5F59D6FA65C5"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DrillBuddy/Resources/Models/DrillsSessionsContainer.swift"
+            filePath = "DrillBuddy Watch App/Views/SessionsListTabView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
-            landmarkName = "addDrills(_:)"
-            landmarkType = "7">
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "sessionsListView"
+            landmarkType = "24">
             <Locations>
                <Location
-                  uuid = "1ACF8A8C-64F5-442A-A8D8-A2902F169AE2 - 7a10b47c3b319118"
+                  uuid = "61AF1ABB-3F6C-4114-A495-5F59D6FA65C5 - fc5e36fb2ce0d1c3"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "DrillBuddy.DrillsSessionsContainer.addDrills(Swift.Array&lt;DrillBuddy.Drill&gt;) -&gt; ()"
-                  moduleName = "DrillBuddy"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/RomanEban/Developer/DrillBuddy/DrillBuddy/Resources/Models/DrillsSessionsContainer.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "73"
-                  endingLineNumber = "73"
-                  offsetFromSymbolStart = "685">
-               </Location>
-               <Location
-                  uuid = "1ACF8A8C-64F5-442A-A8D8-A2902F169AE2 - 1ba20662568750ab"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "DrillBuddy_Watch_App.DrillsSessionsContainer.addDrills(Swift.Array&lt;DrillBuddy_Watch_App.Drill&gt;) -&gt; ()"
+                  symbolName = "closure #1 () -&gt; SwiftUI.ForEach&lt;Swift.Array&lt;(offset: Swift.Int, element: DrillBuddy_Watch_App.Drill)&gt;, Swift.Int, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0&gt; in closure #1 (DrillBuddy_Watch_App.DrillsSessionsContainer) -&gt; &lt;&lt;opaque return type of SwiftUI.View.headerProminence(SwiftUI.Prominence) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.ForEach&lt;Swift.Array&lt;DrillBuddy_Watch_App.DrillsSessionsContainer&gt;, Foundation.Date, &lt;&lt;opaque return type of SwiftUI.View.headerProminence(SwiftUI.Prominence) -&gt; some&gt;&gt;.0&gt; in DrillBuddy_Watch_App.SessionsListTabView.sessionsListView.getter : some"
                   moduleName = "DrillBuddy Watch App"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/RomanEban/Developer/DrillBuddy/DrillBuddy/Resources/Models/DrillsSessionsContainer.swift"
+                  urlString = "file:///Users/RomanEban/Developer/DrillBuddy/DrillBuddy%20Watch%20App/Views/SessionsListTabView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "73"
-                  endingLineNumber = "73"
-                  offsetFromSymbolStart = "685">
+                  startingLineNumber = "90"
+                  endingLineNumber = "90"
+                  offsetFromSymbolStart = "752">
                </Location>
                <Location
-                  uuid = "1ACF8A8C-64F5-442A-A8D8-A2902F169AE2 - 7a10b47c3b31944e"
+                  uuid = "61AF1ABB-3F6C-4114-A495-5F59D6FA65C5 - c38563037b3ab7f8"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "DrillBuddy.DrillsSessionsContainer.addDrills(Swift.Array&lt;DrillBuddy.Drill&gt;) -&gt; ()"
-                  moduleName = "DrillBuddy"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/RomanEban/Developer/DrillBuddy/DrillBuddy/Resources/Models/DrillsSessionsContainer.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "95"
-                  endingLineNumber = "95"
-                  offsetFromSymbolStart = "685">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "10B18464-5100-437B-9431-AAD268F38AE3"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DrillBuddy/Resources/Models/DrillsSessionsContainer.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
-            landmarkName = "addDrills(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "10B18464-5100-437B-9431-AAD268F38AE3 - 1ba206625687521d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "DrillBuddy_Watch_App.DrillsSessionsContainer.addDrills(Swift.Array&lt;DrillBuddy_Watch_App.Drill&gt;) -&gt; ()"
+                  symbolName = "closure #2 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0 in closure #1 (DrillBuddy_Watch_App.DrillsSessionsContainer) -&gt; &lt;&lt;opaque return type of SwiftUI.View.headerProminence(SwiftUI.Prominence) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.ForEach&lt;Swift.Array&lt;DrillBuddy_Watch_App.DrillsSessionsContainer&gt;, Foundation.Date, &lt;&lt;opaque return type of SwiftUI.View.headerProminence(SwiftUI.Prominence) -&gt; some&gt;&gt;.0&gt; in DrillBuddy_Watch_App.SessionsListTabView.sessionsListView.getter : some"
                   moduleName = "DrillBuddy Watch App"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/RomanEban/Developer/DrillBuddy/DrillBuddy/Resources/Models/DrillsSessionsContainer.swift"
+                  urlString = "file:///Users/RomanEban/Developer/DrillBuddy/DrillBuddy%20Watch%20App/Views/SessionsListTabView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "63"
-                  endingLineNumber = "63"
-                  offsetFromSymbolStart = "74">
+                  startingLineNumber = "91"
+                  endingLineNumber = "91"
+                  offsetFromSymbolStart = "42">
                </Location>
                <Location
-                  uuid = "10B18464-5100-437B-9431-AAD268F38AE3 - 7a10b47c3b3193ae"
+                  uuid = "61AF1ABB-3F6C-4114-A495-5F59D6FA65C5 - 6e983e82d971fb8c"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "DrillBuddy.DrillsSessionsContainer.addDrills(Swift.Array&lt;DrillBuddy.Drill&gt;) -&gt; ()"
-                  moduleName = "DrillBuddy"
+                  symbolName = "closure #2 () -&gt; () in closure #1 (Swift.Int, DrillBuddy_Watch_App.Drill) -&gt; &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.ForEach&lt;Swift.Array&lt;(offset: Swift.Int, element: DrillBuddy_Watch_App.Drill)&gt;, Swift.Int, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0&gt; in closure #1 (DrillBuddy_Watch_App.DrillsSessionsContainer) -&gt; &lt;&lt;opaque return type of SwiftUI.View.headerProminence(SwiftUI.Prominence) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.ForEach&lt;Swift.Array&lt;DrillBuddy_Watch_App.DrillsSessionsContainer&gt;, Foundation.Date, &lt;&lt;opaque return type of SwiftUI.View.headerProminence(SwiftUI.Prominence) -&gt; some&gt;&gt;.0&gt; in DrillBuddy_Watch_App.SessionsListTabView.sessionsListView.getter : some"
+                  moduleName = "DrillBuddy Watch App"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/RomanEban/Developer/DrillBuddy/DrillBuddy/Resources/Models/DrillsSessionsContainer.swift"
+                  urlString = "file:///Users/RomanEban/Developer/DrillBuddy/DrillBuddy%20Watch%20App/Views/SessionsListTabView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "63"
-                  endingLineNumber = "63"
-                  offsetFromSymbolStart = "74">
+                  startingLineNumber = "90"
+                  endingLineNumber = "90"
+                  offsetFromSymbolStart = "111">
                </Location>
                <Location
-                  uuid = "10B18464-5100-437B-9431-AAD268F38AE3 - 7a10b47c3b319684"
+                  uuid = "61AF1ABB-3F6C-4114-A495-5F59D6FA65C5 - 6e983e82d971fb8c"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "DrillBuddy.DrillsSessionsContainer.addDrills(Swift.Array&lt;DrillBuddy.Drill&gt;) -&gt; ()"
-                  moduleName = "DrillBuddy"
+                  symbolName = "closure #2 () -&gt; () in closure #1 (Swift.Int, DrillBuddy_Watch_App.Drill) -&gt; &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.ForEach&lt;Swift.Array&lt;(offset: Swift.Int, element: DrillBuddy_Watch_App.Drill)&gt;, Swift.Int, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0&gt; in closure #1 (DrillBuddy_Watch_App.DrillsSessionsContainer) -&gt; &lt;&lt;opaque return type of SwiftUI.View.headerProminence(SwiftUI.Prominence) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.ForEach&lt;Swift.Array&lt;DrillBuddy_Watch_App.DrillsSessionsContainer&gt;, Foundation.Date, &lt;&lt;opaque return type of SwiftUI.View.headerProminence(SwiftUI.Prominence) -&gt; some&gt;&gt;.0&gt; in DrillBuddy_Watch_App.SessionsListTabView.sessionsListView.getter : some"
+                  moduleName = "DrillBuddy Watch App"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/RomanEban/Developer/DrillBuddy/DrillBuddy/Resources/Models/DrillsSessionsContainer.swift"
+                  urlString = "file:///Users/RomanEban/Developer/DrillBuddy/DrillBuddy%20Watch%20App/Views/SessionsListTabView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "85"
-                  endingLineNumber = "85"
-                  offsetFromSymbolStart = "74">
+                  startingLineNumber = "90"
+                  endingLineNumber = "90"
+                  offsetFromSymbolStart = "138">
                </Location>
             </Locations>
          </BreakpointContent>

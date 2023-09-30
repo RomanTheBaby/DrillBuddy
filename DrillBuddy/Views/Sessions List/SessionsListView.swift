@@ -43,7 +43,7 @@ struct SessionsListView: View {
                 #if os(watchOS)
                     SessionsListTabView(
                         watchDataSynchronizer: watchDataSynchronizer,
-                        drillContainers: drillContainers,
+//                        drillContainers: drillContainers,
                         customNewSessionAction: {
                             redirectToNewDrillConfigurationIfNeeded()
                         }
@@ -98,7 +98,7 @@ struct SessionsListView: View {
     
     private var listView: some View {
         List {
-            ForEach(drillContainers) { container in
+            ForEach(drillContainers, id: \.date) { container in
                 Section {
                     ForEach(Array(container.drills.enumerated()), id: \.offset) { index, drill in
                         HStack {
