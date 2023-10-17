@@ -43,7 +43,6 @@ struct SessionsListView: View {
                 #if os(watchOS)
                     SessionsListTabView(
                         watchDataSynchronizer: watchDataSynchronizer,
-//                        drillContainers: drillContainers,
                         customNewSessionAction: {
                             redirectToNewDrillConfigurationIfNeeded()
                         }
@@ -58,9 +57,14 @@ struct SessionsListView: View {
                     }
                 #endif
             }
-            .navigationDestination(isPresented: $redirectToNewDrillConfigurationView) {
-                DrillConfigurationView()
-            }
+//            .navigationDestination(isPresented: $redirectToNewDrillConfigurationView) {
+//                DrillConfigurationView()
+//            }
+            .fullScreenCover(isPresented: $redirectToNewDrillConfigurationView, content: {
+                NavigationStack {
+                    DrillConfigurationView()
+                }
+            })
             .confirmationDialog(
                 "Confirm Action",
                 isPresented: $isPresentingDeleteDataAlert
@@ -170,6 +174,7 @@ struct SessionsListView: View {
                 redirectToNewDrillConfigurationView = true
             }
         } else {
+            print(">>>", Thread.isMainThread)
             do {
                 try ensureMicrophoneAccess()
                 redirectToNewDrillConfigurationView = true
@@ -181,14 +186,28 @@ struct SessionsListView: View {
     }
     
     private func ensureMicrophoneAccess() throws {
-        var hasMicrophoneAccess = false
-        
         #if os(watchOS)
-        let sem = DispatchSemaphore(value: 0)
-        
-        AVAudioApplication.requestRecordPermission { hasPermission in
-            hasMicrophoneAccess = hasPermission
-            sem.signal()
+        switch AVAudioApplication.shared.recordPermission {
+        case .denied:
+            throw AppError.Microphone.noAccess
+        case .granted:
+            break
+        case .undetermined:
+            var hasMicrophoneAccess = false
+
+            let sem = DispatchSemaphore(value: 0)
+            
+            AVAudioApplication.requestRecordPermission { hasPermission in
+                hasMicrophoneAccess = hasPermission
+                sem.signal()
+            }
+            
+            if !hasMicrophoneAccess {
+                throw AppError.Microphone.noAccess
+            }
+        @unknown default:
+            assertionFailure("unknown authorization status for watch microphone access: \(AVAudioApplication.shared.recordPermission)")
+            throw AppError.Microphone.noAccess
         }
         #else
         switch AVCaptureDevice.authorizationStatus(for: .audio) {
@@ -201,18 +220,17 @@ struct SessionsListView: View {
             _ = sem.wait(timeout: DispatchTime.distantFuture)
         case .denied, .restricted:
             hasMicrophoneAccess = false
-            break
         case .authorized:
             hasMicrophoneAccess = true
         @unknown default:
             assertionFailure("unknown authorization status for microphone access: \(AVCaptureDevice.authorizationStatus(for: .audio))")
             hasMicrophoneAccess = false
         }
-        #endif
-
+        
         if !hasMicrophoneAccess {
             throw AppError.Microphone.noAccess
         }
+        #endif
     }
 }
 

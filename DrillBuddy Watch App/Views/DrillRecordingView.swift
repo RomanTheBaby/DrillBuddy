@@ -1,8 +1,8 @@
 //
 //  DrillRecordingView.swift
-//  DrillBuddy
+//  DrillBuddy Watch App
 //
-//  Created by Roman on 2023-09-23.
+//  Created by Roman on 2023-10-16.
 //
 
 import Charts
@@ -11,10 +11,27 @@ import SwiftUI
 
 struct DrillRecordingView: View {
     
+    // MARK: - Tab
+    
+    private enum Tab {
+        case information
+        case controls
+        
+        var title: String {
+            switch self {
+            case .information:
+                return "Information"
+            case .controls:
+                return "Controls"
+            }
+        }
+    }
+    
     // MARK: - Properties
     
     @StateObject var viewModel: DrillRecordingViewModel
     
+    @State private var selectedTab: Tab = .information
     @Environment(\.dismiss) private var dismiss
 
     // MARK: - View
@@ -38,40 +55,43 @@ struct DrillRecordingView: View {
                     }
                 }
             case .recording:
-                VStack(alignment: .leading) {
-                    Text("Recording Drill...")
-                    
+                TabView(selection: $selectedTab) {
                     statisticsView
+                        .navigationTitle("Recording Drill")
+                        .tabItem { Text(Tab.information.title) }
+                        .tag(Tab.information)
                     
-                    GeometryReader(content: { geometry in
-                        DetectSoundsView(confidence: viewModel.lastDetectedSoundConfidenceLevel)
-                            .frame(
-                                width: geometry.size.width / 2,
-                                height: geometry.size.height,
-                                alignment: .center
-                            )
-                            .offset(x: geometry.frame(in: .local).midX - (geometry.size.width / 4))
-                    })
-                    
-                    Button {
-                        viewModel.stopRecording()
-                        
-                        if viewModel.drillEntries.isEmpty {
-                            dismiss()
+                    VStack {
+                        Button {
+                            viewModel.stopRecording()
+                            
+                            if viewModel.drillEntries.isEmpty {
+                                dismiss()
+                            }
+                        } label: {
+                            Text("FINISH")
+                                .padding(8)
+                                .frame(maxWidth: .infinity)
                         }
-                    } label: {
-                        Text("FINISH")
-                            .padding(8)
-                            .frame(maxWidth: .infinity)
+                        .frame(alignment: .center)
+                        .buttonStyle(.borderedProminent)
+                        .tint(.orange)
+                        .shadow(radius: 5)
                     }
-                    .frame(alignment: .center)
-                    .buttonStyle(.borderedProminent)
-                    .shadow(radius: 5)
+                    .tabItem { Text(Tab.controls.title) }
+                    .tag(Tab.controls)
                 }
-                .padding(.horizontal)
             case .summary:
-                summaryView
-                    .navigationTitle("Summary")
+                TabView(selection: $selectedTab) {
+                    statisticsView
+                        .navigationTitle("Summary")
+                        .tabItem { Text(Tab.information.title) }
+                        .tag(Tab.information)
+                    
+                    summaryView
+                        .tabItem { Text(Tab.controls.title) }
+                        .tag(Tab.controls)
+                }
             }
         }.navigationBarBackButtonHidden(true)
     }
@@ -83,20 +103,25 @@ struct DrillRecordingView: View {
             HStack {
                 Text(viewModel.recodingStatistics.shotsCount, format: .number)
                     .font(.system(.largeTitle, weight: .bold))
+                    .foregroundStyle(Color.orange)
                 Text("# of Shots")
             }
             
             HStack {
                 Text(viewModel.recodingStatistics.firstShotDelay.minuteSecondMS)
-                    .font(.system(.largeTitle, weight: .bold))
+                    .font(.system(.title2, weight: .medium))
+                    .foregroundStyle(Color.teal)
                 
-                Text("1st shot delay")
+                Text("1st shot\ndelay")
+                    .font(.system(size: 10))
             }
             
             HStack {
                 Text(viewModel.recodingStatistics.shotsSplit.minuteSecondMS)
-                    .font(.system(.largeTitle, weight: .bold))
-                Text("avg. split")
+                    .font(.system(.title2, weight: .medium))
+                    .foregroundStyle(Color.yellow)
+                Text("avg.\nsplit")
+                    .font(.system(size: 10))
             }
             
             HStack {
@@ -104,7 +129,8 @@ struct DrillRecordingView: View {
                     Duration.seconds(viewModel.recodingStatistics.totalTime)
                         .formatted(.time(pattern: .minuteSecond))
                 )
-                .font(.system(.largeTitle, weight: .bold))
+                .font(.system(.title, weight: .bold))
+                .foregroundStyle(Color.green)
                 
                 Text("Duration")
             }
@@ -113,11 +139,6 @@ struct DrillRecordingView: View {
     
     private var summaryView: some View {
         VStack(alignment: .leading) {
-            statisticsView
-                .padding(.horizontal)
-            
-            Spacer()
-            
             Chart {
                 ForEach(Array(viewModel.drillEntries.enumerated()), id: \.offset) { index, entry in
                     BarMark(
@@ -134,18 +155,27 @@ struct DrillRecordingView: View {
             .chartLegend(.visible)
             .chartForegroundStyleScale(["Avg. Split": Color.red, "Time": Color.blue])
             .padding(.horizontal)
-            
-            Button {
-                dismiss()
-            } label: {
-                Text("Done")
-                    .padding(8)
-                    .frame(maxWidth: .infinity)
-            }
-            .padding(.horizontal)
-            .buttonStyle(.borderedProminent)
-            .shadow(radius: 5)
         }
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    dismiss()
+                } label: {
+                    Text("Done")
+                        .font(.system(.callout, weight: .bold))
+                        .foregroundStyle(Color.white)
+                }
+                .buttonStyle(.borderless)
+            }
+        }
+    }
+}
+
+// MARK: - Time Interval Extension
+
+extension TimeInterval {
+    var minuteSecondMS: String {
+        String(format:"%d:%02d.%03d", minute, second, millisecond)
     }
 }
 
@@ -181,17 +211,5 @@ struct DrillRecordingView: View {
                 configuration: .default
             )
         )
-    }
-}
-
-// MARK: - Time Interval Extension
-
-extension TimeInterval {
-    var hourMinuteSecondMS: String {
-        String(format:"%02d:%02d.%03d", minute, second, millisecond)
-    }
-    
-    var minuteSecondMS: String {
-        String(format:"%d:%02d.%03d", minute, second, millisecond)
     }
 }

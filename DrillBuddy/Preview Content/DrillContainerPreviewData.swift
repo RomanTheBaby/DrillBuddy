@@ -21,20 +21,42 @@ actor DrillSessionsContainerSampleData {
     // MARK: - Public Properties
     
     @MainActor
-    static var container: ModelContainer = {
+    static let container: ModelContainer = {
         let schema = Schema([DrillsSessionsContainer.self, Drill.self])
-        let configuration = ModelConfiguration.init(isStoredInMemoryOnly: true)
-        let modelContainer = try! ModelContainer(for: schema, configurations: [configuration])
-        
-        previewModels.forEach { drillsContainer, drills in
-            modelContainer.mainContext.insert(drillsContainer)
-            drillsContainer.addDrills(drills)
+        let configuration = ModelConfiguration(isStoredInMemoryOnly: true)
+        do {
+            let modelContainer = try ModelContainer(for: schema, configurations: [configuration])
+            
+            previewDrillsInfo.forEach { drillsContainer, drills in
+                modelContainer.mainContext.insert(drillsContainer)
+                drillsContainer.addDrills(drills)
+            }
+            
+            return modelContainer
+        } catch {
+            fatalError("Failed with error: \(error)")
         }
-        
-        return modelContainer
     }()
     
-    @MainActor static private let previewModels: [(container: DrillsSessionsContainer, drills: [Drill])] = {
+    @MainActor
+    static let previewDrillsContainers: [DrillsSessionsContainer] = {
+        let schema = Schema([DrillsSessionsContainer.self, Drill.self])
+        let configuration = ModelConfiguration(isStoredInMemoryOnly: true)
+        
+        do {
+            let modelContainer = try ModelContainer(for: schema, configurations: [configuration])
+            
+            return previewDrillsInfo.map { drillsContainer, drills -> DrillsSessionsContainer in
+                modelContainer.mainContext.insert(drillsContainer)
+                drillsContainer.addDrills(drills)
+                return drillsContainer
+            }
+        } catch {
+            fatalError("Failed with error: \(error)")
+        }
+    }()
+    
+    @MainActor static private let previewDrillsInfo: [(container: DrillsSessionsContainer, drills: [Drill])] = {
         let firstContainer = DrillsSessionsContainer()
         let firstContainerDrills = [
             Drill(

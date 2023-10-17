@@ -1,0 +1,107 @@
+//
+//  AudioRecorder.swift
+//  DrillBuddy
+//
+//  Created by Roman on 2023-09-13.
+//
+
+import AVFoundation
+import CoreAudio
+import Combine
+import Foundation
+import OSLog
+import SoundAnalysis
+
+// NSObject inheritance required to conform to `AVAudioRecorderDelegate`
+class AudioRecorder: NSObject, AVAudioRecorderDelegate, ObservableObject {
+    
+    // MARK: - Private Properties
+    
+    private var audioRecorder: AVAudioRecorder?
+    
+    // MARK: - Public Methods
+    
+    func startRecording(
+        folderName: String,
+        fileName: String,
+        fileExtension: String = "m4a"
+    ) throws -> URL? {
+        guard audioRecorder == nil else {
+            Logger.audioRecorder.warning("Attemping to start recording while another recording is in progress. Aborting")
+            return nil
+        }
+
+        let documentsDirectory = FileManager.default.documentsDirectory
+        let folderURL = documentsDirectory.appendingPathComponent(folderName)
+        
+        do {
+            try FileManager.default.createDirectory(at: folderURL, withIntermediateDirectories: true)
+            
+            let audioURL = folderURL.appendingPathComponent("\(fileName).\(fileExtension)")
+            Logger.audioRecorder.trace("Audio recorder will save new recording to: \(audioURL)")
+
+            let settings = [
+                AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+                AVSampleRateKey: 44100,
+                AVNumberOfChannelsKey: 1,
+                AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
+            ]
+            
+            do {
+                audioRecorder = try AVAudioRecorder(url: audioURL, settings: settings)
+                audioRecorder?.prepareToRecord()
+                audioRecorder?.delegate = self
+                audioRecorder?.record()
+                return audioURL
+            } catch {
+                Logger.audioRecorder.error("Failed to start audio recording at: \(audioURL), with error: \(error) ")
+                stopRecording()
+                throw error
+            }
+            
+        } catch {
+            Logger.audioRecorder.error("Failed to create directory at url: \(folderURL) with error: \(error)")
+            throw error
+        }
+    }
+    
+    func stopRecording() {
+        audioRecorder?.stop()
+        audioRecorder = nil
+    }
+    
+    // MARK: - AVAudioRecorderDelegate
+    
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+        if !flag {
+            Logger.audioRecorder.error("Audio recorder finished recording unsuccessfully")
+            stopRecording()
+        }
+    }
+
+    /* if an error occurs while encoding it will be reported to the delegate. */
+    func audioRecorderEncodeErrorDidOccur(_ recorder: AVAudioRecorder, error: Error?) {
+        if let error {
+            Logger.audioRecorder.trace("Audio recorder encode error did occur \(error)")
+        }
+    }
+}
+
+// MARK: - FileManager
+
+private extension FileManager {
+    var documentsDirectory: URL {
+        let paths = urls(for: .documentDirectory, in: .userDomainMask)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
+    }
+}
+
+// MARK: - Logger
+
+private extension Logger {
+    static let audioRecorder = Logger(
+        subsystem: Bundle.main.bundleIdentifier ?? "DrillBuddy.AudioRecorder",
+        category: String(describing: AudioRecorder.self)
+    )
+}

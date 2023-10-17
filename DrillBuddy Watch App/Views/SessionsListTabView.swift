@@ -29,7 +29,6 @@ struct SessionsListTabView: View {
     // MARK: - Public Properties
     
     @StateObject var watchDataSynchronizer: WatchDataSynchronizer
-//    @State var drillContainers: [DrillsSessionsContainer] = []
     @State var selectedTab: Tab = .controls
     var customNewSessionAction: (() -> Void)? = nil
     
@@ -267,9 +266,9 @@ struct SessionsListTabView: View {
                 watchDataSynchronizer: WatchDataSynchronizer(
                     modelContext: DrillSessionsContainerSampleData.container.mainContext
                 ),
-//                drillContainers: DrillSessionsContainerSampleData.previewModels,
                 selectedTab: .recordslist
             )
+            .modelContainer(DrillSessionsContainerSampleData.container)
         }
     }
 }
@@ -280,7 +279,6 @@ struct SessionsListTabView: View {
             watchDataSynchronizer: WatchDataSynchronizer(
                 modelContext: DrillSessionsContainerSampleData.container.mainContext
             )
-//            drillContainers: []
         )
     }
 }

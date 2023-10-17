@@ -41,9 +41,9 @@ struct DrillRecordingConfiguration {
 extension DrillRecordingConfiguration {
     static let `default` = DrillRecordingConfiguration(
         maxShots: 0,
-        maxSessionDelay: 3,
+        maxSessionDelay: 1,
         minimumSoundConfidenceLevel: 0.7,
-        inferenceWindowSize: 3,
+        inferenceWindowSize: 0.3,
         overlapFactor: 0.4,
         shouldRecordAudio: false
     )

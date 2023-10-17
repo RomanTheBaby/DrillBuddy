@@ -23,7 +23,6 @@
 		7572F0212ABF7CCA001E2F3C /* DrillRecordingConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7572F0202ABF7CCA001E2F3C /* DrillRecordingConfiguration.swift */; };
 		7572F0222ABF7CCA001E2F3C /* DrillRecordingConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7572F0202ABF7CCA001E2F3C /* DrillRecordingConfiguration.swift */; };
 		7572F0252ABFACB4001E2F3C /* DrillRecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7572F0242ABFACB4001E2F3C /* DrillRecordingView.swift */; };
-		7572F0262ABFACB5001E2F3C /* DrillRecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7572F0242ABFACB4001E2F3C /* DrillRecordingView.swift */; };
 		7572F0282ABFB326001E2F3C /* WatchSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7572F0272ABFB326001E2F3C /* WatchSessionDelegate.swift */; };
 		7572F0292ABFB326001E2F3C /* WatchSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7572F0272ABFB326001E2F3C /* WatchSessionDelegate.swift */; };
 		7572F02B2AC0A62A001E2F3C /* WatchDataSynchronizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7572F02A2AC0A62A001E2F3C /* WatchDataSynchronizer.swift */; };
@@ -45,6 +44,25 @@
 		75D113712ABE331600BF8874 /* DrillsSessionsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D113702ABE331600BF8874 /* DrillsSessionsContainer.swift */; };
 		75D113732ABE3A7A00BF8874 /* DrillContainerPreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D113722ABE3A7A00BF8874 /* DrillContainerPreviewData.swift */; };
 		75D113762ABE4EE200BF8874 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D113752ABE4EE200BF8874 /* View+Extension.swift */; };
+		FE254A152ADB3600000602AA /* DetectSoundsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE254A142ADB3600000602AA /* DetectSoundsView.swift */; };
+		FE254A162ADB7744000602AA /* DetectSoundsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE254A142ADB3600000602AA /* DetectSoundsView.swift */; };
+		FE254A182ADDF765000602AA /* DrillRecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE254A172ADDF765000602AA /* DrillRecordingView.swift */; };
+		FE254A1A2ADDF7A5000602AA /* TimeInterval+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE254A192ADDF7A5000602AA /* TimeInterval+Extension.swift */; };
+		FE254A1B2ADDF7AF000602AA /* TimeInterval+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE254A192ADDF7A5000602AA /* TimeInterval+Extension.swift */; };
+		FEE455492AC8BB4700569414 /* AudioSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE455482AC8BB4700569414 /* AudioSessionManager.swift */; };
+		FEE4554A2AC8BB4700569414 /* AudioSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE455482AC8BB4700569414 /* AudioSessionManager.swift */; };
+		FEE4554C2AC8BB6200569414 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE4554B2AC8BB6200569414 /* AudioRecorder.swift */; };
+		FEE4554D2AC8BB6200569414 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE4554B2AC8BB6200569414 /* AudioRecorder.swift */; };
+		FEE455502AC8BD8600569414 /* SoundIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE4554F2AC8BD8600569414 /* SoundIdentifier.swift */; };
+		FEE455512AC8BD8600569414 /* SoundIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE4554F2AC8BD8600569414 /* SoundIdentifier.swift */; };
+		FEE455532AC8BE4C00569414 /* ClassificationResultsSubject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE455522AC8BE4C00569414 /* ClassificationResultsSubject.swift */; };
+		FEE455542AC8BE4C00569414 /* ClassificationResultsSubject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE455522AC8BE4C00569414 /* ClassificationResultsSubject.swift */; };
+		FEE455562AC8BE5400569414 /* AudioClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE455552AC8BE5400569414 /* AudioClassifier.swift */; };
+		FEE455572AC8BE5400569414 /* AudioClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE455552AC8BE5400569414 /* AudioClassifier.swift */; };
+		FEE455592AC8C17500569414 /* DrillRecordingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE455582AC8C17500569414 /* DrillRecordingViewModel.swift */; };
+		FEE4555A2AC8C17500569414 /* DrillRecordingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE455582AC8C17500569414 /* DrillRecordingViewModel.swift */; };
+		FEE4555D2AC8E49B00569414 /* HapticFeedbackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE4555C2AC8E49B00569414 /* HapticFeedbackGenerator.swift */; };
+		FEE455632AD73FF700569414 /* HapticFeedbackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE4555C2AC8E49B00569414 /* HapticFeedbackGenerator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +116,16 @@
 		75D113702ABE331600BF8874 /* DrillsSessionsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillsSessionsContainer.swift; sourceTree = "<group>"; };
 		75D113722ABE3A7A00BF8874 /* DrillContainerPreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillContainerPreviewData.swift; sourceTree = "<group>"; };
 		75D113752ABE4EE200BF8874 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
+		FE254A142ADB3600000602AA /* DetectSoundsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectSoundsView.swift; sourceTree = "<group>"; };
+		FE254A172ADDF765000602AA /* DrillRecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillRecordingView.swift; sourceTree = "<group>"; };
+		FE254A192ADDF7A5000602AA /* TimeInterval+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Extension.swift"; sourceTree = "<group>"; };
+		FEE455482AC8BB4700569414 /* AudioSessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioSessionManager.swift; sourceTree = "<group>"; };
+		FEE4554B2AC8BB6200569414 /* AudioRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
+		FEE4554F2AC8BD8600569414 /* SoundIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundIdentifier.swift; sourceTree = "<group>"; };
+		FEE455522AC8BE4C00569414 /* ClassificationResultsSubject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassificationResultsSubject.swift; sourceTree = "<group>"; };
+		FEE455552AC8BE5400569414 /* AudioClassifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioClassifier.swift; sourceTree = "<group>"; };
+		FEE455582AC8C17500569414 /* DrillRecordingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillRecordingViewModel.swift; sourceTree = "<group>"; };
+		FEE4555C2AC8E49B00569414 /* HapticFeedbackGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticFeedbackGenerator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				7572F0132ABF1D14001E2F3C /* SessionsListTabView.swift */,
+				FE254A172ADDF765000602AA /* DrillRecordingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -173,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				7572F0242ABFACB4001E2F3C /* DrillRecordingView.swift */,
+				FEE455582AC8C17500569414 /* DrillRecordingViewModel.swift */,
 			);
 			path = "Drill Recording";
 			sourceTree = "<group>";
@@ -251,6 +281,7 @@
 				7572F0232ABFAC9F001E2F3C /* Drill Recording */,
 				7572F0182ABF6174001E2F3C /* Sessions List */,
 				75D113572ABE2E7500BF8874 /* ContentView.swift */,
+				FE254A142ADB3600000602AA /* DetectSoundsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -261,8 +292,10 @@
 				75D1135B2ABE2E7B00BF8874 /* Assets.xcassets */,
 				75D1135D2ABE2E7B00BF8874 /* DrillBuddy.entitlements */,
 				75D113612ABE2E7B00BF8874 /* Info.plist */,
+				FEE455472AC8BB3300569414 /* Audio */,
 				75D113742ABE4ED200BF8874 /* Extension */,
 				75D1136F2ABE32F100BF8874 /* Models */,
+				FEE4555B2AC8E48900569414 /* Services */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -290,8 +323,37 @@
 			isa = PBXGroup;
 			children = (
 				75D113752ABE4EE200BF8874 /* View+Extension.swift */,
+				FE254A192ADDF7A5000602AA /* TimeInterval+Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		FEE455472AC8BB3300569414 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				FEE4554E2AC8BD7C00569414 /* Classification */,
+				FEE4554B2AC8BB6200569414 /* AudioRecorder.swift */,
+				FEE455482AC8BB4700569414 /* AudioSessionManager.swift */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
+		FEE4554E2AC8BD7C00569414 /* Classification */ = {
+			isa = PBXGroup;
+			children = (
+				FEE455552AC8BE5400569414 /* AudioClassifier.swift */,
+				FEE455522AC8BE4C00569414 /* ClassificationResultsSubject.swift */,
+				FEE4554F2AC8BD8600569414 /* SoundIdentifier.swift */,
+			);
+			path = Classification;
+			sourceTree = "<group>";
+		};
+		FEE4555B2AC8E48900569414 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				FEE4555C2AC8E49B00569414 /* HapticFeedbackGenerator.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -397,18 +459,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEE4554D2AC8BB6200569414 /* AudioRecorder.swift in Sources */,
+				FE254A162ADB7744000602AA /* DetectSoundsView.swift in Sources */,
 				754838832ABE7B5700146415 /* DrillsSessionsContainer.swift in Sources */,
 				754838822ABE7B5300146415 /* DrillBuddyApp.swift in Sources */,
 				7572F0142ABF1D14001E2F3C /* SessionsListTabView.swift in Sources */,
 				7572F02C2AC0A62A001E2F3C /* WatchDataSynchronizer.swift in Sources */,
 				754838862ABE7B8B00146415 /* DrillContainerPreviewData.swift in Sources */,
 				7572F0172ABF5E10001E2F3C /* AppError.swift in Sources */,
-				7572F0262ABFACB5001E2F3C /* DrillRecordingView.swift in Sources */,
+				FEE455542AC8BE4C00569414 /* ClassificationResultsSubject.swift in Sources */,
+				FEE455512AC8BD8600569414 /* SoundIdentifier.swift in Sources */,
+				FEE4555A2AC8C17500569414 /* DrillRecordingViewModel.swift in Sources */,
 				7572F0302AC22FCA001E2F3C /* WatchDataSyncHandler.swift in Sources */,
+				FE254A1B2ADDF7AF000602AA /* TimeInterval+Extension.swift in Sources */,
+				FEE4554A2AC8BB4700569414 /* AudioSessionManager.swift in Sources */,
+				FEE455572AC8BE5400569414 /* AudioClassifier.swift in Sources */,
 				754838852ABE7B8600146415 /* View+Extension.swift in Sources */,
 				7572F0372AC24AAE001E2F3C /* SyncResponse.swift in Sources */,
 				7572F0292ABFB326001E2F3C /* WatchSessionDelegate.swift in Sources */,
 				7572F03A2AC25356001E2F3C /* Drill.swift in Sources */,
+				FE254A182ADDF765000602AA /* DrillRecordingView.swift in Sources */,
+				FEE455632AD73FF700569414 /* HapticFeedbackGenerator.swift in Sources */,
 				7572F0222ABF7CCA001E2F3C /* DrillRecordingConfiguration.swift in Sources */,
 				7572F0342AC24A64001E2F3C /* SyncData.swift in Sources */,
 				754838842ABE7B6100146415 /* SessionsListView.swift in Sources */,
@@ -420,18 +491,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEE4554C2AC8BB6200569414 /* AudioRecorder.swift in Sources */,
+				FE254A152ADB3600000602AA /* DetectSoundsView.swift in Sources */,
 				75D113582ABE2E7500BF8874 /* ContentView.swift in Sources */,
 				7572F01E2ABF61A4001E2F3C /* DrillConfigurationView.swift in Sources */,
 				7572F0212ABF7CCA001E2F3C /* DrillRecordingConfiguration.swift in Sources */,
 				75D113732ABE3A7A00BF8874 /* DrillContainerPreviewData.swift in Sources */,
 				7572F0252ABFACB4001E2F3C /* DrillRecordingView.swift in Sources */,
 				7572F0362AC24AAE001E2F3C /* SyncResponse.swift in Sources */,
+				FEE455532AC8BE4C00569414 /* ClassificationResultsSubject.swift in Sources */,
 				7572F0282ABFB326001E2F3C /* WatchSessionDelegate.swift in Sources */,
+				FEE455502AC8BD8600569414 /* SoundIdentifier.swift in Sources */,
+				FEE455592AC8C17500569414 /* DrillRecordingViewModel.swift in Sources */,
+				FE254A1A2ADDF7A5000602AA /* TimeInterval+Extension.swift in Sources */,
 				7572F02F2AC22FCA001E2F3C /* WatchDataSyncHandler.swift in Sources */,
+				FEE455492AC8BB4700569414 /* AudioSessionManager.swift in Sources */,
+				FEE455562AC8BE5400569414 /* AudioClassifier.swift in Sources */,
 				75D113712ABE331600BF8874 /* DrillsSessionsContainer.swift in Sources */,
 				75D113562ABE2E7500BF8874 /* DrillBuddyApp.swift in Sources */,
 				75D113762ABE4EE200BF8874 /* View+Extension.swift in Sources */,
 				7572F02B2AC0A62A001E2F3C /* WatchDataSynchronizer.swift in Sources */,
+				FEE4555D2AC8E49B00569414 /* HapticFeedbackGenerator.swift in Sources */,
 				75D1136E2ABE308C00BF8874 /* SessionsListView.swift in Sources */,
 				7572F0392AC25356001E2F3C /* Drill.swift in Sources */,
 				7572F0332AC24A64001E2F3C /* SyncData.swift in Sources */,
@@ -462,6 +542,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = DrillBuddyWatch;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Microphone access is required to record when shots happens";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = bakehouse.DrillBuddy;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -492,6 +573,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = DrillBuddyWatch;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Microphone access is required to record when shots happens";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = bakehouse.DrillBuddy;
 				LD_RUNPATH_SEARCH_PATHS = (

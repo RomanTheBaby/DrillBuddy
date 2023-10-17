@@ -58,7 +58,7 @@ struct DrillConfigurationView: View {
                     ConfigurationStepperView(
                         title: "Max Start Delay",
                         value: $configuration.maxSessionDelay,
-                        stepRange: 3...60,
+                        stepRange: 1...60,
                         step: 0.5
                     )
                 } header: {
@@ -81,29 +81,26 @@ struct DrillConfigurationView: View {
             }
             
             #if !os(watchOS)
+            VStack {
+                Button {
+                    dismiss()
+                } label: {
+                    Text("Cancel")
+                }
                 readyButton
+            }
             #endif
         }
         .scrollBounceBehavior(.basedOnSize)
         .navigationTitle("Configure Session")
         .navigationBarTitleDisplayMode(.large)
-//        .fullScreenCover(isPresented: $isRecordingViewPresented) {
-//            dismiss()
-//        } content: {
-//            RecordingView(
-//                viewModel: RecordingViewModel(
-//                    configuration: recordingConfiguration,
-//                    modelContext: modelContext
-//                )
-//            )
-//        }
     }
     
     private var readyButton: some View {
         #if os(watchOS)
         NavigationLink(
             destination: DrillRecordingView(
-                configuration: configuration
+                viewModel: DrillRecordingViewModel(configuration: configuration)
             )
         ) {
             Text("Shooter Ready")
@@ -117,7 +114,7 @@ struct DrillConfigurationView: View {
         #else
         NavigationLink(
             destination: DrillRecordingView(
-                configuration: configuration
+                viewModel: DrillRecordingViewModel(configuration: configuration)
             )
         ) {
             Text("Shooter Ready")
@@ -175,7 +172,7 @@ private struct ConfigurationStepperView: View {
                 .multilineTextAlignment(.center)
                 .textFieldStyle(.roundedBorder)
                 .frame(width: 50)
-            Stepper("", value: $value, in: 0...1, step: 0.1)
+            Stepper("", value: $value, in: stepRange, step: step)
                 .labelsHidden()
         }
         #endif

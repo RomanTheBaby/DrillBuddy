@@ -28,9 +28,11 @@ struct DrillBuddyApp: App {
         #endif
         
         return WindowGroup {
-            SessionsListView(
-                watchDataSynchronizer: WatchDataSynchronizer(modelContext: ModelContext(modelContainer))
-            )
+            NavigationStack {
+                SessionsListView(
+                    watchDataSynchronizer: WatchDataSynchronizer(modelContext: ModelContext(modelContainer))
+                )
+            }
         }
         .modelContainer(modelContainer)
     }
