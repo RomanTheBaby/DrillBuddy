@@ -123,7 +123,6 @@ final class WatchDataSynchronizer: ObservableObject {
             
         } catch {
             Logger.watchDataSynchronizer.error("Failed to decode sync response with error: \(error)")
-//            assertionFailure()
             throw error
         }
     }

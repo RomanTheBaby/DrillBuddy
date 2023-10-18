@@ -78,9 +78,13 @@ struct DrillRecordingView: View {
                         .tint(.orange)
                         .shadow(radius: 5)
                     }
+                    .navigationTitle(Tab.controls.title)
                     .tabItem { Text(Tab.controls.title) }
                     .tag(Tab.controls)
                 }
+                .blur(radius: viewModel.isPersistingData ? 10 : 0)
+                .overlay(loadingOverlay)
+                
             case .summary:
                 TabView(selection: $selectedTab) {
                     statisticsView
@@ -169,6 +173,14 @@ struct DrillRecordingView: View {
             }
         }
     }
+    
+    @ViewBuilder private var loadingOverlay: some View {
+        if viewModel.isPersistingData {
+            ProgressView()
+                .controlSize(.regular)
+                .progressViewStyle(.circular)
+        }
+    }
 }
 
 // MARK: - Time Interval Extension
@@ -186,6 +198,7 @@ extension TimeInterval {
         DrillRecordingView(
             viewModel: DrillRecordingViewModel(
                 initialState: .standBy,
+                modelContext: DrillSessionsContainerSampleData.container.mainContext,
                 configuration: .default
             )
         )
@@ -197,6 +210,7 @@ extension TimeInterval {
         DrillRecordingView(
             viewModel: DrillRecordingViewModel(
                 initialState: .recording,
+                modelContext: DrillSessionsContainerSampleData.container.mainContext,
                 configuration: .default
             )
         )
@@ -208,6 +222,7 @@ extension TimeInterval {
         DrillRecordingView(
             viewModel: DrillRecordingViewModel(
                 initialState: .summary,
+                modelContext: DrillSessionsContainerSampleData.container.mainContext,
                 configuration: .default
             )
         )

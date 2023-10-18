@@ -5,6 +5,7 @@
 //  Created by Roman on 2023-09-23.
 //
 
+import SwiftData
 import SwiftUI
 
 struct DrillConfigurationView: View {
@@ -12,6 +13,7 @@ struct DrillConfigurationView: View {
     @State var configuration: DrillRecordingConfiguration = .default
     
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var modelContext: ModelContext
     
     var body: some View {
         VStack(spacing: 16) {
@@ -100,7 +102,7 @@ struct DrillConfigurationView: View {
         #if os(watchOS)
         NavigationLink(
             destination: DrillRecordingView(
-                viewModel: DrillRecordingViewModel(configuration: configuration)
+                viewModel: DrillRecordingViewModel(modelContext: modelContext, configuration: configuration)
             )
         ) {
             Text("Shooter Ready")
@@ -114,7 +116,7 @@ struct DrillConfigurationView: View {
         #else
         NavigationLink(
             destination: DrillRecordingView(
-                viewModel: DrillRecordingViewModel(configuration: configuration)
+                viewModel: DrillRecordingViewModel(modelContext: modelContext, configuration: configuration)
             )
         ) {
             Text("Shooter Ready")

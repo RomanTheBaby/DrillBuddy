@@ -79,6 +79,7 @@ class WatchSessionDelegate: NSObject, WCSessionDelegate {
     // MARK: - Private Methods
     
     private func send(syncResult: SyncResponse.SyncResult, to replyHandler: @escaping (Data) -> Void) {
+        Logger.watchSession.trace("Sending sync response \(syncResult)")
         do {
             let encodedSencResponse = try jsonEncoder.encode(SyncResponse(result: syncResult))
             replyHandler(encodedSencResponse)

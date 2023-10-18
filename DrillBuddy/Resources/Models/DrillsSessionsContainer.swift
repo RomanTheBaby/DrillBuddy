@@ -98,6 +98,10 @@ class DrillsSessionsContainer: Identifiable, Hashable {
         drills.append(contentsOf: missingDrills)
         return missingDrills.count
     }
+    
+    static func formatDate(_ date: Date) -> Date {
+        date.containerFormatted
+    }
 }
 
 // MARK: - Date Formatting Helpers

@@ -16,7 +16,7 @@ struct DrillRecordingView: View {
     @StateObject var viewModel: DrillRecordingViewModel
     
     @Environment(\.dismiss) private var dismiss
-
+    
     // MARK: - View
     
     var body: some View {
@@ -69,6 +69,8 @@ struct DrillRecordingView: View {
                     .shadow(radius: 5)
                 }
                 .padding(.horizontal)
+                .blur(radius: viewModel.isPersistingData ? 10 : 0)
+                .overlay(loadingOverlay)
             case .summary:
                 summaryView
                     .navigationTitle("Summary")
@@ -147,6 +149,14 @@ struct DrillRecordingView: View {
             .shadow(radius: 5)
         }
     }
+    
+    @ViewBuilder private var loadingOverlay: some View {
+        if viewModel.isPersistingData {
+            ProgressView()
+                .controlSize(.regular)
+                .progressViewStyle(.circular)
+        }
+    }
 }
 
 // MARK: - Previews
@@ -156,6 +166,7 @@ struct DrillRecordingView: View {
         DrillRecordingView(
             viewModel: DrillRecordingViewModel(
                 initialState: .standBy,
+                modelContext: DrillSessionsContainerSampleData.container.mainContext,
                 configuration: .default
             )
         )
@@ -166,7 +177,8 @@ struct DrillRecordingView: View {
     NavigationStack {
         DrillRecordingView(
             viewModel: DrillRecordingViewModel(
-                initialState: .recording,
+                initialState: .recording, 
+                modelContext: DrillSessionsContainerSampleData.container.mainContext,
                 configuration: .default
             )
         )
@@ -178,6 +190,7 @@ struct DrillRecordingView: View {
         DrillRecordingView(
             viewModel: DrillRecordingViewModel(
                 initialState: .summary,
+                modelContext: DrillSessionsContainerSampleData.container.mainContext,
                 configuration: .default
             )
         )

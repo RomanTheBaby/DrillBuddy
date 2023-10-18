@@ -57,9 +57,6 @@ struct SessionsListView: View {
                     }
                 #endif
             }
-//            .navigationDestination(isPresented: $redirectToNewDrillConfigurationView) {
-//                DrillConfigurationView()
-//            }
             .fullScreenCover(isPresented: $redirectToNewDrillConfigurationView, content: {
                 NavigationStack {
                     DrillConfigurationView()

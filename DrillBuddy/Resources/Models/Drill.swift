@@ -8,6 +8,13 @@
 import Foundation
 import SwiftData
 
+// MARK: - DrillEntry
+
+struct DrillEntry: Codable, Hashable {
+    var time: TimeInterval
+    var confidence: Double
+}
+
 @Model
 class Drill: Identifiable, Hashable, Equatable {
     
@@ -16,7 +23,7 @@ class Drill: Identifiable, Hashable, Equatable {
     struct SendableRepresentation: Codable, Hashable {
         var id: UUID = UUID()
         var date: Date
-        var sounds: [String]
+        var sounds: [DrillEntry]
         var recordingURL: URL?
     }
     
@@ -27,19 +34,24 @@ class Drill: Identifiable, Hashable, Equatable {
     
     @Attribute(.unique)
     private(set) var date: Date
-    private(set) var sounds: [String]
+    private(set) var sounds: [DrillEntry]
     private(set) var recordingURL: URL?
     
     @Relationship(inverse: \DrillsSessionsContainer.drills) var container: DrillsSessionsContainer?
     
     @Transient
     var sendableRepresentation: SendableRepresentation {
-        SendableRepresentation(id: id, date: date, sounds: sounds, recordingURL: recordingURL)
+        SendableRepresentation(
+            id: id,
+            date: date,
+            sounds: sounds,
+            recordingURL: recordingURL
+        )
     }
     
     // MARK: - Init
     
-    init(id: UUID = UUID(), date: Date = Date(), sounds: [String], recordingURL: URL? = nil) {
+    init(id: UUID = UUID(), date: Date = Date(), sounds: [DrillEntry], recordingURL: URL? = nil) {
         self.id = id
         self.date = date
         self.sounds = sounds

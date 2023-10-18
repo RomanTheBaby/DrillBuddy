@@ -15,9 +15,18 @@ struct SyncResponse: Codable {
         var recoverySuggestion: String?
     }
     
-    enum SyncResult: Codable {
+    enum SyncResult: Codable, CustomStringConvertible {
         case success
         case error(SyncError)
+        
+        var description: String {
+            switch self {
+            case .success:
+                return "success"
+            case .error(let syncError):
+                return "error \(syncError)"
+            }
+        }
     }
     
     var result: SyncResult

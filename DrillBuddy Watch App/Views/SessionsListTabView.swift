@@ -164,7 +164,7 @@ struct SessionsListTabView: View {
                     .tint(Color.red)
                     Text("Clear Data")
                 }
-                .disabled(drillContainers.isEmpty)
+                .disabled(drillContainers.isEmpty || isSynchronizing)
                 
                 VStack {
                     Button {

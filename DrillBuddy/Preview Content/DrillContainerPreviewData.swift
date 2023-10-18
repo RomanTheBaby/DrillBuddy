@@ -57,74 +57,136 @@ actor DrillSessionsContainerSampleData {
     }()
     
     @MainActor static private let previewDrillsInfo: [(container: DrillsSessionsContainer, drills: [Drill])] = {
-        let firstContainer = DrillsSessionsContainer()
+        let firstContainer = DrillsSessionsContainer(
+            date: dateFormatter.date(from: "10-Nov-2022") ?? Date().addingTimeInterval(-(((3600 * 24) * 365) * 1))
+        )
         let firstContainerDrills = [
             Drill(
                 date: Date().addingTimeInterval(-5),
-                sounds: ["1", "2", "3", "4"]
+                sounds: [
+                    DrillEntry(time: 1, confidence: 1),
+                    DrillEntry(time: 2, confidence: 1),
+                    DrillEntry(time: 3, confidence: 1),
+                    DrillEntry(time: 4, confidence: 1),
+                ]
             ),
             Drill(
                 date: Date().addingTimeInterval(-10),
-                sounds: ["5", "7", "3", "4"],
+                sounds: [
+                    DrillEntry(time: 5, confidence: 1),
+                    DrillEntry(time: 7, confidence: 1),
+                    DrillEntry(time: 3, confidence: 0.85),
+                    DrillEntry(time: 4, confidence: 0.95),
+                ],
                 recordingURL: URL(string: "google.com")!
             ),
             Drill(
                 date: Date().addingTimeInterval(-15),
-                sounds: ["0", "9", "3", "4"]
+                sounds: [
+                    DrillEntry(time: 8, confidence: 1),
+                    DrillEntry(time: 9, confidence: 1),
+                    DrillEntry(time: 3, confidence: 0.8),
+                    DrillEntry(time: 4, confidence: 0.9),
+                ]
             ),
         ]
         
         let secondContainer = DrillsSessionsContainer(
-            date: dateFormatter.date(from: "08-Aug-2023") ?? Date().addingTimeInterval(-(3600 * 24))
+            date: dateFormatter.date(from: "24-Aug-2014") ?? Date().addingTimeInterval(-(((3600 * 24) * 365) * 10))
         )
         let secondContainerDrills = [
             Drill(
                 date: Date().addingTimeInterval(-20),
-                sounds: ["5", "6", "7", "8"]
+                sounds: [
+                    DrillEntry(time: 5, confidence: 0.9),
+                    DrillEntry(time: 6, confidence: 0.9),
+                    DrillEntry(time: 7, confidence: 0.9),
+                    DrillEntry(time: 8, confidence: 0.9),
+                ]
             ),
             Drill(
                 date: Date().addingTimeInterval(-25),
-                sounds: ["1", "2", "3", "4"]
+                sounds: [
+                    DrillEntry(time: 1, confidence: 0.9),
+                    DrillEntry(time: 2, confidence: 0.9),
+                    DrillEntry(time: 3, confidence: 0.9),
+                    DrillEntry(time: 4, confidence: 0.9),
+                ]
             ),
             Drill(
                 date: Date().addingTimeInterval(-30),
-                sounds: ["2", "3", "3", "4"], recordingURL: URL(string: "google.com")!
+                sounds: [
+                    DrillEntry(time: 2, confidence: 0.9),
+                    DrillEntry(time: 3, confidence: 0.9),
+                    DrillEntry(time: 3.5, confidence: 0.9),
+                    DrillEntry(time: 4, confidence: 0.9),
+                ],
+                recordingURL: URL(string: "google.com")!
             ),
         ]
         
         let thirdContainer = DrillsSessionsContainer(
-            date: dateFormatter.date(from: "11-Sep-2021") ?? Date().addingTimeInterval(-(3600 * 24))
+            date: dateFormatter.date(from: "11-Sep-2021") ?? Date().addingTimeInterval(-(((3600 * 24) * 365) * 15))
         )
         let thirdContainerDrills = [
             Drill(
                 date: Date().addingTimeInterval(-35),
-                sounds: ["1", "2", "3", "4"]
+                sounds: [
+                    DrillEntry(time: 1, confidence: 0.9),
+                    DrillEntry(time: 2, confidence: 0.9),
+                    DrillEntry(time: 3, confidence: 0.9),
+                    DrillEntry(time: 4, confidence: 0.9),
+                ]
             ),
             Drill(
                 date: Date().addingTimeInterval(-40),
-                sounds: ["1", "5", "2", "4"]
+                sounds: [
+                    DrillEntry(time: 1, confidence: 0.9),
+                    DrillEntry(time: 2, confidence: 0.9),
+                    DrillEntry(time: 4, confidence: 0.9),
+                    DrillEntry(time: 5, confidence: 0.9),
+                ]
             ),
         ]
         
         let fourthContainer = DrillsSessionsContainer(
-            date: dateFormatter.date(from: "08-Dec-1996") ?? Date().addingTimeInterval(-(3600 * 52))
+            date: dateFormatter.date(from: "08-Dec-1996") ?? Date().addingTimeInterval(-(((3600 * 24) * 365) * 15))
         )
         let fourthContainerDrills = [
             Drill(
                 date: Date().addingTimeInterval(-45),
-                sounds: ["1", "2", "3", "4"]
+                sounds: [
+                    DrillEntry(time: 1, confidence: 0.9),
+                    DrillEntry(time: 2, confidence: 0.9),
+                    DrillEntry(time: 3, confidence: 0.9),
+                    DrillEntry(time: 4, confidence: 0.9),
+                ]
             ),
             Drill(
                 date: Date().addingTimeInterval(-50),
-                sounds: ["1", "2"]
+                sounds: [
+                    DrillEntry(time: 1, confidence: 0.9),
+                    DrillEntry(time: 2, confidence: 0.9),
+                ]
             ),
             Drill(
                 date: Date().addingTimeInterval(-60),
-                sounds: ["1", "2", "8", "4"]
+                sounds: [
+                    DrillEntry(time: 1, confidence: 0.9),
+                    DrillEntry(time: 2, confidence: 0.9),
+                    DrillEntry(time: 4, confidence: 0.9),
+                    DrillEntry(time: 8, confidence: 0.9),
+                ]
             ),
             Drill(
                 date: Date().addingTimeInterval(-70),
-                sounds: ["1", "2", "9", "0"], recordingURL: URL(string: "google.com")!
+                sounds: [
+                    DrillEntry(time: 1, confidence: 0.9),
+                    DrillEntry(time: 2, confidence: 0.9),
+                    DrillEntry(time: 9, confidence: 0.9),
+                    DrillEntry(time: 12, confidence: 0.9),
+                ],
+                recordingURL: URL(string: "google.com")!
             ),
         ]
         
