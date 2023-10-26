@@ -83,27 +83,27 @@ struct DrillRecordingView: View {
     private var statisticsView: some View {
         VStack(alignment: .leading) {
             HStack {
-                Text(viewModel.recodingStatistics.shotsCount, format: .number)
+                Text(viewModel.recordingStatistics.shotsCount, format: .number)
                     .font(.system(.largeTitle, weight: .bold))
                 Text("# of Shots")
             }
             
             HStack {
-                Text(viewModel.recodingStatistics.firstShotDelay.minuteSecondMS)
+                Text(viewModel.recordingStatistics.firstShotDelay.minuteSecondMS)
                     .font(.system(.largeTitle, weight: .bold))
                 
                 Text("1st shot delay")
             }
             
             HStack {
-                Text(viewModel.recodingStatistics.shotsSplit.minuteSecondMS)
+                Text(viewModel.recordingStatistics.shotsSplit.minuteSecondMS)
                     .font(.system(.largeTitle, weight: .bold))
                 Text("avg. split")
             }
             
             HStack {
                 Text(
-                    Duration.seconds(viewModel.recodingStatistics.totalTime)
+                    Duration.seconds(viewModel.recordingStatistics.totalTime)
                         .formatted(.time(pattern: .minuteSecond))
                 )
                 .font(.system(.largeTitle, weight: .bold))
@@ -128,7 +128,7 @@ struct DrillRecordingView: View {
                     )
                 }
                 RuleMark(
-                    y: .value("Threshold", viewModel.recodingStatistics.shotsSplit)
+                    y: .value("Threshold", viewModel.recordingStatistics.shotsSplit)
                 )
                 .foregroundStyle(.red)
                 .foregroundStyle(by: .value("Average", "Avg. Split"))

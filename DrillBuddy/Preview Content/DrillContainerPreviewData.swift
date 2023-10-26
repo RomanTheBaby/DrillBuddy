@@ -20,6 +20,14 @@ actor DrillSessionsContainerSampleData {
     
     // MARK: - Public Properties
     
+    static let testAudioURL: URL = {
+        guard let testAudioPath = Bundle.main.path(forResource: "Hydrogen", ofType: "mp3") else {
+            fatalError("Could not find test audio")
+        }
+        
+        return URL(fileURLWithPath: testAudioPath)
+    }()
+    
     @MainActor
     static let container: ModelContainer = {
         let schema = Schema([DrillsSessionsContainer.self, Drill.self])
@@ -64,29 +72,30 @@ actor DrillSessionsContainerSampleData {
             Drill(
                 date: Date().addingTimeInterval(-5),
                 sounds: [
-                    DrillEntry(time: 1, confidence: 1),
-                    DrillEntry(time: 2, confidence: 1),
-                    DrillEntry(time: 3, confidence: 1),
-                    DrillEntry(time: 4, confidence: 1),
-                ]
+                    DrillEntry(time: 5, confidence: 1),
+                    DrillEntry(time: 10, confidence: 1),
+                    DrillEntry(time: 15, confidence: 1),
+                    DrillEntry(time: 25, confidence: 1),
+                ],
+                recordingURL: testAudioURL
             ),
             Drill(
                 date: Date().addingTimeInterval(-10),
                 sounds: [
-                    DrillEntry(time: 5, confidence: 1),
-                    DrillEntry(time: 7, confidence: 1),
                     DrillEntry(time: 3, confidence: 0.85),
                     DrillEntry(time: 4, confidence: 0.95),
+                    DrillEntry(time: 5, confidence: 1),
+                    DrillEntry(time: 7, confidence: 1),
                 ],
-                recordingURL: URL(string: "google.com")!
+                recordingURL: testAudioURL
             ),
             Drill(
                 date: Date().addingTimeInterval(-15),
                 sounds: [
-                    DrillEntry(time: 8, confidence: 1),
-                    DrillEntry(time: 9, confidence: 1),
                     DrillEntry(time: 3, confidence: 0.8),
                     DrillEntry(time: 4, confidence: 0.9),
+                    DrillEntry(time: 8, confidence: 1),
+                    DrillEntry(time: 9, confidence: 1),
                 ]
             ),
         ]

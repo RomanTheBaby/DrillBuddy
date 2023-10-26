@@ -15,16 +15,38 @@ import SoundAnalysis
 // NSObject inheritance required to conform to `AVAudioRecorderDelegate`
 class AudioRecorder: NSObject, AVAudioRecorderDelegate, ObservableObject {
     
+    // MARK: - RecorderSettings
+    
+    enum RecorderSettings {
+        case `default`
+        case custom([String: Any])
+        
+        fileprivate var dictionary: [String: Any] {
+            switch self {
+            case .default:
+                return [
+                    AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+                    AVSampleRateKey: 44100,
+                    AVNumberOfChannelsKey: 1,
+                    AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
+                ]
+            case .custom(let settings):
+                return settings
+            }
+        }
+    }
+    
     // MARK: - Private Properties
     
-    private var audioRecorder: AVAudioRecorder?
+    private(set) var audioRecorder: AVAudioRecorder?
     
     // MARK: - Public Methods
     
     func startRecording(
         folderName: String,
         fileName: String,
-        fileExtension: String = "m4a"
+        fileExtension: String = "m4a",
+        settings: RecorderSettings = .default
     ) throws -> URL? {
         guard audioRecorder == nil else {
             Logger.audioRecorder.warning("Attemping to start recording while another recording is in progress. Aborting")
@@ -40,18 +62,8 @@ class AudioRecorder: NSObject, AVAudioRecorderDelegate, ObservableObject {
             let audioURL = folderURL.appendingPathComponent("\(fileName).\(fileExtension)")
             Logger.audioRecorder.trace("Audio recorder will save new recording to: \(audioURL)")
 
-            let settings = [
-                AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
-                AVSampleRateKey: 44100,
-                AVNumberOfChannelsKey: 1,
-                AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
-            ]
-            
             do {
-                audioRecorder = try AVAudioRecorder(url: audioURL, settings: settings)
-                audioRecorder?.prepareToRecord()
-                audioRecorder?.delegate = self
-                audioRecorder?.record()
+                try startRecording(audioURL: audioURL)
                 return audioURL
             } catch {
                 Logger.audioRecorder.error("Failed to start audio recording at: \(audioURL), with error: \(error) ")
@@ -61,6 +73,26 @@ class AudioRecorder: NSObject, AVAudioRecorderDelegate, ObservableObject {
             
         } catch {
             Logger.audioRecorder.error("Failed to create directory at url: \(folderURL) with error: \(error)")
+            throw error
+        }
+    }
+    
+    @discardableResult
+    func startRecording(audioURL: URL, settings: RecorderSettings = .default, isMeteringEnabled: Bool = false) throws -> AVAudioRecorder {
+        Logger.audioRecorder.trace("Audio recorder will save new recording to: \(audioURL)")
+        
+        do {
+            let audioRecorder = try AVAudioRecorder(url: audioURL, settings: settings.dictionary)
+            audioRecorder.isMeteringEnabled = isMeteringEnabled
+            audioRecorder.prepareToRecord()
+            audioRecorder.delegate = self
+            audioRecorder.record()
+            
+            self.audioRecorder = audioRecorder
+            return audioRecorder
+        } catch {
+            Logger.audioRecorder.error("Failed to start audio recording at: \(audioURL), with error: \(error) ")
+            stopRecording()
             throw error
         }
     }

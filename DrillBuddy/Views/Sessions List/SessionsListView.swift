@@ -15,8 +15,8 @@ struct SessionsListView: View {
     
     private enum Constants {
         static let newSessionButton: CGSize = CGSize(
-            width: 100,
-            height: 100
+            width: 90,
+            height: 90
         )
     }
     
@@ -40,22 +40,13 @@ struct SessionsListView: View {
     var body: some View {
         NavigationStack {
             Group {
-                #if os(watchOS)
-                    SessionsListTabView(
-                        watchDataSynchronizer: watchDataSynchronizer,
-                        customNewSessionAction: {
-                            redirectToNewDrillConfigurationIfNeeded()
-                        }
-                    )
-                #else
-                    if drillContainers.isEmpty {
-                        emptyView
-                    } else {
-                        listView
-                            .navigationTitle("My Sessions")
-                            .navigationBarTitleDisplayMode(.large)
-                    }
-                #endif
+                if drillContainers.isEmpty {
+                    emptyView
+                } else {
+                    listView
+                        .navigationTitle("My Sessions")
+                        .navigationBarTitleDisplayMode(.large)
+                }
             }
             .fullScreenCover(isPresented: $redirectToNewDrillConfigurationView, content: {
                 NavigationStack {
@@ -102,13 +93,15 @@ struct SessionsListView: View {
             ForEach(drillContainers, id: \.date) { container in
                 Section {
                     ForEach(Array(container.drills.enumerated()), id: \.offset) { index, drill in
-                        HStack {
-                            Text("Drill #\(index + 1)")
-                            Spacer()
-                            if drill.recordingURL != nil {
-                                Image(systemName: "speaker.3.fill")
-                                    .imageScale(.large)
-                                    .foregroundStyle(Color.blue)
+                        NavigationLink(destination: DrillDetailView(drill: drill)) {
+                            HStack {
+                                Text("Drill #\(index + 1)")
+                                Spacer()
+                                if drill.recordingURL != nil {
+                                    Image(systemName: "speaker.3.fill")
+                                        .imageScale(.large)
+                                        .foregroundStyle(Color.blue)
+                                }
                             }
                         }
                     }
@@ -171,7 +164,6 @@ struct SessionsListView: View {
                 redirectToNewDrillConfigurationView = true
             }
         } else {
-            print(">>>", Thread.isMainThread)
             do {
                 try ensureMicrophoneAccess()
                 redirectToNewDrillConfigurationView = true
@@ -183,30 +175,6 @@ struct SessionsListView: View {
     }
     
     private func ensureMicrophoneAccess() throws {
-        #if os(watchOS)
-        switch AVAudioApplication.shared.recordPermission {
-        case .denied:
-            throw AppError.Microphone.noAccess
-        case .granted:
-            break
-        case .undetermined:
-            var hasMicrophoneAccess = false
-
-            let sem = DispatchSemaphore(value: 0)
-            
-            AVAudioApplication.requestRecordPermission { hasPermission in
-                hasMicrophoneAccess = hasPermission
-                sem.signal()
-            }
-            
-            if !hasMicrophoneAccess {
-                throw AppError.Microphone.noAccess
-            }
-        @unknown default:
-            assertionFailure("unknown authorization status for watch microphone access: \(AVAudioApplication.shared.recordPermission)")
-            throw AppError.Microphone.noAccess
-        }
-        #else
         switch AVCaptureDevice.authorizationStatus(for: .audio) {
         case .notDetermined:
             let sem = DispatchSemaphore(value: 0)
@@ -227,7 +195,6 @@ struct SessionsListView: View {
         if !hasMicrophoneAccess {
             throw AppError.Microphone.noAccess
         }
-        #endif
     }
 }
 

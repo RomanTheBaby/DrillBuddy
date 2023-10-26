@@ -11,9 +11,9 @@ import SwiftData
 
 class DrillRecordingViewModel: ObservableObject {
     
-    // MARK: - RecodingStatistics
+    // MARK: - RecordingStatistics
     
-    struct RecodingStatistics {
+    struct RecordingStatistics {
         var shotsCount: Int = 0
         var shotsSplit: TimeInterval = 0
         var firstShotDelay: TimeInterval = 0
@@ -48,7 +48,7 @@ class DrillRecordingViewModel: ObservableObject {
     
     @Published private(set) var state: State
     @Published private(set) var lastDetectedSoundConfidenceLevel: Double = 0
-    @Published private(set) var recodingStatistics: RecodingStatistics = .init()
+    @Published private(set) var recordingStatistics: RecordingStatistics = .init()
     @Published private(set) var isPersistingData = false
     private(set) var drillEntries: [DrillEntry] = []
     
@@ -58,6 +58,8 @@ class DrillRecordingViewModel: ObservableObject {
     private let audioRecorder: AudioRecorder
     private let soundIdentifier: SoundIdentifier
     private let modelContext: ModelContext
+    
+    private var audioRecordingURL: URL?
     
     private var soundIdentifyingCancellable: AnyCancellable?
     private var timerCancellable: AnyCancellable?
@@ -119,7 +121,12 @@ class DrillRecordingViewModel: ObservableObject {
                 self.handleDetectedSound(detectedSoundInfo)
             }
 
-            startRecordingAudioIfNeeded()
+            do {
+                try startRecordingAudioIfNeeded()
+            } catch {
+                Logger.drillRecording.error("Failed to start recording audio with error: \(error)")
+                stopRecording()
+            }
         } catch {
             Logger.drillRecording.error("Failed to start identifying sounds with error: \(error)")
             stopRecording()
@@ -147,10 +154,15 @@ class DrillRecordingViewModel: ObservableObject {
     
     // MARK: - Private Methods
     
-    private func startRecordingAudioIfNeeded() {
+    private func startRecordingAudioIfNeeded() throws {
         guard configuration.shouldRecordAudio else {
             return
         }
+        
+        audioRecordingURL = try audioRecorder.startRecording(
+            folderName: DateFormatter.audioFolderName.string(from: startDate),
+            fileName: DateFormatter.audioFileName.string(from: startDate)
+        )
     }
     
     private func handleDetectedSound(_ detectedSoundInfo: SoundIdentifier.DetectedSoundInfo, detectedDate: Date = Date()) {
@@ -159,21 +171,16 @@ class DrillRecordingViewModel: ObservableObject {
         let latestEntry = DrillEntry(time: time, confidence: detectedSoundInfo.confidence)
         drillEntries.append(latestEntry)
         
-        recodingStatistics.setShotsCount(drillEntries.count)
+        recordingStatistics.setShotsCount(drillEntries.count)
         
         if drillEntries.count == 1 {
-            recodingStatistics.setFirstShotDelay(latestEntry.time)
-            recodingStatistics.setShotsSplit(latestEntry.time)
+            recordingStatistics.setFirstShotDelay(latestEntry.time)
+            recordingStatistics.setShotsSplit(latestEntry.time)
         } else {
-            let shotTimes = drillEntries.map(\.time)
-            let splits = shotTimes.dropLast(1).enumerated().map { index, time -> Double in
-                shotTimes[index + 1] - time
-            }
-                
-            recodingStatistics.setShotsSplit(splits.reduce(0, +) / Double(splits.count))
+            recordingStatistics.setShotsSplit(drillEntries.averageSplit)
         }
 
-        recodingStatistics.setTotalTime(latestEntry.time)
+        recordingStatistics.setTotalTime(latestEntry.time)
         
         // Updating & reseting last confidence level property
         lastDetectedSoundConfidenceLevel = latestEntry.confidence
@@ -191,6 +198,10 @@ class DrillRecordingViewModel: ObservableObject {
         startDate: Date,
         drillEntries: [DrillEntry]
     ) {
+        guard drillEntries.isEmpty == false else {
+            return
+        }
+        
         let containerFormattedDate = DrillsSessionsContainer.formatDate(startDate)
         
         let predicate = #Predicate<DrillsSessionsContainer> { $0.date == containerFormattedDate }
@@ -204,13 +215,29 @@ class DrillRecordingViewModel: ObservableObject {
                 modelContext.insert(container)
             }
             
-            let drill = Drill(date: startDate, sounds: drillEntries, recordingURL: nil)
+            let drill = Drill(date: startDate, sounds: drillEntries, recordingURL: audioRecordingURL)
             container.addDrills([drill])
             
         } catch {
             Logger.drillRecording.error("Failed to fetch container for date: \(containerFormattedDate) with error: \(error)")
         }
     }
+}
+
+// MARK: - DateFormatter Helpers
+
+private extension DateFormatter {
+    static let audioFolderName: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MMM-yyyy"
+        return dateFormatter
+    }()
+    
+    static let audioFileName: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "h:mm-a"
+        return dateFormatter
+    }()
 }
 
 

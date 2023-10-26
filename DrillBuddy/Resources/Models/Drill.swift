@@ -8,13 +8,6 @@
 import Foundation
 import SwiftData
 
-// MARK: - DrillEntry
-
-struct DrillEntry: Codable, Hashable {
-    var time: TimeInterval
-    var confidence: Double
-}
-
 @Model
 class Drill: Identifiable, Hashable, Equatable {
     

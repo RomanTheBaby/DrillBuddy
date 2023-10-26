@@ -52,9 +52,16 @@ struct DrillConfigurationView: View {
                     ConfigurationStepperView(
                         title: "Max Shots",
                         subtitle: "0 - no limits",
-                        value: $configuration.overlapFactor,
+                        value: Binding(
+                            get: {
+                                Double(configuration.maxShots)
+                            },
+                            set: { newValue, _ in
+                                configuration.maxShots = Int(newValue)
+                            }
+                        ),
                         stepRange: 0...10,
-                        step: 0.1
+                        step: 1
                     )
                     
                     ConfigurationStepperView(
@@ -84,11 +91,6 @@ struct DrillConfigurationView: View {
             
             #if !os(watchOS)
             VStack {
-                Button {
-                    dismiss()
-                } label: {
-                    Text("Cancel")
-                }
                 readyButton
             }
             #endif
@@ -96,6 +98,18 @@ struct DrillConfigurationView: View {
         .scrollBounceBehavior(.basedOnSize)
         .navigationTitle("Configure Session")
         .navigationBarTitleDisplayMode(.large)
+        .toolbar {
+            #if !os(watchOS)
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    dismiss()
+                } label: {
+                    Label("Close", systemImage: "xmark.circle.fill")
+                }
+                .foregroundStyle(.white, .white, .gray)
+            }
+            #endif
+        }
     }
     
     private var readyButton: some View {
@@ -180,6 +194,8 @@ private struct ConfigurationStepperView: View {
         #endif
     }
 }
+
+// MARK: - Preview
 
 #Preview {
     NavigationStack {
