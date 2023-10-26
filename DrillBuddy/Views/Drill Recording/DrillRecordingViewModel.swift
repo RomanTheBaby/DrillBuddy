@@ -135,12 +135,12 @@ class DrillRecordingViewModel: ObservableObject {
     
     func stopRecording() {
         isPersistingData = true
+
+        soundIdentifier.stopDetectingSounds()
+        audioRecorder.stopRecording()
         
         soundIdentifyingCancellable?.cancel()
         timerCancellable?.cancel()
-        
-        audioRecorder.stopRecording()
-        soundIdentifier.stopDetectingSounds()
         
         saveDrillsSessionsContainer(
             in: modelContext,
@@ -191,6 +191,10 @@ class DrillRecordingViewModel: ObservableObject {
                 self?.timerCancellable?.cancel()
                 self?.lastDetectedSoundConfidenceLevel = 0
             })
+        
+        if configuration.maxShots > 0, drillEntries.count == configuration.maxShots {
+            stopRecording()
+        }
     }
     
     private func saveDrillsSessionsContainer(

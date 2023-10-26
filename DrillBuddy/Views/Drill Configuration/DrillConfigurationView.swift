@@ -106,7 +106,6 @@ struct DrillConfigurationView: View {
                 } label: {
                     Label("Close", systemImage: "xmark.circle.fill")
                 }
-                .foregroundStyle(.white, .white, .gray)
             }
             #endif
         }
