@@ -6,6 +6,7 @@
 //
 
 import AVFoundation
+import OSLog
 import SwiftUI
 import SwiftData
 
@@ -151,6 +152,10 @@ struct SessionsListView: View {
     // MARK: - Private Methods
     
     private func clearData() {
+        let allDrills = drillContainers.map(\.drills).flatMap {
+            $0
+        }
+        removeAudioRecordings(for: allDrills)
         withAnimation {
             modelContext.container.deleteAllData()
         }
@@ -196,6 +201,27 @@ struct SessionsListView: View {
             throw AppError.Microphone.noAccess
         }
     }
+    
+    private func removeAudioRecordings(for drills: [Drill]) {
+        drills.forEach { drill in
+            if let recordingURL = drill.recordingURL {
+                do {
+                    try FileManager.default.removeItem(at: recordingURL)
+                } catch {
+                    Logger.sessionsListView.error("Failed to remove audio recording at url: \(recordingURL) with error: \(error)")
+                }
+            }
+        }
+    }
+}
+
+// MARK: - Logger
+
+private extension Logger {
+    static let sessionsListView = Logger(
+        subsystem: Bundle.main.bundleIdentifier ?? "DrillBuddy.SessionsListView",
+        category: String(describing: SessionsListView.self)
+    )
 }
 
 // MARK: - Previews

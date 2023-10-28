@@ -101,6 +101,8 @@ final class WatchDataSynchronizer: ObservableObject {
                                 })
                             }
                             
+                            removeAudioRecordings(for: syncedDrills)
+                            
                             if syncedDrills.count == container.drills.count {
                                 Logger.watchDataSynchronizer.trace("Will delete full container for \(container.date)")
                                 modelContext.delete(container)
@@ -124,6 +126,18 @@ final class WatchDataSynchronizer: ObservableObject {
         } catch {
             Logger.watchDataSynchronizer.error("Failed to decode sync response with error: \(error)")
             throw error
+        }
+    }
+    
+    private func removeAudioRecordings(for drills: [Drill]) {
+        drills.forEach { drill in
+            if let recordingURL = drill.recordingURL {
+                do {
+                    try FileManager.default.removeItem(at: recordingURL)
+                } catch {
+                    Logger.watchDataSynchronizer.error("Failed to remove audio recording at url: \(recordingURL) with error: \(error)")
+                }
+            }
         }
     }
 }
