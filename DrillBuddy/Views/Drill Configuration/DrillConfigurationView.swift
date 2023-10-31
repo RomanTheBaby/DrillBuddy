@@ -9,7 +9,9 @@ import SwiftData
 import SwiftUI
 
 struct DrillConfigurationView: View {
-    
+
+    var showCloseButton = true
+    var isConfigurationEditable = true
     @State var configuration: DrillRecordingConfiguration = .default
     
     @Environment(\.dismiss) private var dismiss
@@ -29,6 +31,7 @@ struct DrillConfigurationView: View {
                         stepRange: 0...1, 
                         step: 0.1
                     )
+                    .disabled(!isConfigurationEditable)
 
                     ConfigurationStepperView(
                         title: "Inference Window Size",
@@ -36,6 +39,7 @@ struct DrillConfigurationView: View {
                         stepRange: 0...10,
                         step: 0.1
                     )
+                    .disabled(!isConfigurationEditable)
                     
                     ConfigurationStepperView(
                         title: "Overlap Factor",
@@ -43,6 +47,7 @@ struct DrillConfigurationView: View {
                         stepRange: 0...10,
                         step: 0.1
                     )
+                    .disabled(!isConfigurationEditable)
                 } header: {
                     Text("Sound Analysis")
                         .listRowInsets(EdgeInsets())
@@ -63,6 +68,7 @@ struct DrillConfigurationView: View {
                         stepRange: 0...10,
                         step: 1
                     )
+                    .disabled(!isConfigurationEditable)
                     
                     ConfigurationStepperView(
                         title: "Max Start Delay",
@@ -70,6 +76,7 @@ struct DrillConfigurationView: View {
                         stepRange: 1...60,
                         step: 0.5
                     )
+                    .disabled(!isConfigurationEditable)
                 } header: {
                     Text("Shooting Session Config")
                         .listRowInsets(EdgeInsets())
@@ -79,6 +86,7 @@ struct DrillConfigurationView: View {
                     HStack {
                         Toggle("Should Record Audio to file", isOn: $configuration.shouldRecordAudio)
                     }
+                    .disabled(!isConfigurationEditable)
                 } header: {
                     Text("Audio Recording")
                         .listRowInsets(EdgeInsets())
@@ -90,7 +98,12 @@ struct DrillConfigurationView: View {
             }
             
             #if !os(watchOS)
-            VStack {
+            VStack(spacing: 8) {
+                if isConfigurationEditable == false {
+                    Text("Configuration cannot be edited")
+                        .font(.footnote)
+                        .foregroundStyle(Color.secondary)
+                }
                 readyButton
             }
             #endif
@@ -100,11 +113,13 @@ struct DrillConfigurationView: View {
         .navigationBarTitleDisplayMode(.large)
         .toolbar {
             #if !os(watchOS)
-            ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    dismiss()
-                } label: {
-                    Label("Close", systemImage: "xmark.circle.fill")
+            if showCloseButton {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Label("Close", systemImage: "xmark.circle.fill")
+                    }
                 }
             }
             #endif
@@ -113,22 +128,35 @@ struct DrillConfigurationView: View {
     
     private var readyButton: some View {
         #if os(watchOS)
-        NavigationLink(
-            destination: DrillRecordingView(
-                viewModel: DrillRecordingViewModel(modelContext: modelContext, configuration: configuration)
-            )
-        ) {
-            Text("Shooter Ready")
-                .frame(maxWidth: .infinity)
-                .padding(.horizontal)
-                .padding(.vertical, 16)
-                .background(Color.orange)
-                .clipShape(RoundedRectangle(cornerRadius: 8))
+        VStack {
+            if isConfigurationEditable == false {
+                Text("Configuration editing is disabled for now")
+                    .font(.callout)
+            }
+            
+            NavigationLink(
+                destination: DrillRecordingView(
+                    customFinishAction: {
+                        dismiss()
+                    },
+                    viewModel: DrillRecordingViewModel(modelContext: modelContext, configuration: configuration)
+                )
+            ) {
+                Text("Shooter Ready")
+                    .frame(maxWidth: .infinity)
+                    .padding(.horizontal)
+                    .padding(.vertical, 16)
+                    .background(Color.orange)
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+            }
         }
         .listRowBackground(Color.clear)
         #else
         NavigationLink(
             destination: DrillRecordingView(
+                customFinishAction: {
+                    dismiss()
+                },
                 viewModel: DrillRecordingViewModel(modelContext: modelContext, configuration: configuration)
             )
         ) {
@@ -196,8 +224,17 @@ private struct ConfigurationStepperView: View {
 
 // MARK: - Preview
 
-#Preview {
+#Preview("Editable") {
     NavigationStack {
         DrillConfigurationView()
+    }
+}
+
+#Preview("Non Editable") {
+    NavigationStack {
+        DrillConfigurationView(
+            isConfigurationEditable: false,
+            configuration: DrillRecordingConfiguration(maxShots: 3, maxSessionDelay: 3, shouldRecordAudio: true)
+        )
     }
 }

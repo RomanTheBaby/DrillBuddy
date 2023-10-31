@@ -12,7 +12,7 @@ import WatchKit
 #endif
 
 class HapticFeedbackGenerator {
-    #if os(iOS)
+    #if !os(watchOS)
     static func generateFeedback(_ feedbackType: UINotificationFeedbackGenerator.FeedbackType) {
         let generator = UINotificationFeedbackGenerator()
         generator.notificationOccurred(feedbackType)

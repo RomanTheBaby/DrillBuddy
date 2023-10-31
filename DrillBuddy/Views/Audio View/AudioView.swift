@@ -91,6 +91,7 @@ struct AudioView: View {
         timerCancellable = Timer.publish(every: interval, on: .main, in: .common)
             .autoconnect()
             .sink { _ in
+                isPlaying = audioPlayer.isPlaying
                 currentTime = audioPlayer.currentTime
             }
     }

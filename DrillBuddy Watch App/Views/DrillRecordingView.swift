@@ -29,6 +29,7 @@ struct DrillRecordingView: View {
     
     // MARK: - Properties
     
+    var customFinishAction: (() -> Void)? = nil
     @StateObject var viewModel: DrillRecordingViewModel
     
     @State private var selectedTab: Tab = .information
@@ -66,7 +67,7 @@ struct DrillRecordingView: View {
                             viewModel.stopRecording()
                             
                             if viewModel.drillEntries.isEmpty {
-                                dismiss()
+                                customFinishAction?() ?? dismiss()
                             }
                         } label: {
                             Text("FINISH")
@@ -163,7 +164,7 @@ struct DrillRecordingView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    dismiss()
+                    customFinishAction?() ?? dismiss()
                 } label: {
                     Text("Done")
                         .font(.system(.callout, weight: .bold))

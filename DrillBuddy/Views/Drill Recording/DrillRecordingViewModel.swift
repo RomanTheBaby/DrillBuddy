@@ -102,8 +102,6 @@ class DrillRecordingViewModel: ObservableObject {
     }
     
     func startRecording() {
-        state = .recording
-        startDate = Date()
         do {
             let soundIdentifyingSubject = try soundIdentifier.startDetectingSounds(
                 soundTypes: [.gunshot, .clapping, .fingerSnapping],
@@ -127,6 +125,17 @@ class DrillRecordingViewModel: ObservableObject {
                 Logger.drillRecording.error("Failed to start recording audio with error: \(error)")
                 stopRecording()
             }
+            
+            state = .recording
+            startDate = Date()
+            
+            #if os(watchOS)
+            DispatchQueue.main.sync {
+                HapticFeedbackGenerator.generateFeedback(.start)
+            }
+            #else
+            HapticFeedbackGenerator.generateFeedback(.success)
+            #endif
         } catch {
             Logger.drillRecording.error("Failed to start identifying sounds with error: \(error)")
             stopRecording()

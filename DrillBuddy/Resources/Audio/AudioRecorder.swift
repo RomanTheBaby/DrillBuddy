@@ -60,6 +60,7 @@ class AudioRecorder: NSObject, AVAudioRecorderDelegate, ObservableObject {
             try FileManager.default.createDirectory(at: folderURL, withIntermediateDirectories: true)
             
             let audioURL = folderURL.appendingPathComponent("\(fileName).\(fileExtension)")
+            print(">>>Record audio to: ", audioURL)
             Logger.audioRecorder.trace("Audio recorder will save new recording to: \(audioURL)")
 
             do {

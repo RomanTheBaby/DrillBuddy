@@ -13,6 +13,7 @@ struct DrillRecordingView: View {
     
     // MARK: - Properties
     
+    var customFinishAction: (() -> Void)? = nil
     @StateObject var viewModel: DrillRecordingViewModel
     
     @Environment(\.dismiss) private var dismiss
@@ -57,7 +58,7 @@ struct DrillRecordingView: View {
                         viewModel.stopRecording()
                         
                         if viewModel.drillEntries.isEmpty {
-                            dismiss()
+                            customFinishAction?() ?? dismiss()
                         }
                     } label: {
                         Text("FINISH")
@@ -138,7 +139,7 @@ struct DrillRecordingView: View {
             .padding(.horizontal)
             
             Button {
-                dismiss()
+                customFinishAction?() ?? dismiss()
             } label: {
                 Text("Done")
                     .padding(8)
