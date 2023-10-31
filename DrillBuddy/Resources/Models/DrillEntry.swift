@@ -13,7 +13,6 @@ struct DrillEntry: Codable, Hashable {
     var confidence: Double
 }
 
-
 extension Array where Element == DrillEntry {
     var averageSplit: TimeInterval {
         let shotTimes = map(\.time)

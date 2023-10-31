@@ -84,6 +84,13 @@ struct TournamentDetailView: View {
             )
             
             Text(tournament.description)
+            
+            Spacer()
+            
+            Text("Leaderboard will be available after submission")
+                .fontWeight(.heavy)
+                .multilineTextAlignment(.center)
+            
             Spacer()
             
             if Date() > tournament.endDate {
