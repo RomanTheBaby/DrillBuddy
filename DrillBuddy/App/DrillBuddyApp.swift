@@ -5,6 +5,9 @@
 //  Created by Roman on 2023-09-22.
 //
 
+#if os(iOS)
+import FirebaseCore
+#endif
 import SwiftUI
 import SwiftData
 
@@ -15,6 +18,20 @@ import SwiftData
                 
 #if os(watchOS)
 #else
+#endif
+
+#if os(iOS)
+// MARK: - AppDelegate
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
+    ) -> Bool {
+        FirebaseApp.configure()
+        return true
+    }
+}
 #endif
 
 // TODO: Add tournaments tab on main screen
@@ -31,6 +48,12 @@ import SwiftData
 @main
 struct DrillBuddyApp: App {
     
+    #if !os(watchOS)
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @StateObject private var userStorage = UserStorage()
+    #endif
+    
+    
     var body: some Scene {
         #if os(watchOS)
         let modelContainer = DrillSessionsContainerSampleData.container
@@ -39,15 +62,18 @@ struct DrillBuddyApp: App {
         #endif
         
         return WindowGroup {
-            NavigationStack {
-                SessionsListView(
-                    watchDataSynchronizer: WatchDataSynchronizer(modelContext: ModelContext(modelContainer))
-                )
-            }
+            MainTabView(
+                watchDataSynchronizer: WatchDataSynchronizer(modelContext: ModelContext(modelContainer))
+            )
+            #if !os(watchOS)
+            .environmentObject(userStorage)
+            #endif
         }
         .modelContainer(ModelContainer.temporary)
     }
 }
+
+// MARK: - ModelContainer
 
 private extension ModelContainer {
 //    static let shared = try! ModelContainer(

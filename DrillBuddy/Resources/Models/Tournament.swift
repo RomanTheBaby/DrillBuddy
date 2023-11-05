@@ -7,12 +7,11 @@
 
 import Foundation
 
-struct Tournament: Identifiable {
+struct Tournament: Identifiable, Codable {
     
-    struct Requirements {
+    struct Requirements: Codable {
         var gunType: GunType = .any
         var gunActionType: GunActionType = .any
-        var maxShotsCount: Int
         var maxTime: TimeInterval
     }
     
@@ -26,4 +25,23 @@ struct Tournament: Identifiable {
     var requirements: Requirements
     
     var recordingConfiguration: DrillRecordingConfiguration = .default
+    
+    var maxShotsCount: Int {
+        recordingConfiguration.maxShots
+    }
+    
+}
+
+struct Leaderboard {
+    struct Entry {
+        var username: String
+        var recordingData: Data
+        var firstShotDelay: TimeInterval
+        var shotsSplit: TimeInterval
+        var totalTime: TimeInterval
+    }
+    
+    var id: UUID
+    var entries: [Entry]
+    var tournamentID: UUID
 }

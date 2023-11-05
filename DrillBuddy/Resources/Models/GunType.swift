@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum GunType {
+enum GunType: Hashable, Codable {
     case any
     case pistol
     case rifle
@@ -28,7 +28,7 @@ enum GunType {
 }
 
 
-enum GunActionType {
+enum GunActionType: Hashable, Codable {
     case any
     case lever
     case pump

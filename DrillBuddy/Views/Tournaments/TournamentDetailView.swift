@@ -49,7 +49,7 @@ struct TournamentDetailView: View {
                     Spacer()
                 }
             }
-            .frame(width: .infinity, alignment: .leading)
+            .frame(maxWidth: .infinity, alignment: .leading)
             .padding()
             .background(
                 RoundedRectangle(cornerRadius: 8)
@@ -60,7 +60,7 @@ struct TournamentDetailView: View {
                 HStack {
                     Text("Max Shots:")
                         .fontWeight(.medium)
-                    Text("\(tournament.requirements.maxShotsCount == 0 ? "Unlimited" : "\(tournament.requirements.maxShotsCount)")")
+                    Text("\(tournament.maxShotsCount == 0 ? "Unlimited" : "\(tournament.maxShotsCount)")")
                     Spacer()
                 }
                 
@@ -83,20 +83,24 @@ struct TournamentDetailView: View {
                     .foregroundStyle(Color.gray.opacity(0.2))
             )
             
-            Text(tournament.description)
-            
-            Spacer()
-            
-            Text("Leaderboard will be available after submission")
-                .fontWeight(.heavy)
-                .multilineTextAlignment(.center)
-            
-            Spacer()
+            ScrollView {
+                Text(tournament.description)
+                    .padding()
+            }
+            .background(
+                RoundedRectangle(cornerRadius: 8)
+                    .foregroundStyle(Color.gray.opacity(0.2))
+            )
             
             if Date() > tournament.endDate {
                 Text("Submissins closed. Tournament has ended")
+                    .fontWeight(.bold)
                     .foregroundStyle(Color.gray)
             } else {
+                Text("Leaderboard will be available after submission")
+                    .fontWeight(.heavy)
+                    .multilineTextAlignment(.center)
+                
                 Text("WARNING: You can enter tournament only once!")
                     .foregroundStyle(Color.red)
                     .font(.footnote)
@@ -115,8 +119,8 @@ struct TournamentDetailView: View {
                 }
                 .buttonStyle(.borderedProminent)
             }
-            
         }
+        .navigationBarTitleDisplayMode(.inline)
         .padding(.horizontal)
         
     }
@@ -124,32 +128,14 @@ struct TournamentDetailView: View {
 
 // MARK: - Preview
 
-#Preview {
+#Preview("Normal") {
     NavigationStack {
-        TournamentDetailView(
-            tournament: Tournament(
-                startDate: Date(),
-                endDate: Date().addingTimeInterval(3600 * 24),
-                title: "3-shot competition",
-                description: "   This is a simple 3 shot competition to test your basic shooting skills.\n   Upon starting the drill draw your weapon and make 3 shots, drill recording will automatically stop when app will hear 3rd shot.\n  Your result will be displayed to everyone on the leaderboard. You can submit only one entry for each tournament.",
-                requirements: Tournament.Requirements(gunActionType: .semiAuto, maxShotsCount: 3, maxTime: 20),
-                recordingConfiguration: DrillRecordingConfiguration(maxShots: 3, maxSessionDelay: 3, shouldRecordAudio: true)
-            )
-        )
+        TournamentDetailView(tournament: TournamentPreviewData.mock)
     }
 }
 
 #Preview("Ended") {
     NavigationStack {
-        TournamentDetailView(
-            tournament: Tournament(
-                startDate: Date().addingTimeInterval(-(3600 * 48)),
-                endDate: Date().addingTimeInterval(-(3600 * 24)),
-                title: "3-shot competition",
-                description: "   This is a simple 3 shot competition to test your basic shooting skills.\n   Upon starting the drill draw your weapon and make 3 shots, drill recording will automatically stop when app will hear 3rd shot.\n  Your result will be displayed to everyone on the leaderboard. You can submit only one entry for each tournament.",
-                requirements: Tournament.Requirements(maxShotsCount: 3, maxTime: 20),
-                recordingConfiguration: DrillRecordingConfiguration(maxShots: 3, maxSessionDelay: 3, shouldRecordAudio: true)
-            )
-        )
+        TournamentDetailView(tournament: TournamentPreviewData.mockEnded)
     }
 }

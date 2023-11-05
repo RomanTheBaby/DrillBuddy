@@ -118,9 +118,6 @@ struct SessionsListView: View {
             }
         }
         .toolbar {
-//                            ToolbarItem(placement: .navigationBarTrailing) {
-//                                EditButton()
-//                            }
             ToolbarItem {
                 Button {
                     isPresentingDeleteDataAlert = true

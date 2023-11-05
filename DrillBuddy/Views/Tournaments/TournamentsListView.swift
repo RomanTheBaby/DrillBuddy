@@ -11,29 +11,116 @@ import SwiftUI
 
 struct TournamentsListView: View {
     
-    var tournaments: [Tournament]
+    @State var tournaments: [Tournament] = []
     
+    @State private var isLoading: Bool = false
+    @State private var error: Error? = nil
+    @State private var authenticationType: AuthenticationView.AuthenticationType? = nil
+    
+    var firestoreService: FirestoreService = FirestoreService()
+    
+    @EnvironmentObject private var userStorage: UserStorage
+
     var body: some View {
-        List {
-            ForEach(tournaments) { tournament in
-                // This ZStack is to hide NavLink right arrow
-                ZStack {
-                    TournamentCardView(tournament: tournament)
-                    NavigationLink(destination: TournamentDetailView(tournament: tournament)) {
-                        EmptyView()
+        Group {
+            if userStorage.currentUser == nil {
+                anonymousView
+            } else {
+                tournamentsView
+                    .errorAlert(error: $error)
+                    .task {
+                        await loadTournaments()
                     }
-                    .opacity(0)
-                }
-                #if !os(watchOS)
-                .listRowSeparator(.hidden)
-                #endif
             }
         }
-        #if !os(watchOS)
-        .listRowSpacing(16)
-        #endif
-        .navigationTitle("Tournaments")
-        .navigationBarTitleDisplayMode(.large)
+        .onChange(of: userStorage.currentUser, { _, newValue in
+            if authenticationType != nil, newValue != nil {
+                authenticationType = nil
+            }
+        })
+        .sheet(item: $authenticationType, onDismiss: {}) { authenticationType in
+            AuthenticationView(authenticationType: authenticationType)
+        }
+    }
+    
+    private var anonymousView: some View {
+        VStack(spacing: 16) {
+            Spacer()
+            
+            Text("To View and participate in tournaments please log in")
+                .multilineTextAlignment(.center)
+                .font(.system(.title2, weight: .medium))
+            
+            Button(action: {
+                authenticationType = .signIn
+            }, label: {
+                Text("Log In")
+                    .padding()
+            })
+            .buttonStyle(.borderedProminent)
+            
+            Spacer()
+                .frame(height: 56)
+        }
+        .padding()
+    }
+    
+    private var tournamentsView: some View {
+        Group {
+            if tournaments.isEmpty {
+                if isLoading {
+                    VStack(spacing: 16) {
+                        ProgressView()
+                        Text("Loading tournaments...")
+                    }
+                } else {
+                    Text("Currently there are no tournaments. Check back later")
+                        .multilineTextAlignment(.center)
+                        .fontWeight(.medium)
+                }
+            } else {
+                List {
+                    ForEach(tournaments) { tournament in
+                        // This ZStack is to hide NavLink right arrow
+                        ZStack {
+                            TournamentCardView(tournament: tournament)
+                            NavigationLink(destination: TournamentDetailView(tournament: tournament)) {
+                                EmptyView()
+                            }
+                            .opacity(0)
+                        }
+                        #if !os(watchOS)
+                        .listRowSeparator(.hidden)
+                        #endif
+                    }
+                }
+                #if !os(watchOS)
+                .listRowSpacing(16)
+                #endif
+                .navigationTitle("Tournaments")
+                .navigationBarTitleDisplayMode(.large)
+                .refreshable {
+                    await loadTournaments(showLoadingIndicator: false)
+                }
+            }
+        }
+    }
+    
+    private func loadTournaments(showLoadingIndicator: Bool = true) async {
+        guard isLoading == false else {
+            return
+        }
+        
+        do {
+            isLoading = showLoadingIndicator ? true : false
+            if isInPreview == false {
+                tournaments = try await firestoreService.fetchTournaments()
+            }
+            isLoading = false
+        } catch let fetchError {
+            isLoading = false
+            error = fetchError
+        }
     }
 }
 
@@ -79,7 +166,7 @@ private struct TournamentCardView: View {
             }
             
             HStack {
-                Text("\(tournament.requirements.maxShotsCount) shot(s)")
+                Text("\(tournament.maxShotsCount) shot(s)")
                 Spacer()
                 HStack {
                     Text(timeText)
@@ -90,6 +177,8 @@ private struct TournamentCardView: View {
     }
 }
 
+// MARK: - Data Helper
+
 private extension Date {
     var tournamentFormatted: String {
         self.formatted(.dateTime.day().month())
@@ -98,7 +187,7 @@ private extension Date {
 
 // MARK: - Previews
 
-#Preview {
+#Preview("Tournaments") {
     NavigationStack {
         TournamentsListView(
             tournaments: [
@@ -107,17 +196,38 @@ private extension Date {
                     endDate: Date().addingTimeInterval(-(3600 * 24)),
                     title: "3-shot competition",
                     description: "",
-                    requirements: Tournament.Requirements(maxShotsCount: 3, maxTime: 20)
+                    requirements: Tournament.Requirements(maxTime: 20),
+                    recordingConfiguration: DrillRecordingConfiguration(maxShots: 3, maxSessionDelay: 4, shouldRecordAudio: true)
                 ),
                 Tournament(
                     startDate: Date(),
                     endDate: Date().addingTimeInterval(3600 * 24),
                     title: "3-shot competition",
                     description: "This is a simple 3 shot competition to test your basic shooting skills.\nUpon starting the drill draw your weapon and make 3 shots, drill recording will automatically stop when app will hear 3rd shot",
-                    requirements: Tournament.Requirements(maxShotsCount: 3, maxTime: 0),
+                    requirements: Tournament.Requirements(maxTime: 0),
                     recordingConfiguration: DrillRecordingConfiguration(maxShots: 3, maxSessionDelay: 4, shouldRecordAudio: true)
                 )
             ]
         )
+        .environmentObject(
+            UserStorage(
+                userInfo: UserInfo(id: "", username: "user_name", email: "email@em.com"),
+                listenToAuthStateChanges: false
+            )
+        )
+    }
+}
+
+#Preview("Empty") {
+    NavigationStack {
+        TournamentsListView(tournaments: [])
+            .environmentObject(UserStoragePreviewData.loggedIn)
+    }
+}
+
+#Preview("Logged Out") {
+    NavigationStack {
+        TournamentsListView(tournaments: [])
+            .environmentObject(UserStoragePreviewData.loggedOut)
     }
 }

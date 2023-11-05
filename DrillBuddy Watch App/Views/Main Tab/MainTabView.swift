@@ -10,7 +10,7 @@ import OSLog
 import SwiftUI
 import SwiftData
 
-struct SessionsListView: View {
+struct MainTabView: View {
     // MARK: - Tab
     
     enum Tab {
@@ -286,7 +286,7 @@ struct SessionsListView: View {
 private extension Logger {
     static let sessionsListView = Logger(
         subsystem: Bundle.main.bundleIdentifier ?? "DrillBuddy.WatchSessionsListView",
-        category: String(describing: SessionsListView.self)
+        category: String(describing: MainTabView.self)
     )
 }
 
@@ -295,7 +295,7 @@ private extension Logger {
 #Preview("With Data") {
     MainActor.assumeIsolated {
         NavigationStack {
-            SessionsListView(
+            MainTabView(
                 watchDataSynchronizer: WatchDataSynchronizer(
                     modelContext: DrillSessionsContainerSampleData.container.mainContext
                 ),
@@ -308,7 +308,7 @@ private extension Logger {
 
 #Preview("No Data") {
     NavigationStack {
-        SessionsListView(
+        MainTabView(
             watchDataSynchronizer: WatchDataSynchronizer(
                 modelContext: DrillSessionsContainerSampleData.container.mainContext
             )

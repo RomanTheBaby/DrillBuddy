@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DrillRecordingConfiguration {
+struct DrillRecordingConfiguration: Codable {
     /// Max shots that app should record in a session. After shots limit is reached, sessions should stop. 0 - unlimited
     var maxShots: Int = 0
     

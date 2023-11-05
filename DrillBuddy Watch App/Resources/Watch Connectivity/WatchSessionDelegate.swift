@@ -7,7 +7,9 @@
 
 import Combine
 import OSLog
+#if canImport(WatchConnectivity)
 import WatchConnectivity
+#endif
 
 // MARK: - WatchSessionDelegate
 

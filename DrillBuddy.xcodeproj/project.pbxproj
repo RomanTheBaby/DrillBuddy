@@ -14,7 +14,7 @@
 		754838832ABE7B5700146415 /* DrillsSessionsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D113702ABE331600BF8874 /* DrillsSessionsContainer.swift */; };
 		754838852ABE7B8600146415 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D113752ABE4EE200BF8874 /* View+Extension.swift */; };
 		754838862ABE7B8B00146415 /* DrillContainerPreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D113722ABE3A7A00BF8874 /* DrillContainerPreviewData.swift */; };
-		7572F0142ABF1D14001E2F3C /* SessionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7572F0132ABF1D14001E2F3C /* SessionsListView.swift */; };
+		7572F0142ABF1D14001E2F3C /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7572F0132ABF1D14001E2F3C /* MainTabView.swift */; };
 		7572F0162ABF5DE8001E2F3C /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7572F0152ABF5DE8001E2F3C /* AppError.swift */; };
 		7572F0172ABF5E10001E2F3C /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7572F0152ABF5DE8001E2F3C /* AppError.swift */; };
 		7572F01E2ABF61A4001E2F3C /* DrillConfigurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7572F01D2ABF61A4001E2F3C /* DrillConfigurationView.swift */; };
@@ -35,7 +35,6 @@
 		7572F0392AC25356001E2F3C /* Drill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7572F0382AC25356001E2F3C /* Drill.swift */; };
 		7572F03A2AC25356001E2F3C /* Drill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7572F0382AC25356001E2F3C /* Drill.swift */; };
 		75D113562ABE2E7500BF8874 /* DrillBuddyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D113552ABE2E7500BF8874 /* DrillBuddyApp.swift */; };
-		75D113582ABE2E7500BF8874 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D113572ABE2E7500BF8874 /* ContentView.swift */; };
 		75D1135C2ABE2E7B00BF8874 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75D1135B2ABE2E7B00BF8874 /* Assets.xcassets */; };
 		75D113602ABE2E7B00BF8874 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75D1135F2ABE2E7B00BF8874 /* Preview Assets.xcassets */; };
 		75D1136C2ABE2F4900BF8874 /* LaunchScreenStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75D1136B2ABE2F4900BF8874 /* LaunchScreenStoryboard.storyboard */; };
@@ -43,6 +42,18 @@
 		75D113712ABE331600BF8874 /* DrillsSessionsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D113702ABE331600BF8874 /* DrillsSessionsContainer.swift */; };
 		75D113732ABE3A7A00BF8874 /* DrillContainerPreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D113722ABE3A7A00BF8874 /* DrillContainerPreviewData.swift */; };
 		75D113762ABE4EE200BF8874 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D113752ABE4EE200BF8874 /* View+Extension.swift */; };
+		FE1D1CF52AF31F2500BF8506 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1D1CF42AF31F2500BF8506 /* ProfileView.swift */; };
+		FE1D1CF82AF324A700BF8506 /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1D1CF72AF324A700BF8506 /* AuthenticationView.swift */; };
+		FE1D1CFA2AF32A0500BF8506 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1D1CF92AF32A0500BF8506 /* AuthenticationService.swift */; };
+		FE1D1CFC2AF3303D00BF8506 /* LocalizedErrorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1D1CFB2AF3303D00BF8506 /* LocalizedErrorInfo.swift */; };
+		FE1D1CFD2AF3303D00BF8506 /* LocalizedErrorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1D1CFB2AF3303D00BF8506 /* LocalizedErrorInfo.swift */; };
+		FE1D1D002AF4471800BF8506 /* Firestore+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1D1CFF2AF4471800BF8506 /* Firestore+Extensions.swift */; };
+		FE1D1D022AF44FDA00BF8506 /* UserStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1D1D012AF44FDA00BF8506 /* UserStorage.swift */; };
+		FE1D1D042AF4501200BF8506 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1D1D032AF4501200BF8506 /* UserInfo.swift */; };
+		FE1D1D082AF45E4700BF8506 /* LoadingViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1D1D072AF45E4700BF8506 /* LoadingViewModifier.swift */; };
+		FE1D1D092AF45E4700BF8506 /* LoadingViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1D1D072AF45E4700BF8506 /* LoadingViewModifier.swift */; };
+		FE1D1D0B2AF464EF00BF8506 /* UserStoragePreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1D1D0A2AF464EF00BF8506 /* UserStoragePreviewData.swift */; };
+		FE241E4E2AF1E00500E693BD /* FirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE241E4D2AF1E00500E693BD /* FirestoreService.swift */; };
 		FE254A152ADB3600000602AA /* DetectSoundsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE254A142ADB3600000602AA /* DetectSoundsView.swift */; };
 		FE254A162ADB7744000602AA /* DetectSoundsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE254A142ADB3600000602AA /* DetectSoundsView.swift */; };
 		FE254A182ADDF765000602AA /* DrillRecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE254A172ADDF765000602AA /* DrillRecordingView.swift */; };
@@ -65,10 +76,27 @@
 		FE254A382AEDD3DC000602AA /* TournamentDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE254A372AEDD3DB000602AA /* TournamentDetailView.swift */; };
 		FE254A3A2AF0583B000602AA /* Tournament.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE254A392AF0583B000602AA /* Tournament.swift */; };
 		FE254A3B2AF0583B000602AA /* Tournament.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE254A392AF0583B000602AA /* Tournament.swift */; };
-		FE254A3C2AF064C8000602AA /* TournamentsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE254A352AEDCE32000602AA /* TournamentsListView.swift */; };
 		FE254A3E2AF065CD000602AA /* TournamentDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE254A3D2AF065CD000602AA /* TournamentDetailView.swift */; };
 		FE254A402AF087D6000602AA /* GunType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE254A3F2AF087D6000602AA /* GunType.swift */; };
 		FE254A412AF087D9000602AA /* GunType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE254A3F2AF087D6000602AA /* GunType.swift */; };
+		FE254A442AF1BB35000602AA /* UsernameInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE254A432AF1BB35000602AA /* UsernameInputView.swift */; };
+		FE254A462AF1D061000602AA /* NSUbiquitousKeyValueStore+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE254A452AF1D061000602AA /* NSUbiquitousKeyValueStore+Extension.swift */; };
+		FE254A4B2AF1D4D4000602AA /* TournamentPreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE254A4A2AF1D4D4000602AA /* TournamentPreviewData.swift */; };
+		FE254A4C2AF1D4D4000602AA /* TournamentPreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE254A4A2AF1D4D4000602AA /* TournamentPreviewData.swift */; };
+		FE254A4D2AF1D674000602AA /* NSUbiquitousKeyValueStore+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE254A452AF1D061000602AA /* NSUbiquitousKeyValueStore+Extension.swift */; };
+		FE28D27A2AF308B30074BC98 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE28D2792AF308B30074BC98 /* MainTabView.swift */; };
+		FE5F223C2AF2E7A600C83412 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = FE5F223B2AF2E7A600C83412 /* FirebaseAnalytics */; };
+		FE5F223E2AF2E7A600C83412 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FE5F223D2AF2E7A600C83412 /* FirebaseAnalyticsSwift */; };
+		FE5F22402AF2E7A600C83412 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = FE5F223F2AF2E7A600C83412 /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		FE5F22422AF2E7A600C83412 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = FE5F22412AF2E7A600C83412 /* FirebaseAuth */; };
+		FE5F22442AF2E7A600C83412 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = FE5F22432AF2E7A600C83412 /* FirebaseAuthCombine-Community */; };
+		FE5F22462AF2E7A600C83412 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = FE5F22452AF2E7A600C83412 /* FirebaseFirestore */; };
+		FE5F22482AF2E7A600C83412 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = FE5F22472AF2E7A600C83412 /* FirebaseFirestoreCombine-Community */; };
+		FE5F224A2AF2E7A600C83412 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FE5F22492AF2E7A600C83412 /* FirebaseFirestoreSwift */; };
+		FE5F224C2AF2E7A600C83412 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = FE5F224B2AF2E7A600C83412 /* FirebaseRemoteConfig */; };
+		FE5F224E2AF2E7A600C83412 /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FE5F224D2AF2E7A600C83412 /* FirebaseRemoteConfigSwift */; };
+		FE66290D2AF30B870059B521 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FE66290C2AF30B870059B521 /* GoogleService-Info.plist */; };
+		FE66290E2AF30B870059B521 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FE66290C2AF30B870059B521 /* GoogleService-Info.plist */; };
 		FEE455492AC8BB4700569414 /* AudioSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE455482AC8BB4700569414 /* AudioSessionManager.swift */; };
 		FEE4554A2AC8BB4700569414 /* AudioSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE455482AC8BB4700569414 /* AudioSessionManager.swift */; };
 		FEE4554C2AC8BB6200569414 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE4554B2AC8BB6200569414 /* AudioRecorder.swift */; };
@@ -113,7 +141,7 @@
 		751CBCAB2ABE7AAD00141805 /* DrillBuddy Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DrillBuddy Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		754838772ABE7B1000146415 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		754838792ABE7B1000146415 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		7572F0132ABF1D14001E2F3C /* SessionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsListView.swift; sourceTree = "<group>"; };
+		7572F0132ABF1D14001E2F3C /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		7572F0152ABF5DE8001E2F3C /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		7572F01D2ABF61A4001E2F3C /* DrillConfigurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillConfigurationView.swift; sourceTree = "<group>"; };
 		7572F0202ABF7CCA001E2F3C /* DrillRecordingConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillRecordingConfiguration.swift; sourceTree = "<group>"; };
@@ -126,7 +154,6 @@
 		7572F0382AC25356001E2F3C /* Drill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drill.swift; sourceTree = "<group>"; };
 		75D113522ABE2E7500BF8874 /* DrillBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrillBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75D113552ABE2E7500BF8874 /* DrillBuddyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillBuddyApp.swift; sourceTree = "<group>"; };
-		75D113572ABE2E7500BF8874 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		75D1135B2ABE2E7B00BF8874 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		75D1135D2ABE2E7B00BF8874 /* DrillBuddy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DrillBuddy.entitlements; sourceTree = "<group>"; };
 		75D1135F2ABE2E7B00BF8874 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -136,6 +163,16 @@
 		75D113702ABE331600BF8874 /* DrillsSessionsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillsSessionsContainer.swift; sourceTree = "<group>"; };
 		75D113722ABE3A7A00BF8874 /* DrillContainerPreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillContainerPreviewData.swift; sourceTree = "<group>"; };
 		75D113752ABE4EE200BF8874 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
+		FE1D1CF42AF31F2500BF8506 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		FE1D1CF72AF324A700BF8506 /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
+		FE1D1CF92AF32A0500BF8506 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
+		FE1D1CFB2AF3303D00BF8506 /* LocalizedErrorInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedErrorInfo.swift; sourceTree = "<group>"; };
+		FE1D1CFF2AF4471800BF8506 /* Firestore+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firestore+Extensions.swift"; sourceTree = "<group>"; };
+		FE1D1D012AF44FDA00BF8506 /* UserStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStorage.swift; sourceTree = "<group>"; };
+		FE1D1D032AF4501200BF8506 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		FE1D1D072AF45E4700BF8506 /* LoadingViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewModifier.swift; sourceTree = "<group>"; };
+		FE1D1D0A2AF464EF00BF8506 /* UserStoragePreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStoragePreviewData.swift; sourceTree = "<group>"; };
+		FE241E4D2AF1E00500E693BD /* FirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreService.swift; sourceTree = "<group>"; };
 		FE254A142ADB3600000602AA /* DetectSoundsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectSoundsView.swift; sourceTree = "<group>"; };
 		FE254A172ADDF765000602AA /* DrillRecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillRecordingView.swift; sourceTree = "<group>"; };
 		FE254A192ADDF7A5000602AA /* TimeInterval+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Extension.swift"; sourceTree = "<group>"; };
@@ -151,6 +188,11 @@
 		FE254A392AF0583B000602AA /* Tournament.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tournament.swift; sourceTree = "<group>"; };
 		FE254A3D2AF065CD000602AA /* TournamentDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentDetailView.swift; sourceTree = "<group>"; };
 		FE254A3F2AF087D6000602AA /* GunType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GunType.swift; sourceTree = "<group>"; };
+		FE254A432AF1BB35000602AA /* UsernameInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameInputView.swift; sourceTree = "<group>"; };
+		FE254A452AF1D061000602AA /* NSUbiquitousKeyValueStore+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSUbiquitousKeyValueStore+Extension.swift"; sourceTree = "<group>"; };
+		FE254A4A2AF1D4D4000602AA /* TournamentPreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentPreviewData.swift; sourceTree = "<group>"; };
+		FE28D2792AF308B30074BC98 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		FE66290C2AF30B870059B521 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FEE455482AC8BB4700569414 /* AudioSessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioSessionManager.swift; sourceTree = "<group>"; };
 		FEE4554B2AC8BB6200569414 /* AudioRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
 		FEE4554F2AC8BD8600569414 /* SoundIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundIdentifier.swift; sourceTree = "<group>"; };
@@ -172,6 +214,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE5F224C2AF2E7A600C83412 /* FirebaseRemoteConfig in Frameworks */,
+				FE5F223E2AF2E7A600C83412 /* FirebaseAnalyticsSwift in Frameworks */,
+				FE5F22402AF2E7A600C83412 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				FE5F223C2AF2E7A600C83412 /* FirebaseAnalytics in Frameworks */,
+				FE5F22422AF2E7A600C83412 /* FirebaseAuth in Frameworks */,
+				FE5F22442AF2E7A600C83412 /* FirebaseAuthCombine-Community in Frameworks */,
+				FE5F22462AF2E7A600C83412 /* FirebaseFirestore in Frameworks */,
+				FE5F224E2AF2E7A600C83412 /* FirebaseRemoteConfigSwift in Frameworks */,
+				FE5F22482AF2E7A600C83412 /* FirebaseFirestoreCombine-Community in Frameworks */,
+				FE5F224A2AF2E7A600C83412 /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,9 +260,9 @@
 		754838812ABE7B4200146415 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				7572F0132ABF1D14001E2F3C /* SessionsListView.swift */,
-				FE254A172ADDF765000602AA /* DrillRecordingView.swift */,
-				FE254A3D2AF065CD000602AA /* TournamentDetailView.swift */,
+				FE254A492AF1D447000602AA /* Drill Recording */,
+				FE254A482AF1D43E000602AA /* Main Tab */,
+				FE254A472AF1D431000602AA /* Tournament Detail */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -295,6 +347,8 @@
 				FE254A272AE9DA85000602AA /* Hydrogen.mp3 */,
 				75D1135F2ABE2E7B00BF8874 /* Preview Assets.xcassets */,
 				75D113722ABE3A7A00BF8874 /* DrillContainerPreviewData.swift */,
+				FE254A4A2AF1D4D4000602AA /* TournamentPreviewData.swift */,
+				FE1D1D0A2AF464EF00BF8506 /* UserStoragePreviewData.swift */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -310,15 +364,18 @@
 		75D113682ABE2EE600BF8874 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				FE254A342AEDCE1A000602AA /* Tournaments */,
+				FE1D1CF62AF3249800BF8506 /* Authentication */,
 				FE254A262AE877A5000602AA /* Audio View */,
-				75D1136A2ABE2F3700BF8874 /* Launch Screen */,
+				FE1D1CF32AF31F0B00BF8506 /* Detect Sounds */,
 				7572F0192ABF6184001E2F3C /* Drill Configuration */,
 				FE254A1C2ADF6EE6000602AA /* Drill Detail */,
 				7572F0232ABFAC9F001E2F3C /* Drill Recording */,
+				75D1136A2ABE2F3700BF8874 /* Launch Screen */,
+				FE28D2782AF308A00074BC98 /* Main Tab */,
+				FE1D1CF22AF31EFF00BF8506 /* Profile */,
 				7572F0182ABF6174001E2F3C /* Sessions List */,
-				75D113572ABE2E7500BF8874 /* ContentView.swift */,
-				FE254A142ADB3600000602AA /* DetectSoundsView.swift */,
+				FE254A342AEDCE1A000602AA /* Tournaments */,
+				FE254A422AF1BB20000602AA /* Username Input */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -330,10 +387,12 @@
 				75D1135D2ABE2E7B00BF8874 /* DrillBuddy.entitlements */,
 				75D113612ABE2E7B00BF8874 /* Info.plist */,
 				FEE455472AC8BB3300569414 /* Audio */,
-				75D113742ABE4ED200BF8874 /* Extension */,
+				75D113742ABE4ED200BF8874 /* Extensions */,
+				FE66290B2AF30B750059B521 /* Firebase */,
 				75D1136F2ABE32F100BF8874 /* Models */,
 				FEE4555B2AC8E48900569414 /* Services */,
 				FE254A2A2AE9DFD7000602AA /* Sounds */,
+				FE1D1D062AF45E3900BF8506 /* View Modifiers */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -350,23 +409,68 @@
 			isa = PBXGroup;
 			children = (
 				7572F0152ABF5DE8001E2F3C /* AppError.swift */,
-				7572F0202ABF7CCA001E2F3C /* DrillRecordingConfiguration.swift */,
-				75D113702ABE331600BF8874 /* DrillsSessionsContainer.swift */,
 				7572F0382AC25356001E2F3C /* Drill.swift */,
 				FE254A202AE851CD000602AA /* DrillEntry.swift */,
-				FE254A392AF0583B000602AA /* Tournament.swift */,
+				7572F0202ABF7CCA001E2F3C /* DrillRecordingConfiguration.swift */,
+				75D113702ABE331600BF8874 /* DrillsSessionsContainer.swift */,
 				FE254A3F2AF087D6000602AA /* GunType.swift */,
+				FE1D1CFB2AF3303D00BF8506 /* LocalizedErrorInfo.swift */,
+				FE254A392AF0583B000602AA /* Tournament.swift */,
+				FE1D1D032AF4501200BF8506 /* UserInfo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
 		};
-		75D113742ABE4ED200BF8874 /* Extension */ = {
+		75D113742ABE4ED200BF8874 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				FE1D1CFE2AF4470D00BF8506 /* Firebase */,
 				75D113752ABE4EE200BF8874 /* View+Extension.swift */,
 				FE254A192ADDF7A5000602AA /* TimeInterval+Extension.swift */,
+				FE254A452AF1D061000602AA /* NSUbiquitousKeyValueStore+Extension.swift */,
 			);
-			path = Extension;
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		FE1D1CF22AF31EFF00BF8506 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				FE1D1CF42AF31F2500BF8506 /* ProfileView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		FE1D1CF32AF31F0B00BF8506 /* Detect Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				FE254A142ADB3600000602AA /* DetectSoundsView.swift */,
+			);
+			path = "Detect Sounds";
+			sourceTree = "<group>";
+		};
+		FE1D1CF62AF3249800BF8506 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				FE1D1CF72AF324A700BF8506 /* AuthenticationView.swift */,
+				FE1D1CF92AF32A0500BF8506 /* AuthenticationService.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		FE1D1CFE2AF4470D00BF8506 /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				FE1D1CFF2AF4471800BF8506 /* Firestore+Extensions.swift */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
+		FE1D1D062AF45E3900BF8506 /* View Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				FE1D1D072AF45E4700BF8506 /* LoadingViewModifier.swift */,
+			);
+			path = "View Modifiers";
 			sourceTree = "<group>";
 		};
 		FE254A1C2ADF6EE6000602AA /* Drill Detail */ = {
@@ -404,6 +508,54 @@
 			path = Tournaments;
 			sourceTree = "<group>";
 		};
+		FE254A422AF1BB20000602AA /* Username Input */ = {
+			isa = PBXGroup;
+			children = (
+				FE254A432AF1BB35000602AA /* UsernameInputView.swift */,
+			);
+			path = "Username Input";
+			sourceTree = "<group>";
+		};
+		FE254A472AF1D431000602AA /* Tournament Detail */ = {
+			isa = PBXGroup;
+			children = (
+				FE254A3D2AF065CD000602AA /* TournamentDetailView.swift */,
+			);
+			path = "Tournament Detail";
+			sourceTree = "<group>";
+		};
+		FE254A482AF1D43E000602AA /* Main Tab */ = {
+			isa = PBXGroup;
+			children = (
+				7572F0132ABF1D14001E2F3C /* MainTabView.swift */,
+			);
+			path = "Main Tab";
+			sourceTree = "<group>";
+		};
+		FE254A492AF1D447000602AA /* Drill Recording */ = {
+			isa = PBXGroup;
+			children = (
+				FE254A172ADDF765000602AA /* DrillRecordingView.swift */,
+			);
+			path = "Drill Recording";
+			sourceTree = "<group>";
+		};
+		FE28D2782AF308A00074BC98 /* Main Tab */ = {
+			isa = PBXGroup;
+			children = (
+				FE28D2792AF308B30074BC98 /* MainTabView.swift */,
+			);
+			path = "Main Tab";
+			sourceTree = "<group>";
+		};
+		FE66290B2AF30B750059B521 /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				FE66290C2AF30B870059B521 /* GoogleService-Info.plist */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
 		FEE455472AC8BB3300569414 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
@@ -428,6 +580,8 @@
 			isa = PBXGroup;
 			children = (
 				FEE4555C2AC8E49B00569414 /* HapticFeedbackGenerator.swift */,
+				FE241E4D2AF1E00500E693BD /* FirestoreService.swift */,
+				FE1D1D012AF44FDA00BF8506 /* UserStorage.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -467,6 +621,18 @@
 				751CBCB72ABE7AB000141805 /* PBXTargetDependency */,
 			);
 			name = DrillBuddy;
+			packageProductDependencies = (
+				FE5F223B2AF2E7A600C83412 /* FirebaseAnalytics */,
+				FE5F223D2AF2E7A600C83412 /* FirebaseAnalyticsSwift */,
+				FE5F223F2AF2E7A600C83412 /* FirebaseAnalyticsWithoutAdIdSupport */,
+				FE5F22412AF2E7A600C83412 /* FirebaseAuth */,
+				FE5F22432AF2E7A600C83412 /* FirebaseAuthCombine-Community */,
+				FE5F22452AF2E7A600C83412 /* FirebaseFirestore */,
+				FE5F22472AF2E7A600C83412 /* FirebaseFirestoreCombine-Community */,
+				FE5F22492AF2E7A600C83412 /* FirebaseFirestoreSwift */,
+				FE5F224B2AF2E7A600C83412 /* FirebaseRemoteConfig */,
+				FE5F224D2AF2E7A600C83412 /* FirebaseRemoteConfigSwift */,
+			);
 			productName = DrillBuddy;
 			productReference = 75D113522ABE2E7500BF8874 /* DrillBuddy.app */;
 			productType = "com.apple.product-type.application";
@@ -498,6 +664,9 @@
 				Base,
 			);
 			mainGroup = 75D113492ABE2E7500BF8874;
+			packageReferences = (
+				FE5F223A2AF2E7A600C83412 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 75D113532ABE2E7500BF8874 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -519,6 +688,7 @@
 				FE254A312AE9E028000602AA /* beep-06.mp3 in Resources */,
 				7548387D2ABE7B1000146415 /* Preview Assets.xcassets in Resources */,
 				7548387C2ABE7B1000146415 /* Assets.xcassets in Resources */,
+				FE66290E2AF30B870059B521 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -527,6 +697,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				75D1136C2ABE2F4900BF8874 /* LaunchScreenStoryboard.storyboard in Resources */,
+				FE66290D2AF30B870059B521 /* GoogleService-Info.plist in Resources */,
 				75D113602ABE2E7B00BF8874 /* Preview Assets.xcassets in Resources */,
 				FE254A2E2AE9E028000602AA /* Synthetic-Shot-Timer.wav in Resources */,
 				FE254A322AE9E028000602AA /* beep-07.mp3 in Resources */,
@@ -543,13 +714,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE1D1CFD2AF3303D00BF8506 /* LocalizedErrorInfo.swift in Sources */,
 				FEE4554D2AC8BB6200569414 /* AudioRecorder.swift in Sources */,
 				FE254A162ADB7744000602AA /* DetectSoundsView.swift in Sources */,
 				FE254A412AF087D9000602AA /* GunType.swift in Sources */,
 				754838832ABE7B5700146415 /* DrillsSessionsContainer.swift in Sources */,
 				FE254A3E2AF065CD000602AA /* TournamentDetailView.swift in Sources */,
 				754838822ABE7B5300146415 /* DrillBuddyApp.swift in Sources */,
-				7572F0142ABF1D14001E2F3C /* SessionsListView.swift in Sources */,
+				7572F0142ABF1D14001E2F3C /* MainTabView.swift in Sources */,
 				FE254A252AE877A2000602AA /* AudioView.swift in Sources */,
 				7572F02C2AC0A62A001E2F3C /* WatchDataSynchronizer.swift in Sources */,
 				754838862ABE7B8B00146415 /* DrillContainerPreviewData.swift in Sources */,
@@ -567,10 +739,12 @@
 				FE254A222AE851CD000602AA /* DrillEntry.swift in Sources */,
 				7572F0292ABFB326001E2F3C /* WatchSessionDelegate.swift in Sources */,
 				7572F03A2AC25356001E2F3C /* Drill.swift in Sources */,
+				FE254A4C2AF1D4D4000602AA /* TournamentPreviewData.swift in Sources */,
 				FE254A182ADDF765000602AA /* DrillRecordingView.swift in Sources */,
-				FE254A3C2AF064C8000602AA /* TournamentsListView.swift in Sources */,
+				FE254A4D2AF1D674000602AA /* NSUbiquitousKeyValueStore+Extension.swift in Sources */,
 				FEE455632AD73FF700569414 /* HapticFeedbackGenerator.swift in Sources */,
 				7572F0222ABF7CCA001E2F3C /* DrillRecordingConfiguration.swift in Sources */,
+				FE1D1D092AF45E4700BF8506 /* LoadingViewModifier.swift in Sources */,
 				7572F0342AC24A64001E2F3C /* SyncData.swift in Sources */,
 				7572F01F2ABF61A4001E2F3C /* DrillConfigurationView.swift in Sources */,
 			);
@@ -581,28 +755,41 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE254A382AEDD3DC000602AA /* TournamentDetailView.swift in Sources */,
+				FE1D1D042AF4501200BF8506 /* UserInfo.swift in Sources */,
 				FEE4554C2AC8BB6200569414 /* AudioRecorder.swift in Sources */,
 				FE254A152ADB3600000602AA /* DetectSoundsView.swift in Sources */,
-				75D113582ABE2E7500BF8874 /* ContentView.swift in Sources */,
 				7572F01E2ABF61A4001E2F3C /* DrillConfigurationView.swift in Sources */,
 				7572F0212ABF7CCA001E2F3C /* DrillRecordingConfiguration.swift in Sources */,
 				FE254A1E2ADF6EF9000602AA /* DrillDetailView.swift in Sources */,
+				FE1D1D002AF4471800BF8506 /* Firestore+Extensions.swift in Sources */,
+				FE1D1D082AF45E4700BF8506 /* LoadingViewModifier.swift in Sources */,
+				FE1D1CF52AF31F2500BF8506 /* ProfileView.swift in Sources */,
 				75D113732ABE3A7A00BF8874 /* DrillContainerPreviewData.swift in Sources */,
+				FE254A462AF1D061000602AA /* NSUbiquitousKeyValueStore+Extension.swift in Sources */,
+				FE1D1D0B2AF464EF00BF8506 /* UserStoragePreviewData.swift in Sources */,
 				7572F0252ABFACB4001E2F3C /* DrillRecordingView.swift in Sources */,
 				7572F0362AC24AAE001E2F3C /* SyncResponse.swift in Sources */,
+				FE254A442AF1BB35000602AA /* UsernameInputView.swift in Sources */,
+				FE1D1CF82AF324A700BF8506 /* AuthenticationView.swift in Sources */,
 				FE254A362AEDCE32000602AA /* TournamentsListView.swift in Sources */,
 				FEE455532AC8BE4C00569414 /* ClassificationResultsSubject.swift in Sources */,
 				7572F0282ABFB326001E2F3C /* WatchSessionDelegate.swift in Sources */,
+				FE1D1CFC2AF3303D00BF8506 /* LocalizedErrorInfo.swift in Sources */,
 				FEE455502AC8BD8600569414 /* SoundIdentifier.swift in Sources */,
+				FE28D27A2AF308B30074BC98 /* MainTabView.swift in Sources */,
 				FE254A212AE851CD000602AA /* DrillEntry.swift in Sources */,
 				FEE455592AC8C17500569414 /* DrillRecordingViewModel.swift in Sources */,
 				FE254A1A2ADDF7A5000602AA /* TimeInterval+Extension.swift in Sources */,
 				FE254A3A2AF0583B000602AA /* Tournament.swift in Sources */,
 				7572F02F2AC22FCA001E2F3C /* WatchDataSyncHandler.swift in Sources */,
 				FEE455492AC8BB4700569414 /* AudioSessionManager.swift in Sources */,
+				FE1D1CFA2AF32A0500BF8506 /* AuthenticationService.swift in Sources */,
 				FE254A402AF087D6000602AA /* GunType.swift in Sources */,
 				FEE455562AC8BE5400569414 /* AudioClassifier.swift in Sources */,
 				75D113712ABE331600BF8874 /* DrillsSessionsContainer.swift in Sources */,
+				FE241E4E2AF1E00500E693BD /* FirestoreService.swift in Sources */,
+				FE254A4B2AF1D4D4000602AA /* TournamentPreviewData.swift in Sources */,
+				FE1D1D022AF44FDA00BF8506 /* UserStorage.swift in Sources */,
 				75D113562ABE2E7500BF8874 /* DrillBuddyApp.swift in Sources */,
 				75D113762ABE4EE200BF8874 /* View+Extension.swift in Sources */,
 				7572F02B2AC0A62A001E2F3C /* WatchDataSynchronizer.swift in Sources */,
@@ -640,13 +827,13 @@
 				INFOPLIST_KEY_CFBundleDisplayName = DrillBuddyWatch;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Microphone access is required to record when shots happens";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = bakehouse.DrillBuddy;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.bakehouse.DrillBuddy;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = bakehouse.DrillBuddy.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bakehouse.DrillBuddy.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -671,13 +858,13 @@
 				INFOPLIST_KEY_CFBundleDisplayName = DrillBuddyWatch;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Microphone access is required to record when shots happens";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = bakehouse.DrillBuddy;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.bakehouse.DrillBuddy;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = bakehouse.DrillBuddy.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bakehouse.DrillBuddy.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -835,7 +1022,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = bakehouse.DrillBuddy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bakehouse.DrillBuddy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
@@ -877,7 +1064,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = bakehouse.DrillBuddy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bakehouse.DrillBuddy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
@@ -918,6 +1105,70 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FE5F223A2AF2E7A600C83412 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.17.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FE5F223B2AF2E7A600C83412 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FE5F223A2AF2E7A600C83412 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		FE5F223D2AF2E7A600C83412 /* FirebaseAnalyticsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FE5F223A2AF2E7A600C83412 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsSwift;
+		};
+		FE5F223F2AF2E7A600C83412 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FE5F223A2AF2E7A600C83412 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		FE5F22412AF2E7A600C83412 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FE5F223A2AF2E7A600C83412 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		FE5F22432AF2E7A600C83412 /* FirebaseAuthCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FE5F223A2AF2E7A600C83412 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseAuthCombine-Community";
+		};
+		FE5F22452AF2E7A600C83412 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FE5F223A2AF2E7A600C83412 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		FE5F22472AF2E7A600C83412 /* FirebaseFirestoreCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FE5F223A2AF2E7A600C83412 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseFirestoreCombine-Community";
+		};
+		FE5F22492AF2E7A600C83412 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FE5F223A2AF2E7A600C83412 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
+		FE5F224B2AF2E7A600C83412 /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FE5F223A2AF2E7A600C83412 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
+		FE5F224D2AF2E7A600C83412 /* FirebaseRemoteConfigSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FE5F223A2AF2E7A600C83412 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfigSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 75D1134A2ABE2E7500BF8874 /* Project object */;
 }
