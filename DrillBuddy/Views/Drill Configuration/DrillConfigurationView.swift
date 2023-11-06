@@ -14,6 +14,7 @@ struct DrillConfigurationView: View {
     var isConfigurationEditable = true
     @State var configuration: DrillRecordingConfiguration = .default
     
+    @State private var showRecordingViewCover = false
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext: ModelContext
     
@@ -111,6 +112,16 @@ struct DrillConfigurationView: View {
         .scrollBounceBehavior(.basedOnSize)
         .navigationTitle("Configure Session")
         .navigationBarTitleDisplayMode(.large)
+        #if !os(watchOS)
+        .fullScreenCover(isPresented: $showRecordingViewCover, content: {
+            DrillRecordingView(
+                customFinishAction: {
+                    dismiss()
+                },
+                viewModel: DrillRecordingViewModel(modelContext: modelContext, configuration: configuration)
+            )
+        })
+        #endif
         .toolbar {
             #if !os(watchOS)
             if showCloseButton {
@@ -152,21 +163,33 @@ struct DrillConfigurationView: View {
         }
         .listRowBackground(Color.clear)
         #else
-        NavigationLink(
-            destination: DrillRecordingView(
-                customFinishAction: {
-                    dismiss()
-                },
-                viewModel: DrillRecordingViewModel(modelContext: modelContext, configuration: configuration)
-            )
-        ) {
+//        NavigationLink(
+//            destination: DrillRecordingView(
+//                customFinishAction: {
+//                    dismiss()
+//                },
+//                viewModel: DrillRecordingViewModel(modelContext: modelContext, configuration: configuration)
+//            )
+//        ) {
+//            Text("Shooter Ready")
+//                .padding(8)
+//                .frame(maxWidth: .infinity)
+//        }
+//        .buttonStyle(.borderedProminent)
+//        .padding([.horizontal, .bottom])
+//        .shadow(radius: 8)
+        // Seems like adding Firebasepackage breaks NavigationLink here for some unknown reason
+        Button(action: {
+            showRecordingViewCover = true
+        }, label: {
             Text("Shooter Ready")
                 .padding(8)
                 .frame(maxWidth: .infinity)
-        }
+        })
         .buttonStyle(.borderedProminent)
         .padding([.horizontal, .bottom])
         .shadow(radius: 8)
+        
         #endif
     }
 }

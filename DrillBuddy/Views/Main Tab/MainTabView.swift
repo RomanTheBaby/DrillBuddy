@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct MainTabView: View {
     
@@ -40,12 +41,14 @@ struct MainTabView: View {
     }
     
     @StateObject var watchDataSynchronizer: WatchDataSynchronizer
+    @Environment(\.modelContext) private var modelContext: ModelContext
     
     var body: some View {
         NavigationStack {
             TabView {
                 ForEach(Tab.allCases, id: \.title) { tab in
                     makeView(for: tab)
+                        .modelContext(modelContext)
                 }
             }
         }

@@ -34,8 +34,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 }
 #endif
 
-// TODO: Add tournaments tab on main screen
-// TODO: Create basic 3 shot tournament
 // TODO: Use leaderboards from GameKit for tournament??????
 // TODO: find most optimal/accurate configuration params
 // TODO: improve audio visualization(i.e like telegram or other way to show waves)
