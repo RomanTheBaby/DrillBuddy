@@ -175,7 +175,7 @@ class DrillRecordingViewModel: ObservableObject {
     }
     
     #if !os(watchOS)
-    func submit(for tournament: Tournament, user: UserInfo) async {
+    @MainActor func submit(for tournament: Tournament, user: UserInfo) async {
         guard let tournamentEntry else {
             return
         }
