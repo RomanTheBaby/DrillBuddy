@@ -55,7 +55,7 @@ struct DrillRecordingView: View {
                             .offset(x: geometry.frame(in: .local).midX - (geometry.size.width / 4))
                     })
                     
-                    if viewModel.tournament != nil {
+                    if viewModel.tournament == nil {
                         Button {
                             viewModel.stopRecording()
                             
@@ -148,7 +148,7 @@ struct DrillRecordingView: View {
                 Button {
                     Task {
                         await viewModel.submit(for: tournament, user: user)
-                        dismiss()
+                        customFinishAction?() ?? dismiss()
                     }
                 } label: {
                     Text("Submit Tournament Entry")

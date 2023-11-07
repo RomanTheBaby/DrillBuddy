@@ -34,7 +34,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 }
 #endif
 
-// TODO: Use leaderboards from GameKit for tournament??????
 // TODO: find most optimal/accurate configuration params
 // TODO: improve audio visualization(i.e like telegram or other way to show waves)
 // TODO: Add information popups on drill configuration parameters(user taps `i` button, pop up shows that explains what this parameters means)

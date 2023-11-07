@@ -48,7 +48,6 @@ struct MainTabView: View {
             TabView {
                 ForEach(Tab.allCases, id: \.title) { tab in
                     makeView(for: tab)
-                        .modelContext(modelContext)
                 }
             }
         }
@@ -60,6 +59,7 @@ struct MainTabView: View {
             return AnyView(
                 NavigationStack {
                     SessionsListView(watchDataSynchronizer: watchDataSynchronizer)
+                        .modelContext(modelContext)
                 }.tabItem {
                     tab.label
                 }.tag(tab)
@@ -68,6 +68,7 @@ struct MainTabView: View {
             return AnyView(
                 NavigationStack {
                     TournamentsListView()
+                        .modelContext(modelContext)
                 }.tabItem {
                     tab.label
                 }.tag(tab)
@@ -76,6 +77,7 @@ struct MainTabView: View {
             return AnyView(
                 NavigationStack {
                     ProfileView()
+                        .modelContext(modelContext)
                 }.tabItem {
                     tab.label
                 }.tag(tab)
