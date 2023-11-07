@@ -111,6 +111,8 @@
 		FEE4555A2AC8C17500569414 /* DrillRecordingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE455582AC8C17500569414 /* DrillRecordingViewModel.swift */; };
 		FEE4555D2AC8E49B00569414 /* HapticFeedbackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE4555C2AC8E49B00569414 /* HapticFeedbackGenerator.swift */; };
 		FEE455632AD73FF700569414 /* HapticFeedbackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE4555C2AC8E49B00569414 /* HapticFeedbackGenerator.swift */; };
+		FEF627572AF86390003DC443 /* TournamentEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF627562AF86390003DC443 /* TournamentEntry.swift */; };
+		FEF627582AF86390003DC443 /* TournamentEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF627562AF86390003DC443 /* TournamentEntry.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -200,6 +202,7 @@
 		FEE455552AC8BE5400569414 /* AudioClassifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioClassifier.swift; sourceTree = "<group>"; };
 		FEE455582AC8C17500569414 /* DrillRecordingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillRecordingViewModel.swift; sourceTree = "<group>"; };
 		FEE4555C2AC8E49B00569414 /* HapticFeedbackGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticFeedbackGenerator.swift; sourceTree = "<group>"; };
+		FEF627562AF86390003DC443 /* TournamentEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentEntry.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -416,6 +419,7 @@
 				FE254A3F2AF087D6000602AA /* GunType.swift */,
 				FE1D1CFB2AF3303D00BF8506 /* LocalizedErrorInfo.swift */,
 				FE254A392AF0583B000602AA /* Tournament.swift */,
+				FEF627562AF86390003DC443 /* TournamentEntry.swift */,
 				FE1D1D032AF4501200BF8506 /* UserInfo.swift */,
 			);
 			path = Models;
@@ -723,6 +727,7 @@
 				754838822ABE7B5300146415 /* DrillBuddyApp.swift in Sources */,
 				7572F0142ABF1D14001E2F3C /* MainTabView.swift in Sources */,
 				FE254A252AE877A2000602AA /* AudioView.swift in Sources */,
+				FEF627582AF86390003DC443 /* TournamentEntry.swift in Sources */,
 				7572F02C2AC0A62A001E2F3C /* WatchDataSynchronizer.swift in Sources */,
 				754838862ABE7B8B00146415 /* DrillContainerPreviewData.swift in Sources */,
 				7572F0172ABF5E10001E2F3C /* AppError.swift in Sources */,
@@ -771,6 +776,7 @@
 				7572F0362AC24AAE001E2F3C /* SyncResponse.swift in Sources */,
 				FE254A442AF1BB35000602AA /* UsernameInputView.swift in Sources */,
 				FE1D1CF82AF324A700BF8506 /* AuthenticationView.swift in Sources */,
+				FEF627572AF86390003DC443 /* TournamentEntry.swift in Sources */,
 				FE254A362AEDCE32000602AA /* TournamentsListView.swift in Sources */,
 				FEE455532AC8BE4C00569414 /* ClassificationResultsSubject.swift in Sources */,
 				7572F0282ABFB326001E2F3C /* WatchSessionDelegate.swift in Sources */,

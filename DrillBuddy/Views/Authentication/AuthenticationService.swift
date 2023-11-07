@@ -15,6 +15,18 @@ import OSLog
 
 class AuthenticationService {
     
+    // MARK: - Properties
+    
+    private let firestoreService: FirestoreService
+    
+    // MARK: - Init
+    
+    init(firestoreService: FirestoreService = FirestoreService()) {
+        self.firestoreService = firestoreService
+    }
+    
+    // MARK: - Public Methods
+    
     @discardableResult
     func signIn(with email: String, password: String) async throws -> UserInfo {
         do {
@@ -39,7 +51,7 @@ class AuthenticationService {
     @discardableResult
     func createUser(username: String, email: String, password: String) async throws -> UserInfo {
         do {
-            guard try await isUsernameAvailable(username) else {
+            guard try await firestoreService.isUsernameAvailable(username) else {
                 throw LocalizedErrorInfo(
                     failureReason: "Username already taken",
                     errorDescription: "Someone else already has that username",
@@ -52,7 +64,7 @@ class AuthenticationService {
                 do {
                     try await updateUsername(for: authDataResult.user, to: username)
                     
-                    try? await Firestore.firestore().collection(.usernames).document(username).setData([:])
+                    try? await firestoreService.addUsername(username)
                     
                     return UserInfo(
                         id: authDataResult.user.uid,
@@ -82,13 +94,6 @@ class AuthenticationService {
     }
     
     // MARK: Private Methods
-    
-    // TODO: Cache usernames maybe and check from cache first
-    private func isUsernameAvailable(_ userName: String) async throws -> Bool {
-        let usernameDocuments = try await Firestore.firestore().collection(.usernames).getDocuments().documents
-        let existingUserNames = Set(usernameDocuments.map(\.documentID))
-        return existingUserNames.contains(userName) == false
-    }
     
     private func updateUsername(for user: FirebaseAuth.User, to newUsername: String) async throws {
         let changeRequest = user.createProfileChangeRequest()

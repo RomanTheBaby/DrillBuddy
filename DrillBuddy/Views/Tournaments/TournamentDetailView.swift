@@ -83,14 +83,18 @@ struct TournamentDetailView: View {
                     .foregroundStyle(Color.gray.opacity(0.2))
             )
             
-            ScrollView {
-                Text(tournament.description)
-                    .padding()
+            if tournament.description.isEmpty == false {
+                ScrollView {
+                    Text(tournament.description)
+                        .padding()
+                }
+                .background(
+                    RoundedRectangle(cornerRadius: 8)
+                        .foregroundStyle(Color.gray.opacity(0.2))
+                )
+            } else {
+                Spacer()
             }
-            .background(
-                RoundedRectangle(cornerRadius: 8)
-                    .foregroundStyle(Color.gray.opacity(0.2))
-            )
             
             if Date() > tournament.endDate {
                 Text("Submissins closed. Tournament has ended")
@@ -110,6 +114,7 @@ struct TournamentDetailView: View {
                         DrillConfigurationView(
                             showCloseButton: false,
                             isConfigurationEditable: false,
+                            tournament: tournament,
                             configuration: tournament.recordingConfiguration
                         )
                 ) {

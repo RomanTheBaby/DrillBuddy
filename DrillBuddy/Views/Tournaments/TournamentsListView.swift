@@ -192,18 +192,22 @@ private extension Date {
         TournamentsListView(
             tournaments: [
                 Tournament(
+                    id: UUID().uuidString,
                     startDate: Date().addingTimeInterval(-(3600 * 48)),
                     endDate: Date().addingTimeInterval(-(3600 * 24)),
                     title: "3-shot competition",
                     description: "",
+                    leaderboardID: UUID().uuidString,
                     requirements: Tournament.Requirements(maxTime: 20),
                     recordingConfiguration: DrillRecordingConfiguration(maxShots: 3, maxSessionDelay: 4, shouldRecordAudio: true)
                 ),
                 Tournament(
+                    id: UUID().uuidString,
                     startDate: Date(),
                     endDate: Date().addingTimeInterval(3600 * 24),
                     title: "3-shot competition",
                     description: "This is a simple 3 shot competition to test your basic shooting skills.\nUpon starting the drill draw your weapon and make 3 shots, drill recording will automatically stop when app will hear 3rd shot",
+                    leaderboardID: UUID().uuidString,
                     requirements: Tournament.Requirements(maxTime: 0),
                     recordingConfiguration: DrillRecordingConfiguration(maxShots: 3, maxSessionDelay: 4, shouldRecordAudio: true)
                 )

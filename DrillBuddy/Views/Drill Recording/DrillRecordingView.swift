@@ -17,6 +17,7 @@ struct DrillRecordingView: View {
     @StateObject var viewModel: DrillRecordingViewModel
     
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var userStorage: UserStorage
     
     // MARK: - View
     
@@ -54,20 +55,22 @@ struct DrillRecordingView: View {
                             .offset(x: geometry.frame(in: .local).midX - (geometry.size.width / 4))
                     })
                     
-                    Button {
-                        viewModel.stopRecording()
-                        
-                        if viewModel.drillEntries.isEmpty {
-                            customFinishAction?() ?? dismiss()
+                    if viewModel.tournament != nil {
+                        Button {
+                            viewModel.stopRecording()
+                            
+                            if viewModel.drillEntries.isEmpty {
+                                customFinishAction?() ?? dismiss()
+                            }
+                        } label: {
+                            Text("FINISH")
+                                .padding(8)
+                                .frame(maxWidth: .infinity)
                         }
-                    } label: {
-                        Text("FINISH")
-                            .padding(8)
-                            .frame(maxWidth: .infinity)
+                        .frame(alignment: .center)
+                        .buttonStyle(.borderedProminent)
+                        .shadow(radius: 5)
                     }
-                    .frame(alignment: .center)
-                    .buttonStyle(.borderedProminent)
-                    .shadow(radius: 5)
                 }
                 .padding(.horizontal)
                 .blur(radius: viewModel.isPersistingData ? 10 : 0)
@@ -76,7 +79,10 @@ struct DrillRecordingView: View {
                 summaryView
                     .navigationTitle("Summary")
             }
-        }.navigationBarBackButtonHidden(true)
+        }
+        .navigationBarBackButtonHidden(true)
+        .errorAlert(error: $viewModel.error)
+        .loadingOverlay(isLoading: viewModel.showLoadingOverlay)
     }
     
     // MARK: - Private Views
@@ -138,16 +144,32 @@ struct DrillRecordingView: View {
             .chartForegroundStyleScale(["Avg. Split": Color.red, "Time": Color.blue])
             .padding(.horizontal)
             
-            Button {
-                customFinishAction?() ?? dismiss()
-            } label: {
-                Text("Done")
-                    .padding(8)
-                    .frame(maxWidth: .infinity)
+            if let tournament = viewModel.tournament, viewModel.drillEntries.isEmpty == false, let user = userStorage.currentUser {
+                Button {
+                    Task {
+                        await viewModel.submit(for: tournament, user: user)
+                        dismiss()
+                    }
+                } label: {
+                    Text("Submit Tournament Entry")
+                        .padding(8)
+                        .frame(maxWidth: .infinity)
+                }
+                .padding(.horizontal)
+                .buttonStyle(.borderedProminent)
+                .shadow(radius: 5)
+            } else {
+                Button {
+                    customFinishAction?() ?? dismiss()
+                } label: {
+                    Text("Done")
+                        .padding(8)
+                        .frame(maxWidth: .infinity)
+                }
+                .padding(.horizontal)
+                .buttonStyle(.borderedProminent)
+                .shadow(radius: 5)
             }
-            .padding(.horizontal)
-            .buttonStyle(.borderedProminent)
-            .shadow(radius: 5)
         }
     }
     
@@ -192,6 +214,19 @@ struct DrillRecordingView: View {
             viewModel: DrillRecordingViewModel(
                 initialState: .summary,
                 modelContext: DrillSessionsContainerSampleData.container.mainContext,
+                configuration: .default
+            )
+        )
+    }
+}
+
+#Preview("Summary - Tournament") {
+    NavigationStack {
+        DrillRecordingView(
+            viewModel: DrillRecordingViewModel(
+                initialState: .summary,
+                modelContext: DrillSessionsContainerSampleData.container.mainContext,
+                tournament: TournamentPreviewData.mock,
                 configuration: .default
             )
         )

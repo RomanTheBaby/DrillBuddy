@@ -16,6 +16,7 @@ extension Firestore {
     enum Collection: String {
         case usernames
         case tournaments
+        case leaderboards
     }
     
     // MARK: - Public Methods

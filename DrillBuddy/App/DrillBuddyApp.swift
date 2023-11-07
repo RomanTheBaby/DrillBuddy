@@ -82,6 +82,7 @@ private extension ModelContainer {
     static let temporary: ModelContainer = {
         let schema = Schema([
             DrillsSessionsContainer.self,
+            TournamentEntry.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
 
@@ -95,6 +96,7 @@ private extension ModelContainer {
     static let shared: ModelContainer = {
         let schema = Schema([
             DrillsSessionsContainer.self,
+            TournamentEntry.self,
         ])
         // TODO: - specify group id???
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)

@@ -10,12 +10,12 @@ import OSLog
 import SwiftData
 
 @Model
-class Drill: Identifiable, Hashable, Equatable {
+class Drill: Identifiable, Hashable, Equatable, CustomStringConvertible {
     
     // MARK: - SendableRepresentation
     
     struct SendableRepresentation: Codable, Hashable {
-        var id: UUID = UUID()
+        var id: UUID
         var date: Date
         var sounds: [DrillEntry]
         var recordingURL: URL?
@@ -41,6 +41,13 @@ class Drill: Identifiable, Hashable, Equatable {
             sounds: sounds,
             recordingURL: recordingURL
         )
+    }
+    
+    // MARK: CustomStringConvertible
+    
+    @Transient
+    var description: String {
+        "Drill(id: \(id), date: \(date), entries: \(sounds), recordingURL: \(recordingURL?.absoluteString ?? "NO_URL"))"
     }
     
     // MARK: - Init

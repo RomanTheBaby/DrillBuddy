@@ -15,13 +15,14 @@ struct Tournament: Identifiable, Codable {
         var maxTime: TimeInterval
     }
     
-    var id: UUID = UUID()
+    var id: String
     
     var startDate: Date
     var endDate: Date
     
     var title: String
     var description: String
+    var leaderboardID: String
     var requirements: Requirements
     
     var recordingConfiguration: DrillRecordingConfiguration = .default
@@ -32,16 +33,19 @@ struct Tournament: Identifiable, Codable {
     
 }
 
-struct Leaderboard {
-    struct Entry {
+// MARK: - Leaderboard
+
+struct Leaderboard: Codable {
+    struct Entry: Codable {
         var username: String
+        var recordingDate: Date
         var recordingData: Data
         var firstShotDelay: TimeInterval
         var shotsSplit: TimeInterval
         var totalTime: TimeInterval
     }
     
-    var id: UUID
+    var id: String
     var entries: [Entry]
-    var tournamentID: UUID
+    var tournamentID: String
 }

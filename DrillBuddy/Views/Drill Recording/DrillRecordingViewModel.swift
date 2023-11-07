@@ -46,17 +46,26 @@ class DrillRecordingViewModel: ObservableObject {
     
     // MARK: - Public Properties
     
+    let tournament: Tournament?
+    private(set) var drillEntries: [DrillEntry] = []
+    
+    @Published var error: Error?
+    @Published private(set) var showLoadingOverlay: Bool = false
     @Published private(set) var state: State
     @Published private(set) var lastDetectedSoundConfidenceLevel: Double = 0
     @Published private(set) var recordingStatistics: RecordingStatistics = .init()
     @Published private(set) var isPersistingData = false
-    private(set) var drillEntries: [DrillEntry] = []
     
     // MARK: - Private Properties
     
     private let configuration: DrillRecordingConfiguration
     private let audioRecorder: AudioRecorder
     private let soundIdentifier: SoundIdentifier
+    
+    #if !os(watchOS)
+    private let firestoreService: FirestoreService = .init()
+    #endif
+    
     private let modelContext: ModelContext
     
     private var audioRecordingURL: URL?
@@ -66,20 +75,26 @@ class DrillRecordingViewModel: ObservableObject {
     
     private lazy var startDate = Date()
     
+    private var tournamentEntry: TournamentEntry?
+    
     // MARK: - Init
     
     init(
         initialState: State = .standBy, 
         modelContext: ModelContext,
+        tournament: Tournament? = nil,
         configuration: DrillRecordingConfiguration,
         audioRecorder: AudioRecorder = .init(),
         soundIdentifier: SoundIdentifier = .init()
+//        firestoreService: FirestoreService = FirestoreService()
     ) {
         self.state = initialState
         self.modelContext = modelContext
+        self.tournament = tournament
         self.configuration = configuration
         self.audioRecorder = audioRecorder
         self.soundIdentifier = soundIdentifier
+//        self.firestoreService = firestoreService
     }
     
     deinit {
@@ -124,6 +139,7 @@ class DrillRecordingViewModel: ObservableObject {
             } catch {
                 Logger.drillRecording.error("Failed to start recording audio with error: \(error)")
                 stopRecording()
+                self.error = error
             }
             
             state = .recording
@@ -139,6 +155,7 @@ class DrillRecordingViewModel: ObservableObject {
         } catch {
             Logger.drillRecording.error("Failed to start identifying sounds with error: \(error)")
             stopRecording()
+            self.error = error
         }
     }
     
@@ -151,15 +168,28 @@ class DrillRecordingViewModel: ObservableObject {
         soundIdentifyingCancellable?.cancel()
         timerCancellable?.cancel()
         
-        saveDrillsSessionsContainer(
-            in: modelContext,
-            startDate: startDate,
-            drillEntries: drillEntries
-        )
+        persistData(in: modelContext, startDate: startDate, drillEntries: drillEntries)
 
         isPersistingData = false
         state = .summary
     }
+    
+    #if !os(watchOS)
+    func submit(for tournament: Tournament, user: UserInfo) async {
+        guard let tournamentEntry else {
+            return
+        }
+
+        showLoadingOverlay = true
+        do {
+            try await firestoreService.submit(entry: tournamentEntry, for: tournament, as: user)
+        } catch {
+            Logger.drillRecording.error("Failed to submit entry: \(tournamentEntry) with error: \(error)")
+            self.error = error
+        }
+        showLoadingOverlay = false
+    }
+    #endif
     
     // MARK: - Private Methods
     
@@ -206,13 +236,53 @@ class DrillRecordingViewModel: ObservableObject {
         }
     }
     
-    private func saveDrillsSessionsContainer(
+    private func persistData(
         in modelContext: ModelContext,
         startDate: Date,
         drillEntries: [DrillEntry]
     ) {
-        guard drillEntries.isEmpty == false else {
+        if let tournament {
+            guard let audioRecordingURL else {
+                self.error = LocalizedErrorInfo(errorDescription: "Failed to record audio", recoverySuggestion: "Please try again")
+                return
+            }
+            
+            let tournamentEntry = TournamentEntry(
+                tournamentId: tournament.id,
+                date: startDate,
+                sounds: drillEntries,
+                recordingURL: audioRecordingURL
+            )
+            Logger.drillRecording.info("Did create tournament entry: \(tournamentEntry)")
+            self.tournamentEntry = tournamentEntry
             return
+        }
+        
+        do {
+            if let savedDrill = try saveDrillsSessionsContainer(
+                in: modelContext,
+                startDate: startDate,
+                drillEntries: drillEntries
+            ) {
+                Logger.drillRecording.info("Did create drill entry: \(savedDrill)")
+            } else {
+                Logger.drillRecording.info("Did not save drill entry")
+            }
+            
+        } catch {
+            self.error = error
+        }
+    }
+    
+    @discardableResult
+    private func saveDrillsSessionsContainer(
+        in modelContext: ModelContext,
+        startDate: Date,
+        drillEntries: [DrillEntry]
+    ) throws -> Drill? {
+        guard drillEntries.isEmpty == false else {
+            Logger.drillRecording.trace("No entries, will not create drill entry")
+            return nil
         }
         
         let containerFormattedDate = DrillsSessionsContainer.formatDate(startDate)
@@ -231,8 +301,10 @@ class DrillRecordingViewModel: ObservableObject {
             let drill = Drill(date: startDate, sounds: drillEntries, recordingURL: audioRecordingURL)
             container.addDrills([drill])
             
+            return drill
         } catch {
             Logger.drillRecording.error("Failed to fetch container for date: \(containerFormattedDate) with error: \(error)")
+            throw error
         }
     }
 }

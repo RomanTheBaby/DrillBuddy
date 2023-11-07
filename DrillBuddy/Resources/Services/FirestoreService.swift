@@ -17,6 +17,7 @@ class FirestoreService {
     // MARK: - Private Properties
     
     private let database = Firestore.firestore()
+    private let jsonEncoder = JSONEncoder()
     
     // MARK: - Public Methods
     
@@ -47,34 +48,78 @@ class FirestoreService {
         }
     }
     
-    func addUsername(_ username: String) async throws -> Bool {
+    func submit(entry: TournamentEntry, for tournament: Tournament, as user: UserInfo) async throws {
         do {
-            let usernameDocuments = try await fetchUsernames()
+            let recordingData = try Data(contentsOf: entry.recordingURL)
             
-            let isUsernameDuplicate = usernameDocuments.map(\.documentID).contains(username)
-            guard isUsernameDuplicate == false else {
-                throw LocalizedErrorInfo(
-                    failureReason: "Username is a already taken",
-                    errorDescription: "Username is a already taken by someone else",
-                    recoverySuggestion: "Choose a different username and try again"
-                )
+            let leaderboardEntry = Leaderboard.Entry(
+                username: user.username,
+                recordingDate: entry.date,
+                recordingData: recordingData,
+                firstShotDelay: entry.sounds[0].time,
+                shotsSplit: entry.sounds.averageSplit,
+                totalTime: entry.sounds[entry.sounds.count - 1].time
+            )
+            
+            do {
+                let entryData = try jsonEncoder.encode(leaderboardEntry)
+                let json = try JSONSerialization.jsonObject(with: entryData)
+                
+                do {
+                    let leaderboardReference = database.collection(.leaderboards).document(tournament.leaderboardID)
+                    try await leaderboardReference.updateData([
+                        "entries": FieldValue.arrayUnion([json])
+                    ])
+                    Logger.firestoreService.info("Add entry to leaderboard \(tournament.leaderboardID)")
+                } catch {
+                    Logger.firestoreService.error("Failed to add leaderboard entry with error: \(error)")
+                    throw error
+                }
+            } catch {
+                Logger.firestoreService.error("Failed to encode leaderboard entry with error: \(error)")
+                throw error
             }
-            try await database.collection(.usernames).document(username).setData([:])
-            return true
+        } catch {
+            Logger.firestoreService.error("Failed to get data from audio at \(entry.recordingURL) with error: \(error)")
+            throw error
+        }
+        
+    }
+    
+    func addUsername(_ username: String) async throws {
+        do {
+            do {
+                guard try await isUsernameAvailable(username) else {
+                    Logger.firestoreService.error("Failed to insert new username \(username) because it already exists")
+                    throw LocalizedErrorInfo(
+                        failureReason: "Username is a already taken",
+                        errorDescription: "Username is a already taken by someone else",
+                        recoverySuggestion: "Choose a different username and try again"
+                    )
+                }
+
+                try await database.collection(.usernames).document(username).setData([:])
+            } catch {
+                Logger.firestoreService.error("Failed to verify if username is a duplicate, before inserting, with error \(error)")
+                throw error
+            }
         } catch {
             Logger.firestoreService.error("Failed to add username \(username) with error: \(error)")
             throw error
         }
     }
     
-    private func fetchUsernames() async throws -> [QueryDocumentSnapshot] {
-        return try await database.collection(.usernames).getDocuments().documents
+    // TODO: Cache usernames maybe and check from cache first
+    func isUsernameAvailable(_ userName: String) async throws -> Bool {
+        let usernameDocuments = try await database.collection(.usernames).getDocuments().documents
+        let existingUserNames = Set(usernameDocuments.map(\.documentID))
+        return existingUserNames.contains(userName) == false
     }
 }
 
 // MARK: - CollectionReference + async
 
-extension CollectionReference {
+private extension CollectionReference {
     @discardableResult
     func addDocument<T: Encodable>(
         from value: T,
@@ -90,7 +135,33 @@ extension CollectionReference {
                     }
                 }
             } catch {
-                Logger.firestoreService.trace("Failed to add document")
+                Logger.firestoreService.trace("Failed to add document with error: \(error)")
+                continuation.resume(throwing: error)
+            }
+        }
+    }
+}
+
+// MARK: - DocumentReference + async
+
+private extension DocumentReference {
+    @discardableResult
+    func setData<T: Encodable>(
+        from value: T,
+        mergeFields: [Any],
+        encoder: Firestore.Encoder = Firestore.Encoder()
+    ) async throws -> T {
+        try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<T, Error>) in
+            do {
+                try setData(from: value, mergeFields: mergeFields, encoder: encoder) { error in
+                    if let error {
+                        continuation.resume(throwing: error)
+                    } else {
+                        continuation.resume(returning: value)
+                    }
+                }
+            } catch {
+                Logger.firestoreService.trace("Failed to set data to document with error: \(error)")
                 continuation.resume(throwing: error)
             }
         }

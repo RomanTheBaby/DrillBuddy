@@ -8,15 +8,23 @@
 import SwiftData
 import SwiftUI
 
+// MARK: - DrillConfigurationView
+
 struct DrillConfigurationView: View {
 
+    // MARK: Properties
+    
     var showCloseButton = true
     var isConfigurationEditable = true
+    var tournament: Tournament? = nil
+    
     @State var configuration: DrillRecordingConfiguration = .default
     
     @State private var showRecordingViewCover = false
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext: ModelContext
+    
+    // MARK: View
     
     var body: some View {
         VStack(spacing: 16) {
@@ -99,11 +107,11 @@ struct DrillConfigurationView: View {
             }
             
             #if !os(watchOS)
-            VStack(spacing: 8) {
+            VStack(spacing: 16) {
                 if isConfigurationEditable == false {
-                    Text("Configuration cannot be edited")
+                    Text(tournament == nil ? "Configuration cannot be edited" : "Configuration is managed by tournament")
                         .font(.footnote)
-                        .foregroundStyle(Color.secondary)
+                        .foregroundStyle(Color.red)
                 }
                 readyButton
             }
@@ -118,7 +126,11 @@ struct DrillConfigurationView: View {
                 customFinishAction: {
                     dismiss()
                 },
-                viewModel: DrillRecordingViewModel(modelContext: modelContext, configuration: configuration)
+                viewModel: DrillRecordingViewModel(
+                    modelContext: modelContext,
+                    tournament: tournament,
+                    configuration: configuration
+                )
             )
         })
         #endif
@@ -178,7 +190,8 @@ struct DrillConfigurationView: View {
 //        .buttonStyle(.borderedProminent)
 //        .padding([.horizontal, .bottom])
 //        .shadow(radius: 8)
-        // Seems like adding Firebasepackage breaks NavigationLink here for some unknown reason
+        // Seems like adding Firebasepackage breaks NavigationLink here for some unknown reason,
+        // as temporary fix replaced with full screen conver
         Button(action: {
             showRecordingViewCover = true
         }, label: {
@@ -250,6 +263,12 @@ private struct ConfigurationStepperView: View {
 #Preview("Editable") {
     NavigationStack {
         DrillConfigurationView()
+    }
+}
+
+#Preview("Tournament") {
+    NavigationStack {
+        DrillConfigurationView(tournament: TournamentPreviewData.mock)
     }
 }
 
