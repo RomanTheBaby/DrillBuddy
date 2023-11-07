@@ -85,6 +85,8 @@
 		FE254A4C2AF1D4D4000602AA /* TournamentPreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE254A4A2AF1D4D4000602AA /* TournamentPreviewData.swift */; };
 		FE254A4D2AF1D674000602AA /* NSUbiquitousKeyValueStore+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE254A452AF1D061000602AA /* NSUbiquitousKeyValueStore+Extension.swift */; };
 		FE28D27A2AF308B30074BC98 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE28D2792AF308B30074BC98 /* MainTabView.swift */; };
+		FE5C20102AF9C284008A9B1A /* Leaderboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5C200F2AF9C284008A9B1A /* Leaderboard.swift */; };
+		FE5C20112AF9C284008A9B1A /* Leaderboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5C200F2AF9C284008A9B1A /* Leaderboard.swift */; };
 		FE5F223C2AF2E7A600C83412 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = FE5F223B2AF2E7A600C83412 /* FirebaseAnalytics */; };
 		FE5F223E2AF2E7A600C83412 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FE5F223D2AF2E7A600C83412 /* FirebaseAnalyticsSwift */; };
 		FE5F22402AF2E7A600C83412 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = FE5F223F2AF2E7A600C83412 /* FirebaseAnalyticsWithoutAdIdSupport */; };
@@ -194,6 +196,7 @@
 		FE254A452AF1D061000602AA /* NSUbiquitousKeyValueStore+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSUbiquitousKeyValueStore+Extension.swift"; sourceTree = "<group>"; };
 		FE254A4A2AF1D4D4000602AA /* TournamentPreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentPreviewData.swift; sourceTree = "<group>"; };
 		FE28D2792AF308B30074BC98 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		FE5C200F2AF9C284008A9B1A /* Leaderboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Leaderboard.swift; sourceTree = "<group>"; };
 		FE66290C2AF30B870059B521 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FEE455482AC8BB4700569414 /* AudioSessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioSessionManager.swift; sourceTree = "<group>"; };
 		FEE4554B2AC8BB6200569414 /* AudioRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
@@ -417,6 +420,7 @@
 				7572F0202ABF7CCA001E2F3C /* DrillRecordingConfiguration.swift */,
 				75D113702ABE331600BF8874 /* DrillsSessionsContainer.swift */,
 				FE254A3F2AF087D6000602AA /* GunType.swift */,
+				FE5C200F2AF9C284008A9B1A /* Leaderboard.swift */,
 				FE1D1CFB2AF3303D00BF8506 /* LocalizedErrorInfo.swift */,
 				FE254A392AF0583B000602AA /* Tournament.swift */,
 				FEF627562AF86390003DC443 /* TournamentEntry.swift */,
@@ -742,6 +746,7 @@
 				754838852ABE7B8600146415 /* View+Extension.swift in Sources */,
 				7572F0372AC24AAE001E2F3C /* SyncResponse.swift in Sources */,
 				FE254A222AE851CD000602AA /* DrillEntry.swift in Sources */,
+				FE5C20112AF9C284008A9B1A /* Leaderboard.swift in Sources */,
 				7572F0292ABFB326001E2F3C /* WatchSessionDelegate.swift in Sources */,
 				7572F03A2AC25356001E2F3C /* Drill.swift in Sources */,
 				FE254A4C2AF1D4D4000602AA /* TournamentPreviewData.swift in Sources */,
@@ -798,6 +803,7 @@
 				FE1D1D022AF44FDA00BF8506 /* UserStorage.swift in Sources */,
 				75D113562ABE2E7500BF8874 /* DrillBuddyApp.swift in Sources */,
 				75D113762ABE4EE200BF8874 /* View+Extension.swift in Sources */,
+				FE5C20102AF9C284008A9B1A /* Leaderboard.swift in Sources */,
 				7572F02B2AC0A62A001E2F3C /* WatchDataSynchronizer.swift in Sources */,
 				FEE4555D2AC8E49B00569414 /* HapticFeedbackGenerator.swift in Sources */,
 				75D1136E2ABE308C00BF8874 /* SessionsListView.swift in Sources */,

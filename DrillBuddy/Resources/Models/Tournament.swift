@@ -32,20 +32,3 @@ struct Tournament: Identifiable, Codable {
     }
     
 }
-
-// MARK: - Leaderboard
-
-struct Leaderboard: Codable {
-    struct Entry: Codable {
-        var username: String
-        var recordingDate: Date
-        var recordingData: Data
-        var firstShotDelay: TimeInterval
-        var shotsSplit: TimeInterval
-        var totalTime: TimeInterval
-    }
-    
-    var id: String
-    var entries: [Entry]
-    var tournamentID: String
-}
