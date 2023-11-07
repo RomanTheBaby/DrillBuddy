@@ -6,11 +6,12 @@
 //
 
 import Foundation
+import SwiftData
 
 actor TournamentPreviewData {
     static let mock: Tournament = {
         Tournament(
-            id: UUID().uuidString,
+            id: "Mock-Tournament",
             startDate: Date().addingTimeInterval(-(3600 * 24)),
             endDate: Date().addingTimeInterval(3600 * 24),
             title: "3-shot competition",
@@ -30,7 +31,7 @@ actor TournamentPreviewData {
     
     static let mockEnded: Tournament = {
         Tournament(
-            id: UUID().uuidString,
+            id: "Mock-Tournament-Ended",
             startDate: Date().addingTimeInterval(-(3600 * 48)),
             endDate: Date().addingTimeInterval(-(3600 * 24)),
             title: "3-shot competition",
@@ -45,6 +46,33 @@ actor TournamentPreviewData {
                 shouldRecordAudio: true
             )
         )
+    }()
+    
+    @MainActor
+    static let container: ModelContainer = {
+        let schema = Schema([TournamentEntry.self])
+        let configuration = ModelConfiguration(isStoredInMemoryOnly: true)
+        do {
+            let modelContainer = try ModelContainer(for: schema, configurations: [configuration])
+            
+            let mockEntry = TournamentEntry(
+                tournamentId: mock.id,
+                date: Date(),
+                sounds: [
+                    DrillEntry(time: 1, confidence: 1),
+                    DrillEntry(time: 1.2, confidence: 1),
+                    DrillEntry(time: 1.5, confidence: 1),
+                    DrillEntry(time: 2, confidence: 1),
+                ],
+                recordingURL: URL(string: "http://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Kangaroo_MusiQue_-_The_Neverwritten_Role_Playing_Game.mp3")!
+            )
+            modelContainer.mainContext.insert(mockEntry)
+            try! modelContainer.mainContext.save()
+            
+            return modelContainer
+        } catch {
+            fatalError("Failed with error: \(error)")
+        }
     }()
 }
 
