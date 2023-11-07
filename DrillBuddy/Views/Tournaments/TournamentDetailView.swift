@@ -46,13 +46,13 @@ struct TournamentDetailView: View {
                 .font(.system(.title, weight: .bold))
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            datesView
-            requirementsView
-            
-            if tournament.description.isEmpty == false {
-                descriptionView
-            } else {
-                Spacer()
+            ScrollView {
+                datesView
+                requirementsView
+                
+                if tournament.description.isEmpty == false {
+                    descriptionView
+                }
             }
             
             if Date() > tournament.endDate {
@@ -61,6 +61,7 @@ struct TournamentDetailView: View {
                     .foregroundStyle(Color.gray)
             } else if tournamentEntries.isEmpty == false {
                 Button(action: {
+                    
                 }, label: {
                     Text("View Leaderboard")
                         .frame(maxWidth: .infinity)
@@ -158,14 +159,12 @@ struct TournamentDetailView: View {
     }
     
     private var descriptionView: some View {
-        ScrollView {
-            Text(tournament.description)
-                .padding()
-        }
-        .background(
-            RoundedRectangle(cornerRadius: 8)
-                .foregroundStyle(Color.gray.opacity(0.2))
-        )
+        Text(tournament.description)
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 8)
+                    .foregroundStyle(Color.gray.opacity(0.2))
+            )
     }
 }
 
