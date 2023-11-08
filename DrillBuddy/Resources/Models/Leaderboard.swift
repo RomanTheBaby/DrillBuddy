@@ -9,6 +9,7 @@ import Foundation
 
 struct Leaderboard: Codable {
     struct Entry: Codable {
+        var userId: String
         var username: String
         var recordingDate: Date
         var recordingData: Data
@@ -20,4 +21,10 @@ struct Leaderboard: Codable {
     var id: String
     var entries: [Entry]
     var tournamentID: String
+    
+    func containsEntry(from user: UserInfo) -> Bool {
+        entries.contains(where: { entry in
+            entry.userId == user.id
+        })
+    }
 }
