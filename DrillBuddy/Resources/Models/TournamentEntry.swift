@@ -10,16 +10,7 @@ import OSLog
 import SwiftData
 
 @Model
-class TournamentEntry: Encodable, CustomStringConvertible {
-    
-    // MARK: - CodingKeys
-    
-    private enum CodingKeys: String, CodingKey {
-        case id
-        case date
-        case sounds
-        case recordingURL
-    }
+class TournamentEntry: CustomStringConvertible {
     
     // MARK: - Properties
     
@@ -51,16 +42,6 @@ class TournamentEntry: Encodable, CustomStringConvertible {
         self.date = date
         self.sounds = sounds
         self.recordingURL = recordingURL
-    }
-    
-    // MARK: - Encodable
-    
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(id, forKey: .id)
-        try container.encode(date, forKey: .date)
-        try container.encode(sounds, forKey: .date)
-        try container.encode(recordingURL, forKey: .date)
     }
     
 }
