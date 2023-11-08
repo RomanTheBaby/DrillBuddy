@@ -6,7 +6,10 @@
 //
 
 import Foundation
+
+#if canImport(FirebaseAuth)
 import FirebaseAuth
+#endif
 
 struct UserInfo: Hashable {
     var id: String
@@ -14,6 +17,7 @@ struct UserInfo: Hashable {
     var email: String
 }
 
+#if canImport(FirebaseAuth)
 extension UserInfo {
     init(firebaseUser: FirebaseAuth.User) {
         self.id = firebaseUser.uid
@@ -21,3 +25,4 @@ extension UserInfo {
         self.email = firebaseUser.email ?? ""
     }
 }
+#endif

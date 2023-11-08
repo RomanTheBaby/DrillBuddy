@@ -87,6 +87,7 @@
 		FE28D27A2AF308B30074BC98 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE28D2792AF308B30074BC98 /* MainTabView.swift */; };
 		FE5C20102AF9C284008A9B1A /* Leaderboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5C200F2AF9C284008A9B1A /* Leaderboard.swift */; };
 		FE5C20112AF9C284008A9B1A /* Leaderboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5C200F2AF9C284008A9B1A /* Leaderboard.swift */; };
+		FE5C20132AFB1018008A9B1A /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1D1D032AF4501200BF8506 /* UserInfo.swift */; };
 		FE5F223C2AF2E7A600C83412 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = FE5F223B2AF2E7A600C83412 /* FirebaseAnalytics */; };
 		FE5F223E2AF2E7A600C83412 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FE5F223D2AF2E7A600C83412 /* FirebaseAnalyticsSwift */; };
 		FE5F22402AF2E7A600C83412 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = FE5F223F2AF2E7A600C83412 /* FirebaseAnalyticsWithoutAdIdSupport */; };
@@ -738,6 +739,7 @@
 				FEE455542AC8BE4C00569414 /* ClassificationResultsSubject.swift in Sources */,
 				FEE455512AC8BD8600569414 /* SoundIdentifier.swift in Sources */,
 				FEE4555A2AC8C17500569414 /* DrillRecordingViewModel.swift in Sources */,
+				FE5C20132AFB1018008A9B1A /* UserInfo.swift in Sources */,
 				FE254A3B2AF0583B000602AA /* Tournament.swift in Sources */,
 				7572F0302AC22FCA001E2F3C /* WatchDataSyncHandler.swift in Sources */,
 				FE254A1B2ADDF7AF000602AA /* TimeInterval+Extension.swift in Sources */,
