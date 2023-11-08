@@ -36,6 +36,8 @@ struct TournamentDetailView: View {
     @State private var leaderboard: Leaderboard? = nil
     @State private var isLoadingData: Bool = false
     
+    @State private var presentableLeaderboard: Leaderboard?
+    
     @Environment(\.dismiss) private var dismiss
     
     @State private var leaderboardUpdateError: Error?
@@ -82,16 +84,13 @@ struct TournamentDetailView: View {
             } else if let leaderboard {
                 if leaderboard.containsEntry(from: user) {
                     Button(action: {
-                        
+                        presentableLeaderboard = leaderboard
                     }, label: {
                         Text("View Leaderboard")
                             .frame(maxWidth: .infinity)
                             .padding()
                     })
                     .buttonStyle(.borderedProminent)
-                    .onAppear {
-                        print(">>>tournamentEntries: ", tournamentEntries)
-                    }
                 } else if let tournamentEntry = tournamentEntries.first {
                     VStack {
                         Text("You already have your attempt. Submit it to view this tournament leaderboard")
@@ -172,6 +171,9 @@ struct TournamentDetailView: View {
             })
         }, message: {
             Text(leaderboardUpdateError?.localizedDescription ?? "An error occured during leaderboard update")
+        })
+        .sheet(item: $presentableLeaderboard, content: { leaderboard in
+            LeaderboardView(leaderboard: leaderboard)
         })
         .task {
             await updateLeaderboard()

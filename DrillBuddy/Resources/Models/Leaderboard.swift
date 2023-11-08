@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Leaderboard: Codable {
+struct Leaderboard: Codable, Identifiable {
     struct Entry: Codable {
         var userId: String
         var username: String

@@ -88,6 +88,8 @@
 		FE5C20102AF9C284008A9B1A /* Leaderboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5C200F2AF9C284008A9B1A /* Leaderboard.swift */; };
 		FE5C20112AF9C284008A9B1A /* Leaderboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5C200F2AF9C284008A9B1A /* Leaderboard.swift */; };
 		FE5C20132AFB1018008A9B1A /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1D1D032AF4501200BF8506 /* UserInfo.swift */; };
+		FE5C20152AFB2507008A9B1A /* LeaderboardPreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5C20142AFB2507008A9B1A /* LeaderboardPreviewData.swift */; };
+		FE5C201A2AFB2695008A9B1A /* LeaderboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5C20192AFB2695008A9B1A /* LeaderboardView.swift */; };
 		FE5F223C2AF2E7A600C83412 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = FE5F223B2AF2E7A600C83412 /* FirebaseAnalytics */; };
 		FE5F223E2AF2E7A600C83412 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FE5F223D2AF2E7A600C83412 /* FirebaseAnalyticsSwift */; };
 		FE5F22402AF2E7A600C83412 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = FE5F223F2AF2E7A600C83412 /* FirebaseAnalyticsWithoutAdIdSupport */; };
@@ -198,6 +200,8 @@
 		FE254A4A2AF1D4D4000602AA /* TournamentPreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentPreviewData.swift; sourceTree = "<group>"; };
 		FE28D2792AF308B30074BC98 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		FE5C200F2AF9C284008A9B1A /* Leaderboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Leaderboard.swift; sourceTree = "<group>"; };
+		FE5C20142AFB2507008A9B1A /* LeaderboardPreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardPreviewData.swift; sourceTree = "<group>"; };
+		FE5C20192AFB2695008A9B1A /* LeaderboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardView.swift; sourceTree = "<group>"; };
 		FE66290C2AF30B870059B521 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FEE455482AC8BB4700569414 /* AudioSessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioSessionManager.swift; sourceTree = "<group>"; };
 		FEE4554B2AC8BB6200569414 /* AudioRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
@@ -354,6 +358,7 @@
 				FE254A272AE9DA85000602AA /* Hydrogen.mp3 */,
 				75D1135F2ABE2E7B00BF8874 /* Preview Assets.xcassets */,
 				75D113722ABE3A7A00BF8874 /* DrillContainerPreviewData.swift */,
+				FE5C20142AFB2507008A9B1A /* LeaderboardPreviewData.swift */,
 				FE254A4A2AF1D4D4000602AA /* TournamentPreviewData.swift */,
 				FE1D1D0A2AF464EF00BF8506 /* UserStoragePreviewData.swift */,
 			);
@@ -371,13 +376,14 @@
 		75D113682ABE2EE600BF8874 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				FE1D1CF62AF3249800BF8506 /* Authentication */,
 				FE254A262AE877A5000602AA /* Audio View */,
+				FE1D1CF62AF3249800BF8506 /* Authentication */,
 				FE1D1CF32AF31F0B00BF8506 /* Detect Sounds */,
 				7572F0192ABF6184001E2F3C /* Drill Configuration */,
 				FE254A1C2ADF6EE6000602AA /* Drill Detail */,
 				7572F0232ABFAC9F001E2F3C /* Drill Recording */,
 				75D1136A2ABE2F3700BF8874 /* Launch Screen */,
+				FE5C20162AFB2671008A9B1A /* Leaderboard */,
 				FE28D2782AF308A00074BC98 /* Main Tab */,
 				FE1D1CF22AF31EFF00BF8506 /* Profile */,
 				7572F0182ABF6174001E2F3C /* Sessions List */,
@@ -555,6 +561,14 @@
 				FE28D2792AF308B30074BC98 /* MainTabView.swift */,
 			);
 			path = "Main Tab";
+			sourceTree = "<group>";
+		};
+		FE5C20162AFB2671008A9B1A /* Leaderboard */ = {
+			isa = PBXGroup;
+			children = (
+				FE5C20192AFB2695008A9B1A /* LeaderboardView.swift */,
+			);
+			path = Leaderboard;
 			sourceTree = "<group>";
 		};
 		FE66290B2AF30B750059B521 /* Firebase */ = {
@@ -806,10 +820,12 @@
 				75D113562ABE2E7500BF8874 /* DrillBuddyApp.swift in Sources */,
 				75D113762ABE4EE200BF8874 /* View+Extension.swift in Sources */,
 				FE5C20102AF9C284008A9B1A /* Leaderboard.swift in Sources */,
+				FE5C20152AFB2507008A9B1A /* LeaderboardPreviewData.swift in Sources */,
 				7572F02B2AC0A62A001E2F3C /* WatchDataSynchronizer.swift in Sources */,
 				FEE4555D2AC8E49B00569414 /* HapticFeedbackGenerator.swift in Sources */,
 				75D1136E2ABE308C00BF8874 /* SessionsListView.swift in Sources */,
 				7572F0392AC25356001E2F3C /* Drill.swift in Sources */,
+				FE5C201A2AFB2695008A9B1A /* LeaderboardView.swift in Sources */,
 				7572F0332AC24A64001E2F3C /* SyncData.swift in Sources */,
 				7572F0162ABF5DE8001E2F3C /* AppError.swift in Sources */,
 				FE254A242AE877A2000602AA /* AudioView.swift in Sources */,
