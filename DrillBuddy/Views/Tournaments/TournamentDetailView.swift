@@ -25,17 +25,36 @@ struct TournamentDetailView: View {
         }
     }
     
-    @Query private var tournamentEntries: [TournamentEntry]
+    private let user: UserInfo
+    private let firestoreService: FirestoreService
+    
+    /// Holds entries to given tournament
+    /// NOTE: We cannot have custom query initialization within the `init` sequence,
+    /// as for some reason, when we do that navigation link stop working
+    private let tournamentEntries: [TournamentEntry]
+    
+    @State private var leaderboard: Leaderboard? = nil
+    @State private var isLoadingData: Bool = false
+    
+    @Environment(\.dismiss) private var dismiss
+    
+    @State private var leaderboardUpdateError: Error?
+    @State private var entrySubmissionError: Error?
     
     // MARK: - Init
     
-    init(tournament: Tournament) {
+    init(
+        tournament: Tournament,
+        leaderboard: Leaderboard? = nil,
+        tournamentEntries: [TournamentEntry] = [],
+        user: UserInfo,
+        firestoreService: FirestoreService = .init()
+    ) {
         self.tournament = tournament
-        self._tournamentEntries = Query(
-            filter: #Predicate<TournamentEntry> { $0.tournamentId == tournament.id },
-            sort: \TournamentEntry.date,
-            order: .reverse
-        )
+        self.firestoreService = firestoreService
+        self._leaderboard = State(initialValue: leaderboard)
+        self.tournamentEntries = tournamentEntries
+        self.user = user
     }
     
     // MARK: - View
@@ -55,46 +74,108 @@ struct TournamentDetailView: View {
                 }
             }
             
-            if Date() > tournament.endDate {
-                Text("Submissins closed. Tournament has ended")
-                    .fontWeight(.bold)
-                    .foregroundStyle(Color.gray)
-            } else if tournamentEntries.isEmpty == false {
-                Button(action: {
+            expiredTournamentDisclaimerView
+            
+            if leaderboard == nil || isLoadingData {
+                ProgressView()
+                    .progressViewStyle(.circular)
+            } else if let leaderboard {
+                if leaderboard.containsEntry(from: user) {
+                    Button(action: {
+                        
+                    }, label: {
+                        Text("View Leaderboard")
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                    })
+                    .buttonStyle(.borderedProminent)
+                    .onAppear {
+                        print(">>>tournamentEntries: ", tournamentEntries)
+                    }
+                } else if let tournamentEntry = tournamentEntries.first {
+                    VStack {
+                        Text("You already have your attempt. Submit it to view this tournament leaderboard")
+                            .fontWeight(.medium)
+                            .foregroundStyle(Color.red)
+                        Button(action: {
+                            Task {
+                                await submit(tournamentEntry: tournamentEntry, to: leaderboard)
+                            }
+                        }, label: {
+                            Text("Submit Entry")
+                                .fontWeight(.bold)
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                        })
+                        .buttonStyle(.borderedProminent)
+                    }
+                } else {
+                    Text("Leaderboard will be available after submission")
+                        .fontWeight(.heavy)
+                        .multilineTextAlignment(.center)
                     
-                }, label: {
-                    Text("View Leaderboard")
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                })
-                .buttonStyle(.borderedProminent)
-            } else {
-                Text("Leaderboard will be available after submission")
-                    .fontWeight(.heavy)
-                    .multilineTextAlignment(.center)
-                
-                Text("WARNING: You can enter tournament only once!")
-                    .foregroundStyle(Color.red)
-                    .font(.footnote)
-                
-                NavigationLink(
-                    destination:
-                        DrillConfigurationView(
-                            showCloseButton: false,
-                            isConfigurationEditable: false,
-                            tournament: tournament,
-                            configuration: tournament.recordingConfiguration
-                        )
-                ) {
-                    Text("Enter Tournament")
-                        .fontWeight(.bold)
-                        .padding()
+                    Text("WARNING: You can enter tournament only once!")
+                        .foregroundStyle(Color.red)
+                        .font(.footnote)
+                    
+                    NavigationLink(
+                        destination:
+                            DrillConfigurationView(
+                                showCloseButton: false,
+                                isConfigurationEditable: false,
+                                tournament: tournament,
+                                configuration: tournament.recordingConfiguration
+                            )
+                    ) {
+                        Text("Enter Tournament")
+                            .fontWeight(.bold)
+                            .padding()
+                    }
+                    .buttonStyle(.borderedProminent)
                 }
-                .buttonStyle(.borderedProminent)
             }
         }
         .navigationBarTitleDisplayMode(.inline)
         .padding(.horizontal)
+        .alert("Failed to fetch leaderboard", isPresented: Binding<Bool>(get: {
+            leaderboardUpdateError != nil
+        }, set: { value in
+            if value == false {
+                leaderboardUpdateError = nil
+            }
+        }), actions: {
+            if leaderboard == nil {
+                Button("Exit", role: .cancel, action: {
+                    dismiss()
+                })
+            }
+
+            Button("Retry", role: .destructive, action: {
+                Task {
+                    await updateLeaderboard()
+                }
+            })
+        }, message: {
+            Text(leaderboardUpdateError?.localizedDescription ?? "An error occured during leaderboard update")
+        })
+        .alert("Failed to submit entry to leaderboard", isPresented: Binding<Bool>(get: {
+            entrySubmissionError != nil
+        }, set: { value in
+            if value == false {
+                entrySubmissionError = nil
+            }
+        }), actions: {
+            Button("Retry", role: .destructive, action: {
+                Task {
+                    await submit(tournamentEntry: tournamentEntries[0], to: leaderboard!)
+                }
+            })
+        }, message: {
+            Text(leaderboardUpdateError?.localizedDescription ?? "An error occured during leaderboard update")
+        })
+        .task {
+            await updateLeaderboard()
+        }
     }
     
     // MARK: - Private Views
@@ -166,25 +247,121 @@ struct TournamentDetailView: View {
                     .foregroundStyle(Color.gray.opacity(0.2))
             )
     }
+    
+    private var expiredTournamentDisclaimerView: some View {
+        Group {
+            if Date() > tournament.endDate {
+                Text("Submissins closed. Tournament has ended")
+                    .fontWeight(.bold)
+                    .foregroundStyle(Color.gray)
+            } else {
+                EmptyView()
+            }
+        }
+    }
+    
+    // MARK: - Private Methods
+    
+    private func updateLeaderboard() async {
+        isLoadingData = true
+        do {
+            self.leaderboard = try await firestoreService.fetchLeaderboard(for: tournament)
+        } catch {
+            leaderboardUpdateError = error
+        }
+        isLoadingData = false
+    }
+    
+    private func submit(tournamentEntry: TournamentEntry, to leaderboard: Leaderboard) async {
+        isLoadingData = true
+        do {
+            try await firestoreService.submit(entry: tournamentEntry, for: tournament, as: user)
+            do {
+                self.leaderboard = try await firestoreService.fetchLeaderboard(for: tournament)
+            } catch {
+                let recordingData = try! Data(contentsOf: tournamentEntry.recordingURL)
+                
+                let leaderboardEntry = Leaderboard.Entry(
+                    userId: user.id,
+                    username: user.username,
+                    recordingDate: tournamentEntry.date,
+                    recordingData: recordingData,
+                    firstShotDelay: tournamentEntry.sounds[0].time,
+                    shotsSplit: tournamentEntry.sounds.averageSplit,
+                    totalTime: tournamentEntry.sounds[tournamentEntry.sounds.count - 1].time
+                )
+                
+                self.leaderboard = Leaderboard(
+                    id: leaderboard.id,
+                    entries: leaderboard.entries + [leaderboardEntry],
+                    tournamentID: leaderboard.tournamentID
+                )
+            }
+        } catch {
+            entrySubmissionError = error
+        }
+        isLoadingData = false
+    }
 }
 
 // MARK: - Preview
 
-#Preview("Normal") {
+#Preview("Newcommer") {
     NavigationStack {
-        TournamentDetailView(tournament: TournamentPreviewData.mock)
+        TournamentDetailView(
+            tournament: TournamentPreviewData.mock,
+            user: UserStoragePreviewData.loggedIn.currentUser!
+        )
     }
 }
 
 #Preview("Ended") {
     NavigationStack {
-        TournamentDetailView(tournament: TournamentPreviewData.mockEnded)
+        TournamentDetailView(
+            tournament: TournamentPreviewData.mockEnded,
+            user: UserStoragePreviewData.loggedIn.currentUser!
+        )
     }
 }
 
-#Preview("With Entry") {
+#Preview("With Unsubmitted Entry") {
     NavigationStack {
-        TournamentDetailView(tournament: TournamentPreviewData.mock)
-            .modelContainer(TournamentPreviewData.container)
+        TournamentDetailView(
+            tournament: TournamentPreviewData.mock,
+            leaderboard: Leaderboard(
+                id: TournamentPreviewData.mock.leaderboardID,
+                entries: [],
+                tournamentID: TournamentPreviewData.mock.id
+            ),
+            tournamentEntries: [TournamentPreviewData.mockEntry],
+            user: UserStoragePreviewData.loggedIn.currentUser!
+        )
+        .modelContainer(TournamentPreviewData.container)
+    }
+}
+
+#Preview("With Submitted Entry") {
+    NavigationStack {
+        TournamentDetailView(
+            tournament: TournamentPreviewData.mock,
+            leaderboard: Leaderboard(
+                id: TournamentPreviewData.mock.leaderboardID,
+                entries: [
+                    .init(
+                        userId: UserStoragePreviewData.loggedIn.currentUser!.id,
+                        username: UserStoragePreviewData.loggedIn.currentUser!.username,
+                        recordingDate: Date(),
+                        recordingData: Data(),
+                        firstShotDelay: 0.5,
+                        shotsSplit: 1.2,
+                        totalTime: 4
+                    )
+                ],
+                tournamentID: TournamentPreviewData.mock.id
+            ),
+            tournamentEntries: [TournamentPreviewData.mockEntry],
+            user: UserStoragePreviewData.loggedIn.currentUser!
+        )
+        .modelContainer(TournamentPreviewData.container)
     }
 }

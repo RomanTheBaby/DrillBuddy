@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 // MARK: - TournamentsListView
 
@@ -20,17 +21,20 @@ struct TournamentsListView: View {
     var firestoreService: FirestoreService = FirestoreService()
     
     @EnvironmentObject private var userStorage: UserStorage
+    
+    @Query(sort: \TournamentEntry.date, order: .forward)
+    private var tournamentEntries: [TournamentEntry]
 
     var body: some View {
         Group {
-            if userStorage.currentUser == nil {
-                anonymousView
-            } else {
-                tournamentsView
+            if let user = userStorage.currentUser {
+                makeTournamentsView(for: user)
                     .errorAlert(error: $error)
                     .task {
                         await loadTournaments()
                     }
+            } else {
+                anonymousView
             }
         }
         .onChange(of: userStorage.currentUser, { _, newValue in
@@ -65,7 +69,7 @@ struct TournamentsListView: View {
         .padding()
     }
     
-    private var tournamentsView: some View {
+    private func makeTournamentsView(for user: UserInfo) -> some View {
         Group {
             if tournaments.isEmpty {
                 if isLoading {
@@ -84,7 +88,11 @@ struct TournamentsListView: View {
                         // This ZStack is to hide NavLink right arrow
                         ZStack {
                             TournamentCardView(tournament: tournament)
-                            NavigationLink(destination: TournamentDetailView(tournament: tournament)) {
+                            NavigationLink(destination: TournamentDetailView(
+                                tournament: tournament,
+                                tournamentEntries: tournamentEntries.filter { $0.tournamentId == tournament.id },
+                                user: user
+                            )) {
                                 EmptyView()
                             }
                             .opacity(0)
@@ -227,6 +235,7 @@ private extension Date {
         TournamentsListView(tournaments: [])
             .environmentObject(UserStoragePreviewData.loggedIn)
     }
+    .modelContainer(TournamentPreviewData.container)
 }
 
 #Preview("Logged Out") {
