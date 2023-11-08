@@ -16,7 +16,7 @@ actor TournamentPreviewData {
             endDate: Date().addingTimeInterval(3600 * 24),
             title: "3-shot competition",
             description: "   This is a simple 3 shot competition to test your basic shooting skills.\n   Upon starting the drill draw your weapon and make 3 shots, drill recording will automatically stop when app will hear 3rd shot.\n  Your result will be displayed to everyone on the leaderboard. You can submit only one entry for each tournament.",
-            leaderboardID: UUID().uuidString,
+            leaderboardID: "cqhoHabzfKpBvYc6zT0O",
             requirements: Tournament.Requirements(
                 gunActionType: .semiAuto,
                 maxTime: 20
@@ -55,17 +55,6 @@ actor TournamentPreviewData {
         do {
             let modelContainer = try ModelContainer(for: schema, configurations: [configuration])
             
-            let mockEntry = TournamentEntry(
-                tournamentId: mock.id,
-                date: Date(),
-                sounds: [
-                    DrillEntry(time: 1, confidence: 1),
-                    DrillEntry(time: 1.2, confidence: 1),
-                    DrillEntry(time: 1.5, confidence: 1),
-                    DrillEntry(time: 2, confidence: 1),
-                ],
-                recordingURL: URL(string: "http://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Kangaroo_MusiQue_-_The_Neverwritten_Role_Playing_Game.mp3")!
-            )
             modelContainer.mainContext.insert(mockEntry)
             try! modelContainer.mainContext.save()
             
@@ -74,5 +63,17 @@ actor TournamentPreviewData {
             fatalError("Failed with error: \(error)")
         }
     }()
+    
+    static let mockEntry = TournamentEntry(
+        tournamentId: mock.id,
+        date: Date(),
+        sounds: [
+            DrillEntry(time: 1, confidence: 1),
+            DrillEntry(time: 1.2, confidence: 1),
+            DrillEntry(time: 1.5, confidence: 1),
+            DrillEntry(time: 2, confidence: 1),
+        ],
+        recordingURL: URL(string: "http://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Kangaroo_MusiQue_-_The_Neverwritten_Role_Playing_Game.mp3")!
+    )
 }
 

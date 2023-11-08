@@ -48,11 +48,30 @@ class FirestoreService {
         }
     }
     
+    func fetchLeaderboard(for tournament: Tournament) async throws -> Leaderboard {
+        do {
+            return try await fetchLeaderboard(withID: tournament.leaderboardID)
+        } catch {
+            Logger.firestoreService.error("Failed to fetch leaderboard for tournament: \(tournament.id) with error: \(error)")
+            throw error
+        }
+    }
+    
+    func fetchLeaderboard(withID leaderboardId: String) async throws -> Leaderboard {
+        do {
+            return try await database.collection(.leaderboards).document(leaderboardId).getDocument(as: Leaderboard.self)
+        } catch {
+            Logger.firestoreService.error("Failed to fetch leaderboard by id: \(leaderboardId) with error: \(error)")
+            throw error
+        }
+    }
+    
     func submit(entry: TournamentEntry, for tournament: Tournament, as user: UserInfo) async throws {
         do {
             let recordingData = try Data(contentsOf: entry.recordingURL)
             
             let leaderboardEntry = Leaderboard.Entry(
+                userId: user.id,
                 username: user.username,
                 recordingDate: entry.date,
                 recordingData: recordingData,
