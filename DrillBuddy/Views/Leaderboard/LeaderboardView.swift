@@ -14,6 +14,8 @@ struct LeaderboardView: View {
     private let leaderboard: Leaderboard
     private let sortedEntries: [Leaderboard.Entry]
     
+    @Environment(\.dismiss) private var dismiss
+    
     // MARK: - Init
     
     init(leaderboard: Leaderboard) {
@@ -26,22 +28,33 @@ struct LeaderboardView: View {
     // MARK: - View
     
     var body: some View {
-        if sortedEntries.isEmpty {
-            Text("Leaderboard is empty")
-        } else {
-            List {
-                ForEach(Array(sortedEntries.enumerated()), id: \.offset) { index, entry in
-                    HStack {
-                        Text("# \(index) |")
-                        Text(entry.username)
-                        Spacer()
-                        Text(
-                            Duration.seconds(entry.totalTime)
-                                .formatted(.time(pattern: .minuteSecond))
-                        )
+        VStack {
+            if sortedEntries.isEmpty {
+                Text("Leaderboard is empty")
+            } else {
+                List {
+                    ForEach(Array(sortedEntries.enumerated()), id: \.offset) { index, entry in
+                        HStack {
+                            Text("# \(index)")
+                            Text(entry.username)
+                            Spacer()
+                            Text(entry.totalTime.minuteSecondMS)
+                        }
+                        .padding(8)
                     }
                 }
             }
+            
+            Button(action: {
+                dismiss()
+            }, label: {
+                Text("Dismiss")
+                    .padding()
+                    .frame(maxWidth: .infinity)
+            })
+            .buttonStyle(.borderedProminent)
+            .padding(.horizontal)
+            
         }
     }
 }
