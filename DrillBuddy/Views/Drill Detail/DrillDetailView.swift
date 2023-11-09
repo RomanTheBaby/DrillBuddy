@@ -101,6 +101,14 @@ struct DrillDetailView: View {
     }
 }
 
+// MARK: - Time Interval Extension
+
+private extension TimeInterval {
+    var minuteSecondMS: String {
+        String(format:"%d:%02d.%03d", minute, second, millisecond)
+    }
+}
+
 // MARK: - Previews
 
 #Preview {

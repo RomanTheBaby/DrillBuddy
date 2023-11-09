@@ -7,10 +7,13 @@
 
 import SwiftUI
 
+// MARK: - LeaderboardView
+
 struct LeaderboardView: View {
     
     // MARK: - Properties
     
+    private let searchableUserId: String?
     private let leaderboard: Leaderboard
     private let sortedEntries: [Leaderboard.Entry]
     
@@ -18,8 +21,9 @@ struct LeaderboardView: View {
     
     // MARK: - Init
     
-    init(leaderboard: Leaderboard) {
+    init(leaderboard: Leaderboard, searchableUserId: String? = nil) {
         self.leaderboard = leaderboard
+        self.searchableUserId = searchableUserId
         self.sortedEntries = leaderboard.entries.sorted(by: {
             $0.totalTime < $1.totalTime
         })
@@ -30,17 +34,23 @@ struct LeaderboardView: View {
     var body: some View {
         VStack {
             if sortedEntries.isEmpty {
+                Spacer()
                 Text("Leaderboard is empty")
+                Spacer()
             } else {
                 List {
                     ForEach(Array(sortedEntries.enumerated()), id: \.offset) { index, entry in
-                        HStack {
-                            Text("# \(index)")
-                            Text(entry.username)
-                            Spacer()
-                            Text(entry.totalTime.minuteSecondMS)
-                        }
-                        .padding(8)
+                        Button(action: {
+                            print(">>Show detail for ", entry)
+                        }, label: {
+                            LeaderboardEntryView(
+                                position: index > 15 ? index + 185 : index + 1, 
+                                entry: entry
+                            )
+                            .listRowInsets(EdgeInsets())
+                        })
+                        .buttonStyle(.plain)
+                        .listRowBackground(entry.userId == searchableUserId ? Color.red : Color(uiColor: UIColor.systemBackground))
                     }
                 }
             }
@@ -54,8 +64,48 @@ struct LeaderboardView: View {
             })
             .buttonStyle(.borderedProminent)
             .padding(.horizontal)
-            
         }
+    }
+}
+
+// MARK: - LeaderboardEntryView
+
+private struct LeaderboardEntryView: View {
+    let position: Int
+    let entry: Leaderboard.Entry
+    
+    var body: some View {
+        HStack {
+            Text("# \(position)")
+                .fontWeight(.bold)
+                .frame(width: 50, alignment: .leading)
+            
+            VStack(alignment: .leading) {
+                Text(entry.username)
+                    .font(.system(.callout, weight: .regular))
+                HStack(spacing: 2) {
+                    Text(entry.firstShotDelay.secondMS)
+                    Text("/")
+                    Text(entry.shotsSplit.secondMS)
+                }
+                .font(.system(.footnote, weight: .light))
+            }
+            Spacer()
+            Text(entry.totalTime.minuteSecondMS)
+        }
+        .padding(8)
+    }
+}
+
+// MARK: - Time Interval Extension
+
+private extension TimeInterval {
+    var minuteSecondMS: String {
+        String(format:"%d:%02d.%03d", minute, second, millisecond)
+    }
+    
+    var secondMS: String {
+        String(format:"%d:%02d.%03d", minute, second, millisecond)
     }
 }
 
@@ -67,4 +117,8 @@ struct LeaderboardView: View {
 
 #Preview("Full") {
     LeaderboardView(leaderboard: LeaderboardPreviewData.full)
+}
+
+#Preview("Full / user") {
+    LeaderboardView(leaderboard: LeaderboardPreviewData.full, searchableUserId: LeaderboardPreviewData.full.entries[11].userId)
 }

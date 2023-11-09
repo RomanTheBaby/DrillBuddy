@@ -235,7 +235,7 @@ struct DrillRecordingView: View {
 
 // MARK: - Time Interval Extension
 
-extension TimeInterval {
+private extension TimeInterval {
     var hourMinuteSecondMS: String {
         String(format:"%02d:%02d.%03d", minute, second, millisecond)
     }
