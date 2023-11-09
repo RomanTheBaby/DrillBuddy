@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "filename" : "_64a1854d-b237-47fc-80e9-6377db0bc242.jpg",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
@@ -54,6 +55,12 @@
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "512x512"
+    },
+    {
+      "filename" : "_64a1854d-b237-47fc-80e9-6377db0bc242 1.jpg",
+      "idiom" : "universal",
+      "platform" : "watchos",
+      "size" : "1024x1024"
     }
   ],
   "info" : {
