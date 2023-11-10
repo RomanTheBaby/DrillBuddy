@@ -27,6 +27,10 @@ struct AudioView: View {
         audioPlayer = try! AVAudioPlayer(contentsOf: audioURL)
     }
     
+    init(audioData: Data) {
+        audioPlayer = try! AVAudioPlayer(data: audioData)
+    }
+    
     // MARK: - View
     
     var body: some View {

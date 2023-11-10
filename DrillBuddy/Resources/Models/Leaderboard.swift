@@ -8,7 +8,12 @@
 import Foundation
 
 struct Leaderboard: Codable, Identifiable {
-    struct Entry: Codable {
+    struct Entry: Codable, Identifiable, Hashable {
+        
+        var id: String {
+            userId
+        }
+        
         var userId: String
         var username: String
         var recordingDate: Date

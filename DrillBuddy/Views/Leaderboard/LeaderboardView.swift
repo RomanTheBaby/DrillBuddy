@@ -17,6 +17,7 @@ struct LeaderboardView: View {
     private let leaderboard: Leaderboard
     private let sortedEntries: [Leaderboard.Entry]
     
+    @State private var entryDetail: Leaderboard.Entry?
     @Environment(\.dismiss) private var dismiss
     
     // MARK: - Init
@@ -36,12 +37,13 @@ struct LeaderboardView: View {
             if sortedEntries.isEmpty {
                 Spacer()
                 Text("Leaderboard is empty")
+                    .font(.system(.title, weight: .bold))
                 Spacer()
             } else {
                 List {
                     ForEach(Array(sortedEntries.enumerated()), id: \.offset) { index, entry in
                         Button(action: {
-                            print(">>Show detail for ", entry)
+                            entryDetail = entry
                         }, label: {
                             LeaderboardEntryView(
                                 position: index > 15 ? index + 185 : index + 1, 
@@ -64,6 +66,12 @@ struct LeaderboardView: View {
             })
             .buttonStyle(.borderedProminent)
             .padding(.horizontal)
+        }
+        .sheet(item: $entryDetail) { entry in
+            LeaderboardEntryDetailView(
+                position: sortedEntries.firstIndex(of: entry) ?? 0,
+                entry: entry
+            )
         }
     }
 }
