@@ -14,6 +14,7 @@ struct LeaderboardEntryDetailView: View {
     var position: Int
     var leaderboardId: String
     var entry: Leaderboard.Entry
+    @State var canBeReported: Bool = true
     var firestoreService: FirestoreService = FirestoreService()
 
     @State private var showReportingSheet = false
@@ -24,7 +25,7 @@ struct LeaderboardEntryDetailView: View {
     
     var body: some View {
         VStack {
-            Text("#1 by \(entry.username)")
+            Text("#\(position) by \(entry.username)")
                 .padding(.top)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .font(.system(.largeTitle, weight: .bold))
@@ -64,14 +65,18 @@ struct LeaderboardEntryDetailView: View {
             Text("Recording: ")
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .font(.system(.title2, weight: .bold))
+            
             AudioView(audioData: entry.recordingData)
-            Button(action: {
-                showReportingSheet = true
-            }, label: {
-                Text("Report")
-                    .padding()
-                    .foregroundStyle(Color.red)
-            })
+            
+            if canBeReported {
+                Button(action: {
+                    showReportingSheet = true
+                }, label: {
+                    Text("Report")
+                        .padding()
+                        .foregroundStyle(Color.red)
+                })
+            }
             
             Spacer()
             
@@ -91,8 +96,8 @@ struct LeaderboardEntryDetailView: View {
             Button("Cancel", role: .cancel) {}
             Button("Audio cheating", role: .destructive) {
                 if let currentUser = userStorage.currentUser {
+                    showLoadingOverlay = true
                     Task {
-                        showLoadingOverlay = true
                         do {
                             try await firestoreService.report(
                                 entry: entry,
@@ -102,6 +107,7 @@ struct LeaderboardEntryDetailView: View {
                         } catch {
                             self.error = error
                         }
+                        canBeReported = false
                         showLoadingOverlay = false
                     }
                 } else {

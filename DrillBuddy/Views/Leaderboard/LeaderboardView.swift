@@ -46,7 +46,7 @@ struct LeaderboardView: View {
                             entryDetail = entry
                         }, label: {
                             LeaderboardEntryView(
-                                position: index > 15 ? index + 185 : index + 1, 
+                                position: index + 1,
                                 entry: entry
                             )
                             .listRowInsets(EdgeInsets())
@@ -69,9 +69,10 @@ struct LeaderboardView: View {
         }
         .sheet(item: $entryDetail) { entry in
             LeaderboardEntryDetailView(
-                position: sortedEntries.firstIndex(of: entry) ?? 0,
+                position: (sortedEntries.firstIndex(of: entry) ?? -1) + 1,
                 leaderboardId: leaderboard.id,
-                entry: entry
+                entry: entry,
+                canBeReported: entry.userId != searchableUserId
             )
         }
     }
