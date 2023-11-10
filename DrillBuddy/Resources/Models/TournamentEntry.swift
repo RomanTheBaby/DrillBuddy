@@ -17,6 +17,8 @@ class TournamentEntry: CustomStringConvertible {
     @Attribute(.unique)
     private(set) var tournamentId: String
     
+    private(set) var userId: String
+    
     @Attribute(.unique)
     private(set) var date: Date
     private(set) var sounds: [DrillEntry]
@@ -34,11 +36,13 @@ class TournamentEntry: CustomStringConvertible {
     
     init(
         tournamentId: String,
+        userId: String,
         date: Date,
         sounds: [DrillEntry],
         recordingURL: URL
     ) {
         self.tournamentId = tournamentId
+        self.userId = userId
         self.date = date
         self.sounds = sounds
         self.recordingURL = recordingURL

@@ -6,7 +6,9 @@
 //
 
 import Foundation
+#if canImport(FirebaseAuth)
 import FirebaseAuth
+#endif
 
 class UserStorage: ObservableObject {
     
@@ -20,10 +22,15 @@ class UserStorage: ObservableObject {
         if let userInfo {
             currentUser = userInfo
             objectWillChange.send()
-        } else if let firebaseUser = Auth.auth().currentUser {
-            currentUser = UserInfo(firebaseUser: firebaseUser)
+        } else {
+            #if canImport(FirebaseAuth)
+            if let firebaseUser = Auth.auth().currentUser {
+                currentUser = UserInfo(firebaseUser: firebaseUser)
+            }
+            #endif
         }
         
+        #if canImport(FirebaseAuth)
         if listenToAuthStateChanges {
             Auth.auth().addStateDidChangeListener { [weak self] _, firebaseUser in
                 if let firebaseUser {
@@ -33,5 +40,6 @@ class UserStorage: ObservableObject {
                 }
             }
         }
+        #endif
     }
 }

@@ -91,6 +91,8 @@
 		FE5C20152AFB2507008A9B1A /* LeaderboardPreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5C20142AFB2507008A9B1A /* LeaderboardPreviewData.swift */; };
 		FE5C201A2AFB2695008A9B1A /* LeaderboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5C20192AFB2695008A9B1A /* LeaderboardView.swift */; };
 		FE5C201C2AFC7929008A9B1A /* LeaderboardEntryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5C201B2AFC7929008A9B1A /* LeaderboardEntryDetailView.swift */; };
+		FE5C201D2AFDBE21008A9B1A /* UserStoragePreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1D1D0A2AF464EF00BF8506 /* UserStoragePreviewData.swift */; };
+		FE5C201E2AFDBE53008A9B1A /* UserStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1D1D012AF44FDA00BF8506 /* UserStorage.swift */; };
 		FE5F223C2AF2E7A600C83412 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = FE5F223B2AF2E7A600C83412 /* FirebaseAnalytics */; };
 		FE5F223E2AF2E7A600C83412 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FE5F223D2AF2E7A600C83412 /* FirebaseAnalyticsSwift */; };
 		FE5F22402AF2E7A600C83412 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = FE5F223F2AF2E7A600C83412 /* FirebaseAnalyticsWithoutAdIdSupport */; };
@@ -744,6 +746,7 @@
 				FEE4554D2AC8BB6200569414 /* AudioRecorder.swift in Sources */,
 				FE254A162ADB7744000602AA /* DetectSoundsView.swift in Sources */,
 				FE254A412AF087D9000602AA /* GunType.swift in Sources */,
+				FE5C201E2AFDBE53008A9B1A /* UserStorage.swift in Sources */,
 				754838832ABE7B5700146415 /* DrillsSessionsContainer.swift in Sources */,
 				FE254A3E2AF065CD000602AA /* TournamentDetailView.swift in Sources */,
 				754838822ABE7B5300146415 /* DrillBuddyApp.swift in Sources */,
@@ -752,6 +755,7 @@
 				FEF627582AF86390003DC443 /* TournamentEntry.swift in Sources */,
 				7572F02C2AC0A62A001E2F3C /* WatchDataSynchronizer.swift in Sources */,
 				754838862ABE7B8B00146415 /* DrillContainerPreviewData.swift in Sources */,
+				FE5C201D2AFDBE21008A9B1A /* UserStoragePreviewData.swift in Sources */,
 				7572F0172ABF5E10001E2F3C /* AppError.swift in Sources */,
 				FEE455542AC8BE4C00569414 /* ClassificationResultsSubject.swift in Sources */,
 				FEE455512AC8BD8600569414 /* SoundIdentifier.swift in Sources */,

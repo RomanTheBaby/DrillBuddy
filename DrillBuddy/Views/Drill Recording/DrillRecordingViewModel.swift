@@ -47,6 +47,7 @@ class DrillRecordingViewModel: ObservableObject {
     // MARK: - Public Properties
     
     let tournament: Tournament?
+    let currentUser: UserInfo?
     private(set) var drillEntries: [DrillEntry] = []
     
     @Published var error: Error?
@@ -80,9 +81,10 @@ class DrillRecordingViewModel: ObservableObject {
     // MARK: - Init
     
     init(
-        initialState: State = .standBy, 
+        initialState: State = .standBy,
         modelContext: ModelContext,
         tournament: Tournament? = nil,
+        currentUser: UserInfo? = nil,
         configuration: DrillRecordingConfiguration,
         audioRecorder: AudioRecorder = .init(),
         soundIdentifier: SoundIdentifier = .init()
@@ -91,6 +93,7 @@ class DrillRecordingViewModel: ObservableObject {
         self.state = initialState
         self.modelContext = modelContext
         self.tournament = tournament
+        self.currentUser = currentUser
         self.configuration = configuration
         self.audioRecorder = audioRecorder
         self.soundIdentifier = soundIdentifier
@@ -247,8 +250,14 @@ class DrillRecordingViewModel: ObservableObject {
                 return
             }
             
+            guard let currentUser else {
+                self.error = LocalizedErrorInfo(errorDescription: "Failed to save submission", recoverySuggestion: "Please log in and try again")
+                return
+            }
+            
             let tournamentEntry = TournamentEntry(
                 tournamentId: tournament.id,
+                userId: currentUser.id,
                 date: startDate,
                 sounds: drillEntries,
                 recordingURL: audioRecordingURL

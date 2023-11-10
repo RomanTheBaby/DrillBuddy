@@ -65,7 +65,8 @@ actor TournamentPreviewData {
     }()
     
     static let mockEntry = TournamentEntry(
-        tournamentId: mock.id,
+        tournamentId: mock.id, 
+        userId: UserStoragePreviewData.loggedIn.currentUser?.id ?? "mock_entry_userId",
         date: Date(),
         sounds: [
             DrillEntry(time: 1, confidence: 1),

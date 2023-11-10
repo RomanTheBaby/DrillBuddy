@@ -23,6 +23,7 @@ struct DrillConfigurationView: View {
     @State private var showRecordingViewCover = false
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext: ModelContext
+    @EnvironmentObject private var userStorage: UserStorage
     
     // MARK: View
     
@@ -129,6 +130,7 @@ struct DrillConfigurationView: View {
                 viewModel: DrillRecordingViewModel(
                     modelContext: modelContext,
                     tournament: tournament,
+                    currentUser: userStorage.currentUser,
                     configuration: configuration
                 )
             )

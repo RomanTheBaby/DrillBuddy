@@ -90,7 +90,7 @@ struct TournamentsListView: View {
                             TournamentCardView(tournament: tournament)
                             NavigationLink(destination: TournamentDetailView(
                                 tournament: tournament,
-                                tournamentEntries: tournamentEntries.filter { $0.tournamentId == tournament.id },
+                                tournamentEntries: tournamentEntries(for: tournament),
                                 user: user
                             )) {
                                 EmptyView()
@@ -128,6 +128,16 @@ struct TournamentsListView: View {
         } catch let fetchError {
             isLoading = false
             error = fetchError
+        }
+    }
+    
+    private func tournamentEntries(for tournament: Tournament) -> [TournamentEntry] {
+        guard let currentUser = userStorage.currentUser else {
+            return []
+        }
+        
+        return tournamentEntries.filter { entry in
+            entry.tournamentId == tournament.id && entry.userId == currentUser.id
         }
     }
 }

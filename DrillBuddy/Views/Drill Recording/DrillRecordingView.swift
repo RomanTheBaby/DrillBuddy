@@ -17,7 +17,6 @@ struct DrillRecordingView: View {
     @StateObject var viewModel: DrillRecordingViewModel
     
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject private var userStorage: UserStorage
     
     // MARK: - View
     
@@ -144,7 +143,9 @@ struct DrillRecordingView: View {
             .chartForegroundStyleScale(["Avg. Split": Color.red, "Time": Color.blue])
             .padding(.horizontal)
             
-            if let tournament = viewModel.tournament, viewModel.drillEntries.isEmpty == false, let user = userStorage.currentUser {
+            if let tournament = viewModel.tournament, 
+                viewModel.drillEntries.isEmpty == false,
+                let user = viewModel.currentUser {
                 Button {
                     Task {
                         await viewModel.submit(for: tournament, user: user)
