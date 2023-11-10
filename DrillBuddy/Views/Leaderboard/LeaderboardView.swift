@@ -70,6 +70,7 @@ struct LeaderboardView: View {
         .sheet(item: $entryDetail) { entry in
             LeaderboardEntryDetailView(
                 position: sortedEntries.firstIndex(of: entry) ?? 0,
+                leaderboardId: leaderboard.id,
                 entry: entry
             )
         }

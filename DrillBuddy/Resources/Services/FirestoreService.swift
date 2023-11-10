@@ -105,6 +105,29 @@ class FirestoreService {
         
     }
     
+    func report(entry: Leaderboard.Entry, leaderboardId: String, reporter: UserInfo) async throws {
+        do {
+            let leaderboardReportReferences = database.collection(.leaderboardReports).document(leaderboardId)
+            
+            let document = try await leaderboardReportReferences.getDocument()
+            let reportData: [String: Any] = [
+                entry.id: FieldValue.increment(Int64(1)),
+                "reporters": FieldValue.arrayUnion([reporter.id]),
+            ]
+            Logger.firestoreService.info("Did fetch document data for leaderboard: \(leaderboardId)")
+            if document.exists {
+                try await leaderboardReportReferences.updateData(reportData)
+            } else {
+                try await leaderboardReportReferences.setData(reportData)
+            }
+            
+            Logger.firestoreService.info("Did report entry: \(entry.id), on leaderboard: \(leaderboardId) by reporter: \(reporter.id)")
+        } catch {
+            Logger.firestoreService.error("Failed to report entry: \(entry.id), on leaderboard: \(leaderboardId) with error: \(error)")
+            throw error
+        }
+    }
+    
     func addUsername(_ username: String) async throws {
         do {
             do {

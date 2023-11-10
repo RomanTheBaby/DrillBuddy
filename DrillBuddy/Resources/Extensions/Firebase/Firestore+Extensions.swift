@@ -17,6 +17,7 @@ extension Firestore {
         case usernames
         case tournaments
         case leaderboards
+        case leaderboardReports
     }
     
     // MARK: - Public Methods

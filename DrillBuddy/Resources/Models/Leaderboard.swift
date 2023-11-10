@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Leaderboard: Codable, Identifiable {
+struct Leaderboard: Codable, Identifiable, Hashable {
     struct Entry: Codable, Identifiable, Hashable {
         
         var id: String {

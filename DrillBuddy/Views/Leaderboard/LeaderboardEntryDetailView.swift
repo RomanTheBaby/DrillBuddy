@@ -12,14 +12,20 @@ import SwiftUI
 
 struct LeaderboardEntryDetailView: View {
     var position: Int
+    var leaderboardId: String
     var entry: Leaderboard.Entry
+    var firestoreService: FirestoreService = FirestoreService()
 
     @State private var showReportingSheet = false
+    @State private var showLoadingOverlay = false
+    @State private var error: Error?
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var userStorage: UserStorage
     
     var body: some View {
         VStack {
             Text("#1 by \(entry.username)")
+                .padding(.top)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .font(.system(.largeTitle, weight: .bold))
             Spacer()
@@ -79,17 +85,33 @@ struct LeaderboardEntryDetailView: View {
             .buttonStyle(.borderedProminent)
         }
         .padding(.horizontal)
+        .errorAlert(error: $error)
+        .loadingOverlay(isLoading: showLoadingOverlay)
         .confirmationDialog("Report Options", isPresented: $showReportingSheet, actions: {
             Button("Cancel", role: .cancel) {}
             Button("Audio cheating", role: .destructive) {
-                
+                if let currentUser = userStorage.currentUser {
+                    Task {
+                        showLoadingOverlay = true
+                        do {
+                            try await firestoreService.report(
+                                entry: entry,
+                                leaderboardId: leaderboardId,
+                                reporter: currentUser
+                            )
+                        } catch {
+                            self.error = error
+                        }
+                        showLoadingOverlay = false
+                    }
+                } else {
+                    error = LocalizedErrorInfo(
+                        errorDescription: "Submission report error",
+                        recoverySuggestion: "Please log in to report this submission"
+                    )
+                }
             }
         })
-//        .alert("Report Options", isPresented: $showReportingSheet) {
-//            
-//        } message: {
-//            Text("Select what is wrong with this submission")
-//        }
     }
 }
 
@@ -104,6 +126,7 @@ private extension TimeInterval {
 #Preview {
     LeaderboardEntryDetailView(
         position: 1,
+        leaderboardId: "mock_leaderboard",
         entry: Leaderboard.Entry(
             userId: "userID",
             username: "Testo Usero",
