@@ -14,6 +14,7 @@ struct LeaderboardEntryDetailView: View {
     var position: Int
     var entry: Leaderboard.Entry
 
+    @State private var showReportingSheet = false
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -58,6 +59,13 @@ struct LeaderboardEntryDetailView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .font(.system(.title2, weight: .bold))
             AudioView(audioData: entry.recordingData)
+            Button(action: {
+                showReportingSheet = true
+            }, label: {
+                Text("Report")
+                    .padding()
+                    .foregroundStyle(Color.red)
+            })
             
             Spacer()
             
@@ -71,6 +79,17 @@ struct LeaderboardEntryDetailView: View {
             .buttonStyle(.borderedProminent)
         }
         .padding(.horizontal)
+        .confirmationDialog("Report Options", isPresented: $showReportingSheet, actions: {
+            Button("Cancel", role: .cancel) {}
+            Button("Audio cheating", role: .destructive) {
+                
+            }
+        })
+//        .alert("Report Options", isPresented: $showReportingSheet) {
+//            
+//        } message: {
+//            Text("Select what is wrong with this submission")
+//        }
     }
 }
 
