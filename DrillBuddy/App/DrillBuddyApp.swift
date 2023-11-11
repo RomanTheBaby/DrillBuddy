@@ -37,7 +37,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 // TODO: update date parsing for tournaments from server???
 // TODO: find most optimal/accurate configuration params
 // TODO: improve audio visualization(i.e like telegram or other way to show waves)
-// TODO: Add information popups on drill configuration parameters(user taps `i` button, pop up shows that explains what this parameters means)
 // TODO: better communicate errors on DrillRecordingView
 // TODO: Add DrillDetailView for watch target, maybe vertical tabs like workout app???
 // TODO: implements statistics, to communicate improvements in drill to users???
