@@ -42,15 +42,15 @@ struct ProfileView: View {
             } else {
                 VStack {
                     Spacer()
-                    
                     Text("Sign in to view and participate in tournaments")
                         .multilineTextAlignment(.center)
                         .font(.system(.title2, weight: .medium))
+                    Spacer()
                     
                     Button(action: {
                         authenticationType = .signIn
                     }, label: {
-                        Text("Sign Un")
+                        Text("Sign In")
                             .frame(maxWidth: .infinity)
                             .padding()
                     })
