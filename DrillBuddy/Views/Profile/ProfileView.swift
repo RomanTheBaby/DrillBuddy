@@ -22,9 +22,10 @@ struct ProfileView: View {
         Group {
             if let currentUser = userStorage.currentUser {
                 VStack {
+                    Text("Welcome, **\(currentUser.username)**")
+                        .font(.title)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     Spacer()
-                    Text("Logged in as: \(currentUser.username)")
-                        .font(.system(.title2, weight: .medium))
                     Button(action: {
                         do {
                             try authenticationService.signOut()
