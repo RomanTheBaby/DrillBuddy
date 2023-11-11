@@ -93,8 +93,10 @@
 		FE5C201C2AFC7929008A9B1A /* LeaderboardEntryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5C201B2AFC7929008A9B1A /* LeaderboardEntryDetailView.swift */; };
 		FE5C201D2AFDBE21008A9B1A /* UserStoragePreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1D1D0A2AF464EF00BF8506 /* UserStoragePreviewData.swift */; };
 		FE5C201E2AFDBE53008A9B1A /* UserStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1D1D012AF44FDA00BF8506 /* UserStorage.swift */; };
+		FE5C20202B001BA5008A9B1A /* DrillParameterInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5C201F2B001BA5008A9B1A /* DrillParameterInfoView.swift */; };
 		FE5C20232B003228008A9B1A /* DrillParameterInfoFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5C20222B003228008A9B1A /* DrillParameterInfoFactory.swift */; };
 		FE5C20242B0033D7008A9B1A /* DrillParameterInfoFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5C20222B003228008A9B1A /* DrillParameterInfoFactory.swift */; };
+		FE5C20252B0033DF008A9B1A /* DrillParameterInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5C201F2B001BA5008A9B1A /* DrillParameterInfoView.swift */; };
 		FE5F223C2AF2E7A600C83412 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = FE5F223B2AF2E7A600C83412 /* FirebaseAnalytics */; };
 		FE5F223E2AF2E7A600C83412 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FE5F223D2AF2E7A600C83412 /* FirebaseAnalyticsSwift */; };
 		FE5F22402AF2E7A600C83412 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = FE5F223F2AF2E7A600C83412 /* FirebaseAnalyticsWithoutAdIdSupport */; };
@@ -208,6 +210,7 @@
 		FE5C20142AFB2507008A9B1A /* LeaderboardPreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardPreviewData.swift; sourceTree = "<group>"; };
 		FE5C20192AFB2695008A9B1A /* LeaderboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardView.swift; sourceTree = "<group>"; };
 		FE5C201B2AFC7929008A9B1A /* LeaderboardEntryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardEntryDetailView.swift; sourceTree = "<group>"; };
+		FE5C201F2B001BA5008A9B1A /* DrillParameterInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillParameterInfoView.swift; sourceTree = "<group>"; };
 		FE5C20222B003228008A9B1A /* DrillParameterInfoFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillParameterInfoFactory.swift; sourceTree = "<group>"; };
 		FE66290C2AF30B870059B521 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FEE455482AC8BB4700569414 /* AudioSessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioSessionManager.swift; sourceTree = "<group>"; };
@@ -583,10 +586,12 @@
 		FE5C20212B003211008A9B1A /* Drill Parameter Info */ = {
 			isa = PBXGroup;
 			children = (
+				FE5C201F2B001BA5008A9B1A /* DrillParameterInfoView.swift */,
 				FE5C20222B003228008A9B1A /* DrillParameterInfoFactory.swift */,
 			);
 			path = "Drill Parameter Info";
 			sourceTree = "<group>";
+		};
 		FE66290B2AF30B750059B521 /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
@@ -775,6 +780,7 @@
 				FE254A3B2AF0583B000602AA /* Tournament.swift in Sources */,
 				7572F0302AC22FCA001E2F3C /* WatchDataSyncHandler.swift in Sources */,
 				FE254A1B2ADDF7AF000602AA /* TimeInterval+Extension.swift in Sources */,
+				FE5C20252B0033DF008A9B1A /* DrillParameterInfoView.swift in Sources */,
 				FEE4554A2AC8BB4700569414 /* AudioSessionManager.swift in Sources */,
 				FE5C20242B0033D7008A9B1A /* DrillParameterInfoFactory.swift in Sources */,
 				FEE455572AC8BE5400569414 /* AudioClassifier.swift in Sources */,
@@ -800,6 +806,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE254A382AEDD3DC000602AA /* TournamentDetailView.swift in Sources */,
+				FE5C20202B001BA5008A9B1A /* DrillParameterInfoView.swift in Sources */,
 				FE1D1D042AF4501200BF8506 /* UserInfo.swift in Sources */,
 				FEE4554C2AC8BB6200569414 /* AudioRecorder.swift in Sources */,
 				FE254A152ADB3600000602AA /* DetectSoundsView.swift in Sources */,

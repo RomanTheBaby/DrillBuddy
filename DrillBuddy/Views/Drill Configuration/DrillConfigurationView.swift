@@ -21,6 +21,9 @@ struct DrillConfigurationView: View {
     @State var configuration: DrillRecordingConfiguration = .default
     
     @State private var showRecordingViewCover = false
+    
+    @State private var drillParameterInfoFactory: DrillParameterInfoFactory?
+    
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext: ModelContext
     @EnvironmentObject private var userStorage: UserStorage
@@ -35,58 +38,108 @@ struct DrillConfigurationView: View {
                 #endif
                 
                 Section {
-                    ConfigurationStepperView(
-                        title: "Min Confidence Level",
-                        value: $configuration.minimumSoundConfidenceLevel,
-                        stepRange: 0...1, 
-                        step: 0.1
-                    )
-                    .disabled(!isConfigurationEditable)
+                    HStack {
+                        #if !os(watchOS)
+                        Button {
+                            drillParameterInfoFactory = DrillParameterInfoFactory(keyPath: \.minimumSoundConfidenceLevel)
+                        } label: {
+                            Image(systemName: "info.circle.fill")
+                        }
+                        #endif
+                        
+                        ConfigurationStepperView(
+                            title: "Min Confidence Level",
+                            value: $configuration.minimumSoundConfidenceLevel,
+                            stepRange: 0.1...1,
+                            step: 0.1
+                        )
+                        .disabled(!isConfigurationEditable)
+                    }
 
-                    ConfigurationStepperView(
-                        title: "Inference Window Size",
-                        value: $configuration.inferenceWindowSize,
-                        stepRange: 0...10,
-                        step: 0.1
-                    )
-                    .disabled(!isConfigurationEditable)
+                    HStack {
+                        #if !os(watchOS)
+                        Button {
+                            drillParameterInfoFactory = DrillParameterInfoFactory(keyPath: \.inferenceWindowSize)
+                        } label: {
+                            Image(systemName: "info.circle.fill")
+                        }
+                        #endif
+                        
+                        ConfigurationStepperView(
+                            title: "Inference Window Size",
+                            value: $configuration.inferenceWindowSize,
+                            stepRange: 0...10,
+                            step: 0.1
+                        )
+                        .disabled(!isConfigurationEditable)
+                    }
                     
-                    ConfigurationStepperView(
-                        title: "Overlap Factor",
-                        value: $configuration.overlapFactor,
-                        stepRange: 0...10,
-                        step: 0.1
-                    )
-                    .disabled(!isConfigurationEditable)
+                    HStack {
+                        #if !os(watchOS)
+                        Button {
+                            drillParameterInfoFactory = DrillParameterInfoFactory(keyPath: \.overlapFactor)
+                        } label: {
+                            Image(systemName: "info.circle.fill")
+                        }
+                        #endif
+                        
+                        ConfigurationStepperView(
+                            title: "Overlap Factor",
+                            value: $configuration.overlapFactor,
+                            stepRange: 0...10,
+                            step: 0.1
+                        )
+                        .disabled(!isConfigurationEditable)
+                    }
                 } header: {
                     Text("Sound Analysis")
                         .listRowInsets(EdgeInsets())
                 }
                 
                 Section {
-                    ConfigurationStepperView(
-                        title: "Max Shots",
-                        subtitle: "0 - no limits",
-                        value: Binding(
-                            get: {
-                                Double(configuration.maxShots)
-                            },
-                            set: { newValue, _ in
-                                configuration.maxShots = Int(newValue)
-                            }
-                        ),
-                        stepRange: 0...10,
-                        step: 1
-                    )
-                    .disabled(!isConfigurationEditable)
+                    HStack {
+                        #if !os(watchOS)
+                        Button {
+                            drillParameterInfoFactory = DrillParameterInfoFactory(keyPath: \.maxShots)
+                        } label: {
+                            Image(systemName: "info.circle.fill")
+                        }
+                        #endif
+                        
+                        ConfigurationStepperView(
+                            title: "Max Shots",
+                            subtitle: "0 - no limits",
+                            value: Binding(
+                                get: {
+                                    Double(configuration.maxShots)
+                                },
+                                set: { newValue, _ in
+                                    configuration.maxShots = Int(newValue)
+                                }
+                            ),
+                            stepRange: 0...10,
+                            step: 1
+                        )
+                        .disabled(!isConfigurationEditable)
+                    }
                     
-                    ConfigurationStepperView(
-                        title: "Max Start Delay",
-                        value: $configuration.maxSessionDelay,
-                        stepRange: 1...60,
-                        step: 0.5
-                    )
-                    .disabled(!isConfigurationEditable)
+                    HStack {
+                        #if !os(watchOS)
+                        Button {
+                            drillParameterInfoFactory = DrillParameterInfoFactory(keyPath: \.maxSessionDelay)
+                        } label: {
+                            Image(systemName: "info.circle.fill")
+                        }
+                        #endif
+                        
+                        ConfigurationStepperView(
+                            title: "Max Start Delay",
+                            value: $configuration.maxSessionDelay,
+                            stepRange: 1...60,
+                            step: 0.5
+                        )
+                        .disabled(!isConfigurationEditable)
+                    }
                 } header: {
                     Text("Shooting Session Config")
                         .listRowInsets(EdgeInsets())
@@ -121,6 +174,9 @@ struct DrillConfigurationView: View {
         .scrollBounceBehavior(.basedOnSize)
         .navigationTitle("Configure Session")
         .navigationBarTitleDisplayMode(.large)
+        .sheet(item: $drillParameterInfoFactory, content: { infoFactory in
+            DrillParameterInfoView(infoFactory: infoFactory)
+        })
         #if !os(watchOS)
         .fullScreenCover(isPresented: $showRecordingViewCover, content: {
             DrillRecordingView(
