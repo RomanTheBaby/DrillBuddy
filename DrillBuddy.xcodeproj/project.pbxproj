@@ -93,6 +93,8 @@
 		FE5C201C2AFC7929008A9B1A /* LeaderboardEntryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5C201B2AFC7929008A9B1A /* LeaderboardEntryDetailView.swift */; };
 		FE5C201D2AFDBE21008A9B1A /* UserStoragePreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1D1D0A2AF464EF00BF8506 /* UserStoragePreviewData.swift */; };
 		FE5C201E2AFDBE53008A9B1A /* UserStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1D1D012AF44FDA00BF8506 /* UserStorage.swift */; };
+		FE5C20232B003228008A9B1A /* DrillParameterInfoFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5C20222B003228008A9B1A /* DrillParameterInfoFactory.swift */; };
+		FE5C20242B0033D7008A9B1A /* DrillParameterInfoFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5C20222B003228008A9B1A /* DrillParameterInfoFactory.swift */; };
 		FE5F223C2AF2E7A600C83412 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = FE5F223B2AF2E7A600C83412 /* FirebaseAnalytics */; };
 		FE5F223E2AF2E7A600C83412 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FE5F223D2AF2E7A600C83412 /* FirebaseAnalyticsSwift */; };
 		FE5F22402AF2E7A600C83412 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = FE5F223F2AF2E7A600C83412 /* FirebaseAnalyticsWithoutAdIdSupport */; };
@@ -206,6 +208,7 @@
 		FE5C20142AFB2507008A9B1A /* LeaderboardPreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardPreviewData.swift; sourceTree = "<group>"; };
 		FE5C20192AFB2695008A9B1A /* LeaderboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardView.swift; sourceTree = "<group>"; };
 		FE5C201B2AFC7929008A9B1A /* LeaderboardEntryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardEntryDetailView.swift; sourceTree = "<group>"; };
+		FE5C20222B003228008A9B1A /* DrillParameterInfoFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillParameterInfoFactory.swift; sourceTree = "<group>"; };
 		FE66290C2AF30B870059B521 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FEE455482AC8BB4700569414 /* AudioSessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioSessionManager.swift; sourceTree = "<group>"; };
 		FEE4554B2AC8BB6200569414 /* AudioRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
@@ -385,6 +388,7 @@
 				FE1D1CF32AF31F0B00BF8506 /* Detect Sounds */,
 				7572F0192ABF6184001E2F3C /* Drill Configuration */,
 				FE254A1C2ADF6EE6000602AA /* Drill Detail */,
+				FE5C20212B003211008A9B1A /* Drill Parameter Info */,
 				7572F0232ABFAC9F001E2F3C /* Drill Recording */,
 				75D1136A2ABE2F3700BF8874 /* Launch Screen */,
 				FE5C20162AFB2671008A9B1A /* Leaderboard */,
@@ -576,6 +580,13 @@
 			path = Leaderboard;
 			sourceTree = "<group>";
 		};
+		FE5C20212B003211008A9B1A /* Drill Parameter Info */ = {
+			isa = PBXGroup;
+			children = (
+				FE5C20222B003228008A9B1A /* DrillParameterInfoFactory.swift */,
+			);
+			path = "Drill Parameter Info";
+			sourceTree = "<group>";
 		FE66290B2AF30B750059B521 /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
@@ -765,6 +776,7 @@
 				7572F0302AC22FCA001E2F3C /* WatchDataSyncHandler.swift in Sources */,
 				FE254A1B2ADDF7AF000602AA /* TimeInterval+Extension.swift in Sources */,
 				FEE4554A2AC8BB4700569414 /* AudioSessionManager.swift in Sources */,
+				FE5C20242B0033D7008A9B1A /* DrillParameterInfoFactory.swift in Sources */,
 				FEE455572AC8BE5400569414 /* AudioClassifier.swift in Sources */,
 				754838852ABE7B8600146415 /* View+Extension.swift in Sources */,
 				7572F0372AC24AAE001E2F3C /* SyncResponse.swift in Sources */,
@@ -796,6 +808,7 @@
 				FE254A1E2ADF6EF9000602AA /* DrillDetailView.swift in Sources */,
 				FE1D1D002AF4471800BF8506 /* Firestore+Extensions.swift in Sources */,
 				FE1D1D082AF45E4700BF8506 /* LoadingViewModifier.swift in Sources */,
+				FE5C20232B003228008A9B1A /* DrillParameterInfoFactory.swift in Sources */,
 				FE1D1CF52AF31F2500BF8506 /* ProfileView.swift in Sources */,
 				75D113732ABE3A7A00BF8874 /* DrillContainerPreviewData.swift in Sources */,
 				FE254A462AF1D061000602AA /* NSUbiquitousKeyValueStore+Extension.swift in Sources */,
