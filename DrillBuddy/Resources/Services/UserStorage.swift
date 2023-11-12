@@ -8,7 +8,9 @@
 import Foundation
 #if canImport(FirebaseAuth)
 import FirebaseAuth
+import FirebaseCrashlytics
 #endif
+
 
 class UserStorage: ObservableObject {
     
@@ -35,6 +37,7 @@ class UserStorage: ObservableObject {
             Auth.auth().addStateDidChangeListener { [weak self] _, firebaseUser in
                 if let firebaseUser {
                     self?.currentUser = UserInfo(firebaseUser: firebaseUser)
+                    Crashlytics.crashlytics().setUserID(firebaseUser.uid)
                 } else {
                     self?.currentUser = nil
                 }

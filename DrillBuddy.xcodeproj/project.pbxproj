@@ -97,6 +97,7 @@
 		FE5C20232B003228008A9B1A /* DrillParameterInfoFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5C20222B003228008A9B1A /* DrillParameterInfoFactory.swift */; };
 		FE5C20242B0033D7008A9B1A /* DrillParameterInfoFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5C20222B003228008A9B1A /* DrillParameterInfoFactory.swift */; };
 		FE5C20252B0033DF008A9B1A /* DrillParameterInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5C201F2B001BA5008A9B1A /* DrillParameterInfoView.swift */; };
+		FE5C20292B00796C008A9B1A /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = FE5C20282B00796C008A9B1A /* FirebaseCrashlytics */; };
 		FE5F223C2AF2E7A600C83412 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = FE5F223B2AF2E7A600C83412 /* FirebaseAnalytics */; };
 		FE5F223E2AF2E7A600C83412 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FE5F223D2AF2E7A600C83412 /* FirebaseAnalyticsSwift */; };
 		FE5F22402AF2E7A600C83412 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = FE5F223F2AF2E7A600C83412 /* FirebaseAnalyticsWithoutAdIdSupport */; };
@@ -240,6 +241,7 @@
 				FE5F22402AF2E7A600C83412 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				FE5F223C2AF2E7A600C83412 /* FirebaseAnalytics in Frameworks */,
 				FE5F22422AF2E7A600C83412 /* FirebaseAuth in Frameworks */,
+				FE5C20292B00796C008A9B1A /* FirebaseCrashlytics in Frameworks */,
 				FE5F22442AF2E7A600C83412 /* FirebaseAuthCombine-Community in Frameworks */,
 				FE5F22462AF2E7A600C83412 /* FirebaseFirestore in Frameworks */,
 				FE5F224E2AF2E7A600C83412 /* FirebaseRemoteConfigSwift in Frameworks */,
@@ -676,6 +678,7 @@
 				FE5F22492AF2E7A600C83412 /* FirebaseFirestoreSwift */,
 				FE5F224B2AF2E7A600C83412 /* FirebaseRemoteConfig */,
 				FE5F224D2AF2E7A600C83412 /* FirebaseRemoteConfigSwift */,
+				FE5C20282B00796C008A9B1A /* FirebaseCrashlytics */,
 			);
 			productName = DrillBuddy;
 			productReference = 75D113522ABE2E7500BF8874 /* DrillBuddy.app */;
@@ -1176,6 +1179,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		FE5C20282B00796C008A9B1A /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FE5F223A2AF2E7A600C83412 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
 		FE5F223B2AF2E7A600C83412 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FE5F223A2AF2E7A600C83412 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
