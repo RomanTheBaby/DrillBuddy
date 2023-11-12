@@ -6,6 +6,7 @@
 //
 
 import AVFoundation
+import FirebaseAnalytics
 import SwiftUI
 
 // MARK: - LeaderboardEntryDetailView
@@ -104,6 +105,20 @@ struct LeaderboardEntryDetailView: View {
                                 leaderboardId: leaderboardId,
                                 reporter: currentUser
                             )
+
+                            Analytics.logEvent("Entry Reported", parameters: [
+                                "leaderboardID": leaderboardId,
+                                "entry": [
+                                    "ownerID": entry.userId,
+                                    "totalTime": entry.totalTime,
+                                    "position": position,
+                                ],
+                                "reporter": [
+                                    "id": currentUser.id,
+                                    "username": currentUser.username,
+                                ],
+                            ])
+                            
                         } catch {
                             self.error = error
                         }
