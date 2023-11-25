@@ -169,7 +169,7 @@ final class AudioClassifier: NSObject {
     /// - Parameter requestsAndObservers: A list of pairs that contains an analysis request to
     ///   register, and an observer to send results to. The system retains both the requests and the observers
     ///   during analysis.
-    private func startAnalyzing(_ requestsAndObservers: [(SNRequest, SNResultsObserving)]) throws {
+    private func startAnalyzing(request: SNRequest, observer: SNResultsObserving) throws {
         stopAnalyzing()
 
         do {
@@ -186,9 +186,9 @@ final class AudioClassifier: NSObject {
 
             let newAnalyzer = SNAudioStreamAnalyzer(format: audioFormat)
             analyzer = newAnalyzer
-
-            try requestsAndObservers.forEach { try newAnalyzer.add($0.0, withObserver: $0.1) }
-            retainedObservers = requestsAndObservers.map { $0.1 }
+            
+            try newAnalyzer.add(request, withObserver: observer)
+            retainedObservers = [observer]
 
             newAudioEngine.inputNode.installTap(
               onBus: busIndex,
@@ -257,14 +257,14 @@ final class AudioClassifier: NSObject {
         do {
             let observer = ClassificationResultsSubject(subject: subject)
 
-            let request = try SNClassifySoundRequest(classifierIdentifier: .version1)
+            let request = try SNClassifySoundRequest.makeShared()
             request.windowDuration = CMTimeMakeWithSeconds(inferenceWindowSize, preferredTimescale: 48_000)
             request.overlapFactor = overlapFactor
 
             self.subject = subject
 
             startListeningForAudioSessionInterruptions()
-            try startAnalyzing([(request, observer)])
+            try startAnalyzing(request: request, observer: observer)
         } catch {
             subject.send(completion: .failure(error))
             self.subject = nil
@@ -276,5 +276,12 @@ final class AudioClassifier: NSObject {
     func stopSoundClassification() {
         stopAnalyzing()
         stopListeningForAudioSessionInterruptions()
+    }
+}
+
+extension SNClassifySoundRequest {
+    static func makeShared() throws -> SNClassifySoundRequest {
+//        try SNClassifySoundRequest(mlModel: GunshotSoundClassifierV1().model)
+        try SNClassifySoundRequest(classifierIdentifier: .version1)
     }
 }

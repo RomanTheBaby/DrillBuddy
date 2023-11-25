@@ -106,12 +106,14 @@ class SoundIdentifier {
                 
                 for soundType in validSoundTypes {
                     guard let classification = classificationResult.classification(forIdentifier: soundType.identifier) else {
-                        Logger.soundIdentifier.debug("no classification for \(soundType.identifier)")
+                        Logger.soundIdentifier.error("no classification for \(soundType.identifier), got: \(classificationResult.classifications.map(\.identifier))")
                         continue
                     }
                     
                     guard classification.confidence > minRequiredConfidence else {
-                        Logger.soundIdentifier.trace("confidence requirements not met for audio type: \(classification.identifier), confidence: \(classification.confidence)")
+                        if classification.confidence > 0.1 {
+                            Logger.soundIdentifier.trace("confidence requirements not met for audio type: \(classification.identifier), confidence: \(classification.confidence)")
+                        }
                         continue
                     }
                     let soundInfo = DetectedSoundInfo(
@@ -145,7 +147,7 @@ class SoundIdentifier {
     ///
     ///  - Returns: The set of all labels that sound classification emits.
     private static func getAllPossibleLabels() throws -> Set<String> {
-        let request = try SNClassifySoundRequest(classifierIdentifier: .version1)
+        let request = try SNClassifySoundRequest.makeShared()
         return Set<String>(request.knownClassifications)
     }
     

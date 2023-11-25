@@ -22,6 +22,7 @@ class ClassificationResultsSubject: NSObject, SNResultsObserving {
     }
 
     func request(_ request: SNRequest, didFailWithError error: Error) {
+        // TODO: log firebase event
         subject.send(completion: .failure(error))
     }
 

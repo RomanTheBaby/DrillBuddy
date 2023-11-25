@@ -25,7 +25,7 @@ class HapticFeedbackGenerator {
     #endif
         
     #if os(watchOS)
-    @MainActor static func generateFeedback(_ feedbackType: WKHapticType) {
+    static func generateFeedback(_ feedbackType: WKHapticType) {
         WKInterfaceDevice.current().play(.success)
     }
     #endif

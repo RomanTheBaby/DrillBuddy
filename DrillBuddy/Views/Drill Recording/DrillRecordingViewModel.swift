@@ -122,7 +122,7 @@ class DrillRecordingViewModel: ObservableObject {
     func startRecording() {
         do {
             let soundIdentifyingSubject = try soundIdentifier.startDetectingSounds(
-                soundTypes: [.gunshot, .clapping, .fingerSnapping],
+                soundTypes: [.gunshot],//[.gunshot, .clapping, .fingerSnapping],
                 minRequiredConfidence: configuration.minimumSoundConfidenceLevel,
                 inferenceWindowSize: configuration.inferenceWindowSize,
                 overlapFactor: configuration.overlapFactor
@@ -149,9 +149,7 @@ class DrillRecordingViewModel: ObservableObject {
             startDate = Date()
             
             #if os(watchOS)
-            DispatchQueue.main.sync {
-                HapticFeedbackGenerator.generateFeedback(.start)
-            }
+            HapticFeedbackGenerator.generateFeedback(.start)
             #else
             HapticFeedbackGenerator.generateFeedback(.success)
             #endif

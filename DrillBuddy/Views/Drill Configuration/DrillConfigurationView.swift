@@ -177,7 +177,6 @@ struct DrillConfigurationView: View {
         .sheet(item: $drillParameterInfoFactory, content: { infoFactory in
             DrillParameterInfoView(infoFactory: infoFactory)
         })
-        #if !os(watchOS)
         .fullScreenCover(isPresented: $showRecordingViewCover, content: {
             DrillRecordingView(
                 customFinishAction: {
@@ -191,7 +190,6 @@ struct DrillConfigurationView: View {
                 )
             )
         })
-        #endif
         .toolbar {
             #if !os(watchOS)
             if showCloseButton {
