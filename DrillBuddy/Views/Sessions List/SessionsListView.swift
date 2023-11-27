@@ -16,8 +16,8 @@ struct SessionsListView: View {
     
     private enum Constants {
         static let newSessionButton: CGSize = CGSize(
-            width: 90,
-            height: 90
+            width: 70,
+            height: 70
         )
     }
     
@@ -117,6 +117,7 @@ struct SessionsListView: View {
                 .headerProminence(.increased)
             }
         }
+        .navigationTitle("Drills")
         .toolbar {
             ToolbarItem {
                 Button {
@@ -127,22 +128,27 @@ struct SessionsListView: View {
             }
         }
         .safeAreaInset(edge: .bottom) {
-            Button(action: {
-                redirectToNewDrillConfigurationIfNeeded()
-            }) {
-                Text("Add New")
-                    .fontWeight(.medium)
-                    .frame(
-                        width: Constants.newSessionButton.width,
-                        height: Constants.newSessionButton.height
-                    )
+            HStack {
+                Spacer()
+                Button(action: {
+                    redirectToNewDrillConfigurationIfNeeded()
+                }) {
+                    Text("Add\nNew")
+                        .fontWeight(.medium)
+                        .frame(
+                            width: Constants.newSessionButton.width,
+                            height: Constants.newSessionButton.height
+                        )
+                }
+                .buttonStyle(.borderedProminent)
+                .clipShape(Circle())
+                .background(
+                    Circle()
+                        .shadow(radius: 8, y: 2)
+                )
+                .padding(.bottom, 8)
+                .padding(.trailing)
             }
-            .buttonStyle(.borderedProminent)
-            .clipShape(Circle())
-            .background(
-                Circle()
-                    .shadow(radius: 8, y: 2)
-            )
         }
     }
     

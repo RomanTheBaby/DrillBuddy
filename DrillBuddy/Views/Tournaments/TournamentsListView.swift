@@ -29,6 +29,7 @@ struct TournamentsListView: View {
         Group {
             if let user = userStorage.currentUser {
                 makeTournamentsView(for: user)
+                    .navigationTitle("Tournments")
                     .errorAlert(error: $error)
                     .task {
                         await loadTournaments()

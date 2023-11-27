@@ -122,7 +122,11 @@ class DrillRecordingViewModel: ObservableObject {
     func startRecording() {
         do {
             let soundIdentifyingSubject = try soundIdentifier.startDetectingSounds(
-                soundTypes: [.gunshot],//[.gunshot, .clapping, .fingerSnapping],
+                soundTypes: [
+                    .gunshot,
+                    .clapping,
+                    .fingerSnapping,
+                ],
                 minRequiredConfidence: configuration.minimumSoundConfidenceLevel,
                 inferenceWindowSize: configuration.inferenceWindowSize,
                 overlapFactor: configuration.overlapFactor

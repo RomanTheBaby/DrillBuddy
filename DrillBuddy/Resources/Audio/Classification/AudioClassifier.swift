@@ -281,7 +281,7 @@ final class AudioClassifier: NSObject {
 
 extension SNClassifySoundRequest {
     static func makeShared() throws -> SNClassifySoundRequest {
-//        try SNClassifySoundRequest(mlModel: GunshotSoundClassifierV1().model)
         try SNClassifySoundRequest(classifierIdentifier: .version1)
+//        try SNClassifySoundRequest(mlModel: GunshotSoundClassifierV2_3().model)
     }
 }
