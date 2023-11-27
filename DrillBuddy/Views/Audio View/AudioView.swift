@@ -77,6 +77,9 @@ struct AudioView: View {
             RoundedRectangle(cornerRadius: 8)
                 .foregroundStyle(Color.gray.opacity(0.2))
         )
+        .onDisappear {
+            pauseAudio()
+        }
     }
     
     // MARK: - Private Methods
