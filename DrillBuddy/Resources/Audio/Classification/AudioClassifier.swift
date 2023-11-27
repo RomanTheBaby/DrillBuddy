@@ -55,14 +55,6 @@ final class AudioClassifier: NSObject {
     /// A subject to deliver sound classification results to, including an error, if necessary.
     private var subject: PassthroughSubject<SNClassificationResult, Error>?
     
-    private let audioSessionManager: AudioSessionManager
-    
-    // MARK: - Init
-    
-    init(audioSessionManager: AudioSessionManager = AudioSessionManager()) {
-        self.audioSessionManager = audioSessionManager
-    }
-    
     // MARK: - Private Methods
     /// Requests permission to access microphone input, throwing an error if the user denies access.
     private func ensureMicrophoneAccess() throws {
@@ -106,7 +98,7 @@ final class AudioClassifier: NSObject {
         mode: AVAudioSession.Mode = .default,
         options: AVAudioSession.CategoryOptions = []
     ) throws {
-        try audioSessionManager.startAudioSession(
+        try AudioSessionManager.startAudioSession(
             category: category,
             mode: mode,
             options: options
@@ -115,7 +107,7 @@ final class AudioClassifier: NSObject {
 
     /// Deactivates the app's AVAudioSession.
     private func stopAudioSession() {
-        audioSessionManager.stopAudioSession()
+        AudioSessionManager.stopAudioSession()
     }
 
     /// Starts observing for audio recording interruptions.

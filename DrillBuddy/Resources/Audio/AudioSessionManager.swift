@@ -13,7 +13,7 @@ class AudioSessionManager {
     /// Configures and activates an AVAudioSession.
     ///
     /// If this method throws an error, it calls `stopAudioSession` to reverse its effects.
-    func startAudioSession(
+    class func startAudioSession(
         category: AVAudioSession.Category,
         mode: AVAudioSession.Mode = .default,
         options: AVAudioSession.CategoryOptions = []
@@ -31,7 +31,7 @@ class AudioSessionManager {
     }
     
     /// Deactivates the app's AVAudioSession.
-    func stopAudioSession() {
+    class func stopAudioSession() {
         autoreleasepool {
             let audioSession = AVAudioSession.sharedInstance()
             do {

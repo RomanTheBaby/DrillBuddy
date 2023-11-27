@@ -19,6 +19,8 @@ struct AudioView: View {
     @State private var audioPlayer: AVAudioPlayer
     @State private var currentTime: TimeInterval = 0
     
+    @State private var error: Error?
+    
     @State private var timerCancellable: AnyCancellable?
     
     // MARK: - Init
@@ -77,6 +79,14 @@ struct AudioView: View {
             RoundedRectangle(cornerRadius: 8)
                 .foregroundStyle(Color.gray.opacity(0.2))
         )
+        .errorAlert(error: $error)
+        .onAppear {
+            do {
+                try AudioSessionManager.startAudioSession(category: .playback)
+            } catch {
+                self.error = error
+            }
+        }
         .onDisappear {
             pauseAudio()
         }
