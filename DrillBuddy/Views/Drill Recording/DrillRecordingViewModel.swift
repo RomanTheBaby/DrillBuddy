@@ -54,7 +54,7 @@ class DrillRecordingViewModel: ObservableObject {
     @Published private(set) var showLoadingOverlay: Bool = false
     @Published private(set) var state: State
     @Published private(set) var lastDetectedSoundConfidenceLevel: Double = 0
-    @Published private(set) var recordingStatistics: RecordingStatistics = .init()
+    @Published private(set) var recordingStatistics: RecordingStatistics = RecordingStatistics()
     @Published private(set) var isPersistingData = false
     
     // MARK: - Private Properties
@@ -64,7 +64,7 @@ class DrillRecordingViewModel: ObservableObject {
     private let soundIdentifier: SoundIdentifier
     
     #if !os(watchOS)
-    private let firestoreService: FirestoreService = .init()
+    private let firestoreService: FirestoreService = FirestoreService()
     #endif
     
     private let modelContext: ModelContext
@@ -86,8 +86,8 @@ class DrillRecordingViewModel: ObservableObject {
         tournament: Tournament? = nil,
         currentUser: UserInfo? = nil,
         configuration: DrillRecordingConfiguration,
-        audioRecorder: AudioRecorder = .init(),
-        soundIdentifier: SoundIdentifier = .init()
+        audioRecorder: AudioRecorder = AudioRecorder(),
+        soundIdentifier: SoundIdentifier = SoundIdentifier()
 //        firestoreService: FirestoreService = FirestoreService()
     ) {
         self.state = initialState

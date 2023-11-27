@@ -50,7 +50,7 @@ class SoundIdentifier {
     
     // MARK: - Init
 
-    init(audioClassifier: AudioClassifier = .init()) {
+    init(audioClassifier: AudioClassifier = AudioClassifier()) {
         self.audioClassifier = audioClassifier
     }
     

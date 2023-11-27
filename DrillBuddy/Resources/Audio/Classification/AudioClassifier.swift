@@ -59,7 +59,7 @@ final class AudioClassifier: NSObject {
     
     // MARK: - Init
     
-    init(audioSessionManager: AudioSessionManager = .init()) {
+    init(audioSessionManager: AudioSessionManager = AudioSessionManager()) {
         self.audioSessionManager = audioSessionManager
     }
     

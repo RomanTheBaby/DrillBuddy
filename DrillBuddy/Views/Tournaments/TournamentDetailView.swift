@@ -50,7 +50,7 @@ struct TournamentDetailView: View {
         leaderboard: Leaderboard? = nil,
         tournamentEntries: [TournamentEntry] = [],
         user: UserInfo,
-        firestoreService: FirestoreService = .init()
+        firestoreService: FirestoreService = FirestoreService()
     ) {
         self.tournament = tournament
         self.firestoreService = firestoreService
@@ -349,7 +349,7 @@ struct TournamentDetailView: View {
             leaderboard: Leaderboard(
                 id: TournamentPreviewData.mock.leaderboardID,
                 entries: [
-                    .init(
+                    Leaderboard.Entry(
                         userId: UserStoragePreviewData.loggedIn.currentUser!.id,
                         username: UserStoragePreviewData.loggedIn.currentUser!.username,
                         recordingDate: Date(),
