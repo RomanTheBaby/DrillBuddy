@@ -126,6 +126,8 @@
 		FEE4555D2AC8E49B00569414 /* HapticFeedbackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE4555C2AC8E49B00569414 /* HapticFeedbackGenerator.swift */; };
 		FEE455632AD73FF700569414 /* HapticFeedbackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE4555C2AC8E49B00569414 /* HapticFeedbackGenerator.swift */; };
 		FEE608602B1564FF00CEA999 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5C20262B007828008A9B1A /* Logger.swift */; };
+		FEE608622B15722400CEA999 /* AudioRecordingPathGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE608612B15722400CEA999 /* AudioRecordingPathGenerator.swift */; };
+		FEE608632B15722A00CEA999 /* AudioRecordingPathGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE608612B15722400CEA999 /* AudioRecordingPathGenerator.swift */; };
 		FEF627572AF86390003DC443 /* TournamentEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF627562AF86390003DC443 /* TournamentEntry.swift */; };
 		FEF627582AF86390003DC443 /* TournamentEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF627562AF86390003DC443 /* TournamentEntry.swift */; };
 /* End PBXBuildFile section */
@@ -224,6 +226,7 @@
 		FEE455552AC8BE5400569414 /* AudioClassifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioClassifier.swift; sourceTree = "<group>"; };
 		FEE455582AC8C17500569414 /* DrillRecordingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillRecordingViewModel.swift; sourceTree = "<group>"; };
 		FEE4555C2AC8E49B00569414 /* HapticFeedbackGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticFeedbackGenerator.swift; sourceTree = "<group>"; };
+		FEE608612B15722400CEA999 /* AudioRecordingPathGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecordingPathGenerator.swift; sourceTree = "<group>"; };
 		FEF627562AF86390003DC443 /* TournamentEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentEntry.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -415,6 +418,8 @@
 				75D1135B2ABE2E7B00BF8874 /* Assets.xcassets */,
 				75D1135D2ABE2E7B00BF8874 /* DrillBuddy.entitlements */,
 				75D113612ABE2E7B00BF8874 /* Info.plist */,
+				FEE608612B15722400CEA999 /* AudioRecordingPathGenerator.swift */,
+				FE5C20262B007828008A9B1A /* Logger.swift */,
 				FEE455472AC8BB3300569414 /* Audio */,
 				75D113742ABE4ED200BF8874 /* Extensions */,
 				FE66290B2AF30B750059B521 /* Firebase */,
@@ -422,7 +427,6 @@
 				FEE4555B2AC8E48900569414 /* Services */,
 				FE254A2A2AE9DFD7000602AA /* Sounds */,
 				FE1D1D062AF45E3900BF8506 /* View Modifiers */,
-				FE5C20262B007828008A9B1A /* Logger.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -793,6 +797,7 @@
 				FE5C20242B0033D7008A9B1A /* DrillParameterInfoFactory.swift in Sources */,
 				FEE455572AC8BE5400569414 /* AudioClassifier.swift in Sources */,
 				754838852ABE7B8600146415 /* View+Extension.swift in Sources */,
+				FEE608632B15722A00CEA999 /* AudioRecordingPathGenerator.swift in Sources */,
 				7572F0372AC24AAE001E2F3C /* SyncResponse.swift in Sources */,
 				FE254A222AE851CD000602AA /* DrillEntry.swift in Sources */,
 				FE5C20112AF9C284008A9B1A /* Leaderboard.swift in Sources */,
@@ -835,6 +840,7 @@
 				FE1D1CF82AF324A700BF8506 /* AuthenticationView.swift in Sources */,
 				FEF627572AF86390003DC443 /* TournamentEntry.swift in Sources */,
 				FE254A362AEDCE32000602AA /* TournamentsListView.swift in Sources */,
+				FEE608622B15722400CEA999 /* AudioRecordingPathGenerator.swift in Sources */,
 				FEE455532AC8BE4C00569414 /* ClassificationResultsSubject.swift in Sources */,
 				7572F0282ABFB326001E2F3C /* WatchSessionDelegate.swift in Sources */,
 				FE1D1CFC2AF3303D00BF8506 /* LocalizedErrorInfo.swift in Sources */,

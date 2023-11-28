@@ -41,44 +41,9 @@ class AudioRecorder: NSObject, AVAudioRecorderDelegate, ObservableObject {
     
     // MARK: - Public Methods
     
-    func startRecording(
-        folderName: String,
-        fileName: String,
-        fileExtension: String = "m4a",
-        settings: RecorderSettings = .default
-    ) throws -> URL? {
-        guard audioRecorder == nil else {
-            LogManager.log(.warning, module: .audioRecorder, message: "Attemping to start recording while another recording is in progress. Aborting")
-            return nil
-        }
-
-        let documentsDirectory = FileManager.default.documentsDirectory
-        let folderURL = documentsDirectory.appendingPathComponent(folderName)
-        
-        do {
-            try FileManager.default.createDirectory(at: folderURL, withIntermediateDirectories: true)
-            
-            let audioURL = folderURL.appendingPathComponent("\(fileName).\(fileExtension)")
-            LogManager.log(.trace, module: .audioRecorder, message: "Will record audio to: \(audioURL)")
-
-            do {
-                try startRecording(audioURL: audioURL)
-                return audioURL
-            } catch {
-                LogManager.log(.error, module: .audioRecorder, message: "Failed to start audio recording at: \(audioURL), with error: \(error) ")
-                stopRecording()
-                throw error
-            }
-            
-        } catch {
-            LogManager.log(.error, module: .audioRecorder, message: "Failed to create directory at url: \(folderURL) with error: \(error)")
-            throw error
-        }
-    }
-    
     @discardableResult
     func startRecording(audioURL: URL, settings: RecorderSettings = .default, isMeteringEnabled: Bool = false) throws -> AVAudioRecorder {
-        LogManager.log(.trace, module: .audioRecorder, message: "Audio recorder will save new recording to: \(audioURL)")
+        LogManager.log(.trace, module: .audioRecorder, message: "Will record audio to: \(audioURL)")
         
         do {
             let audioRecorder = try AVAudioRecorder(url: audioURL, settings: settings.dictionary)

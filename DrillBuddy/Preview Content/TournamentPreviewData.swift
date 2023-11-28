@@ -73,8 +73,7 @@ actor TournamentPreviewData {
             DrillEntry(time: 1.2, confidence: 1),
             DrillEntry(time: 1.5, confidence: 1),
             DrillEntry(time: 2, confidence: 1),
-        ],
-        recordingURL: URL(string: "http://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Kangaroo_MusiQue_-_The_Neverwritten_Role_Playing_Game.mp3")!
+        ]
     )
 }
 

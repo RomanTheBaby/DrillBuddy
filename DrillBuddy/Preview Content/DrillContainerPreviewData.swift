@@ -76,8 +76,7 @@ actor DrillSessionsContainerSampleData {
                     DrillEntry(time: 10, confidence: 1),
                     DrillEntry(time: 15, confidence: 1),
                     DrillEntry(time: 25, confidence: 1),
-                ],
-                recordingURL: testAudioURL
+                ]
             ),
             Drill(
                 date: Date().addingTimeInterval(-10),
@@ -86,8 +85,7 @@ actor DrillSessionsContainerSampleData {
                     DrillEntry(time: 4, confidence: 0.95),
                     DrillEntry(time: 5, confidence: 1),
                     DrillEntry(time: 7, confidence: 1),
-                ],
-                recordingURL: testAudioURL
+                ]
             ),
             Drill(
                 date: Date().addingTimeInterval(-15),
@@ -129,8 +127,7 @@ actor DrillSessionsContainerSampleData {
                     DrillEntry(time: 3, confidence: 0.9),
                     DrillEntry(time: 3.5, confidence: 0.9),
                     DrillEntry(time: 4, confidence: 0.9),
-                ],
-                recordingURL: URL(string: "google.com")!
+                ]
             ),
         ]
         
@@ -194,8 +191,7 @@ actor DrillSessionsContainerSampleData {
                     DrillEntry(time: 2, confidence: 0.9),
                     DrillEntry(time: 9, confidence: 0.9),
                     DrillEntry(time: 12, confidence: 0.9),
-                ],
-                recordingURL: URL(string: "google.com")!
+                ]
             ),
         ]
         

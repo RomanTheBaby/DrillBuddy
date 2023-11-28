@@ -67,7 +67,15 @@ class FirestoreService {
     
     func submit(entry: TournamentEntry, for tournament: Tournament, as user: UserInfo) async throws {
         do {
-            let recordingData = try Data(contentsOf: entry.recordingURL)
+            guard let recordingURL = entry.recordingURL else {
+                throw LocalizedErrorInfo(
+                    failureReason: "Missing audio file for tournament entry",
+                    errorDescription: "Unable to submit tournament entry as missing audio recording.",
+                    recoverySuggestion: "Please try again or contact support."
+                )
+            }
+            
+            let recordingData = try Data(contentsOf: recordingURL)
             
             let leaderboardEntry = Leaderboard.Entry(
                 userId: user.id,
@@ -98,7 +106,7 @@ class FirestoreService {
                 throw error
             }
         } catch {
-            LogManager.log(.error, module: .firestoreService, message: "Failed to get data from audio at \(entry.recordingURL) with error: \(error)")
+            LogManager.log(.error, module: .firestoreService, message: "Failed to get data from audio at \(entry.recordingURL?.absoluteString ?? "no url") with error: \(error)")
             throw error
         }
         

@@ -17,7 +17,6 @@ class Drill: Identifiable, Hashable, Equatable, CustomStringConvertible {
         var id: UUID
         var date: Date
         var sounds: [DrillEntry]
-        var recordingURL: URL?
     }
     
     // MARK: - Properties
@@ -28,7 +27,6 @@ class Drill: Identifiable, Hashable, Equatable, CustomStringConvertible {
     @Attribute(.unique)
     private(set) var date: Date
     private(set) var sounds: [DrillEntry]
-    private(set) var recordingURL: URL?
     
     @Relationship(inverse: \DrillsSessionsContainer.drills) var container: DrillsSessionsContainer?
     
@@ -37,33 +35,42 @@ class Drill: Identifiable, Hashable, Equatable, CustomStringConvertible {
         SendableRepresentation(
             id: id,
             date: date,
-            sounds: sounds,
-            recordingURL: recordingURL
+            sounds: sounds
         )
+    }
+    
+    @Transient
+    var recordingURL: URL? {
+        try? AudioRecordingPathGenerator.path(for: self, createMissingDirectories: false)
     }
     
     // MARK: CustomStringConvertible
     
     @Transient
     var description: String {
-        "Drill(id: \(id), date: \(date), entries: \(sounds), recordingURL: \(recordingURL?.absoluteString ?? "NO_URL"))"
+        """
+        Drill(
+        id: \(id),
+        date: \(date), 
+        entries: \(sounds),
+        recordingURL: \((try? AudioRecordingPathGenerator.path(for: self, createMissingDirectories: false))?.absoluteString ?? "no recording")
+        )
+        """
     }
     
     // MARK: - Init
     
-    init(id: UUID = UUID(), date: Date = Date(), sounds: [DrillEntry], recordingURL: URL? = nil) {
+    init(id: UUID = UUID(), date: Date = Date(), sounds: [DrillEntry]) {
         self.id = id
         self.date = date
         self.sounds = sounds
-        self.recordingURL = recordingURL
     }
     
     convenience init(sendableRepresentation: SendableRepresentation) {
         self.init(
             id: sendableRepresentation.id,
             date: sendableRepresentation.date,
-            sounds: sendableRepresentation.sounds,
-            recordingURL: sendableRepresentation.recordingURL
+            sounds: sendableRepresentation.sounds
         )
     }
     
@@ -73,7 +80,6 @@ class Drill: Identifiable, Hashable, Equatable, CustomStringConvertible {
         hasher.combine(id)
         hasher.combine(date)
         hasher.combine(sounds)
-        hasher.combine(recordingURL)
     }
     
     // MARK: - Equatable
@@ -82,6 +88,5 @@ class Drill: Identifiable, Hashable, Equatable, CustomStringConvertible {
         lhs.id == rhs.id
             && lhs.date == rhs.date
             && lhs.sounds == rhs.sounds
-            && lhs.recordingURL == rhs.recordingURL
     }
 }

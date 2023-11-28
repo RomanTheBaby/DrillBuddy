@@ -25,12 +25,22 @@ struct AudioView: View {
     
     // MARK: - Init
     
-    init(audioURL: URL) {
-        audioPlayer = try! AVAudioPlayer(contentsOf: audioURL)
+    init?(audioURL: URL) {
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: URL(filePath: audioURL.relativePath))
+        } catch {
+            LogManager.log(.fault, module: .audioView, message: "Failed to initialize player with url: \(audioURL), with error: \(error)")
+            return nil
+        }
     }
     
-    init(audioData: Data) {
-        audioPlayer = try! AVAudioPlayer(data: audioData)
+    init?(audioData: Data) {
+        do {
+            audioPlayer = try AVAudioPlayer(data: audioData)
+        } catch {
+            LogManager.log(.fault, module: .audioView, message: "Failed to initialize player with data \(audioData), with error: \(error)")
+            return nil
+        }
     }
     
     // MARK: - View
@@ -125,3 +135,5 @@ struct AudioView: View {
         audioURL: DrillSessionsContainerSampleData.testAudioURL
     )
 }
+
+//URL(string: "http://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Kangaroo_MusiQue_-_The_Neverwritten_Role_Playing_Game.mp3")!

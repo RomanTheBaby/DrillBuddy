@@ -21,15 +21,18 @@ class TournamentEntry: CustomStringConvertible {
     @Attribute(.unique)
     private(set) var date: Date
     private(set) var sounds: [DrillEntry]
-    private(set) var recordingURL: URL
+    
+    @Transient
+    var recordingURL: URL? {
+        try? AudioRecordingPathGenerator.pathForRecording(at: date, createMissingDirectories: false)
+    }
     
     // MARK: CustomStringConvertible
     
     @Transient
     var description: String {
-        "TournamentEntry(tournamentId: \(tournamentId), date: \(date)), sounds: \(sounds), recordingURL: \(recordingURL))"
+        "TournamentEntry(tournamentId: \(tournamentId), date: \(date)), sounds: \(sounds), recordingURL: \(recordingURL?.absoluteString ?? "no recording"))"
     }
-    
     
     // MARK: - Init
     
@@ -37,14 +40,12 @@ class TournamentEntry: CustomStringConvertible {
         tournamentId: String,
         userId: String,
         date: Date,
-        sounds: [DrillEntry],
-        recordingURL: URL
+        sounds: [DrillEntry]
     ) {
         self.tournamentId = tournamentId
         self.userId = userId
         self.date = date
         self.sounds = sounds
-        self.recordingURL = recordingURL
     }
     
 }

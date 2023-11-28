@@ -70,8 +70,10 @@ struct DrillDetailView: View {
             }
             .padding(.horizontal)
             
-            if let recordingURL = drill.recordingURL {
-                AudioView(audioURL: recordingURL)
+            
+            if let recordingURL = drill.recordingURL,
+               let audioView = AudioView(audioURL: recordingURL) {
+                audioView
                     .padding(.horizontal)
             }
             

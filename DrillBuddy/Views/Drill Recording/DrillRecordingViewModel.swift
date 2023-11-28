@@ -69,8 +69,6 @@ class DrillRecordingViewModel: ObservableObject {
     
     private let modelContext: ModelContext
     
-    private var audioRecordingURL: URL?
-    
     private var soundIdentifyingCancellable: AnyCancellable?
     private var timerCancellable: AnyCancellable?
     
@@ -203,10 +201,19 @@ class DrillRecordingViewModel: ObservableObject {
             return
         }
         
-        audioRecordingURL = try audioRecorder.startRecording(
-            folderName: DateFormatter.audioFolderName.string(from: startDate),
-            fileName: DateFormatter.audioFileName.string(from: startDate)
-        )
+        do {
+            let recordingURL = try AudioRecordingPathGenerator.pathForRecording(at: startDate)
+            
+            do {
+                try audioRecorder.startRecording(audioURL: recordingURL)
+            } catch {
+                LogManager.log(.fault, module: .drillRecording, message: "Failed to start recording audio at: \(recordingURL) with error: \(error)")
+                throw error
+            }
+        } catch {
+            LogManager.log(.fault, module: .drillRecording, message: "Failed to generate recording for audio with error: \(error)")
+            throw error
+        }
     }
     
     private func handleDetectedSound(_ detectedSoundInfo: SoundIdentifier.DetectedSoundInfo, detectedDate: Date = Date()) {
@@ -247,11 +254,6 @@ class DrillRecordingViewModel: ObservableObject {
         drillEntries: [DrillEntry]
     ) {
         if let tournament {
-            guard let audioRecordingURL else {
-                self.error = LocalizedErrorInfo(errorDescription: "Failed to record audio", recoverySuggestion: "Please try again")
-                return
-            }
-            
             guard let currentUser else {
                 self.error = LocalizedErrorInfo(errorDescription: "Failed to save submission", recoverySuggestion: "Please log in and try again")
                 return
@@ -261,8 +263,7 @@ class DrillRecordingViewModel: ObservableObject {
                 tournamentId: tournament.id,
                 userId: currentUser.id,
                 date: startDate,
-                sounds: drillEntries,
-                recordingURL: audioRecordingURL
+                sounds: drillEntries
             )
             LogManager.log(.info, module: .drillRecording, message: "Did create tournament entry: \(tournamentEntry)")
             self.tournamentEntry = tournamentEntry
@@ -309,7 +310,7 @@ class DrillRecordingViewModel: ObservableObject {
                 modelContext.insert(container)
             }
             
-            let drill = Drill(date: startDate, sounds: drillEntries, recordingURL: audioRecordingURL)
+            let drill = Drill(date: startDate, sounds: drillEntries)
             container.addDrills([drill])
             
             return drill

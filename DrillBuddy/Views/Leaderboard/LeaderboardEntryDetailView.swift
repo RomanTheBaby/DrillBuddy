@@ -30,7 +30,6 @@ struct LeaderboardEntryDetailView: View {
                 .padding(.top)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .font(.system(.largeTitle, weight: .bold))
-            Spacer()
 
             Text("Summary: ")
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -68,6 +67,8 @@ struct LeaderboardEntryDetailView: View {
                 .font(.system(.title2, weight: .bold))
             
             AudioView(audioData: entry.recordingData)
+
+            Spacer()
             
             if canBeReported {
                 Button(action: {
@@ -78,8 +79,6 @@ struct LeaderboardEntryDetailView: View {
                         .foregroundStyle(Color.red)
                 })
             }
-            
-            Spacer()
             
             Button(action: {
                 dismiss()

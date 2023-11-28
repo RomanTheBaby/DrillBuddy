@@ -281,23 +281,30 @@ struct TournamentDetailView: View {
             do {
                 self.leaderboard = try await firestoreService.fetchLeaderboard(for: tournament)
             } catch {
-                let recordingData = try! Data(contentsOf: tournamentEntry.recordingURL)
-                
-                let leaderboardEntry = Leaderboard.Entry(
-                    userId: user.id,
-                    username: user.username,
-                    recordingDate: tournamentEntry.date,
-                    recordingData: recordingData,
-                    firstShotDelay: tournamentEntry.sounds[0].time,
-                    shotsSplit: tournamentEntry.sounds.averageSplit,
-                    totalTime: tournamentEntry.sounds[tournamentEntry.sounds.count - 1].time
-                )
-                
-                self.leaderboard = Leaderboard(
-                    id: leaderboard.id,
-                    entries: leaderboard.entries + [leaderboardEntry],
-                    tournamentID: leaderboard.tournamentID
-                )
+                do {
+                    guard let recordingURL = tournamentEntry.recordingURL else {
+                        throw LocalizedErrorInfo(failureReason: "Unable to submit entry. Failed to retrieve audio")
+                    }
+                    let recordingData = try Data(contentsOf: recordingURL)
+                    
+                    let leaderboardEntry = Leaderboard.Entry(
+                        userId: user.id,
+                        username: user.username,
+                        recordingDate: tournamentEntry.date,
+                        recordingData: recordingData,
+                        firstShotDelay: tournamentEntry.sounds[0].time,
+                        shotsSplit: tournamentEntry.sounds.averageSplit,
+                        totalTime: tournamentEntry.sounds[tournamentEntry.sounds.count - 1].time
+                    )
+                    
+                    self.leaderboard = Leaderboard(
+                        id: leaderboard.id,
+                        entries: leaderboard.entries + [leaderboardEntry],
+                        tournamentID: leaderboard.tournamentID
+                    )
+                } catch {
+                    entrySubmissionError = error
+                }
             }
         } catch {
             entrySubmissionError = error
