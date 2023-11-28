@@ -6,7 +6,6 @@
 //
 
 import AVFoundation
-import OSLog
 import SwiftUI
 import SwiftData
 
@@ -211,20 +210,11 @@ struct SessionsListView: View {
                 do {
                     try FileManager.default.removeItem(at: recordingURL)
                 } catch {
-                    Logger.sessionsListView.error("Failed to remove audio recording at url: \(recordingURL) with error: \(error)")
+                    LogManager.log(.error, module: .sessionsListView, message: "Failed to remove audio recording at url: \(recordingURL) with error: \(error)")
                 }
             }
         }
     }
-}
-
-// MARK: - Logger
-
-private extension Logger {
-    static let sessionsListView = Logger(
-        subsystem: Bundle.main.bundleIdentifier ?? "DrillBuddy.SessionsListView",
-        category: String(describing: SessionsListView.self)
-    )
 }
 
 // MARK: - Previews

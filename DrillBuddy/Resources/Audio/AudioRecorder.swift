@@ -9,7 +9,6 @@ import AVFoundation
 import CoreAudio
 import Combine
 import Foundation
-import OSLog
 import SoundAnalysis
 
 // NSObject inheritance required to conform to `AVAudioRecorderDelegate`
@@ -49,7 +48,7 @@ class AudioRecorder: NSObject, AVAudioRecorderDelegate, ObservableObject {
         settings: RecorderSettings = .default
     ) throws -> URL? {
         guard audioRecorder == nil else {
-            Logger.audioRecorder.warning("Attemping to start recording while another recording is in progress. Aborting")
+            LogManager.log(.warning, module: .audioRecorder, message: "Attemping to start recording while another recording is in progress. Aborting")
             return nil
         }
 
@@ -60,27 +59,26 @@ class AudioRecorder: NSObject, AVAudioRecorderDelegate, ObservableObject {
             try FileManager.default.createDirectory(at: folderURL, withIntermediateDirectories: true)
             
             let audioURL = folderURL.appendingPathComponent("\(fileName).\(fileExtension)")
-            print(">>>Record audio to: ", audioURL)
-            Logger.audioRecorder.trace("Audio recorder will save new recording to: \(audioURL)")
+            LogManager.log(.trace, module: .audioRecorder, message: "Will record audio to: \(audioURL)")
 
             do {
                 try startRecording(audioURL: audioURL)
                 return audioURL
             } catch {
-                Logger.audioRecorder.error("Failed to start audio recording at: \(audioURL), with error: \(error) ")
+                LogManager.log(.error, module: .audioRecorder, message: "Failed to start audio recording at: \(audioURL), with error: \(error) ")
                 stopRecording()
                 throw error
             }
             
         } catch {
-            Logger.audioRecorder.error("Failed to create directory at url: \(folderURL) with error: \(error)")
+            LogManager.log(.error, module: .audioRecorder, message: "Failed to create directory at url: \(folderURL) with error: \(error)")
             throw error
         }
     }
     
     @discardableResult
     func startRecording(audioURL: URL, settings: RecorderSettings = .default, isMeteringEnabled: Bool = false) throws -> AVAudioRecorder {
-        Logger.audioRecorder.trace("Audio recorder will save new recording to: \(audioURL)")
+        LogManager.log(.trace, module: .audioRecorder, message: "Audio recorder will save new recording to: \(audioURL)")
         
         do {
             let audioRecorder = try AVAudioRecorder(url: audioURL, settings: settings.dictionary)
@@ -92,7 +90,7 @@ class AudioRecorder: NSObject, AVAudioRecorderDelegate, ObservableObject {
             self.audioRecorder = audioRecorder
             return audioRecorder
         } catch {
-            Logger.audioRecorder.error("Failed to start audio recording at: \(audioURL), with error: \(error) ")
+            LogManager.log(.error, module: .audioRecorder, message: "Failed to start audio recording at: \(audioURL), with error: \(error) ")
             stopRecording()
             throw error
         }
@@ -107,7 +105,7 @@ class AudioRecorder: NSObject, AVAudioRecorderDelegate, ObservableObject {
     
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         if !flag {
-            Logger.audioRecorder.error("Audio recorder finished recording unsuccessfully")
+            LogManager.log(.error, module: .audioRecorder, message: "Audio recorder finished recording unsuccessfully")
             stopRecording()
         }
     }
@@ -115,7 +113,7 @@ class AudioRecorder: NSObject, AVAudioRecorderDelegate, ObservableObject {
     /* if an error occurs while encoding it will be reported to the delegate. */
     func audioRecorderEncodeErrorDidOccur(_ recorder: AVAudioRecorder, error: Error?) {
         if let error {
-            Logger.audioRecorder.trace("Audio recorder encode error did occur \(error)")
+            LogManager.log(.trace, module: .audioRecorder, message: "Audio recorder encode error did occur \(error)")
         }
     }
 }
@@ -128,13 +126,4 @@ private extension FileManager {
         let documentsDirectory = paths[0]
         return documentsDirectory
     }
-}
-
-// MARK: - Logger
-
-private extension Logger {
-    static let audioRecorder = Logger(
-        subsystem: Bundle.main.bundleIdentifier ?? "DrillBuddy.AudioRecorder",
-        category: String(describing: AudioRecorder.self)
-    )
 }

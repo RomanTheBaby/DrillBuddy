@@ -9,7 +9,6 @@ import Foundation
 import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
-import OSLog
 
 // MARK: - AuthenticationService
 
@@ -33,7 +32,7 @@ class AuthenticationService {
             let authDataResult = try await Auth.auth().signIn(withEmail: email, password: password)
             return UserInfo(firebaseUser: authDataResult.user)
         } catch {
-            Logger.authenticationService.error("Failed to sign in with error: \(error)")
+            LogManager.log(.error, module: .authenticationService, message: "Failed to sign in with error: \(error)")
             
             // So Google's response structure is weird.
             // Actual error can be an underlying error or it may not be,
@@ -72,15 +71,15 @@ class AuthenticationService {
                         email: authDataResult.user.email ?? ""
                     )
                 } catch {
-                    Logger.authenticationService.error("Failed to update username with error: \(error)")
+                    LogManager.log(.error, module: .authenticationService, message: "Failed to update username with error: \(error)")
                     return UserInfo(firebaseUser: authDataResult.user)
                 }
             } catch {
-                Logger.authenticationService.error("Failed to sign up with error: \(error)")
+                LogManager.log(.error, module: .authenticationService, message: "Failed to sign up with error: \(error)")
                 throw error
             }
         } catch {
-            Logger.authenticationService.error("Failed to validate usernames with error: \(error)")
+            LogManager.log(.error, module: .authenticationService, message: "Failed to validate usernames with error: \(error)")
             throw error
         }
     }
@@ -89,7 +88,7 @@ class AuthenticationService {
         do {
             try Auth.auth().signOut()
         } catch {
-            Logger.authenticationService.error("Failed to log out with error: \(error)")
+            LogManager.log(.error, module: .authenticationService, message: "Failed to log out with error: \(error)")
         }
     }
     
@@ -100,13 +99,4 @@ class AuthenticationService {
         changeRequest.displayName = newUsername
         try await changeRequest.commitChanges()
     }
-}
-
-// MARK: - Logger
-
-private extension Logger {
-    static let authenticationService = Logger(
-        subsystem: Bundle.main.bundleIdentifier ?? "DrillBuddy.AuthenticationService",
-        category: String(describing: AuthenticationService.self)
-    )
 }

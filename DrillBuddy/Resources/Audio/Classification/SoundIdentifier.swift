@@ -8,7 +8,6 @@
 import Combine
 import Foundation
 import SoundAnalysis
-import OSLog
 
 class SoundIdentifier {
     
@@ -106,13 +105,13 @@ class SoundIdentifier {
                 
                 for soundType in validSoundTypes {
                     guard let classification = classificationResult.classification(forIdentifier: soundType.identifier) else {
-                        Logger.soundIdentifier.error("no classification for \(soundType.identifier), got: \(classificationResult.classifications.map(\.identifier))")
+                        LogManager.log(.error, module: .soundIdentifier, message: "no classification for \(soundType.identifier), got: \(classificationResult.classifications.map(\.identifier))")
                         continue
                     }
                     
                     guard classification.confidence > minRequiredConfidence else {
                         if classification.confidence > 0.1 {
-                            Logger.soundIdentifier.trace("confidence requirements not met for audio type: \(classification.identifier), confidence: \(classification.confidence)")
+                            LogManager.log(.trace, module: .soundIdentifier, message: "confidence requirements not met for audio type: \(classification.identifier), confidence: \(classification.confidence)")
                         }
                         continue
                     }
@@ -156,24 +155,14 @@ class SoundIdentifier {
             let validSoundLabels = try Self.getAllPossibleLabels()
             return soundTypes.filter { soundType in
                 if validSoundLabels.contains(soundType.identifier) == false {
-                    Logger.soundIdentifier.error("Not able to verify sound: \(soundType.identifier, privacy: .public)")
+                    LogManager.log(.error, module: .soundIdentifier, message: "Not able to verify sound: \(soundType.identifier)")
                     return false
                 }
                 return true
             }
         } catch {
-            Logger.soundIdentifier.error("Failed to get possible sound labels with error: \(error, privacy: .public)")
+            LogManager.log(.error, module: .soundIdentifier, message: "Failed to get possible sound labels with error: \(error)")
             return []
         }
     }
-}
-
-
-// MARK: - Logger
-
-private extension Logger {
-    static let soundIdentifier = Logger(
-        subsystem: Bundle.main.bundleIdentifier ?? "DrillBuddy.AudioRecorder",
-        category: String(describing: SoundIdentifier.self)
-    )
 }

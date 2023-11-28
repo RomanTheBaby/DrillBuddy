@@ -6,7 +6,6 @@
 //
 
 import Combine
-import OSLog
 import SwiftData
 import WatchConnectivity
 
@@ -50,12 +49,12 @@ final class WatchDataSynchronizer: ObservableObject {
                         continuation.resume(throwing: error)
                     }
                 } errorHandler: { error in
-                    Logger.watchDataSynchronizer.error("Failed to send data to iPhone with error: \(error)")
+                    LogManager.log(.error, module: .watchDataSynchronizer, message: "Failed to send data to iPhone with error: \(error)")
                     assertionFailure("Failed to sync data with error: \(error)")
                     continuation.resume(throwing: error)
                 }
             } catch {
-                Logger.watchDataSynchronizer.error("Failed to encode sync data with error: \(error)")
+                LogManager.log(.error, module: .watchDataSynchronizer, message: "Failed to encode sync data with error: \(error)")
                 assertionFailure()
                 continuation.resume(throwing: error)
             }
@@ -65,14 +64,14 @@ final class WatchDataSynchronizer: ObservableObject {
     // MARK: - Private Methods
     
     private func handlerSyncReplyData(_ replyData: Data, for syncData: SyncData) throws {
-        Logger.watchDataSynchronizer.trace("Did Receive reply data")
+        LogManager.log(.trace, module: .watchDataSynchronizer, message: "Did Receive reply data")
         
         do {
             let syncResponse = try jsonDecoder.decode(SyncResponse.self, from: replyData)
             
             switch syncResponse.result {
             case .success:
-                Logger.watchDataSynchronizer.trace("Sync response says success")
+                LogManager.log(.trace, module: .watchDataSynchronizer, message: "Sync response says success")
 
                 if let drillContainersData = syncData.drillContainers {
                     let sentContainersStorage = drillContainersData.reduce([Date: DrillsSessionsContainer.SendableRepresentation]()) { partialResult, sendableContainer in
@@ -88,7 +87,7 @@ final class WatchDataSynchronizer: ObservableObject {
                     do {
                         let syncedContainers = try modelContext.fetch(FetchDescriptor<DrillsSessionsContainer>(predicate: predicate))
                         
-                        Logger.watchDataSynchronizer.error("Will remove synced data from \(syncedContainers.count) container(s)")
+                        LogManager.log(.error, module: .watchDataSynchronizer, message: "Will remove synced data from \(syncedContainers.count) container(s)")
                         
                         for container in syncedContainers {
                             guard let sentContainer = sentContainersStorage[container.date] else {
@@ -102,38 +101,28 @@ final class WatchDataSynchronizer: ObservableObject {
                             }
                             
                             if syncedDrills.count == container.drills.count {
-                                Logger.watchDataSynchronizer.trace("Will delete full container for \(container.date)")
+                                LogManager.log(.trace, module: .watchDataSynchronizer, message: "Will delete full container for \(container.date)")
                                 modelContext.delete(container)
                             } else {
-                                Logger.watchDataSynchronizer.trace("Will \(syncedDrills.count) synced drills from container for \(container.date)")
+                                LogManager.log(.trace, module: .watchDataSynchronizer, message: "Will \(syncedDrills.count) synced drills from container for \(container.date)")
                                 syncedDrills.forEach(modelContext.delete)
                             }
                         }
                         
                     } catch {
-                        Logger.watchDataSynchronizer.error("Failed to fetch drill containers to cleanup after sync")
+                        LogManager.log(.error, module: .watchDataSynchronizer, message: "Failed to fetch drill containers to cleanup after sync")
                         throw error
                     }
                 }
                 
             case .error(let syncError):
-                Logger.watchDataSynchronizer.error("Sync response retuns failure with description: \(syncError)")
+                LogManager.log(.error, module: .watchDataSynchronizer, message: "Sync response retuns failure with description: \(syncError)")
                 throw syncError
             }
             
         } catch {
-            Logger.watchDataSynchronizer.error("Failed to decode sync response with error: \(error)")
+            LogManager.log(.error, module: .watchDataSynchronizer, message: "Failed to decode sync response with error: \(error)")
             throw error
         }
     }
-}
-
-
-// MARK: - Logger
-
-private extension Logger {
-    static let watchDataSynchronizer = Logger(
-        subsystem: Bundle.main.bundleIdentifier ?? "DrillBuddy.WatchConnectivity",
-        category: String(describing: WatchDataSynchronizer.self)
-    )
 }

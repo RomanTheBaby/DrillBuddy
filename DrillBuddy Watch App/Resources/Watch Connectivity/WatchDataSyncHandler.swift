@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import OSLog
 import SwiftData
 
 
@@ -26,11 +25,11 @@ class WatchDataSyncHandler {
     
     func handleSyncData(_ syncData: SyncData) throws {
         guard let drillContainersData = syncData.drillContainers else {
-            Logger.watchSyncHandler.trace("No drill containers to sync")
+            LogManager.log(.trace, module: .watchDataSyncHandler, message: "No drill containers to sync")
             return
         }
         
-        Logger.watchSyncHandler.trace("Did Receive \(drillContainersData.count) drill containers to sync")
+        LogManager.log(.trace, module: .watchDataSyncHandler, message: "Did Receive \(drillContainersData.count) drill containers to sync")
         
         do {
             let syncedContainersDates = Set<Date>(drillContainersData.map(\.date))
@@ -48,25 +47,16 @@ class WatchDataSyncHandler {
             drillContainersData.forEach { drillContainerData in
                 if let localContainer = existingContainersDict[drillContainerData.date] {
                     let insertedDrillsCount = localContainer.addDrills(drillContainerData.drills.map(Drill.init(sendableRepresentation:)))
-                    Logger.watchSyncHandler.trace("Container already exists for \(drillContainerData.date), inserted missing containers: \(insertedDrillsCount)")
+                    LogManager.log(.trace, module: .watchDataSyncHandler, message: "Container already exists for \(drillContainerData.date), inserted missing containers: \(insertedDrillsCount)")
                 } else {
-                    Logger.watchSyncHandler.trace("No container found for \(drillContainerData.date), inserting all data")
+                    LogManager.log(.trace, module: .watchDataSyncHandler, message: "No container found for \(drillContainerData.date), inserting all data")
                     DrillsSessionsContainer(context: modelContext, sendableRepresentation: drillContainerData)
                 }
             }
         } catch {
-            Logger.watchSyncHandler.error("Failed to fetch existing drills with error: \(error)")
+            LogManager.log(.error, module: .watchDataSyncHandler, message: "Failed to fetch existing drills with error: \(error)")
             assertionFailure()
             throw error
         }
     }
-}
-
-// MARK: - Logger
-
-private extension Logger {
-    static let watchSyncHandler = Logger(
-        subsystem: Bundle.main.bundleIdentifier ?? "DrillBuddy.WatchDataSyncHandler",
-        category: String(describing: WatchSessionDelegate.self)
-    )
 }

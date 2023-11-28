@@ -6,7 +6,7 @@
 //
 
 import Combine
-import OSLog
+import Foundation
 import SwiftData
 
 class DrillRecordingViewModel: ObservableObject {
@@ -137,14 +137,14 @@ class DrillRecordingViewModel: ObservableObject {
                 guard let self else {
                     return
                 }
-                Logger.drillRecording.debug("Detected sound of type: \(detectedSoundInfo.soundType.identifier), confidence: \(detectedSoundInfo.confidence)")
+                LogManager.log(.debug, module: .drillRecording, message: "Detected sound of type: \(detectedSoundInfo.soundType.identifier), confidence: \(detectedSoundInfo.confidence)")
                 self.handleDetectedSound(detectedSoundInfo)
             }
 
             do {
                 try startRecordingAudioIfNeeded()
             } catch {
-                Logger.drillRecording.error("Failed to start recording audio with error: \(error)")
+                LogManager.log(.error, module: .drillRecording, message: "Failed to start recording audio with error: \(error)")
                 stopRecording()
                 self.error = error
             }
@@ -158,7 +158,7 @@ class DrillRecordingViewModel: ObservableObject {
             HapticFeedbackGenerator.generateFeedback(.success)
             #endif
         } catch {
-            Logger.drillRecording.error("Failed to start identifying sounds with error: \(error)")
+            LogManager.log(.error, module: .drillRecording, message: "Failed to start identifying sounds with error: \(error)")
             stopRecording()
             self.error = error
         }
@@ -189,7 +189,7 @@ class DrillRecordingViewModel: ObservableObject {
         do {
             try await firestoreService.submit(entry: tournamentEntry, for: tournament, as: user)
         } catch {
-            Logger.drillRecording.error("Failed to submit entry: \(tournamentEntry) with error: \(error)")
+            LogManager.log(.error, module: .drillRecording, message: "Failed to submit entry: \(tournamentEntry) with error: \(error)")
             self.error = error
         }
         showLoadingOverlay = false
@@ -264,7 +264,7 @@ class DrillRecordingViewModel: ObservableObject {
                 sounds: drillEntries,
                 recordingURL: audioRecordingURL
             )
-            Logger.drillRecording.info("Did create tournament entry: \(tournamentEntry)")
+            LogManager.log(.info, module: .drillRecording, message: "Did create tournament entry: \(tournamentEntry)")
             self.tournamentEntry = tournamentEntry
             return
         }
@@ -275,9 +275,9 @@ class DrillRecordingViewModel: ObservableObject {
                 startDate: startDate,
                 drillEntries: drillEntries
             ) {
-                Logger.drillRecording.info("Did create drill entry: \(savedDrill)")
+                LogManager.log(.info, module: .drillRecording, message: "Did create drill entry: \(savedDrill)")
             } else {
-                Logger.drillRecording.info("Did not save drill entry")
+                LogManager.log(.info, module: .drillRecording, message: "Did not save drill entry")
             }
             
         } catch {
@@ -292,7 +292,7 @@ class DrillRecordingViewModel: ObservableObject {
         drillEntries: [DrillEntry]
     ) throws -> Drill? {
         guard drillEntries.isEmpty == false else {
-            Logger.drillRecording.trace("No entries, will not create drill entry")
+            LogManager.log(.trace, module: .drillRecording, message: "No entries, will not create drill entry")
             return nil
         }
         
@@ -314,7 +314,7 @@ class DrillRecordingViewModel: ObservableObject {
             
             return drill
         } catch {
-            Logger.drillRecording.error("Failed to fetch container for date: \(containerFormattedDate) with error: \(error)")
+            LogManager.log(.error, module: .drillRecording, message: "Failed to fetch container for date: \(containerFormattedDate) with error: \(error)")
             throw error
         }
     }
@@ -334,14 +334,4 @@ private extension DateFormatter {
         dateFormatter.dateFormat = "h:mm-a"
         return dateFormatter
     }()
-}
-
-
-// MARK: - Logger
-
-private extension Logger {
-    static let drillRecording = Logger(
-        subsystem: Bundle.main.bundleIdentifier ?? "DrillBuddy.DrillRecordingViewModel",
-        category: String(describing: DrillRecordingViewModel.self)
-    )
 }

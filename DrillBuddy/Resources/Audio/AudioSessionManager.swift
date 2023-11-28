@@ -7,7 +7,6 @@
 
 import AVFoundation
 import Foundation
-import OSLog
 
 class AudioSessionManager {
     /// Configures and activates an AVAudioSession.
@@ -24,7 +23,7 @@ class AudioSessionManager {
             try audioSession.setCategory(category, mode: mode)
             try audioSession.setActive(true)
         } catch {
-            Logger.audioSessionManager.error("Failed to start audio session with error: \(error)")
+            LogManager.log(.error, module: .audioSessionManager, message: "Failed to start audio session with error: \(error)")
             stopAudioSession()
             throw error
         }
@@ -37,18 +36,8 @@ class AudioSessionManager {
             do {
                 try audioSession.setActive(false)
             } catch {
-                Logger.audioSessionManager.error("Failed to stop audio session with error: \(error)")
+                LogManager.log(.error, module: .audioSessionManager, message: "Failed to stop audio session with error: \(error)")
             }
         }
     }
-}
-
-
-// MARK: - Logger
-
-private extension Logger {
-    static let audioSessionManager = Logger(
-        subsystem: Bundle.main.bundleIdentifier ?? "DrillBuddy.AudioRecorder",
-        category: String(describing: AudioRecorder.self)
-    )
 }

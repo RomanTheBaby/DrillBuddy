@@ -8,7 +8,6 @@
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 import Foundation
-import OSLog
 
 
 /// Note: Firestore is not available on watchOS and App Clip targets.
@@ -30,12 +29,12 @@ class FirestoreService {
                         let tournament = try tournamentDocument.data(as: Tournament.self)
                         return tournament
                     } catch {
-                        Logger.firestoreService.error("Failed to decode tournament wih error: \(error). Tournament data: \(tournamentDocument.data())")
+                        LogManager.log(.error, module: .firestoreService, message: "Failed to decode tournament wih error: \(error). Tournament data: \(tournamentDocument.data())")
                         return nil
                     }
                 }
         } catch {
-            Logger.firestoreService.error("Failed to fetch tournaments with errror: \(error)")
+            LogManager.log(.error, module: .firestoreService, message: "Failed to fetch tournaments with errror: \(error)")
             throw error
         }
     }
@@ -44,7 +43,7 @@ class FirestoreService {
         do {
             try await database.collection(.tournaments).addDocument(from: tournament)
         } catch {
-            Logger.firestoreService.error("Failed to create with error: \(error)")
+            LogManager.log(.error, module: .firestoreService, message: "Failed to create with error: \(error)")
         }
     }
     
@@ -52,7 +51,7 @@ class FirestoreService {
         do {
             return try await fetchLeaderboard(withID: tournament.leaderboardID)
         } catch {
-            Logger.firestoreService.error("Failed to fetch leaderboard for tournament: \(tournament.id) with error: \(error)")
+            LogManager.log(.error, module: .firestoreService, message: "Failed to fetch leaderboard for tournament: \(tournament.id) with error: \(error)")
             throw error
         }
     }
@@ -61,7 +60,7 @@ class FirestoreService {
         do {
             return try await database.collection(.leaderboards).document(leaderboardId).getDocument(as: Leaderboard.self)
         } catch {
-            Logger.firestoreService.error("Failed to fetch leaderboard by id: \(leaderboardId) with error: \(error)")
+            LogManager.log(.error, module: .firestoreService, message: "Failed to fetch leaderboard by id: \(leaderboardId) with error: \(error)")
             throw error
         }
     }
@@ -89,17 +88,17 @@ class FirestoreService {
                     try await leaderboardReference.updateData([
                         "entries": FieldValue.arrayUnion([json])
                     ])
-                    Logger.firestoreService.info("Add entry to leaderboard \(tournament.leaderboardID)")
+                    LogManager.log(.info, module: .firestoreService, message: "Add entry to leaderboard \(tournament.leaderboardID)")
                 } catch {
-                    Logger.firestoreService.error("Failed to add leaderboard entry with error: \(error)")
+                    LogManager.log(.error, module: .firestoreService, message: "Failed to add leaderboard entry with error: \(error)")
                     throw error
                 }
             } catch {
-                Logger.firestoreService.error("Failed to encode leaderboard entry with error: \(error)")
+                LogManager.log(.error, module: .firestoreService, message: "Failed to encode leaderboard entry with error: \(error)")
                 throw error
             }
         } catch {
-            Logger.firestoreService.error("Failed to get data from audio at \(entry.recordingURL) with error: \(error)")
+            LogManager.log(.error, module: .firestoreService, message: "Failed to get data from audio at \(entry.recordingURL) with error: \(error)")
             throw error
         }
         
@@ -114,16 +113,16 @@ class FirestoreService {
                 entry.id: FieldValue.increment(Int64(1)),
                 "reporters": FieldValue.arrayUnion([reporter.id]),
             ]
-            Logger.firestoreService.info("Did fetch document data for leaderboard: \(leaderboardId)")
+            LogManager.log(.info, module: .firestoreService, message: "Did fetch document data for leaderboard: \(leaderboardId)")
             if document.exists {
                 try await leaderboardReportReferences.updateData(reportData)
             } else {
                 try await leaderboardReportReferences.setData(reportData)
             }
             
-            Logger.firestoreService.info("Did report entry: \(entry.id), on leaderboard: \(leaderboardId) by reporter: \(reporter.id)")
+            LogManager.log(.info, module: .firestoreService, message: "Did report entry: \(entry.id), on leaderboard: \(leaderboardId) by reporter: \(reporter.id)")
         } catch {
-            Logger.firestoreService.error("Failed to report entry: \(entry.id), on leaderboard: \(leaderboardId) with error: \(error)")
+            LogManager.log(.error, module: .firestoreService, message: "Failed to report entry: \(entry.id), on leaderboard: \(leaderboardId) with error: \(error)")
             throw error
         }
     }
@@ -132,7 +131,7 @@ class FirestoreService {
         do {
             do {
                 guard try await isUsernameAvailable(username) else {
-                    Logger.firestoreService.error("Failed to insert new username \(username) because it already exists")
+                    LogManager.log(.error, module: .firestoreService, message: "Failed to insert new username \(username) because it already exists")
                     throw LocalizedErrorInfo(
                         failureReason: "Username is a already taken",
                         errorDescription: "Username is a already taken by someone else",
@@ -142,11 +141,11 @@ class FirestoreService {
 
                 try await database.collection(.usernames).document(username).setData([:])
             } catch {
-                Logger.firestoreService.error("Failed to verify if username is a duplicate, before inserting, with error \(error)")
+                LogManager.log(.error, module: .firestoreService, message: "Failed to verify if username is a duplicate, before inserting, with error \(error)")
                 throw error
             }
         } catch {
-            Logger.firestoreService.error("Failed to add username \(username) with error: \(error)")
+            LogManager.log(.error, module: .firestoreService, message: "Failed to add username \(username) with error: \(error)")
             throw error
         }
     }
@@ -177,7 +176,7 @@ private extension CollectionReference {
                     }
                 }
             } catch {
-                Logger.firestoreService.trace("Failed to add document with error: \(error)")
+                LogManager.log(.trace, module: .firestoreService, message: "Failed to add document with error: \(error)")
                 continuation.resume(throwing: error)
             }
         }
@@ -203,18 +202,9 @@ private extension DocumentReference {
                     }
                 }
             } catch {
-                Logger.firestoreService.trace("Failed to set data to document with error: \(error)")
+                LogManager.log(.trace, module: .firestoreService, message: "Failed to set data to document with error: \(error)")
                 continuation.resume(throwing: error)
             }
         }
     }
-}
-
-// MARK: - Logger
-
-private extension Logger {
-    static let firestoreService = Logger(
-        subsystem: Bundle.main.bundleIdentifier ?? "DrillBuddy.FirestoreService",
-        category: String(describing: FirestoreService.self)
-    )
 }

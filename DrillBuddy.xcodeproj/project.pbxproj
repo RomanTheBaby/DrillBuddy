@@ -97,6 +97,7 @@
 		FE5C20232B003228008A9B1A /* DrillParameterInfoFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5C20222B003228008A9B1A /* DrillParameterInfoFactory.swift */; };
 		FE5C20242B0033D7008A9B1A /* DrillParameterInfoFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5C20222B003228008A9B1A /* DrillParameterInfoFactory.swift */; };
 		FE5C20252B0033DF008A9B1A /* DrillParameterInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5C201F2B001BA5008A9B1A /* DrillParameterInfoView.swift */; };
+		FE5C20272B007828008A9B1A /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5C20262B007828008A9B1A /* Logger.swift */; };
 		FE5C20292B00796C008A9B1A /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = FE5C20282B00796C008A9B1A /* FirebaseCrashlytics */; };
 		FE5F223C2AF2E7A600C83412 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = FE5F223B2AF2E7A600C83412 /* FirebaseAnalytics */; };
 		FE5F223E2AF2E7A600C83412 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FE5F223D2AF2E7A600C83412 /* FirebaseAnalyticsSwift */; };
@@ -124,6 +125,7 @@
 		FEE4555A2AC8C17500569414 /* DrillRecordingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE455582AC8C17500569414 /* DrillRecordingViewModel.swift */; };
 		FEE4555D2AC8E49B00569414 /* HapticFeedbackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE4555C2AC8E49B00569414 /* HapticFeedbackGenerator.swift */; };
 		FEE455632AD73FF700569414 /* HapticFeedbackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE4555C2AC8E49B00569414 /* HapticFeedbackGenerator.swift */; };
+		FEE608602B1564FF00CEA999 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5C20262B007828008A9B1A /* Logger.swift */; };
 		FEF627572AF86390003DC443 /* TournamentEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF627562AF86390003DC443 /* TournamentEntry.swift */; };
 		FEF627582AF86390003DC443 /* TournamentEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF627562AF86390003DC443 /* TournamentEntry.swift */; };
 /* End PBXBuildFile section */
@@ -213,6 +215,7 @@
 		FE5C201B2AFC7929008A9B1A /* LeaderboardEntryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardEntryDetailView.swift; sourceTree = "<group>"; };
 		FE5C201F2B001BA5008A9B1A /* DrillParameterInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillParameterInfoView.swift; sourceTree = "<group>"; };
 		FE5C20222B003228008A9B1A /* DrillParameterInfoFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillParameterInfoFactory.swift; sourceTree = "<group>"; };
+		FE5C20262B007828008A9B1A /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		FE66290C2AF30B870059B521 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FEE455482AC8BB4700569414 /* AudioSessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioSessionManager.swift; sourceTree = "<group>"; };
 		FEE4554B2AC8BB6200569414 /* AudioRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
@@ -419,6 +422,7 @@
 				FEE4555B2AC8E48900569414 /* Services */,
 				FE254A2A2AE9DFD7000602AA /* Sounds */,
 				FE1D1D062AF45E3900BF8506 /* View Modifiers */,
+				FE5C20262B007828008A9B1A /* Logger.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -781,6 +785,7 @@
 				FEE4555A2AC8C17500569414 /* DrillRecordingViewModel.swift in Sources */,
 				FE5C20132AFB1018008A9B1A /* UserInfo.swift in Sources */,
 				FE254A3B2AF0583B000602AA /* Tournament.swift in Sources */,
+				FEE608602B1564FF00CEA999 /* Logger.swift in Sources */,
 				7572F0302AC22FCA001E2F3C /* WatchDataSyncHandler.swift in Sources */,
 				FE254A1B2ADDF7AF000602AA /* TimeInterval+Extension.swift in Sources */,
 				FE5C20252B0033DF008A9B1A /* DrillParameterInfoView.swift in Sources */,
@@ -825,6 +830,7 @@
 				FE1D1D0B2AF464EF00BF8506 /* UserStoragePreviewData.swift in Sources */,
 				7572F0252ABFACB4001E2F3C /* DrillRecordingView.swift in Sources */,
 				7572F0362AC24AAE001E2F3C /* SyncResponse.swift in Sources */,
+				FE5C20272B007828008A9B1A /* Logger.swift in Sources */,
 				FE254A442AF1BB35000602AA /* UsernameInputView.swift in Sources */,
 				FE1D1CF82AF324A700BF8506 /* AuthenticationView.swift in Sources */,
 				FEF627572AF86390003DC443 /* TournamentEntry.swift in Sources */,
