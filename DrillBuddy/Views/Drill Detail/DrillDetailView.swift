@@ -13,6 +13,14 @@ import SwiftUI
 
 struct DrillDetailView: View {
     
+    // MARK: Tab
+    
+    private enum Tab {
+        case notes
+        case splitsChart
+        case recordingConfiguration
+    }
+    
     // MARK: Properties
     
     var drill: Drill
@@ -25,8 +33,18 @@ struct DrillDetailView: View {
     @State private var isPresentingDeleteDataAlert = false
     @State private var showLoadingOverlay: Bool = false
     @State private var showConfigurationOverlay: Bool = false
+    @State private var notes: String = ""
+    @State private var selectedTab: Tab = .splitsChart
+    
+    @FocusState private var isFirstResponder :Bool
+    
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext: ModelContext
+    
+    init(drill: Drill) {
+        self.drill = drill
+        self._notes = State(initialValue: drill.notes)
+    }
     
     // MARK: View
     
@@ -98,9 +116,36 @@ struct DrillDetailView: View {
                     .padding(.horizontal)
             }
             
-            TabView {
+            TabView(selection: $selectedTab) {
+                VStack {
+                    TextField("Add Your Notes...", text: $notes, axis: .vertical)
+                        .lineLimit(5...)
+                        .focused($isFirstResponder)
+                        .autocorrectionDisabled(true)
+                        .onDisappear {
+                            isFirstResponder = false
+                            drill.updateNotes(newNotes: notes)
+                            try? modelContext.save()
+                        }
+                        .onSubmit {
+                            isFirstResponder = false
+                            drill.updateNotes(newNotes: notes)
+                            try? modelContext.save()
+                        }
+                        .submitLabel(.done)
+                        .textFieldStyle(.roundedBorder)//.plain)
+                        .padding()
+                        
+                    Spacer()
+                }
+                .tag(Tab.notes)
+                
                 DrillSplitsChartView(drill: drill)
+                    .padding(.bottom)
+                    .tag(Tab.splitsChart)
+                
                 DrillRecordingParametersView(drill: drill)
+                    .tag(Tab.recordingConfiguration)
             }
             .tabViewStyle(.page)
             .indexViewStyle(.page(backgroundDisplayMode: .always))

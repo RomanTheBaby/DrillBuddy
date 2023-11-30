@@ -17,6 +17,7 @@ class Drill: Identifiable, Hashable, Equatable, CustomStringConvertible {
         var id: UUID
         var date: Date
         var sounds: [DrillEntry]
+        var notes: String
         var recordingConfiguration: DrillRecordingConfiguration
     }
     
@@ -29,6 +30,8 @@ class Drill: Identifiable, Hashable, Equatable, CustomStringConvertible {
     private(set) var date: Date
     private(set) var sounds: [DrillEntry]
     
+    private(set) var notes: String = ""
+    
     @Relationship(inverse: \DrillsSessionsContainer.drills) var container: DrillsSessionsContainer?
     
     @Transient
@@ -37,6 +40,7 @@ class Drill: Identifiable, Hashable, Equatable, CustomStringConvertible {
             id: id,
             date: date,
             sounds: sounds,
+            notes: notes,
             recordingConfiguration: recordingConfiguration
         )
     }
@@ -67,10 +71,11 @@ class Drill: Identifiable, Hashable, Equatable, CustomStringConvertible {
     
     // MARK: - Init
     
-    init(id: UUID = UUID(), date: Date = Date(), sounds: [DrillEntry], recordingConfiguration: DrillRecordingConfiguration) {
+    init(id: UUID = UUID(), date: Date = Date(), sounds: [DrillEntry], notes: String = "", recordingConfiguration: DrillRecordingConfiguration) {
         self.id = id
         self.date = date
         self.sounds = sounds
+        self.notes = notes
         self.recordingConfiguration = recordingConfiguration
         self.recordingConfigurationData = try! JSONEncoder().encode(recordingConfiguration)
     }
@@ -80,8 +85,13 @@ class Drill: Identifiable, Hashable, Equatable, CustomStringConvertible {
             id: sendableRepresentation.id,
             date: sendableRepresentation.date,
             sounds: sendableRepresentation.sounds,
+            notes: sendableRepresentation.notes,
             recordingConfiguration: sendableRepresentation.recordingConfiguration
         )
+    }
+    
+    func updateNotes(newNotes: String) {
+        notes = newNotes
     }
     
     // MARK: - Hashable

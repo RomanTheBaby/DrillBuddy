@@ -38,29 +38,30 @@ struct SessionsListView: View {
     // MARK: - View
     
     var body: some View {
-        NavigationStack {
-            Group {
-                if drillContainers.isEmpty {
-                    emptyView
-                } else {
-                    listView
-                        .navigationTitle("My Sessions")
-                        .navigationBarTitleDisplayMode(.large)
-                }
+        Group {
+            if drillContainers.isEmpty {
+                emptyView
+            } else {
+                listView
+                    .navigationTitle("My Sessions")
+                    .navigationBarTitleDisplayMode(.large)
             }
-            .fullScreenCover(isPresented: $redirectToNewDrillConfigurationView, content: {
-                NavigationStack {
-                    DrillConfigurationView()
-                }
-            })
-            .confirmationDialog(
-                "Confirm Action",
-                isPresented: $isPresentingDeleteDataAlert
-            ) {
-                Button("Delete All", role: .destructive, action: clearData)
-            } message: {
-                Text("Are you sure you want to delete all records?\nThis action cannot be undone")
+        }
+        .navigationTitle("Drills")
+        .navigationBarTitleDisplayMode(.large)
+        .navigationBarHidden(false)
+        .fullScreenCover(isPresented: $redirectToNewDrillConfigurationView, content: {
+            NavigationStack {
+                DrillConfigurationView()
             }
+        })
+        .confirmationDialog(
+            "Confirm Action",
+            isPresented: $isPresentingDeleteDataAlert
+        ) {
+            Button("Delete All", role: .destructive, action: clearData)
+        } message: {
+            Text("Are you sure you want to delete all records?\nThis action cannot be undone")
         }
         .errorAlert(error: $error)
     }
@@ -97,9 +98,16 @@ struct SessionsListView: View {
                             HStack {
                                 Text("Drill #\(index + 1)")
                                 Spacer()
+                                
+                                if drill.notes.isEmpty == false {
+                                    Image(systemName: "pencil")//"square.and.pencil")
+                                        .imageScale(.medium)
+                                        .foregroundStyle(Color.blue)
+                                }
+                                
                                 if drill.recordingURL != nil {
                                     Image(systemName: "speaker.3.fill")
-                                        .imageScale(.large)
+                                        .imageScale(.medium)
                                         .foregroundStyle(Color.blue)
                                 }
                             }
@@ -114,16 +122,6 @@ struct SessionsListView: View {
                         .padding(.vertical, 12)
                 }
                 .headerProminence(.increased)
-            }
-        }
-        .navigationTitle("Drills")
-        .toolbar {
-            ToolbarItem {
-                Button {
-                    isPresentingDeleteDataAlert = true
-                } label: {
-                    Label("Clear All Data", systemImage: "trash.fill")
-                }
             }
         }
         .safeAreaInset(edge: .bottom) {
@@ -221,19 +219,23 @@ struct SessionsListView: View {
 
 #Preview("With Data") {
     MainActor.assumeIsolated {
+        NavigationStack {
+            SessionsListView(
+                watchDataSynchronizer: WatchDataSynchronizer(
+                    modelContext: DrillSessionsContainerSampleData.container.mainContext
+                )
+            )
+            .modelContainer(DrillSessionsContainerSampleData.container)
+        }
+    }
+}
+
+#Preview("No container") {
+    NavigationStack {
         SessionsListView(
             watchDataSynchronizer: WatchDataSynchronizer(
                 modelContext: DrillSessionsContainerSampleData.container.mainContext
             )
         )
-        .modelContainer(DrillSessionsContainerSampleData.container)
     }
-}
-
-#Preview("No container") {
-    SessionsListView(
-        watchDataSynchronizer: WatchDataSynchronizer(
-            modelContext: DrillSessionsContainerSampleData.container.mainContext
-        )
-    )
 }

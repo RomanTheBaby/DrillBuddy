@@ -77,6 +77,7 @@ actor DrillSessionsContainerSampleData {
                     DrillEntry(time: 15, confidence: 1),
                     DrillEntry(time: 25, confidence: 1),
                 ], 
+                notes: "Test",
                 recordingConfiguration: .default
             ),
             Drill(
@@ -87,6 +88,7 @@ actor DrillSessionsContainerSampleData {
                     DrillEntry(time: 5, confidence: 1),
                     DrillEntry(time: 7, confidence: 1),
                 ],
+                notes: "Test2",
                 recordingConfiguration: .default
             ),
             Drill(
@@ -123,6 +125,7 @@ actor DrillSessionsContainerSampleData {
                     DrillEntry(time: 3, confidence: 0.9),
                     DrillEntry(time: 4, confidence: 0.9),
                 ],
+                notes: "Test new",
                 recordingConfiguration: .default
             ),
             Drill(
@@ -149,6 +152,7 @@ actor DrillSessionsContainerSampleData {
                     DrillEntry(time: 3, confidence: 0.9),
                     DrillEntry(time: 4, confidence: 0.9),
                 ],
+                notes: "Yo yo yo yo, glock goes scraaaaaaa",
                 recordingConfiguration: .default
             ),
             Drill(
