@@ -91,7 +91,7 @@ class Drill: Identifiable, Hashable, Equatable, CustomStringConvertible {
     }
     
     func updateNotes(newNotes: String) {
-        notes = newNotes
+        notes = newNotes.trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
     // MARK: - Hashable

@@ -117,7 +117,12 @@ struct DrillDetailView: View {
             }
             
             TabView(selection: $selectedTab) {
-                VStack {
+                VStack(spacing: 8) {
+                    Text("Notes")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .font(.system(.title, weight: .bold))
+                        .padding(.horizontal)
+                    
                     TextField("Add Your Notes...", text: $notes, axis: .vertical)
                         .lineLimit(5...)
                         .focused($isFirstResponder)
@@ -134,7 +139,7 @@ struct DrillDetailView: View {
                         }
                         .submitLabel(.done)
                         .textFieldStyle(.roundedBorder)//.plain)
-                        .padding()
+                        .padding([.bottom, .horizontal])
                         
                     Spacer()
                 }
