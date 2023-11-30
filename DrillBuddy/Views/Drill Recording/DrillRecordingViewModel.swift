@@ -141,20 +141,23 @@ class DrillRecordingViewModel: ObservableObject {
 
             do {
                 try startRecordingAudioIfNeeded()
+                
+                state = .recording
+                startDate = Date()
+                
+                #if os(watchOS)
+                HapticFeedbackGenerator.generateFeedback(.start)
+                #else
+                HapticFeedbackGenerator.generateFeedback(.warning)
+//                    .generateImpact(.heavy)
+                // .generateFeedback(.success)
+                #endif
+                
             } catch {
                 LogManager.log(.error, module: .drillRecording, message: "Failed to start recording audio with error: \(error)")
                 stopRecording()
                 self.error = error
             }
-            
-            state = .recording
-            startDate = Date()
-            
-            #if os(watchOS)
-            HapticFeedbackGenerator.generateFeedback(.start)
-            #else
-            HapticFeedbackGenerator.generateFeedback(.success)
-            #endif
         } catch {
             LogManager.log(.error, module: .drillRecording, message: "Failed to start identifying sounds with error: \(error)")
             stopRecording()

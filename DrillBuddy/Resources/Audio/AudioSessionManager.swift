@@ -15,13 +15,16 @@ class AudioSessionManager {
     class func startAudioSession(
         category: AVAudioSession.Category,
         mode: AVAudioSession.Mode = .default,
-        options: AVAudioSession.CategoryOptions = []
+        options: AVAudioSession.CategoryOptions = [],
+        allowHapticsAndSystemSoundsDuringRecording: Bool = true
     ) throws {
         stopAudioSession()
         do {
             let audioSession = AVAudioSession.sharedInstance()
             try audioSession.setCategory(category, mode: mode)
             try audioSession.setActive(true)
+            
+            try AVAudioSession.sharedInstance().setAllowHapticsAndSystemSoundsDuringRecording(allowHapticsAndSystemSoundsDuringRecording)
         } catch {
             LogManager.log(.error, module: .audioSessionManager, message: "Failed to start audio session with error: \(error)")
             stopAudioSession()
