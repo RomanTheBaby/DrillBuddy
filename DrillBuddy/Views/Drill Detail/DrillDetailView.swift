@@ -98,32 +98,12 @@ struct DrillDetailView: View {
                     .padding(.horizontal)
             }
             
-            Chart {
-                ForEach(Array(drill.sounds.enumerated()), id: \.offset) { index, entry in
-                    BarMark(
-                        x: .value("Shot #", "#\(index)"),
-                        y: .value("Time", entry.time)
-                    )
-                }
-                RuleMark(
-                    y: .value("Threshold", drill.sounds.averageSplit)
-                )
-                .foregroundStyle(.red)
-                .foregroundStyle(by: .value("Average", "Avg. Split"))
+            TabView {
+                DrillSplitsChartView(drill: drill)
+                DrillRecordingParametersView(drill: drill)
             }
-            .chartLegend(.visible)
-            .chartForegroundStyleScale(["Avg. Split": Color.red, "Time": Color.blue])
-            .padding(.horizontal)
-            
-            Spacer()
-            
-            Button(action: {
-                showConfigurationOverlay = true
-            }, label: {
-                Text("View Configuration")
-            })
-            .padding(.horizontal)
-            .padding(.vertical, 4)
+            .tabViewStyle(.page)
+            .indexViewStyle(.page(backgroundDisplayMode: .always))
         }
         .popover(isPresented: $showConfigurationOverlay, content: {
             NavigationStack {
@@ -184,11 +164,36 @@ struct DrillDetailView: View {
     }
 }
 
+// MARK: - Drill
+
+struct DrillSplitsChartView: View {
+    var drill: Drill
+    
+    var body: some View {
+        Chart {
+            ForEach(Array(drill.sounds.enumerated()), id: \.offset) { index, entry in
+                BarMark(
+                    x: .value("Shot #", "#\(index)"),
+                    y: .value("Time", entry.time)
+                )
+            }
+            RuleMark(
+                y: .value("Threshold", drill.sounds.averageSplit)
+            )
+            .foregroundStyle(.red)
+            .foregroundStyle(by: .value("Average", "Avg. Split"))
+        }
+        .chartLegend(.visible)
+        .chartForegroundStyleScale(["Avg. Split": Color.red, "Time": Color.blue])
+        .padding(.horizontal)
+    }
+}
+
+// MARK: - DrillRecordingParametersView
+
 private struct DrillRecordingParametersView: View {
     
     var drill: Drill
-    
-    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         VStack {
@@ -247,27 +252,9 @@ private struct DrillRecordingParametersView: View {
                 RoundedRectangle(cornerRadius: 8)
                     .foregroundStyle(Color.gray.opacity(0.2))
             )
+            .padding(.horizontal)
             
             Spacer()
-            
-            Button(action: {
-                dismiss()
-            }, label: {
-                Text("Dismiss")
-                    .padding(.vertical, 8)
-                    .frame(maxWidth: .infinity)
-            })
-            .buttonStyle(.borderedProminent)
-        }
-        .padding(.horizontal)
-        .toolbar {
-            ToolbarItem {
-                Button {
-                    dismiss()
-                } label: {
-                    Label("Close", systemImage: "xmark.circle.fill")
-                }
-            }
         }
     }
 }
