@@ -52,7 +52,9 @@ struct DrillBuddyApp: App {
     
     
     var body: some Scene {
-        #if os(watchOS)
+        #if targetEnvironment(simulator)
+        let modelContainer = ModelContainer.shared
+        #elseif os(watchOS)
         let modelContainer = DrillSessionsContainerSampleData.container
         #else
         let modelContainer = ModelContainer.temporary
