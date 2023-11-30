@@ -30,7 +30,11 @@ actor DrillSessionsContainerSampleData {
     
     @MainActor
     static let container: ModelContainer = {
-        let schema = Schema([DrillsSessionsContainer.self, Drill.self])
+        let schema = Schema([
+            DrillsSessionsContainer.self,
+            Drill.self,
+            TournamentEntry.self,
+        ])
         let configuration = ModelConfiguration(isStoredInMemoryOnly: true)
         do {
             let modelContainer = try ModelContainer(for: schema, configurations: [configuration])
