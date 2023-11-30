@@ -17,6 +17,7 @@ class Drill: Identifiable, Hashable, Equatable, CustomStringConvertible {
         var id: UUID
         var date: Date
         var sounds: [DrillEntry]
+        var recordingConfiguration: DrillRecordingConfiguration
     }
     
     // MARK: - Properties
@@ -35,7 +36,8 @@ class Drill: Identifiable, Hashable, Equatable, CustomStringConvertible {
         SendableRepresentation(
             id: id,
             date: date,
-            sounds: sounds
+            sounds: sounds,
+            recordingConfiguration: recordingConfiguration
         )
     }
     
@@ -43,6 +45,11 @@ class Drill: Identifiable, Hashable, Equatable, CustomStringConvertible {
     var recordingURL: URL? {
         try? AudioRecordingPathGenerator.path(for: self, createMissingDirectories: false)
     }
+    
+    @Transient
+    private(set) var recordingConfiguration: DrillRecordingConfiguration = .default
+    
+    private var recordingConfigurationData: Data
     
     // MARK: CustomStringConvertible
     
@@ -60,17 +67,20 @@ class Drill: Identifiable, Hashable, Equatable, CustomStringConvertible {
     
     // MARK: - Init
     
-    init(id: UUID = UUID(), date: Date = Date(), sounds: [DrillEntry]) {
+    init(id: UUID = UUID(), date: Date = Date(), sounds: [DrillEntry], recordingConfiguration: DrillRecordingConfiguration) {
         self.id = id
         self.date = date
         self.sounds = sounds
+        self.recordingConfiguration = recordingConfiguration
+        self.recordingConfigurationData = try! JSONEncoder().encode(recordingConfiguration)
     }
     
     convenience init(sendableRepresentation: SendableRepresentation) {
         self.init(
             id: sendableRepresentation.id,
             date: sendableRepresentation.date,
-            sounds: sendableRepresentation.sounds
+            sounds: sendableRepresentation.sounds,
+            recordingConfiguration: sendableRepresentation.recordingConfiguration
         )
     }
     

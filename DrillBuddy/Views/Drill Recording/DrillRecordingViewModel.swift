@@ -310,7 +310,7 @@ class DrillRecordingViewModel: ObservableObject {
                 modelContext.insert(container)
             }
             
-            let drill = Drill(date: startDate, sounds: drillEntries)
+            let drill = Drill(date: startDate, sounds: drillEntries, recordingConfiguration: configuration)
             container.addDrills([drill])
             
             return drill

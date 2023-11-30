@@ -66,7 +66,7 @@ struct DrillBuddyApp: App {
             .environmentObject(userStorage)
             #endif
         }
-        .modelContainer(ModelContainer.temporary)
+        .modelContainer(modelContainer)
     }
 }
 

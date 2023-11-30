@@ -76,7 +76,8 @@ actor DrillSessionsContainerSampleData {
                     DrillEntry(time: 10, confidence: 1),
                     DrillEntry(time: 15, confidence: 1),
                     DrillEntry(time: 25, confidence: 1),
-                ]
+                ], 
+                recordingConfiguration: .default
             ),
             Drill(
                 date: Date().addingTimeInterval(-10),
@@ -85,7 +86,8 @@ actor DrillSessionsContainerSampleData {
                     DrillEntry(time: 4, confidence: 0.95),
                     DrillEntry(time: 5, confidence: 1),
                     DrillEntry(time: 7, confidence: 1),
-                ]
+                ],
+                recordingConfiguration: .default
             ),
             Drill(
                 date: Date().addingTimeInterval(-15),
@@ -94,7 +96,8 @@ actor DrillSessionsContainerSampleData {
                     DrillEntry(time: 4, confidence: 0.9),
                     DrillEntry(time: 8, confidence: 1),
                     DrillEntry(time: 9, confidence: 1),
-                ]
+                ],
+                recordingConfiguration: .default
             ),
         ]
         
@@ -109,7 +112,8 @@ actor DrillSessionsContainerSampleData {
                     DrillEntry(time: 6, confidence: 0.9),
                     DrillEntry(time: 7, confidence: 0.9),
                     DrillEntry(time: 8, confidence: 0.9),
-                ]
+                ],
+                recordingConfiguration: .default
             ),
             Drill(
                 date: Date().addingTimeInterval(-25),
@@ -118,7 +122,8 @@ actor DrillSessionsContainerSampleData {
                     DrillEntry(time: 2, confidence: 0.9),
                     DrillEntry(time: 3, confidence: 0.9),
                     DrillEntry(time: 4, confidence: 0.9),
-                ]
+                ],
+                recordingConfiguration: .default
             ),
             Drill(
                 date: Date().addingTimeInterval(-30),
@@ -127,7 +132,8 @@ actor DrillSessionsContainerSampleData {
                     DrillEntry(time: 3, confidence: 0.9),
                     DrillEntry(time: 3.5, confidence: 0.9),
                     DrillEntry(time: 4, confidence: 0.9),
-                ]
+                ],
+                recordingConfiguration: .default
             ),
         ]
         
@@ -142,7 +148,8 @@ actor DrillSessionsContainerSampleData {
                     DrillEntry(time: 2, confidence: 0.9),
                     DrillEntry(time: 3, confidence: 0.9),
                     DrillEntry(time: 4, confidence: 0.9),
-                ]
+                ],
+                recordingConfiguration: .default
             ),
             Drill(
                 date: Date().addingTimeInterval(-40),
@@ -151,7 +158,8 @@ actor DrillSessionsContainerSampleData {
                     DrillEntry(time: 2, confidence: 0.9),
                     DrillEntry(time: 4, confidence: 0.9),
                     DrillEntry(time: 5, confidence: 0.9),
-                ]
+                ],
+                recordingConfiguration: .default
             ),
         ]
         
@@ -166,14 +174,16 @@ actor DrillSessionsContainerSampleData {
                     DrillEntry(time: 2, confidence: 0.9),
                     DrillEntry(time: 3, confidence: 0.9),
                     DrillEntry(time: 4, confidence: 0.9),
-                ]
+                ],
+                recordingConfiguration: .default
             ),
             Drill(
                 date: Date().addingTimeInterval(-50),
                 sounds: [
                     DrillEntry(time: 1, confidence: 0.9),
                     DrillEntry(time: 2, confidence: 0.9),
-                ]
+                ],
+                recordingConfiguration: .default
             ),
             Drill(
                 date: Date().addingTimeInterval(-60),
@@ -182,7 +192,8 @@ actor DrillSessionsContainerSampleData {
                     DrillEntry(time: 2, confidence: 0.9),
                     DrillEntry(time: 4, confidence: 0.9),
                     DrillEntry(time: 8, confidence: 0.9),
-                ]
+                ],
+                recordingConfiguration: .default
             ),
             Drill(
                 date: Date().addingTimeInterval(-70),
@@ -191,7 +202,8 @@ actor DrillSessionsContainerSampleData {
                     DrillEntry(time: 2, confidence: 0.9),
                     DrillEntry(time: 9, confidence: 0.9),
                     DrillEntry(time: 12, confidence: 0.9),
-                ]
+                ],
+                recordingConfiguration: .default
             ),
         ]
         

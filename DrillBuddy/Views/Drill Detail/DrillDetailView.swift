@@ -6,11 +6,14 @@
 //
 
 import Charts
+import SwiftData
 import SwiftUI
 
 // MARK: - DrillDetailView
 
 struct DrillDetailView: View {
+    
+    // MARK: Properties
     
     var drill: Drill
     
@@ -18,8 +21,17 @@ struct DrillDetailView: View {
         drill.sounds.averageSplit
     }
     
+    @State private var error: Error?
+    @State private var isPresentingDeleteDataAlert = false
+    @State private var showLoadingOverlay: Bool = false
+    @State private var showConfigurationOverlay: Bool = false
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var modelContext: ModelContext
+    
+    // MARK: View
+    
     var body: some View {
-        VStack {
+        VStack(spacing: 8) {
             VStack {
                 Text("Session for:")
                     .font(.system(.title, weight: .bold))
@@ -30,76 +42,233 @@ struct DrillDetailView: View {
             }
             .padding(.horizontal)
             
-            Spacer()
-                .frame(height: 8)
-            
             VStack(alignment: .leading) {
-                HStack {
-                    Text(drill.sounds.count, format: .number)
-                        .font(.system(.title, weight: .bold))
-                    Text("# of Shots")
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                }
-                
-                if let firstSound = drill.sounds.first {
+                Group {
+                    Spacer()
+                        .frame(height: 8)
+                    
                     HStack {
-                        Text(firstSound.time.minuteSecondMS)
+                        Text(drill.sounds.count, format: .number)
                             .font(.system(.title, weight: .bold))
-                        
-                        Text("1st shot delay")
+                        Text("# of Shots")
+                            .frame(maxWidth: .infinity, alignment: .leading)
                     }
-                }
-                
-                HStack {
-                    Text(averageSplit.minuteSecondMS)
-                        .font(.system(.title, weight: .bold))
-                    Text("avg. split")
-                }
-                
-                if let lastSound = drill.sounds.last {
+                    
+                    if let firstSound = drill.sounds.first {
+                        HStack {
+                            Text(firstSound.time.minuteSecondMS)
+                                .font(.system(.title, weight: .bold))
+                            
+                            Text("1st shot delay")
+                        }
+                    }
+                    
                     HStack {
-                        Text(
-                            Duration.seconds(lastSound.time)
-                                .formatted(.time(pattern: .minuteSecond))
-                        )
-                        .font(.system(.title, weight: .bold))
-                        
-                        Text("Duration")
+                        Text(averageSplit.minuteSecondMS)
+                            .font(.system(.title, weight: .bold))
+                        Text("avg. split")
                     }
+                    
+                    if let lastSound = drill.sounds.last {
+                        HStack {
+                            Text(
+                                Duration.seconds(lastSound.time)
+                                    .formatted(.time(pattern: .minuteSecond))
+                            )
+                            .font(.system(.title, weight: .bold))
+                            
+                            Text("Duration")
+                        }
+                    }
+                    
+                    Spacer()
+                        .frame(height: 8)
                 }
+                .padding(.horizontal)
             }
+            .background(
+                RoundedRectangle(cornerRadius: 8)
+                    .foregroundStyle(Color.gray.opacity(0.2))
+            )
             .padding(.horizontal)
             
-            
-            if let recordingURL = drill.recordingURL,
+            if let recordingURL = isInPreview ? DrillSessionsContainerSampleData.testAudioURL : drill.recordingURL,
                let audioView = AudioView(audioURL: recordingURL) {
                 audioView
                     .padding(.horizontal)
             }
             
-            Spacer()
-                .frame(height: 16)
-            
-            VStack(alignment: .leading) {
-                Chart {
-                    ForEach(Array(drill.sounds.enumerated()), id: \.offset) { index, entry in
-                        BarMark(
-                            x: .value("Shot #", "#\(index)"),
-                            y: .value("Time", entry.time)
-                        )
-                    }
-                    RuleMark(
-                        y: .value("Threshold", drill.sounds.averageSplit)
+            Chart {
+                ForEach(Array(drill.sounds.enumerated()), id: \.offset) { index, entry in
+                    BarMark(
+                        x: .value("Shot #", "#\(index)"),
+                        y: .value("Time", entry.time)
                     )
-                    .foregroundStyle(.red)
-                    .foregroundStyle(by: .value("Average", "Avg. Split"))
                 }
-                .chartLegend(.visible)
-                .chartForegroundStyleScale(["Avg. Split": Color.red, "Time": Color.blue])
-                .padding(.horizontal)
+                RuleMark(
+                    y: .value("Threshold", drill.sounds.averageSplit)
+                )
+                .foregroundStyle(.red)
+                .foregroundStyle(by: .value("Average", "Avg. Split"))
+            }
+            .chartLegend(.visible)
+            .chartForegroundStyleScale(["Avg. Split": Color.red, "Time": Color.blue])
+            .padding(.horizontal)
+            
+            Spacer()
+            
+            Button(action: {
+                showConfigurationOverlay = true
+            }, label: {
+                Text("View Configuration")
+            })
+            .padding(.horizontal)
+            .padding(.vertical, 4)
+        }
+        .popover(isPresented: $showConfigurationOverlay, content: {
+            NavigationStack {
+                DrillRecordingParametersView(drill: drill)
+            }
+        })
+        .errorAlert(error: $error)
+        .loadingOverlay(isLoading: showLoadingOverlay)
+        .confirmationDialog(
+            "Confirm Action",
+            isPresented: $isPresentingDeleteDataAlert
+        ) {
+            Button("Delete", role: .destructive, action: deleteDrill)
+        } message: {
+            Text("Are you sure you want to this data for this drill?\nThis action cannot be undone")
+        }
+        .toolbar {
+            ToolbarItem {
+                Button {
+                    isPresentingDeleteDataAlert = true
+                } label: {
+                    Label("Clear All Data", systemImage: "trash.fill")
+                }
             }
         }
         .navigationBarTitleDisplayMode(.inline)
+    }
+    
+    // MARK: - Private Methods
+    
+    private func deleteDrill() {
+        showLoadingOverlay = true
+        
+        do {
+            try deleteRecording(for: drill)
+            withAnimation {
+                modelContext.delete(drill)
+                showLoadingOverlay = false
+                dismiss()
+            }
+        } catch {
+            showLoadingOverlay = false
+            self.error = error
+        }
+    }
+    
+    private func deleteRecording(for drill: Drill) throws {
+        guard let recordingURL = drill.recordingURL else {
+            return
+        }
+        
+        do {
+            try FileManager.default.removeItem(at: recordingURL)
+        } catch {
+            LogManager.log(.error, module: .sessionsListView, message: "Failed to remove audio recording at url: \(recordingURL) with error: \(error)")
+            throw error
+        }
+    }
+}
+
+private struct DrillRecordingParametersView: View {
+    
+    var drill: Drill
+    
+    @Environment(\.dismiss) private var dismiss
+    
+    var body: some View {
+        VStack {
+            VStack(alignment: .leading, spacing: 16) {
+                Spacer()
+                    .frame(height: 8)
+                
+                HStack {
+                    Text("Min Confidence Level")
+                        .font(.system(.title3, weight: .bold))
+                    Text(String(format: "%.2f", drill.recordingConfiguration.minimumSoundConfidenceLevel))
+                    Spacer()
+                }
+                
+                HStack {
+                    Text("Min Confidence Level")
+                        .font(.system(.title3, weight: .bold))
+                    Text(String(format: "%.2f", drill.recordingConfiguration.inferenceWindowSize))
+                    Spacer()
+                }
+                
+                HStack {
+                    Text("Overlap Factor")
+                        .font(.system(.title3, weight: .bold))
+                    Text(String(format: "%.2f", drill.recordingConfiguration.overlapFactor))
+                    Spacer()
+                }
+                
+                HStack {
+                    Text("Max Shots")
+                        .font(.system(.title3, weight: .bold))
+                    Text("\(drill.recordingConfiguration.maxShots)")
+                    Spacer()
+                }
+                
+                HStack {
+                    Text("Max Delay")
+                        .font(.system(.title3, weight: .bold))
+                    Text("\(drill.recordingConfiguration.maxSessionDelay)")
+                    Spacer()
+                }
+                
+                HStack {
+                    Text("With Audio")
+                        .font(.system(.title3, weight: .bold))
+                    Text("\(drill.recordingConfiguration.shouldRecordAudio ? "YES" : "NO")")
+                    Spacer()
+                }
+                
+                Spacer()
+                    .frame(height: 8)
+            }
+            .padding(.horizontal)
+            .frame(maxWidth: .infinity)
+            .background(
+                RoundedRectangle(cornerRadius: 8)
+                    .foregroundStyle(Color.gray.opacity(0.2))
+            )
+            
+            Spacer()
+            
+            Button(action: {
+                dismiss()
+            }, label: {
+                Text("Dismiss")
+                    .padding(.vertical, 8)
+                    .frame(maxWidth: .infinity)
+            })
+            .buttonStyle(.borderedProminent)
+        }
+        .padding(.horizontal)
+        .toolbar {
+            ToolbarItem {
+                Button {
+                    dismiss()
+                } label: {
+                    Label("Close", systemImage: "xmark.circle.fill")
+                }
+            }
+        }
     }
 }
 
@@ -114,7 +283,10 @@ private extension TimeInterval {
 // MARK: - Previews
 
 #Preview {
-    DrillDetailView(
-        drill: DrillSessionsContainerSampleData.previewDrillsContainers[0].drills[0]
-    )
+    NavigationStack {
+        DrillDetailView(
+            drill: DrillSessionsContainerSampleData.previewDrillsContainers[0].drills[0]
+        )
+    }
 }
+
