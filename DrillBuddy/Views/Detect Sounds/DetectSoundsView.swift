@@ -22,6 +22,7 @@ struct DetectSoundsView: View {
             generateMeter(confidence: confidence, numberOfBars: numberOfBars)
             if label.isEmpty == false {
                 Text(label)
+                    .padding(.top, 4)
                     .lineLimit(1)
                     .multilineTextAlignment(.center)
             }
@@ -79,6 +80,7 @@ struct DetectSoundsView: View {
 #Preview("With Labels") {
     DetectSoundsView(
         confidence: 0.5,
+        label: "Test Label",
         labelForBar: { barIndex in
             Text("\(barIndex)")
         }

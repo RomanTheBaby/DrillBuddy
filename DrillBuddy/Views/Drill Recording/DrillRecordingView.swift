@@ -48,6 +48,7 @@ struct DrillRecordingView: View {
                     GeometryReader(content: { geometry in
                         DetectSoundsView(
                             confidence: viewModel.lastDetectedSoundConfidenceLevel,
+                            label: String(format: "%.2f%%%", viewModel.lastDetectedSoundConfidenceLevel * 100),
                             numberOfBars: 20,
                             labelForBar: { barIndex in
                                 switch barIndex {
