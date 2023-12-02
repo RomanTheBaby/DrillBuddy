@@ -46,13 +46,37 @@ struct DrillRecordingView: View {
                     statisticsView
                     
                     GeometryReader(content: { geometry in
-                        DetectSoundsView(confidence: viewModel.lastDetectedSoundConfidenceLevel)
-                            .frame(
-                                width: geometry.size.width / 2,
-                                height: geometry.size.height,
-                                alignment: .center
-                            )
-                            .offset(x: geometry.frame(in: .local).midX - (geometry.size.width / 4))
+                        DetectSoundsView(
+                            confidence: viewModel.lastDetectedSoundConfidenceLevel,
+                            numberOfBars: 20,
+                            labelForBar: { barIndex in
+                                switch barIndex {
+                                case 0:
+                                    Text("100%")
+                                        .font(.caption2)
+                                case 5:
+                                    Text("75%")
+                                        .font(.caption2)
+                                case 10:
+                                    Text("50%")
+                                        .font(.caption2)
+                                case 15:
+                                    Text("25%")
+                                        .font(.caption2)
+                                case 19:
+                                    Text("5%")
+                                        .font(.caption2)
+                                default:
+                                    EmptyView()
+                                }
+                            }
+                        )
+                        .frame(
+                            width: geometry.size.width / 2,
+                            height: geometry.size.height,
+                            alignment: .center
+                        )
+                        .offset(x: geometry.frame(in: .local).midX - (geometry.size.width / 4))
                     })
                     
                     if viewModel.tournament == nil {

@@ -13,6 +13,7 @@ struct DetectSoundsView: View {
     var label: String = ""
     var numberOfBars: Int = 30
     var maxBarSize: CGSize = CGSize(width: CGFloat.infinity, height: CGFloat.infinity)
+    var labelForBar: ((_ barIndex: Int) -> any View)? = nil
     
     // MARK: - View
     
@@ -45,9 +46,14 @@ struct DetectSoundsView: View {
         
         return VStack(spacing: 2) {
             ForEach(0..<numberOfBars, id: \.self) { barIndex in
-                Rectangle()
-                    .foregroundStyle(barColors[numberOfBars - 1 - barIndex])
-                    .opacity(barOpacities[numberOfBars - 1 - barIndex])
+                ZStack {
+                    Rectangle()
+                        .foregroundStyle(barColors[numberOfBars - 1 - barIndex])
+                        .opacity(barOpacities[numberOfBars - 1 - barIndex])
+                    if let barLabel = labelForBar?(barIndex) {
+                        AnyView(barLabel)
+                    }
+                }
             }
         }.animation(.easeInOut, value: confidence)
     }
@@ -67,4 +73,15 @@ struct DetectSoundsView: View {
 
 #Preview {
     DetectSoundsView(confidence: 0.5)
+        .padding()
+}
+
+#Preview("With Labels") {
+    DetectSoundsView(
+        confidence: 0.5,
+        labelForBar: { barIndex in
+            Text("\(barIndex)")
+        }
+    )
+    .padding()
 }
