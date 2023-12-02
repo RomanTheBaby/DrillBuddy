@@ -48,10 +48,11 @@ class DrillRecordingViewModel: ObservableObject {
     
     let tournament: Tournament?
     let currentUser: UserInfo?
+    
+    private(set) var drill: Drill?
     private(set) var drillEntries: [DrillEntry] = []
     
     @Published var error: Error?
-    @Published private(set) var showLoadingOverlay: Bool = false
     @Published private(set) var state: State
     @Published private(set) var lastDetectedSoundConfidenceLevel: Double = 0
     @Published private(set) var recordingStatistics: RecordingStatistics = RecordingStatistics()
@@ -186,16 +187,21 @@ class DrillRecordingViewModel: ObservableObject {
             return
         }
 
-        showLoadingOverlay = true
         do {
             try await firestoreService.submit(entry: tournamentEntry, for: tournament, as: user)
         } catch {
             LogManager.log(.error, module: .drillRecording, message: "Failed to submit entry: \(tournamentEntry) with error: \(error)")
             self.error = error
         }
-        showLoadingOverlay = false
     }
     #endif
+    
+    func deleteRecordedDrill() {
+        guard let drill else {
+            return
+        }
+        modelContext.delete(drill)
+    }
     
     // MARK: - Private Methods
     
@@ -280,6 +286,7 @@ class DrillRecordingViewModel: ObservableObject {
                 drillEntries: drillEntries
             ) {
                 LogManager.log(.info, module: .drillRecording, message: "Did create drill entry: \(savedDrill)")
+                drill = savedDrill
             } else {
                 LogManager.log(.info, module: .drillRecording, message: "Did not save drill entry")
             }

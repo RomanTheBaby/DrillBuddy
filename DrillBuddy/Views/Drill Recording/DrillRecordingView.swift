@@ -73,15 +73,12 @@ struct DrillRecordingView: View {
                 }
                 .padding(.horizontal)
                 .blur(radius: viewModel.isPersistingData ? 10 : 0)
-                .overlay(loadingOverlay)
             case .summary:
                 summaryView
-                    .navigationTitle("Summary")
             }
         }
         .navigationBarBackButtonHidden(true)
         .errorAlert(error: $viewModel.error)
-        .loadingOverlay(isLoading: viewModel.showLoadingOverlay)
     }
     
     // MARK: - Private Views
@@ -119,7 +116,20 @@ struct DrillRecordingView: View {
         }
     }
     
+    @ViewBuilder
     private var summaryView: some View {
+        if let drill = viewModel.drill {
+            VStack {
+                DrillDetailView(drill: drill)
+                summaryFooter
+            }
+        } else {
+            minimalSummaryView
+                .navigationTitle("Summary")
+        }
+    }
+    
+    private var minimalSummaryView: some View {
         VStack(alignment: .leading) {
             statisticsView
                 .padding(.horizontal)
@@ -143,42 +153,55 @@ struct DrillRecordingView: View {
             .chartForegroundStyleScale(["Avg. Split": Color.red, "Time": Color.blue])
             .padding(.horizontal)
             
-            if let tournament = viewModel.tournament, 
-                viewModel.drillEntries.isEmpty == false,
-                let user = viewModel.currentUser {
-                Button {
-                    Task {
-                        await viewModel.submit(for: tournament, user: user)
-                        customFinishAction?() ?? dismiss()
-                    }
-                } label: {
-                    Text("Submit Tournament Entry")
-                        .padding(8)
-                        .frame(maxWidth: .infinity)
+            summaryFooter
+        }
+    }
+    
+    @ViewBuilder
+    private var summaryFooter: some View {
+        if let tournament = viewModel.tournament,
+            viewModel.drillEntries.isEmpty == false,
+            let user = viewModel.currentUser {
+            Button {
+                Task {
+                    await viewModel.submit(for: tournament, user: user)
+                    customFinishAction?() ?? dismiss()
                 }
-                .padding(.horizontal)
-                .buttonStyle(.borderedProminent)
-                .shadow(radius: 5)
-            } else {
+            } label: {
+                Text("Submit Tournament Entry")
+                    .padding(8)
+                    .frame(maxWidth: .infinity)
+            }
+            .padding(.horizontal)
+            .buttonStyle(.borderedProminent)
+            .shadow(radius: 5)
+        } else {
+            HStack(spacing: 8) {
+                if viewModel.drill != nil {
+                    Button {
+                        viewModel.deleteRecordedDrill()
+                        customFinishAction?() ?? dismiss()
+                    } label: {
+                        Text("Delete")
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 40)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .tint(Color.red)
+                    .shadow(radius: 5)
+                }
+                
                 Button {
                     customFinishAction?() ?? dismiss()
                 } label: {
                     Text("Done")
-                        .padding(8)
                         .frame(maxWidth: .infinity)
+                        .frame(height: 40)
                 }
-                .padding(.horizontal)
                 .buttonStyle(.borderedProminent)
                 .shadow(radius: 5)
             }
-        }
-    }
-    
-    @ViewBuilder private var loadingOverlay: some View {
-        if viewModel.isPersistingData {
-            ProgressView()
-                .controlSize(.regular)
-                .progressViewStyle(.circular)
+            .padding(.horizontal)
         }
     }
 }
