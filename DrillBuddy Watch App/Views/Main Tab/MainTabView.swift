@@ -41,6 +41,7 @@ struct MainTabView: View {
     @State private var isSynchronizing: Bool = false
     @State private var redirectToNewDrillConfigurationView = false
     @State private var isConfirmingDeletion = false
+
     @Environment(\.modelContext) private var modelContext: ModelContext
     
     // MARK: - View

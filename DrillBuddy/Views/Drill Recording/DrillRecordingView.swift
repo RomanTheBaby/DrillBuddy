@@ -127,7 +127,7 @@ struct DrillRecordingView: View {
     private var summaryView: some View {
         if let drill = viewModel.drill {
             VStack {
-                DrillDetailView(drill: drill)
+                DrillDetailView(drill: drill, showDeleteToolbarButton: false)
                 summaryFooter
             }
         } else {

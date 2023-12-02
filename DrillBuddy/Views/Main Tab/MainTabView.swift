@@ -40,12 +40,14 @@ struct MainTabView: View {
         }
     }
     
+    @State private var selectedTab: Tab = .drills
+    
     @StateObject var watchDataSynchronizer: WatchDataSynchronizer
     @Environment(\.modelContext) private var modelContext: ModelContext
     
     var body: some View {
         NavigationStack {
-            TabView {
+            TabView(selection: $selectedTab) {
                 ForEach(Tab.allCases, id: \.title) { tab in
                     makeView(for: tab)
                 }

@@ -29,6 +29,8 @@ struct DrillDetailView: View {
         drill.sounds.averageSplit
     }
     
+    private let showDeleteToolbarButton: Bool
+    
     @State private var error: Error?
     @State private var isPresentingDeleteDataAlert = false
     @State private var showLoadingOverlay: Bool = false
@@ -41,8 +43,9 @@ struct DrillDetailView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext: ModelContext
     
-    init(drill: Drill) {
+    init(drill: Drill, showDeleteToolbarButton: Bool = true) {
         self.drill = drill
+        self.showDeleteToolbarButton = showDeleteToolbarButton
         self._notes = State(initialValue: drill.notes)
     }
     
@@ -176,11 +179,13 @@ struct DrillDetailView: View {
             Text("Are you sure you want to this data for this drill?\nThis action cannot be undone")
         }
         .toolbar {
-            ToolbarItem {
-                Button {
-                    isPresentingDeleteDataAlert = true
-                } label: {
-                    Label("Clear All Data", systemImage: "trash.fill")
+            if showDeleteToolbarButton {
+                ToolbarItem {
+                    Button {
+                        isPresentingDeleteDataAlert = true
+                    } label: {
+                        Label("Clear All Data", systemImage: "trash.fill")
+                    }
                 }
             }
         }
