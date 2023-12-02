@@ -127,17 +127,17 @@ struct DrillDetailView: View {
                         .lineLimit(5...)
                         .focused($isFirstResponder)
                         .autocorrectionDisabled(true)
-                        .onDisappear {
-                            isFirstResponder = false
-                            drill.updateNotes(newNotes: notes)
-                            try? modelContext.save()
-                        }
+                        .submitLabel(.return)
                         .onSubmit {
                             isFirstResponder = false
                             drill.updateNotes(newNotes: notes)
                             try? modelContext.save()
                         }
-                        .submitLabel(.done)
+                        .onDisappear {
+                            isFirstResponder = false
+                            drill.updateNotes(newNotes: notes)
+                            try? modelContext.save()
+                        }
                         .textFieldStyle(.roundedBorder)//.plain)
                         .padding([.bottom, .horizontal])
                         
@@ -152,6 +152,11 @@ struct DrillDetailView: View {
                 DrillRecordingParametersView(drill: drill)
                     .tag(Tab.recordingConfiguration)
             }
+            .onChange(of: selectedTab, {
+                isFirstResponder = false
+                drill.updateNotes(newNotes: notes)
+                try? modelContext.save()
+            })
             .tabViewStyle(.page)
             .indexViewStyle(.page(backgroundDisplayMode: .always))
         }
