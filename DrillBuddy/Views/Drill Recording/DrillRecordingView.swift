@@ -16,6 +16,7 @@ struct DrillRecordingView: View {
     var customFinishAction: (() -> Void)? = nil
     @StateObject var viewModel: DrillRecordingViewModel
     
+    @State private var showLoadingOverlay: Bool = false
     @Environment(\.dismiss) private var dismiss
     
     // MARK: - View
@@ -56,10 +57,16 @@ struct DrillRecordingView: View {
                     
                     if viewModel.tournament == nil {
                         Button {
-                            viewModel.stopRecording()
+                            showLoadingOverlay = true
                             
-                            if viewModel.drillEntries.isEmpty {
-                                customFinishAction?() ?? dismiss()
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                                viewModel.stopRecording()
+                                
+                                if viewModel.drillEntries.isEmpty {
+                                    customFinishAction?() ?? dismiss()
+                                }
+                                
+                                showLoadingOverlay = false
                             }
                         } label: {
                             Text("FINISH")
@@ -72,13 +79,13 @@ struct DrillRecordingView: View {
                     }
                 }
                 .padding(.horizontal)
-                .blur(radius: viewModel.isPersistingData ? 10 : 0)
             case .summary:
                 summaryView
             }
         }
         .navigationBarBackButtonHidden(true)
         .errorAlert(error: $viewModel.error)
+        .loadingOverlay(isLoading: showLoadingOverlay)
     }
     
     // MARK: - Private Views
