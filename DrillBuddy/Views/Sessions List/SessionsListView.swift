@@ -77,7 +77,7 @@ struct SessionsListView: View {
                 Label("Add New", systemImage: "plus")
                     .fontWeight(.medium)
                     .frame(maxWidth: .infinity)
-                    .padding(.vertical)
+                    .padding(.vertical, 8)
             }
             .buttonStyle(.borderedProminent)
             .padding(.horizontal)

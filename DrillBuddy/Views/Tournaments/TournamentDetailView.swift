@@ -173,7 +173,9 @@ struct TournamentDetailView: View {
             Text(leaderboardUpdateError?.localizedDescription ?? "An error occured during leaderboard update")
         })
         .sheet(item: $presentableLeaderboard, content: { leaderboard in
-            LeaderboardView(leaderboard: leaderboard, searchableUserId: user.id)
+            NavigationStack {
+                LeaderboardView(leaderboard: leaderboard, searchableUserId: user.id)
+            }
         })
         .task {
             await updateLeaderboard()

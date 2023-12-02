@@ -67,6 +67,8 @@ struct LeaderboardView: View {
             .buttonStyle(.borderedProminent)
             .padding(.horizontal)
         }
+        .navigationBarTitleDisplayMode(.large)
+        .navigationTitle("Leaderboard")
         .sheet(item: $entryDetail) { entry in
             LeaderboardEntryDetailView(
                 position: (sortedEntries.firstIndex(of: entry) ?? -1) + 1,
