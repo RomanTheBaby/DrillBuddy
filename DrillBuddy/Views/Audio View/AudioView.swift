@@ -15,6 +15,8 @@ struct AudioView: View {
     
     // MARK: - Private Properties
     
+    private let timeMarks: [TimeInterval]
+    
     @State private var isPlaying = false
     @State private var audioPlayer: AVAudioPlayer
     @State private var currentTime: TimeInterval = 0
@@ -25,18 +27,20 @@ struct AudioView: View {
     
     // MARK: - Init
     
-    init?(audioURL: URL) {
+    init?(audioURL: URL, timeMarks: [TimeInterval] = []) {
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: URL(filePath: audioURL.relativePath))
+            self.timeMarks = timeMarks
         } catch {
             LogManager.log(.fault, module: .audioView, message: "Failed to initialize player with url: \(audioURL), with error: \(error)")
             return nil
         }
     }
     
-    init?(audioData: Data) {
+    init?(audioData: Data, timeMarks: [TimeInterval] = []) {
         do {
             audioPlayer = try AVAudioPlayer(data: audioData)
+            self.timeMarks = timeMarks
         } catch {
             LogManager.log(.fault, module: .audioView, message: "Failed to initialize player with data \(audioData), with error: \(error)")
             return nil
@@ -71,17 +75,33 @@ struct AudioView: View {
                             .formatted(.time(pattern: .minuteSecond))
                     )
                 }
-                Slider(
-                    value: Binding(
-                        get: {
-                            currentTime
-                        }, set: { newValue in
-                            audioPlayer.currentTime = newValue
-                            currentTime = newValue
+                ZStack {
+                    Slider(
+                        value: Binding(
+                            get: {
+                                currentTime
+                            }, set: { newValue in
+                                audioPlayer.currentTime = newValue
+                                currentTime = newValue
+                            }
+                        ),
+                        in: 0...audioPlayer.duration
+                    )
+                    .background(
+                        Group {
+                            if timeMarks.isEmpty {
+                                EmptyView()
+                            } else {
+                                GeometryReader { geometry in
+                                    makeTimeMarks(for: timeMarks, size: geometry.size)
+                                        .offset(x: 0)
+                                        .foregroundStyle(Color.red)
+                                        .frame(width: geometry.size.width)
+                                }
+                            }
                         }
-                    ),
-                    in: 0...audioPlayer.duration
-                )
+                    )
+                }
             }
         }
         .padding()
@@ -100,6 +120,29 @@ struct AudioView: View {
         .onDisappear {
             pauseAudio()
         }
+    }
+    
+    private func makeTimeMarks(for timeMarks: [TimeInterval], size: CGSize) -> some View {
+        let duration = audioPlayer.duration
+        
+        let marksData = timeMarks.enumerated()
+            .map { index, mark -> (position: CGPoint, size: CGSize, color: Color) in
+                (
+                    position: CGPoint(x: CGFloat(mark / duration) * size.width, y: size.height / 2),
+                    size: CGSize(width: 2, height: size.height),
+                    color: (index + 1) % 2 == 0 ? Color.red : Color.blue
+                )
+            }
+        
+        return Group {
+            ForEach(Array(marksData.enumerated()), id: \.offset) { index, data in
+                Rectangle()
+                    .position(data.position)
+                    .frame(width: data.size.width, height: data.size.height)
+                    .foregroundStyle(data.color)
+            }
+        }
+        .frame(width: size.width, alignment: .leading)
     }
     
     // MARK: - Private Methods
@@ -132,7 +175,8 @@ struct AudioView: View {
 
 #Preview {
     AudioView(
-        audioURL: DrillSessionsContainerSampleData.testAudioURL
+        audioURL: DrillSessionsContainerSampleData.testAudioURL,
+        timeMarks: [1, 1.5, 2, 3, 30, 60, 65, 66, 120, 240]
     )
 }
 
