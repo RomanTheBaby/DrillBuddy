@@ -114,7 +114,7 @@ struct DrillDetailView: View {
             .padding(.horizontal)
             
             if let recordingURL = isInPreview ? DrillSessionsContainerSampleData.testAudioURL : drill.recordingURL,
-               let audioView = AudioView(audioURL: recordingURL) {
+               let audioView = AudioView(audioURL: recordingURL, timeMarks: drill.sounds.map(\.time)) {
                 audioView
                     .padding(.horizontal)
             }
