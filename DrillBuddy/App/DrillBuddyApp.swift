@@ -7,6 +7,7 @@
 
 #if os(iOS)
 import FirebaseCore
+import FirebaseRemoteConfig
 #endif
 import SwiftUI
 import SwiftData

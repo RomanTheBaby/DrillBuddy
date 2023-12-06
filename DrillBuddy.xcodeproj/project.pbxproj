@@ -87,6 +87,8 @@
 		FE28D27A2AF308B30074BC98 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE28D2792AF308B30074BC98 /* MainTabView.swift */; };
 		FE3DD1662B1FFAF600D7FA45 /* AppRemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3DD1652B1FFAF600D7FA45 /* AppRemoteConfig.swift */; };
 		FE3DD1672B1FFAF900D7FA45 /* AppRemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3DD1652B1FFAF600D7FA45 /* AppRemoteConfig.swift */; };
+		FE3DD1692B20057A00D7FA45 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3DD1682B20057A00D7FA45 /* UserDefaults+Extension.swift */; };
+		FE3DD16A2B20057A00D7FA45 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3DD1682B20057A00D7FA45 /* UserDefaults+Extension.swift */; };
 		FE5C20102AF9C284008A9B1A /* Leaderboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5C200F2AF9C284008A9B1A /* Leaderboard.swift */; };
 		FE5C20112AF9C284008A9B1A /* Leaderboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5C200F2AF9C284008A9B1A /* Leaderboard.swift */; };
 		FE5C20132AFB1018008A9B1A /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1D1D032AF4501200BF8506 /* UserInfo.swift */; };
@@ -213,6 +215,7 @@
 		FE254A4A2AF1D4D4000602AA /* TournamentPreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentPreviewData.swift; sourceTree = "<group>"; };
 		FE28D2792AF308B30074BC98 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		FE3DD1652B1FFAF600D7FA45 /* AppRemoteConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRemoteConfig.swift; sourceTree = "<group>"; };
+		FE3DD1682B20057A00D7FA45 /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
 		FE5C200F2AF9C284008A9B1A /* Leaderboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Leaderboard.swift; sourceTree = "<group>"; };
 		FE5C20142AFB2507008A9B1A /* LeaderboardPreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardPreviewData.swift; sourceTree = "<group>"; };
 		FE5C20192AFB2695008A9B1A /* LeaderboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardView.swift; sourceTree = "<group>"; };
@@ -466,6 +469,7 @@
 				75D113752ABE4EE200BF8874 /* View+Extension.swift */,
 				FE254A192ADDF7A5000602AA /* TimeInterval+Extension.swift */,
 				FE254A452AF1D061000602AA /* NSUbiquitousKeyValueStore+Extension.swift */,
+				FE3DD1682B20057A00D7FA45 /* UserDefaults+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -784,6 +788,7 @@
 				FEF627582AF86390003DC443 /* TournamentEntry.swift in Sources */,
 				7572F02C2AC0A62A001E2F3C /* WatchDataSynchronizer.swift in Sources */,
 				754838862ABE7B8B00146415 /* DrillContainerPreviewData.swift in Sources */,
+				FE3DD16A2B20057A00D7FA45 /* UserDefaults+Extension.swift in Sources */,
 				FE5C201D2AFDBE21008A9B1A /* UserStoragePreviewData.swift in Sources */,
 				7572F0172ABF5E10001E2F3C /* AppError.swift in Sources */,
 				FEE455542AC8BE4C00569414 /* ClassificationResultsSubject.swift in Sources */,
@@ -826,6 +831,7 @@
 				FEE4554C2AC8BB6200569414 /* AudioRecorder.swift in Sources */,
 				FE254A152ADB3600000602AA /* DetectSoundsView.swift in Sources */,
 				7572F01E2ABF61A4001E2F3C /* DrillConfigurationView.swift in Sources */,
+				FE3DD1692B20057A00D7FA45 /* UserDefaults+Extension.swift in Sources */,
 				7572F0212ABF7CCA001E2F3C /* DrillRecordingConfiguration.swift in Sources */,
 				FE254A1E2ADF6EF9000602AA /* DrillDetailView.swift in Sources */,
 				FE1D1D002AF4471800BF8506 /* Firestore+Extensions.swift in Sources */,

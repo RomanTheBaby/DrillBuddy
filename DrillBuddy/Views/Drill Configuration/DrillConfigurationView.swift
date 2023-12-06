@@ -5,6 +5,9 @@
 //  Created by Roman on 2023-09-23.
 //
 
+#if canImport(FirebaseAnalytics)
+import FirebaseAnalytics
+#endif
 import SwiftData
 import SwiftUI
 
@@ -18,7 +21,8 @@ struct DrillConfigurationView: View {
     var isConfigurationEditable = true
     var tournament: Tournament? = nil
     
-    @State var configuration: DrillRecordingConfiguration = .default
+    @State var configuration: DrillRecordingConfiguration = UserDefaults.standard.favoriteConfiguration
+    @State private var favoriteConfiguration = UserDefaults.standard.favoriteConfiguration
     
     @State private var showRecordingViewCover = false
     
@@ -166,6 +170,26 @@ struct DrillConfigurationView: View {
                     Text(tournament == nil ? "Configuration cannot be edited" : "Configuration is managed by tournament")
                         .font(.footnote)
                         .foregroundStyle(Color.red)
+                } else {
+                    Button {
+                        UserDefaults.standard.favoriteConfiguration = configuration
+                        favoriteConfiguration = configuration
+                        
+                        #if canImport(FirebaseAnalytics)
+                        Analytics.logEvent("favorite_configuration_updated", parameters: [
+                            "maxShots": configuration.maxShots,
+                            "maxSessionDelay": configuration.maxSessionDelay,
+                            "minimumSoundConfidenceLevel": configuration.minimumSoundConfidenceLevel,
+                            "inferenceWindowSize": configuration.inferenceWindowSize,
+                            "overlapFactor": configuration.overlapFactor,
+                            "shouldRecordAudio": configuration.shouldRecordAudio,
+                        ])
+                        #endif
+                        
+                    } label: {
+                        Text("Save this configuration as default")
+                    }
+                    .disabled(favoriteConfiguration == configuration)
                 }
                 readyButton
             }
@@ -324,7 +348,7 @@ private struct ConfigurationStepperView: View {
 
 #Preview("Tournament") {
     NavigationStack {
-        DrillConfigurationView(tournament: TournamentPreviewData.mock)
+        DrillConfigurationView(isConfigurationEditable: false, tournament: TournamentPreviewData.mock)
     }
 }
 

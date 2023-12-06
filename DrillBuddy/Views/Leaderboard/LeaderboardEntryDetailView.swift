@@ -105,7 +105,7 @@ struct LeaderboardEntryDetailView: View {
                                 reporter: currentUser
                             )
 
-                            Analytics.logEvent("Entry Reported", parameters: [
+                            Analytics.logEvent("entry_reported", parameters: [
                                 "leaderboardID": leaderboardId,
                                 "entry": [
                                     "ownerID": entry.userId,
