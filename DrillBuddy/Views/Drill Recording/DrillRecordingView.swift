@@ -211,8 +211,12 @@ struct DrillRecordingView: View {
             HStack(spacing: 8) {
                 if viewModel.drill != nil {
                     Button {
-                        viewModel.deleteRecordedDrill()
-                        customFinishAction?() ?? dismiss()
+                        do {
+                            try viewModel.deleteRecordedDrill()
+                            customFinishAction?() ?? dismiss()
+                        } catch {
+                            LogManager.log(.error, module: .drillRecording, message: "Failed to delete drill with error: \(error)")
+                        }
                     } label: {
                         Text("Delete")
                             .frame(maxWidth: .infinity)

@@ -38,7 +38,7 @@ struct DrillDetailView: View {
     @State private var notes: String = ""
     @State private var selectedTab: Tab = .splitsChart
     
-    @FocusState private var isFirstResponder :Bool
+    @FocusState private var isFirstResponder: Bool
     
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext: ModelContext

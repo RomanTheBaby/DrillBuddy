@@ -196,11 +196,16 @@ class DrillRecordingViewModel: ObservableObject {
     }
     #endif
     
-    func deleteRecordedDrill() {
+    func deleteRecordedDrill() throws {
         guard let drill else {
             return
         }
-        modelContext.delete(drill)
+        
+        do {
+            try modelContext.deleteDrill(drill)
+        } catch {
+            self.error = error
+        }
     }
     
     // MARK: - Private Methods
