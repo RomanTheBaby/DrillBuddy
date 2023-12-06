@@ -20,6 +20,8 @@ struct Tournament: Identifiable, Codable {
     var startDate: Date
     var endDate: Date
     
+    var isHidden: Bool
+    
     var title: String
     var description: String
     var leaderboardID: String

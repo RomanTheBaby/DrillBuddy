@@ -13,7 +13,8 @@ actor TournamentPreviewData {
         Tournament(
             id: "Mock-Tournament",
             startDate: Date().addingTimeInterval(-(3600 * 24)),
-            endDate: Date().addingTimeInterval(3600 * 24),
+            endDate: Date().addingTimeInterval(3600 * 24), 
+            isHidden: false,
             title: "3-shot competition",
             description: "   This is a simple 3 shot competition to test your basic shooting skills.\n   Upon starting the drill draw your weapon and make 3 shots, drill recording will automatically stop when app will hear 3rd shot.\n  Your result will be displayed to everyone on the leaderboard. You can submit only one entry for each tournament.",
             leaderboardID: "cqhoHabzfKpBvYc6zT0O",
@@ -33,7 +34,8 @@ actor TournamentPreviewData {
         Tournament(
             id: "Mock-Tournament-Ended",
             startDate: Date().addingTimeInterval(-(3600 * 48)),
-            endDate: Date().addingTimeInterval(-(3600 * 24)),
+            endDate: Date().addingTimeInterval(-(3600 * 24)), 
+            isHidden: false,
             title: "3-shot competition",
             description: "   This is a simple 3 shot competition to test your basic shooting skills.\n   Upon starting the drill draw your weapon and make 3 shots, drill recording will automatically stop when app will hear 3rd shot.\n  Your result will be displayed to everyone on the leaderboard. You can submit only one entry for each tournament.",
             leaderboardID: UUID().uuidString,

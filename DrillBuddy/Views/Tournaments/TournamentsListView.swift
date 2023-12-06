@@ -79,9 +79,18 @@ struct TournamentsListView: View {
                         Text("Loading tournaments...")
                     }
                 } else {
-                    Text("Currently there are no tournaments. Check back later")
-                        .multilineTextAlignment(.center)
-                        .fontWeight(.medium)
+                    VStack(spacing: 8) {
+                        Text("Currently there are no tournaments. Check back later")
+                            .multilineTextAlignment(.center)
+                            .fontWeight(.medium)
+                        Button(action: {
+                            Task {
+                                await loadTournaments(showLoadingIndicator: true)
+                            }
+                        }, label: {
+                            Text("Retry")
+                        })
+                    }
                 }
             } else {
                 List {
@@ -124,6 +133,9 @@ struct TournamentsListView: View {
             isLoading = showLoadingIndicator ? true : false
             if isInPreview == false {
                 tournaments = try await firestoreService.fetchTournaments()
+                    .filter {
+                        $0.isHidden == false
+                    }
             }
             isLoading = false
         } catch let fetchError {
@@ -214,6 +226,7 @@ private extension Date {
                     id: UUID().uuidString,
                     startDate: Date().addingTimeInterval(-(3600 * 48)),
                     endDate: Date().addingTimeInterval(-(3600 * 24)),
+                    isHidden: false,
                     title: "3-shot competition",
                     description: "",
                     leaderboardID: UUID().uuidString,
@@ -224,6 +237,7 @@ private extension Date {
                     id: UUID().uuidString,
                     startDate: Date(),
                     endDate: Date().addingTimeInterval(3600 * 24),
+                    isHidden: false,
                     title: "3-shot competition",
                     description: "This is a simple 3 shot competition to test your basic shooting skills.\nUpon starting the drill draw your weapon and make 3 shots, drill recording will automatically stop when app will hear 3rd shot",
                     leaderboardID: UUID().uuidString,
