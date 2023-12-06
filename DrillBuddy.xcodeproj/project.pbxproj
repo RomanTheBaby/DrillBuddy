@@ -85,6 +85,8 @@
 		FE254A4C2AF1D4D4000602AA /* TournamentPreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE254A4A2AF1D4D4000602AA /* TournamentPreviewData.swift */; };
 		FE254A4D2AF1D674000602AA /* NSUbiquitousKeyValueStore+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE254A452AF1D061000602AA /* NSUbiquitousKeyValueStore+Extension.swift */; };
 		FE28D27A2AF308B30074BC98 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE28D2792AF308B30074BC98 /* MainTabView.swift */; };
+		FE3DD1662B1FFAF600D7FA45 /* AppRemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3DD1652B1FFAF600D7FA45 /* AppRemoteConfig.swift */; };
+		FE3DD1672B1FFAF900D7FA45 /* AppRemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3DD1652B1FFAF600D7FA45 /* AppRemoteConfig.swift */; };
 		FE5C20102AF9C284008A9B1A /* Leaderboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5C200F2AF9C284008A9B1A /* Leaderboard.swift */; };
 		FE5C20112AF9C284008A9B1A /* Leaderboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5C200F2AF9C284008A9B1A /* Leaderboard.swift */; };
 		FE5C20132AFB1018008A9B1A /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1D1D032AF4501200BF8506 /* UserInfo.swift */; };
@@ -210,6 +212,7 @@
 		FE254A452AF1D061000602AA /* NSUbiquitousKeyValueStore+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSUbiquitousKeyValueStore+Extension.swift"; sourceTree = "<group>"; };
 		FE254A4A2AF1D4D4000602AA /* TournamentPreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentPreviewData.swift; sourceTree = "<group>"; };
 		FE28D2792AF308B30074BC98 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		FE3DD1652B1FFAF600D7FA45 /* AppRemoteConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRemoteConfig.swift; sourceTree = "<group>"; };
 		FE5C200F2AF9C284008A9B1A /* Leaderboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Leaderboard.swift; sourceTree = "<group>"; };
 		FE5C20142AFB2507008A9B1A /* LeaderboardPreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardPreviewData.swift; sourceTree = "<group>"; };
 		FE5C20192AFB2695008A9B1A /* LeaderboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardView.swift; sourceTree = "<group>"; };
@@ -417,6 +420,7 @@
 				75D1135D2ABE2E7B00BF8874 /* DrillBuddy.entitlements */,
 				75D113612ABE2E7B00BF8874 /* Info.plist */,
 				FEE608612B15722400CEA999 /* AudioRecordingPathGenerator.swift */,
+				FE3DD1652B1FFAF600D7FA45 /* AppRemoteConfig.swift */,
 				FE5C20262B007828008A9B1A /* Logger.swift */,
 				FEE455472AC8BB3300569414 /* Audio */,
 				75D113742ABE4ED200BF8874 /* Extensions */,
@@ -776,6 +780,7 @@
 				754838822ABE7B5300146415 /* DrillBuddyApp.swift in Sources */,
 				7572F0142ABF1D14001E2F3C /* MainTabView.swift in Sources */,
 				FE254A252AE877A2000602AA /* AudioView.swift in Sources */,
+				FE3DD1672B1FFAF900D7FA45 /* AppRemoteConfig.swift in Sources */,
 				FEF627582AF86390003DC443 /* TournamentEntry.swift in Sources */,
 				7572F02C2AC0A62A001E2F3C /* WatchDataSynchronizer.swift in Sources */,
 				754838862ABE7B8B00146415 /* DrillContainerPreviewData.swift in Sources */,
@@ -849,6 +854,7 @@
 				FE254A3A2AF0583B000602AA /* Tournament.swift in Sources */,
 				7572F02F2AC22FCA001E2F3C /* WatchDataSyncHandler.swift in Sources */,
 				FEE455492AC8BB4700569414 /* AudioSessionManager.swift in Sources */,
+				FE3DD1662B1FFAF600D7FA45 /* AppRemoteConfig.swift in Sources */,
 				FE1D1CFA2AF32A0500BF8506 /* AuthenticationService.swift in Sources */,
 				FE254A402AF087D6000602AA /* GunType.swift in Sources */,
 				FEE455562AC8BE5400569414 /* AudioClassifier.swift in Sources */,

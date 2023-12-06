@@ -29,6 +29,19 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
     ) -> Bool {
         FirebaseApp.configure()
+        
+        #if os(iOS)
+        let settings = RemoteConfigSettings()
+        settings.minimumFetchInterval = 3600
+        RemoteConfig.remoteConfig().configSettings = settings
+        
+        do {
+            try RemoteConfig.remoteConfig().setDefaults(from: AppRemoteConfig.default)
+        } catch {
+            
+        }
+        #endif
+        
         return true
     }
 }
@@ -37,7 +50,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 // TODO: update date parsing for tournaments from server???
 // TODO: find most optimal/accurate configuration params
 // TODO: improve audio visualization(i.e like telegram or other way to show waves)
-// TODO: better communicate errors on DrillRecordingView
 // TODO: Add DrillDetailView for watch target, maybe vertical tabs like workout app???
 // TODO: implements statistics, to communicate improvements in drill to users???
 // TODO: play timer sound when starting drill(transition from standby to recording). And haptic feedback(always haptic feedback on watch)
