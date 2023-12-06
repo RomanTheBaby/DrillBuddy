@@ -100,7 +100,6 @@
 		FE5C20272B007828008A9B1A /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5C20262B007828008A9B1A /* Logger.swift */; };
 		FE5C20292B00796C008A9B1A /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = FE5C20282B00796C008A9B1A /* FirebaseCrashlytics */; };
 		FE5F223C2AF2E7A600C83412 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = FE5F223B2AF2E7A600C83412 /* FirebaseAnalytics */; };
-		FE5F223E2AF2E7A600C83412 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FE5F223D2AF2E7A600C83412 /* FirebaseAnalyticsSwift */; };
 		FE5F22402AF2E7A600C83412 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = FE5F223F2AF2E7A600C83412 /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		FE5F22422AF2E7A600C83412 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = FE5F22412AF2E7A600C83412 /* FirebaseAuth */; };
 		FE5F22442AF2E7A600C83412 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = FE5F22432AF2E7A600C83412 /* FirebaseAuthCombine-Community */; };
@@ -243,7 +242,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE5F224C2AF2E7A600C83412 /* FirebaseRemoteConfig in Frameworks */,
-				FE5F223E2AF2E7A600C83412 /* FirebaseAnalyticsSwift in Frameworks */,
 				FE5F22402AF2E7A600C83412 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				FE5F223C2AF2E7A600C83412 /* FirebaseAnalytics in Frameworks */,
 				FE5F22422AF2E7A600C83412 /* FirebaseAuth in Frameworks */,
@@ -677,7 +675,6 @@
 			name = DrillBuddy;
 			packageProductDependencies = (
 				FE5F223B2AF2E7A600C83412 /* FirebaseAnalytics */,
-				FE5F223D2AF2E7A600C83412 /* FirebaseAnalyticsSwift */,
 				FE5F223F2AF2E7A600C83412 /* FirebaseAnalyticsWithoutAdIdSupport */,
 				FE5F22412AF2E7A600C83412 /* FirebaseAuth */,
 				FE5F22432AF2E7A600C83412 /* FirebaseAuthCombine-Community */,
@@ -1200,11 +1197,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FE5F223A2AF2E7A600C83412 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAnalytics;
-		};
-		FE5F223D2AF2E7A600C83412 /* FirebaseAnalyticsSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FE5F223A2AF2E7A600C83412 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalyticsSwift;
 		};
 		FE5F223F2AF2E7A600C83412 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
 			isa = XCSwiftPackageProductDependency;
