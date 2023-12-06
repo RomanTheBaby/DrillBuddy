@@ -105,7 +105,9 @@ final class WatchDataSynchronizer: ObservableObject {
                                 modelContext.delete(container)
                             } else {
                                 LogManager.log(.trace, module: .watchDataSynchronizer, message: "Will \(syncedDrills.count) synced drills from container for \(container.date)")
-                                syncedDrills.forEach(modelContext.delete)
+                                syncedDrills.forEach {
+                                    try? modelContext.deleteDrill($0)
+                                }
                             }
                         }
                         

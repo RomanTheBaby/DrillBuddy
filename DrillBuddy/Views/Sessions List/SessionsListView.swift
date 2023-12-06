@@ -83,8 +83,6 @@ struct SessionsListView: View {
             .padding(.horizontal)
             #if os(watchOS)
             .tint(Color.orange)
-            #else
-            .tint(Color.blue)
             #endif
         }
     }
@@ -94,7 +92,7 @@ struct SessionsListView: View {
             ForEach(drillContainers, id: \.date) { container in
                 Section {
                     ForEach(Array(container.drills.enumerated()), id: \.offset) { index, drill in
-                        NavigationLink(destination: DrillDetailView(drill: drill)) {
+                        NavigationLink(destination: DrillDetailView(drill: drill, showDeleteToolbarButton: false)) {
                             HStack {
                                 Text("Drill #\(index + 1)")
                                 Spacer()
@@ -112,6 +110,9 @@ struct SessionsListView: View {
                                 }
                             }
                         }
+                    }
+                    .onDelete { indexSet in
+                        deleteItems(offsets: indexSet, in: container)
                     }
                 } header: {
                     Text(container.title)
@@ -150,6 +151,18 @@ struct SessionsListView: View {
     }
     
     // MARK: - Private Methods
+    
+    private func deleteItems(offsets: IndexSet, in container: DrillsSessionsContainer) {
+        withAnimation {
+            for index in offsets {
+                do {
+                    try modelContext.deleteDrill(container.drills[index])
+                } catch {
+                    self.error = error
+                }
+            }
+        }
+    }
     
     private func clearData() {
         let allDrills = drillContainers.map(\.drills).flatMap {
