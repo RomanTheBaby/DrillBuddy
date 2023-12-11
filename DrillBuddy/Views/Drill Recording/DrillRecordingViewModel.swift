@@ -120,12 +120,13 @@ class DrillRecordingViewModel: ObservableObject {
     
     func startRecording() {
         do {
+            #if DEBUG
+            let soundTypes: [SoundIdentifier.SoundType] = [.gunshot, .fingerSnapping]
+            #else
+            let soundTypes: [SoundIdentifier.SoundType] = [.gunshot]
+            #endif
             let soundIdentifyingSubject = try soundIdentifier.startDetectingSounds(
-                soundTypes: [
-                    .gunshot,
-                    .clapping,
-                    .fingerSnapping,
-                ],
+                soundTypes: soundTypes,
                 minRequiredConfidence: configuration.minimumSoundConfidenceLevel,
                 inferenceWindowSize: configuration.inferenceWindowSize,
                 overlapFactor: configuration.overlapFactor
@@ -150,8 +151,6 @@ class DrillRecordingViewModel: ObservableObject {
                 HapticFeedbackGenerator.generateFeedback(.start)
                 #else
                 HapticFeedbackGenerator.generateFeedback(.warning)
-//                    .generateImpact(.heavy)
-                // .generateFeedback(.success)
                 #endif
                 
             } catch {

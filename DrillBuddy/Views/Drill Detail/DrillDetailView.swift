@@ -327,6 +327,8 @@ private extension TimeInterval {
     }
 }
 
+#if DEBUG
+
 // MARK: - Previews
 
 #Preview {
@@ -337,3 +339,4 @@ private extension TimeInterval {
     }
 }
 
+#endif

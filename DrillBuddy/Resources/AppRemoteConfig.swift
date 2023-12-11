@@ -13,12 +13,20 @@ struct AppRemoteConfig: Hashable, Codable {
         var showTournaments: Bool
     }
     
+    struct SettingsTab: Hashable, Codable {
+        var showLogInButton: Bool
+    }
+    
     var mainTabBar: MainTabBar
+    var settingsTab: SettingsTab
     
     static let `default` = AppRemoteConfig(
         mainTabBar: MainTabBar(
             showSettings: false,
             showTournaments: false
+        ),
+        settingsTab: SettingsTab(
+            showLogInButton: false
         )
     )
 }

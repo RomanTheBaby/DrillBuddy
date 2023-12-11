@@ -216,6 +216,7 @@ private extension Date {
     }
 }
 
+#if DEBUG
 // MARK: - Previews
 
 #Preview("Tournaments") {
@@ -269,3 +270,4 @@ private extension Date {
             .environmentObject(UserStoragePreviewData.loggedOut)
     }
 }
+#endif

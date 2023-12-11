@@ -43,11 +43,10 @@ struct SessionsListView: View {
                 emptyView
             } else {
                 listView
-                    .navigationTitle("My Sessions")
                     .navigationBarTitleDisplayMode(.large)
             }
         }
-        .navigationTitle("Drills")
+        .navigationTitle("My Drills")
         .navigationBarTitleDisplayMode(.large)
         .navigationBarHidden(false)
         .fullScreenCover(isPresented: $redirectToNewDrillConfigurationView, content: {
@@ -228,6 +227,7 @@ struct SessionsListView: View {
     }
 }
 
+#if DEBUG
 // MARK: - Previews
 
 #Preview("With Data") {
@@ -252,3 +252,4 @@ struct SessionsListView: View {
         )
     }
 }
+#endif

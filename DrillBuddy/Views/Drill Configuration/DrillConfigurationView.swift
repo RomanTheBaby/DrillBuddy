@@ -338,6 +338,8 @@ private struct ConfigurationStepperView: View {
     }
 }
 
+#if DEBUG
+
 // MARK: - Preview
 
 #Preview("Editable") {
@@ -360,3 +362,5 @@ private struct ConfigurationStepperView: View {
         )
     }
 }
+
+#endif

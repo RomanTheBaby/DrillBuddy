@@ -242,6 +242,8 @@ struct DrillRecordingView: View {
     }
 }
 
+#if DEBUG
+
 // MARK: - Previews
 
 #Preview("Stand By") {
@@ -292,6 +294,8 @@ struct DrillRecordingView: View {
         )
     }
 }
+
+#endif
 
 // MARK: - Time Interval Extension
 

@@ -171,6 +171,7 @@ struct AudioView: View {
     }
 }
 
+#if DEBUG
 // MARK: - Preview
 
 #Preview {
@@ -181,3 +182,4 @@ struct AudioView: View {
 }
 
 //URL(string: "http://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Kangaroo_MusiQue_-_The_Neverwritten_Role_Playing_Game.mp3")!
+#endif

@@ -78,6 +78,8 @@ struct ProfileView: View {
     }
 }
 
+#if DEBUG
+
 // MARK: - Previews
 
 #Preview("Logged Out") {
@@ -91,3 +93,5 @@ struct ProfileView: View {
             UserStoragePreviewData.loggedIn
         )
 }
+
+#endif

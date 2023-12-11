@@ -121,6 +121,7 @@ private extension TimeInterval {
     }
 }
 
+#if DEBUG
 // MARK: - Previews
 
 #Preview("Empty") {
@@ -134,3 +135,4 @@ private extension TimeInterval {
 #Preview("Full / user") {
     LeaderboardView(leaderboard: LeaderboardPreviewData.full, searchableUserId: LeaderboardPreviewData.full.entries[11].userId)
 }
+#endif

@@ -315,6 +315,7 @@ struct TournamentDetailView: View {
     }
 }
 
+#if DEBUG
 // MARK: - Preview
 
 #Preview("Newcommer") {
@@ -376,3 +377,5 @@ struct TournamentDetailView: View {
         .modelContainer(TournamentPreviewData.container)
     }
 }
+
+#endif

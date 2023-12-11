@@ -42,7 +42,7 @@ struct MainTabView: View {
     }
     
     @State private var selectedTab: Tab = .drills
-    @State private var configuration: AppRemoteConfig.MainTabBar? = nil
+    @State private var configuration: AppRemoteConfig? = nil
     
     @StateObject var watchDataSynchronizer: WatchDataSynchronizer
     @Environment(\.modelContext) private var modelContext: ModelContext
@@ -50,10 +50,14 @@ struct MainTabView: View {
     var body: some View {
         if let configuration {
             NavigationStack {
-                TabView(selection: $selectedTab) {
-                    ForEach(tabs(for: configuration), id: \.title) { tab in
-                        makeView(for: tab)
-                            .toolbar(tabs(for: configuration).count > 1 ? .visible : .hidden, for: .tabBar)
+                if tabs(for: configuration).count == 1, let tab = tabs(for: configuration).first {
+                    makeView(for: tab)
+                } else {
+                    TabView(selection: $selectedTab) {
+                        ForEach(tabs(for: configuration), id: \.title) { tab in
+                            makeView(for: tab)
+                                .toolbar(tabs(for: configuration).count > 1 ? .visible : .hidden, for: .tabBar)
+                        }
                     }
                 }
             }
@@ -67,15 +71,17 @@ struct MainTabView: View {
         }
     }
     
-    private func tabs(for configuration: AppRemoteConfig.MainTabBar) -> [Tab] {
+    private func tabs(for configuration: AppRemoteConfig) -> [Tab] {
         Tab.allCases.filter { tab in
             switch tab {
             case .drills:
                 return true
             case .tournaments:
-                return configuration.showTournaments
+                return configuration.mainTabBar.showTournaments
+                    && configuration.mainTabBar.showSettings
+                    && configuration.settingsTab.showLogInButton
             case .account:
-                return configuration.showSettings
+                return configuration.mainTabBar.showSettings && configuration.settingsTab.showLogInButton
             }
         }
     }
@@ -119,21 +125,22 @@ struct MainTabView: View {
             case .successFetchedFromRemote, .successUsingPreFetchedData:
                 do {
                     let configData = RemoteConfig.remoteConfig().configValue(forKey: String(describing: AppRemoteConfig.self))
-                    configuration = try JSONDecoder().decode(AppRemoteConfig.self, from: configData.dataValue).mainTabBar
+                    configuration = try JSONDecoder().decode(AppRemoteConfig.self, from: configData.dataValue)
                 } catch {
                     LogManager.log(.fault, module: .mainTabView, message: "Failed to decode remote config with error \(error)")
-                    configuration = AppRemoteConfig.default.mainTabBar
+                    configuration = .default
                 }
             default:
-                configuration = AppRemoteConfig.default.mainTabBar
+                configuration = .default
             }
         } catch let error {
             LogManager.log(.fault, module: .mainTabView, message: "Failed to fetch remote config with error: \(error)")
-            configuration = AppRemoteConfig.default.mainTabBar
+            configuration = .default
         }
     }
 }
 
+#if DEBUG
 // MARK: - Previews
 
 #Preview("Logged in") {
@@ -153,3 +160,4 @@ struct MainTabView: View {
     )
     .environmentObject(UserStoragePreviewData.loggedIn)
 }
+#endif
