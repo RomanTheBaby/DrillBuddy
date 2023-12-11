@@ -33,7 +33,11 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         #if os(iOS)
         let settings = RemoteConfigSettings()
+        #if DEBUG
+        settings.minimumFetchInterval = 0
+        #else
         settings.minimumFetchInterval = 3600
+        #endif
         RemoteConfig.remoteConfig().configSettings = settings
         
         do {
@@ -45,6 +49,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         return true
     }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {}
 }
 #endif
 
@@ -65,12 +71,16 @@ struct DrillBuddyApp: App {
     
     
     var body: some Scene {
-        #if !targetEnvironment(simulator)
-        let modelContainer = ModelContainer.shared
-        #elseif os(watchOS)
-        let modelContainer = DrillSessionsContainerSampleData.container
+        #if DEBUG
+            #if !targetEnvironment(simulator)
+            let modelContainer = ModelContainer.shared
+            #elseif os(watchOS)
+            let modelContainer = DrillSessionsContainerSampleData.container
+            #else
+            let modelContainer = DrillSessionsContainerSampleData.container
+            #endif
         #else
-        let modelContainer = ModelContainer.temporary
+        let modelContainer = ModelContainer.shared
         #endif
         
         return WindowGroup {
