@@ -23,18 +23,19 @@ struct ProfileView: View {
     
     var body: some View {
         contentView
-        .onChange(of: userStorage.currentUser, { _, newValue in
-            if authenticationType != nil, newValue != nil {
-                authenticationType = nil
+            .navigationTitle("Settings")
+            .onChange(of: userStorage.currentUser, { _, newValue in
+                if authenticationType != nil, newValue != nil {
+                    authenticationType = nil
+                }
+            })
+            .errorAlert(error: $error)
+            .sheet(item: $authenticationType, onDismiss: {}) { authenticationType in
+                AuthenticationView(
+                    authenticationType: authenticationType,
+                    authenticationService: authenticationService
+                )
             }
-        })
-        .errorAlert(error: $error)
-        .sheet(item: $authenticationType, onDismiss: {}) { authenticationType in
-            AuthenticationView(
-                authenticationType: authenticationType,
-                authenticationService: authenticationService
-            )
-        }
     }
     
     @ViewBuilder
@@ -89,34 +90,40 @@ struct ProfileView: View {
 // MARK: - Previews
 
 #Preview("Logged Out - No login button") {
-    ProfileView()
-        .environmentObject(UserStoragePreviewData.loggedOut)
-        .environment(
-            \.remoteConfiguration,
-             AppRemoteConfig(
-                mainTabBar: AppRemoteConfig.MainTabBar(showSettings: true, showTournaments: false),
-                settingsTab: AppRemoteConfig.SettingsTab(showLogInButton: false)
-             )
-        )
+    NavigationStack {
+        ProfileView()
+            .environmentObject(UserStoragePreviewData.loggedOut)
+            .environment(
+                \.remoteConfiguration,
+                 AppRemoteConfig(
+                    mainTabBar: AppRemoteConfig.MainTabBar(showSettings: true, showTournaments: false),
+                    settingsTab: AppRemoteConfig.SettingsTab(showLogInButton: false)
+                 )
+            )
+    }
 }
 
 #Preview("Logged Out ") {
-    ProfileView()
-        .environmentObject(UserStoragePreviewData.loggedOut)
-        .environment(
-            \.remoteConfiguration,
-             AppRemoteConfig(
-                mainTabBar: AppRemoteConfig.MainTabBar(showSettings: true, showTournaments: false),
-                settingsTab: AppRemoteConfig.SettingsTab(showLogInButton: true)
-             )
-        )
+    NavigationStack {
+        ProfileView()
+            .environmentObject(UserStoragePreviewData.loggedOut)
+            .environment(
+                \.remoteConfiguration,
+                 AppRemoteConfig(
+                    mainTabBar: AppRemoteConfig.MainTabBar(showSettings: true, showTournaments: false),
+                    settingsTab: AppRemoteConfig.SettingsTab(showLogInButton: true)
+                 )
+            )
+    }
 }
 
 #Preview("Logged In") {
-    ProfileView()
-        .environmentObject(
-            UserStoragePreviewData.loggedIn
-        )
+    NavigationStack {
+        ProfileView()
+            .environmentObject(
+                UserStoragePreviewData.loggedIn
+            )
+    }
 }
 
 #endif
