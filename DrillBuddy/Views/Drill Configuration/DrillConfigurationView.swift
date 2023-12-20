@@ -308,12 +308,10 @@ private struct ConfigurationStepperView: View {
                         .foregroundColor(.gray)
                 }
             }
-            Stepper(
-                value.truncatingRemainder(dividingBy: 1) == 0 ? "\(value)" : String(format: "%.1f", value),
-                value: $value,
-                in: stepRange,
-                step: step
-            )
+            Stepper(value: $value, in: stepRange, step: step) {
+                Text(value.truncatingRemainder(dividingBy: 1) == 0 ? "\(value)" : String(format: "%.1f", value))
+                    .font(.system(.title3, weight: .medium))
+            }
         }
         #else
         HStack {
