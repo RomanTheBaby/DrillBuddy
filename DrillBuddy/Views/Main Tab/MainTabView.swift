@@ -74,7 +74,7 @@ struct MainTabView: View {
                 return configuration.mainTabBar.showTournaments
                     && configuration.settingsTab.showLogInButton
             case .account:
-                return true
+                return configuration.mainTabBar.showSettings
             }
         }
     }

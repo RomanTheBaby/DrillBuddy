@@ -59,13 +59,11 @@ struct ProfileView: View {
             }
             .padding()
         } else {
-            VStack(alignment: .leading) {
-                Spacer()
-                
+            List {
                 if remoteConfiguration.settingsTab.showLogInButton {
                     VStack {
                         Text("Sign in to view and participate in tournaments")
-                            .multilineTextAlignment(.center)
+                            .multilineTextAlignment(.leading)
                             .font(.system(.title3, weight: .medium))
                         
                         Button(action: {
@@ -77,20 +75,11 @@ struct ProfileView: View {
                         })
                         .buttonStyle(.borderedProminent)
                     }
-                    .padding()
+                    .padding(2)
                     .frame(maxWidth: .infinity)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 16)
-                            .stroke(lineWidth: 0.5)
-                    )
                 }
-                
-                Divider()
-                    .frame(maxWidth: .infinity)
                 Link("Leave a review", destination: URL(string: "https://apps.apple.com/us/app/drillbuddy/id6473848506")!)
-                    .padding(.horizontal)
             }
-            .padding()
         }
     }
 }
