@@ -49,16 +49,10 @@ struct MainTabView: View {
     
     var body: some View {
         if let configuration {
-            NavigationStack {
-                if tabs(for: configuration).count == 1, let tab = tabs(for: configuration).first {
+            TabView(selection: $selectedTab) {
+                ForEach(tabs(for: configuration), id: \.title) { tab in
                     makeView(for: tab)
-                } else {
-                    TabView(selection: $selectedTab) {
-                        ForEach(tabs(for: configuration), id: \.title) { tab in
-                            makeView(for: tab)
-                                .toolbar(tabs(for: configuration).count > 1 ? .visible : .hidden, for: .tabBar)
-                        }
-                    }
+                        .toolbar(tabs(for: configuration).count > 1 ? .visible : .hidden, for: .tabBar)
                 }
             }
         } else {
@@ -78,10 +72,9 @@ struct MainTabView: View {
                 return true
             case .tournaments:
                 return configuration.mainTabBar.showTournaments
-                    && configuration.mainTabBar.showSettings
                     && configuration.settingsTab.showLogInButton
             case .account:
-                return configuration.mainTabBar.showSettings && configuration.settingsTab.showLogInButton
+                return true
             }
         }
     }
@@ -111,6 +104,7 @@ struct MainTabView: View {
                 NavigationStack {
                     ProfileView()
                         .modelContext(modelContext)
+                        .environment(\.remoteConfiguration, configuration ?? .default)
                 }.tabItem {
                     tab.label
                 }.tag(tab)
@@ -150,6 +144,7 @@ struct MainTabView: View {
         )
     )
     .environmentObject(UserStoragePreviewData.loggedIn)
+    .modelContainer(DrillSessionsContainerSampleData.container)
 }
 
 #Preview("Logged Out") {
@@ -159,5 +154,6 @@ struct MainTabView: View {
         )
     )
     .environmentObject(UserStoragePreviewData.loggedIn)
+    .modelContainer(DrillSessionsContainerSampleData.container)
 }
 #endif

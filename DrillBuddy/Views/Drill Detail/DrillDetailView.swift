@@ -197,6 +197,12 @@ struct DrillDetailView: View {
                     }
                 }
             }
+            
+            ToolbarItem {
+                Button("Done") {
+                    dismiss()
+                }
+            }
         }
         .navigationBarTitleDisplayMode(.inline)
     }

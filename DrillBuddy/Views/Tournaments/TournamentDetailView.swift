@@ -136,6 +136,13 @@ struct TournamentDetailView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .padding(.horizontal)
+        .toolbar {
+            ToolbarItem {
+                Button("Done") {
+                    dismiss()
+                }
+            }
+        }
         .alert("Failed to fetch leaderboard", isPresented: Binding<Bool>(get: {
             leaderboardUpdateError != nil
         }, set: { value in

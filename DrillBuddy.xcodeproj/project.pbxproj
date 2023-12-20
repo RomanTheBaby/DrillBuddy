@@ -91,6 +91,8 @@
 		FE3DD16A2B20057A00D7FA45 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3DD1682B20057A00D7FA45 /* UserDefaults+Extension.swift */; };
 		FE3DD1A52B20118200D7FA45 /* ModelContext+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3DD1A42B20118200D7FA45 /* ModelContext+Extension.swift */; };
 		FE3DD1A62B20118200D7FA45 /* ModelContext+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3DD1A42B20118200D7FA45 /* ModelContext+Extension.swift */; };
+		FE44378E2B339D8B00E6EC80 /* EnvironmentKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE44378D2B339D8B00E6EC80 /* EnvironmentKeys.swift */; };
+		FE44378F2B339D8B00E6EC80 /* EnvironmentKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE44378D2B339D8B00E6EC80 /* EnvironmentKeys.swift */; };
 		FE5C20102AF9C284008A9B1A /* Leaderboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5C200F2AF9C284008A9B1A /* Leaderboard.swift */; };
 		FE5C20112AF9C284008A9B1A /* Leaderboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5C200F2AF9C284008A9B1A /* Leaderboard.swift */; };
 		FE5C20132AFB1018008A9B1A /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1D1D032AF4501200BF8506 /* UserInfo.swift */; };
@@ -219,6 +221,7 @@
 		FE3DD1652B1FFAF600D7FA45 /* AppRemoteConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRemoteConfig.swift; sourceTree = "<group>"; };
 		FE3DD1682B20057A00D7FA45 /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
 		FE3DD1A42B20118200D7FA45 /* ModelContext+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ModelContext+Extension.swift"; sourceTree = "<group>"; };
+		FE44378D2B339D8B00E6EC80 /* EnvironmentKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentKeys.swift; sourceTree = "<group>"; };
 		FE5C200F2AF9C284008A9B1A /* Leaderboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Leaderboard.swift; sourceTree = "<group>"; };
 		FE5C20142AFB2507008A9B1A /* LeaderboardPreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardPreviewData.swift; sourceTree = "<group>"; };
 		FE5C20192AFB2695008A9B1A /* LeaderboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardView.swift; sourceTree = "<group>"; };
@@ -474,6 +477,7 @@
 				FE254A452AF1D061000602AA /* NSUbiquitousKeyValueStore+Extension.swift */,
 				FE3DD1682B20057A00D7FA45 /* UserDefaults+Extension.swift */,
 				FE3DD1A42B20118200D7FA45 /* ModelContext+Extension.swift */,
+				FE44378D2B339D8B00E6EC80 /* EnvironmentKeys.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -797,6 +801,7 @@
 				7572F0172ABF5E10001E2F3C /* AppError.swift in Sources */,
 				FEE455542AC8BE4C00569414 /* ClassificationResultsSubject.swift in Sources */,
 				FEE455512AC8BD8600569414 /* SoundIdentifier.swift in Sources */,
+				FE44378F2B339D8B00E6EC80 /* EnvironmentKeys.swift in Sources */,
 				FEE4555A2AC8C17500569414 /* DrillRecordingViewModel.swift in Sources */,
 				FE5C20132AFB1018008A9B1A /* UserInfo.swift in Sources */,
 				FE254A3B2AF0583B000602AA /* Tournament.swift in Sources */,
@@ -875,6 +880,7 @@
 				FE254A4B2AF1D4D4000602AA /* TournamentPreviewData.swift in Sources */,
 				FE1D1D022AF44FDA00BF8506 /* UserStorage.swift in Sources */,
 				75D113562ABE2E7500BF8874 /* DrillBuddyApp.swift in Sources */,
+				FE44378E2B339D8B00E6EC80 /* EnvironmentKeys.swift in Sources */,
 				75D113762ABE4EE200BF8874 /* View+Extension.swift in Sources */,
 				FE5C20102AF9C284008A9B1A /* Leaderboard.swift in Sources */,
 				FE5C20152AFB2507008A9B1A /* LeaderboardPreviewData.swift in Sources */,
@@ -907,7 +913,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"DrillBuddy Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = JL6XT94C4X;
 				ENABLE_PREVIEWS = YES;
@@ -937,8 +943,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"DrillBuddy Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = JL6XT94C4X;
 				ENABLE_PREVIEWS = YES;
@@ -954,6 +961,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bakehouse.DrillBuddy.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1086,13 +1094,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = DrillBuddy/DrillBuddy.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"DrillBuddy/Preview Content\"";
 				DEVELOPMENT_TEAM = JL6XT94C4X;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DrillBuddy/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Microphone access is required to record when shots happens";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -1103,8 +1112,8 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreenStoryboard.storyboard;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
@@ -1127,14 +1136,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = DrillBuddy/DrillBuddy.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"DrillBuddy/Preview Content\"";
 				DEVELOPMENT_TEAM = JL6XT94C4X;
-				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DrillBuddy/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Microphone access is required to record when shots happens";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -1145,8 +1156,8 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreenStoryboard.storyboard;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
@@ -1154,6 +1165,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bakehouse.DrillBuddy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = YES;

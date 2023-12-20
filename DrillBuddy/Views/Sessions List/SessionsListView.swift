@@ -9,6 +9,8 @@ import AVFoundation
 import SwiftUI
 import SwiftData
 
+// MARK: - SessionsListView
+
 struct SessionsListView: View {
 
     // MARK: - Constants
@@ -30,6 +32,7 @@ struct SessionsListView: View {
     @State private var hasMicrophoneAccess = true
     @State private var isPresentingDeleteDataAlert: Bool = false
     @State private var redirectToNewDrillConfigurationView = false
+    @State private var selectedDrill: Drill?
     @Environment(\.modelContext) private var modelContext: ModelContext
     
     @Query(sort: \DrillsSessionsContainer.date, order: .reverse, animation: .smooth)
@@ -52,6 +55,11 @@ struct SessionsListView: View {
         .fullScreenCover(isPresented: $redirectToNewDrillConfigurationView, content: {
             NavigationStack {
                 DrillConfigurationView()
+            }
+        })
+        .fullScreenCover(item: $selectedDrill, content: { drill in
+            NavigationStack {
+                DrillDetailView(drill: drill, showDeleteToolbarButton: false)
             }
         })
         .confirmationDialog(
@@ -91,24 +99,11 @@ struct SessionsListView: View {
             ForEach(drillContainers, id: \.date) { container in
                 Section {
                     ForEach(Array(container.drills.enumerated()), id: \.offset) { index, drill in
-                        NavigationLink(destination: DrillDetailView(drill: drill, showDeleteToolbarButton: false)) {
-                            HStack {
-                                Text("Drill #\(index + 1)")
-                                Spacer()
-                                
-                                if drill.notes.isEmpty == false {
-                                    Image(systemName: "pencil")//"square.and.pencil")
-                                        .imageScale(.medium)
-                                        .foregroundStyle(Color.blue)
-                                }
-                                
-                                if drill.recordingURL != nil {
-                                    Image(systemName: "speaker.3.fill")
-                                        .imageScale(.medium)
-                                        .foregroundStyle(Color.blue)
-                                }
+                        DrillRowView(title: "Drill #\(index + 1)", drill: drill)
+                            .contentShape(Rectangle()) // this is needed for tap to work on black spaces
+                            .onTapGesture {
+                                selectedDrill = drill
                             }
-                        }
                     }
                     .onDelete { indexSet in
                         deleteItems(offsets: indexSet, in: container)
@@ -227,8 +222,34 @@ struct SessionsListView: View {
     }
 }
 
-#if DEBUG
+// MARK: - DrillRowView
+
+private struct DrillRowView: View {
+    var title: String
+    var drill: Drill
+    
+    var body: some View {
+        HStack {
+            Text(title)
+            Spacer()
+            
+            if drill.notes.isEmpty == false {
+                Image(systemName: "pencil")//"square.and.pencil")
+                    .imageScale(.medium)
+                    .foregroundStyle(Color.blue)
+            }
+            
+            if drill.recordingURL != nil {
+                Image(systemName: "speaker.3.fill")
+                    .imageScale(.medium)
+                    .foregroundStyle(Color.blue)
+            }
+        }
+    }
+}
+
 // MARK: - Previews
+#if DEBUG
 
 #Preview("With Data") {
     MainActor.assumeIsolated {

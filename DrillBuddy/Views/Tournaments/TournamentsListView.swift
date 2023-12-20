@@ -14,8 +14,9 @@ struct TournamentsListView: View {
     
     @State var tournaments: [Tournament] = []
     
-    @State private var isLoading: Bool = false
     @State private var error: Error? = nil
+    @State private var isLoading: Bool = false
+    @State private var selectedTournament: Tournament?
     @State private var authenticationType: AuthenticationView.AuthenticationType? = nil
     
     var firestoreService: FirestoreService = FirestoreService()
@@ -95,23 +96,25 @@ struct TournamentsListView: View {
             } else {
                 List {
                     ForEach(tournaments) { tournament in
-                        // This ZStack is to hide NavLink right arrow
-                        ZStack {
-                            TournamentCardView(tournament: tournament)
-                            NavigationLink(destination: TournamentDetailView(
-                                tournament: tournament,
-                                tournamentEntries: tournamentEntries(for: tournament),
-                                user: user
-                            )) {
-                                EmptyView()
+                        TournamentCardView(tournament: tournament)
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                selectedTournament = tournament
                             }
-                            .opacity(0)
-                        }
-                        #if !os(watchOS)
-                        .listRowSeparator(.hidden)
-                        #endif
+                            #if !os(watchOS)
+                            .listRowSeparator(.hidden)
+                            #endif
                     }
                 }
+                .fullScreenCover(item: $selectedTournament, content: { tournament in
+                    NavigationStack {
+                        TournamentDetailView(
+                            tournament: tournament,
+                            tournamentEntries: tournamentEntries(for: tournament),
+                            user: user
+                        )
+                    }
+                })
                 #if !os(watchOS)
                 .listRowSpacing(16)
                 #endif

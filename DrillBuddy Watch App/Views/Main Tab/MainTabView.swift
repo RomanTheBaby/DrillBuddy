@@ -63,9 +63,11 @@ struct MainTabView: View {
                 .tag(Tab.controls)
         }
         .errorAlert(error: $error)
-        .navigationDestination(isPresented: $redirectToNewDrillConfigurationView) {
-            DrillConfigurationView()
-        }
+        .fullScreenCover(isPresented: $redirectToNewDrillConfigurationView, content: {
+            NavigationStack {
+                DrillConfigurationView()
+            }
+        })
         .onChange(of: drillContainers) { _, newValue in
             if newValue.isEmpty {
                 selectedTab = .controls
@@ -114,11 +116,6 @@ struct MainTabView: View {
             }
         }
         .toolbar {
-//            //            ToolbarItemGroup(placement: .primaryAction) {
-//            //                            ToolbarItem(placement: .navigationBarTrailing) {
-////            ToolbarItem(placement: .bottomBar) {
-////            ToolbarItem(placement: .topBarLeading) {
-////                ToolbarItem {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
                     redirectToNewDrillConfigurationIfNeeded()
