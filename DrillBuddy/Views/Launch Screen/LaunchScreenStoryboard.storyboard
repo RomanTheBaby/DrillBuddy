@@ -22,9 +22,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppIconTransparent" translatesAutoresizingMaskIntoConstraints="NO" id="QvC-Xl-GqS">
-                                <rect key="frame" x="96.666666666666686" y="-278.66666666666669" width="200" height="1434.3333333333333"/>
+                                <rect key="frame" x="49" y="291" width="295" height="295"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="200" id="TcL-xE-NBD"/>
+                                    <constraint firstAttribute="width" secondItem="QvC-Xl-GqS" secondAttribute="height" multiplier="1:1" id="aYn-Rx-Een"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -32,11 +32,11 @@
                         <color key="backgroundColor" red="0.92549019607843142" green="0.44705882352941173" blue="0.39215686274509803" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="o7Q-yx-35L" secondAttribute="trailing" constant="16" id="3Do-vT-4UK"/>
+                            <constraint firstItem="QvC-Xl-GqS" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.75" id="G2T-sA-Knq"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="o7Q-yx-35L" secondAttribute="bottom" constant="8" id="JX8-hB-uwf"/>
                             <constraint firstItem="o7Q-yx-35L" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="KHI-Lx-ue9"/>
                             <constraint firstItem="QvC-Xl-GqS" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="PPV-cH-hpe"/>
                             <constraint firstItem="QvC-Xl-GqS" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerXWithinMargins" id="WLd-Az-soY"/>
-                            <constraint firstItem="QvC-Xl-GqS" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="32" id="yOS-3d-QmR"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -46,6 +46,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="AppIconTransparent" width="1079" height="1434"/>
+        <image name="AppIconTransparent" width="1024" height="1024"/>
     </resources>
 </document>
